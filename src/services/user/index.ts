@@ -40,11 +40,8 @@ const userService = {
     }
 
     if (params?.search) {
-      qsParts.push(`name:like=${params.search}`);
-    }
-
-    if (params?.email) {
-      qsParts.push(`email:like=${params.email}`);
+      // Search in both name and email fields
+      qsParts.push(`name:like=${params.search}`, `email:like=${params.search}`);
     }
 
     const qsValue = qsParts.join(",");

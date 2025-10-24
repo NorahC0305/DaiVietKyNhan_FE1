@@ -22,7 +22,7 @@ const Toolbar = ({ onSearch, onStatusFilter, searchValue, statusValue }: Toolbar
           <Input
             size="sm"
             inputMode="search"
-            placeholder="Tìm kiếm người dùng..."
+            placeholder="Tìm kiếm theo tên hoặc email..."
             className="bg-transparent hover:bg-transparent"
             color="black"
             value={searchValue}
