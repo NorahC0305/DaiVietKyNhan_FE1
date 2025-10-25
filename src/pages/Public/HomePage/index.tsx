@@ -65,10 +65,10 @@ const testimonialsData = [
 ];
 
 // Component for authenticated features
-const AuthenticatedFeatures = () => {
+const AuthenticatedFeatures = ({ user }: { user: IUser }) => {
   const { data: session, status } = useSession();
   const [showModal, setShowModal] = useState(false);
-  
+
   // Hook để kiểm tra trạng thái điểm danh
   const {
     attendanceList,
@@ -107,6 +107,7 @@ const AuthenticatedFeatures = () => {
         // Đóng modal sau khi điểm danh thành công
         setShowModal(false);
       }}
+      userCoin={user?.coin}
       attendanceData={{
         attendanceList,
         isLoading: isAttendanceLoading,
@@ -225,7 +226,7 @@ const HomePageClient = ({
       </section>
 
       {/* Check-in Modal Dialog - dynamically loaded to avoid SSR issues */}
-      <DynamicAuthenticatedFeatures />
+      <DynamicAuthenticatedFeatures user={user} />
 
       {/* Banner 2 - Khí Chất Section */}
       <section className="relative mt-12 lg:mt-32 w-full lg:h-[870px] h-[591px] flex items-center justify-center overflow-hidden">

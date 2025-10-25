@@ -40,8 +40,8 @@ const userService = {
     }
 
     if (params?.search) {
-      // Search in both name and email fields
-      qsParts.push(`name:like=${params.search}`, `email:like=${params.search}`);
+      // Search only by email field
+      qsParts.push(`email:like=${params.search}`);
     }
 
     const qsValue = qsParts.join(",");
@@ -55,6 +55,18 @@ const userService = {
     const queryString = qs.stringify(finalParams, {
       skipNulls: true,
     });
+
+    // Debug logging for search query
+    if (params?.search) {
+      console.log('🔍 [SEARCH DEBUG] User search query (email only):', {
+        searchTerm: params.search,
+        qsParts: qsParts,
+        qsValue: qsValue,
+        finalQueryString: queryString,
+        timestamp: new Date().toISOString(),
+        searchField: 'email only'
+      });
+    }
 
     return await http.get(`/user/user-list?${queryString}`, {
       next: { tags: ["modifyUser"] },

@@ -23,9 +23,10 @@ interface ModalLayoutProps {
   onClose?: () => void;
   onCheckinSuccess?: () => void;
   attendanceData: AttendanceData;
+  userCoin?: number;
 }
 
-const ModalLayout: React.FC<ModalLayoutProps> = memo(({ isOpen, onClose, onCheckinSuccess, attendanceData }) => {
+const ModalLayout: React.FC<ModalLayoutProps> = memo(({ isOpen, onClose, onCheckinSuccess, attendanceData, userCoin }) => {
   // Use attendance data from props instead of hook
   const {
     attendanceList,
@@ -75,28 +76,6 @@ const ModalLayout: React.FC<ModalLayoutProps> = memo(({ isOpen, onClose, onCheck
   const currentProgress = useMemo(() => {
     return weeklyProgress.filter((day) => day.checked).length;
   }, [weeklyProgress]);
-
-  // Get current reward (default reward or from today's attendance)
-  const currentReward = useMemo(() => {
-    const today = new Date();
-    const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
-
-    const todayAttendance = attendanceList.find((item) => {
-      let itemDateString: string;
-
-      if (item.date.includes("T")) {
-        const itemDate = new Date(item.date);
-        itemDateString = `${itemDate.getFullYear()}-${String(itemDate.getMonth() + 1).padStart(2, '0')}-${String(itemDate.getDate()).padStart(2, '0')}`;
-      } else {
-        const itemDate = new Date(item.date);
-        itemDateString = `${itemDate.getFullYear()}-${String(itemDate.getMonth() + 1).padStart(2, '0')}-${String(itemDate.getDate()).padStart(2, '0')}`;
-      }
-
-      return itemDateString === todayString;
-    });
-
-    return todayAttendance ? todayAttendance.coin : 100; // Default 100 coins
-  }, [attendanceList]);
 
   // Check if today is checked in
   const todayChecked = useMemo(() => {
@@ -207,7 +186,7 @@ const ModalLayout: React.FC<ModalLayoutProps> = memo(({ isOpen, onClose, onCheck
                     {/* Progress and Reward Display */}
                     <div className="flex-1 flex justify-center mb-2">
                       <RewardDisplay
-                        reward={currentReward}
+                        reward={userCoin ?? 100}
                         className={styles["reward-frame"]}
                       />
                     </div>
