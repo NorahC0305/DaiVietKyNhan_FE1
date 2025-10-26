@@ -31,7 +31,7 @@ export const UserRewardExchangeSchema = z.object({
   id: z.number(),
   userId: z.number(),
   rewardId: z.number(),
-  status: z.enum(["COMPLETED", "PENDING"]),
+  status: z.enum(["COMPLETED", "PENDING","COMPLETED"]),
   exchangedAt: z.string().nullable(),
   code: z.string().nullable(),
   valuePaid: z.number(),

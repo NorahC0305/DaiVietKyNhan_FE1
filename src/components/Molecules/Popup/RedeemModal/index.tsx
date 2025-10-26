@@ -65,7 +65,6 @@ export default function RedeemModal({
   const context = useUserDataContextSafe();
   const contextUserData = context?.userData || null;
   const refreshUserData = context?.refreshUserData || null;
-
   // Use context user data if available, otherwise fallback to rewards hook data
   const userData = contextUserData || rewardsUserData;
 
@@ -96,7 +95,6 @@ export default function RedeemModal({
     const giftText = reward.gift?.toLowerCase() || "";
     const coinMatch = giftText.match(/(\d+)\s*(xu|coin)/);
     
-    console.log('Reward gift:', reward.gift, 'Gift text:', giftText, 'Coin match:', coinMatch);
     
     const right: RightDisplay = coinMatch 
       ? {
@@ -115,24 +113,18 @@ export default function RedeemModal({
         : user.point >= reward.requireValue
       : false;
 
-    // Check if reward is active and within date range
-    const now = new Date();
-    const startDate = reward.startDate ? new Date(reward.startDate) : null;
-    const endDate = reward.endDate ? new Date(reward.endDate) : null;
-    const isWithinDateRange = startDate && endDate ? now >= startDate && (!endDate || now <= endDate) : true;
-
     // Check if user can redeem based on status
     // If userRewardExchange exists:
     // - COMPLETED: user already exchanged, cannot redeem again
     // - PENDING: user can still redeem (exchange)
     // If no userRewardExchange exists: user can redeem
     const canRedeemByStatus =
-      !userRewardExchange || userRewardExchange.status === "PENDING";
+      !userRewardExchange || userRewardExchange.status === "COMPLETED";
 
     return {
       id: reward.id.toString(),
       canRedeem:
-        reward.isActive && canAfford && isWithinDateRange && canRedeemByStatus,
+        reward.isActive && canAfford && canRedeemByStatus,
       display: { left, right },
     };
   };
