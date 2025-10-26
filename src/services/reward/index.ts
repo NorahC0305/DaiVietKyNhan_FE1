@@ -32,6 +32,12 @@ const rewardService = {
     });
   },
 
+  getGiftCodes: async (type: "CODE" | "COIN" | "POINT") => {
+    return await http.get(`/reward/type/${type}`, {
+      cache: "no-store",
+    });
+  },
+
   getUserRewards: async (params?: {
     currentPage?: number;
     pageSize?: number;

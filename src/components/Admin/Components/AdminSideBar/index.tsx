@@ -41,6 +41,7 @@ const MENU_ITEMS: IPAGES.MenuItem[] = [
     subItems: [
       { id: "audience-info", label: "Thông tin khán giả", icon: "User" },
       { id: "scores-edit", label: "Điểm số & chỉnh sửa điểm", icon: "Star" },
+      { id: "gift-code", label: "Mã GIF", icon: "Gift" },
 
       {
         id: "received-letters",
@@ -131,6 +132,7 @@ const AdminSideBar = () => {
     () => ({
       "audience-info": ROUTES.ADMIN_DASHBOARD.USER.INFO,
       "scores-edit": ROUTES.ADMIN_DASHBOARD.USER.POINTS,
+      "gift-code": ROUTES.ADMIN_DASHBOARD.USER.GIFT_CODE,
       "photo-submission": ROUTES.ADMIN_DASHBOARD.USER.SUBMITTED_IMAGE,
       "received-letters": ROUTES.ADMIN_DASHBOARD.USER.SENT_MAIL,
       "content-info": ROUTES.ADMIN_DASHBOARD.CONTENT.INFO,
@@ -173,6 +175,10 @@ const AdminSideBar = () => {
       [ROUTES.ADMIN_DASHBOARD.USER.POINTS]: {
         parentId: "user-management",
         subId: "scores-edit",
+      },
+      [ROUTES.ADMIN_DASHBOARD.USER.GIFT_CODE]: {
+        parentId: "user-management",
+        subId: "gift-code",
       },
       [ROUTES.ADMIN_DASHBOARD.USER.SUBMITTED_IMAGE]: {
         parentId: "user-management",
