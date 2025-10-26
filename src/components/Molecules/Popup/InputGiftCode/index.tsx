@@ -38,7 +38,9 @@ export default function InputGiftCode({
         message.includes("đã sử dụng") ||
         message.includes("exhausted") ||
         message.includes("quota") ||
-        message.includes("usage")
+        message.includes("usage") ||
+        message.includes("thưởng đã hết hạn") ||
+        message.includes("hết hạn")
       ) {
         return "limit";
       }
@@ -49,7 +51,8 @@ export default function InputGiftCode({
         message.includes("sai") ||
         message.includes("không hợp lệ") ||
         message.includes("not found") ||
-        message.includes("không tìm thấy")
+        message.includes("không tìm thấy") ||
+        message.includes("mã đổi thưởng không hợp lệ")
       ) {
         return "incorrect";
       }
