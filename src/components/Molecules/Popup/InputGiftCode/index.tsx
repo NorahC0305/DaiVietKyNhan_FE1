@@ -40,7 +40,8 @@ export default function InputGiftCode({
         message.includes("quota") ||
         message.includes("usage") ||
         message.includes("thưởng đã hết hạn") ||
-        message.includes("hết hạn")
+        message.includes("hết hạn") ||
+        message.includes("giới hạn thưởng đã vượt")
       ) {
         return "limit";
       }
