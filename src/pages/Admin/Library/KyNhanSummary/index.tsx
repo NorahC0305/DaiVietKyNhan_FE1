@@ -269,12 +269,6 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Validate file size (10MB limit)
-      if (file.size > 10 * 1024 * 1024) {
-        toast.error("File ảnh không được lớn hơn 10MB");
-        return;
-      }
-
       // Validate file type
       if (!file.type.startsWith("image/")) {
         toast.error("Vui lòng chọn file ảnh hợp lệ");
@@ -299,12 +293,6 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
     setIsDragOver(false);
     const file = e.dataTransfer.files[0];
     if (file && file.type.startsWith("image/")) {
-      // Validate file size (10MB limit)
-      if (file.size > 10 * 1024 * 1024) {
-        toast.error("File ảnh không được lớn hơn 10MB");
-        return;
-      }
-
       // Validate file type
       if (!file.type.startsWith("image/")) {
         toast.error("Vui lòng chọn file ảnh hợp lệ");
@@ -439,9 +427,8 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <div
-                  className={`p-2 rounded-lg ${
-                    isEditMode ? "bg-orange-100" : "bg-blue-100"
-                  }`}
+                  className={`p-2 rounded-lg ${isEditMode ? "bg-orange-100" : "bg-blue-100"
+                    }`}
                 >
                   {isEditMode ? (
                     <Edit className="h-6 w-6 text-orange-600" />
@@ -455,11 +442,10 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                   </h1>
                   <p className="text-gray-600 text-sm lg:text-base">
                     {isEditMode
-                      ? `Đang chỉnh sửa tóm tắt cho ${
-                          editingSummary
-                            ? `ID: ${editingSummary.id}`
-                            : "kỳ nhân"
-                        }`
+                      ? `Đang chỉnh sửa tóm tắt cho ${editingSummary
+                        ? `ID: ${editingSummary.id}`
+                        : "kỳ nhân"
+                      }`
                       : "Quản lý và tạo tóm tắt cho các kỳ nhân trong hệ thống"}
                   </p>
                 </div>
@@ -544,9 +530,8 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                   className="flex items-center gap-2"
                 >
                   <RefreshCw
-                    className={`h-4 w-4 ${
-                      isLoadingSummaries ? "animate-spin" : ""
-                    }`}
+                    className={`h-4 w-4 ${isLoadingSummaries ? "animate-spin" : ""
+                      }`}
                   />
                   <span className="hidden sm:inline">Làm mới</span>
                 </Button>
@@ -579,11 +564,10 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
               <div className="flex items-center justify-between">
                 <CardTitle className="text-xl font-semibold text-gray-800 flex items-center gap-3">
                   <div
-                    className={`p-2 rounded-lg ${
-                      isEditMode
-                        ? "bg-orange-100 text-orange-600"
-                        : "bg-blue-100 text-blue-600"
-                    }`}
+                    className={`p-2 rounded-lg ${isEditMode
+                      ? "bg-orange-100 text-orange-600"
+                      : "bg-blue-100 text-blue-600"
+                      }`}
                   >
                     {isEditMode ? (
                       <Edit className="h-5 w-5" />
@@ -666,8 +650,8 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                       /* Upload Area or Current Image Display */
                       <>
                         {isEditMode &&
-                        editingSummary &&
-                        editingSummary.imgUrl ? (
+                          editingSummary &&
+                          editingSummary.imgUrl ? (
                           /* Current Image Display in Edit Mode */
                           <div className="border-2 border-solid border-gray-300 rounded-lg p-4 bg-gray-50">
                             <div className="text-center mb-3">
@@ -704,11 +688,10 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                         ) : (
                           /* Upload Area */
                           <div
-                            className={`border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200 cursor-pointer ${
-                              isDragOver
-                                ? "border-blue-400 bg-blue-50 scale-105"
-                                : "border-gray-300 bg-gray-50 hover:border-gray-400 hover:bg-gray-100"
-                            }`}
+                            className={`border-2 border-dashed rounded-lg p-8 text-center transition-all duration-200 cursor-pointer ${isDragOver
+                              ? "border-blue-400 bg-blue-50 scale-105"
+                              : "border-gray-300 bg-gray-50 hover:border-gray-400 hover:bg-gray-100"
+                              }`}
                             onDrop={handleDrop}
                             onDragOver={handleDragOver}
                             onDragLeave={handleDragLeave}
@@ -717,17 +700,15 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                             }
                           >
                             <Upload
-                              className={`w-12 h-12 mx-auto mb-4 transition-colors ${
-                                isDragOver ? "text-blue-500" : "text-gray-400"
-                              }`}
+                              className={`w-12 h-12 mx-auto mb-4 transition-colors ${isDragOver ? "text-blue-500" : "text-gray-400"
+                                }`}
                             />
                             <p className="text-sm text-gray-600 mb-2">
                               <span
-                                className={`font-medium transition-colors ${
-                                  isDragOver
-                                    ? "text-blue-700"
-                                    : "text-blue-600 hover:text-blue-700"
-                                }`}
+                                className={`font-medium transition-colors ${isDragOver
+                                  ? "text-blue-700"
+                                  : "text-blue-600 hover:text-blue-700"
+                                  }`}
                               >
                                 {isDragOver
                                   ? "Thả ảnh vào đây"
@@ -736,7 +717,7 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                               {!isDragOver && " hoặc kéo thả vào đây"}
                             </p>
                             <p className="text-xs text-gray-500">
-                              PNG, JPG, GIF up to 10MB
+                              PNG, JPG, GIF
                             </p>
                           </div>
                         )}
@@ -903,11 +884,10 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                     value={formData.summary}
                     onChange={(value) => handleInputChange("summary", value)}
                     placeholder="Nhập tóm tắt kỳ nhân..."
-                    className={`${
-                      formValidationErrors.summary
-                        ? "border-red-300 focus-within:border-red-500 focus-within:ring-red-500"
-                        : ""
-                    }`}
+                    className={`${formValidationErrors.summary
+                      ? "border-red-300 focus-within:border-red-500 focus-within:ring-red-500"
+                      : ""
+                      }`}
                     textColor="black"
                   />
                 </div>
@@ -960,11 +940,10 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                         !formData.summary.trim() ||
                         Object.keys(formValidationErrors).length > 0
                       }
-                      className={`${
-                        isEditMode
-                          ? "bg-orange-600 hover:bg-orange-700"
-                          : "bg-blue-600 hover:bg-blue-700"
-                      } text-white min-w-[140px]`}
+                      className={`${isEditMode
+                        ? "bg-orange-600 hover:bg-orange-700"
+                        : "bg-blue-600 hover:bg-blue-700"
+                        } text-white min-w-[140px]`}
                     >
                       {isSubmitting || isUpdating ? (
                         <>
@@ -1059,11 +1038,10 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                 </div>
               ) : filteredSummaries.length > 0 ? (
                 <div
-                  className={`${
-                    viewMode === "grid"
-                      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                      : "space-y-4"
-                  }`}
+                  className={`${viewMode === "grid"
+                    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                    : "space-y-4"
+                    }`}
                 >
                   {filteredSummaries.map((summary) => {
                     const relatedKyNhan =
