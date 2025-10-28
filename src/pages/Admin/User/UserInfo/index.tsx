@@ -20,7 +20,7 @@ interface UserInfoPageProps {
   birthdayAndGenderStats: any;
 }
 
-const UserInfoPage = ({ listUsers: initialListUsers, birthdayAndGenderStats  }: UserInfoPageProps) => {
+const UserInfoPage = ({ listUsers: initialListUsers, birthdayAndGenderStats }: UserInfoPageProps) => {
   const [listUsers, setListUsers] = useState<IMePaginationResponse['data']>(initialListUsers);
   const [itemsPerPage, setItemsPerPage] = useState<number>(15);
   const [page, setPage] = useState<number>(1);
