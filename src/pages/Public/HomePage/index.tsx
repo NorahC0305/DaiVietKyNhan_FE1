@@ -11,7 +11,8 @@ import RadialGradial from "@components/Atoms/RadialGradient";
 import { useUserRank } from "@hooks/useUser";
 import { useAttendance } from "@hooks/useAttendance";
 import ModalLayout from "@components/Molecules/DailyCheckin/Layouts/ModalLayout";
-import { Dialog, DialogContent } from "@components/Atoms/ui/dialog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@components/Atoms/ui/tooltip";
+import VideoModal from "@components/Atoms/VideoModal";
 import { useRouter } from "next/navigation";
 import { AttendanceProvider } from "@contexts/AttendanceContext";
 import { IAttendanceItem } from "@models/attendance/response";
@@ -134,6 +135,7 @@ const HomePageClient = ({
 }: HomePageClientProps) => {
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(1); // Bắt đầu từ testimonial thứ 2 (index 1) làm chính
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
 
   // Memoize params để tránh re-creation mỗi lần render
   const rankParams = useMemo(() => ({ currentPage: 1, pageSize: 15 }), []);
@@ -227,6 +229,40 @@ const HomePageClient = ({
 
       {/* Check-in Modal Dialog - dynamically loaded to avoid SSR issues */}
       <DynamicAuthenticatedFeatures user={user} />
+
+      {/* Video Guide Icon with Tooltip */}
+      <TooltipProvider delayDuration={0}>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <div
+              className="fixed lg:bottom-7 bottom-20 lg:right-7 right-5 lg:w-[50px] lg:h-[50px] w-[45px] h-[45px] z-10 cursor-pointer"
+              onClick={() => setIsVideoModalOpen(true)}
+            >
+              <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1761673445/video_pzrrzw.png" alt="Video" fill />
+            </div>
+          </TooltipTrigger>
+          <TooltipContent side="left" sideOffset={10} className="bg-transparent border-0 shadow-none">
+            <p
+              className="lg:text-2xl text-lg font-black italic"
+              style={{
+                color: '#FFFFFF',
+                WebkitTextStroke: '0.1px #000000',
+                textShadow: '-0.1px -0.1px 0 #000000, 0.1px -0.1px 0 #000000, -0.1px 0.1px 0 #000000, 0.1px 0.1px 0 #000000'
+              }}
+            >
+              Hướng dẫn Khai Nhân Mở Ấn
+            </p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
+      {/* Video Modal */}
+      <VideoModal
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        videoSrc="https://res.cloudinary.com/djwgtiit3/video/upload/v1761676141/videohuongdan_dwmc23.mp4"
+        title="Hướng dẫn Khai Nhân Mở Ấn"
+      />
 
       {/* Banner 2 - Khí Chất Section */}
       <section className="relative mt-12 lg:mt-32 w-full lg:h-[870px] h-[591px] flex items-center justify-center overflow-hidden">

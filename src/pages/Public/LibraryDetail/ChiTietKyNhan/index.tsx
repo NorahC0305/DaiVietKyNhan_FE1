@@ -195,7 +195,7 @@ const ChiTietKyNhan: React.FC<ChiTietKyNhanProps> = ({ chiTietKyNhan }) => {
         )}
       </div>
 
-      <SectionTitle>GIAI ĐOẠN DÂN GIAN VÀ TRUYỀN THUYẾT</SectionTitle>
+      <SectionTitle>GIAI THOẠI DÂN GIAN VÀ TRUYỀN THUYẾT</SectionTitle>
       <div className="space-y-6">
         {(chiTietKyNhan?.giaiThoaiDanGian || []).map((item: any) => (
           <div key={item.id}>
