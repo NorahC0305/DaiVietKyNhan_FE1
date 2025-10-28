@@ -12,6 +12,7 @@ import {
   IMonthlyUserStatsResponse,
   ILandStatsResponse,
   IUserRankResponse,
+  IUserDemographicsStatsResponse,
 } from "@models/user/response";
 import qs from "qs";
 
@@ -155,6 +156,53 @@ const userService = {
     return await http.get<IUserRankResponse>(`/user/user-rank?${queryParams}`, {
       next: { tags: ["userRank"] },
     });
+  },
+  getUserDemographicsStats: async (): Promise<IUserDemographicsStatsResponse> => {
+    // Mock API - Replace with actual API call later
+    // return await http.get<IUserDemographicsStatsResponse>("/user/birthday-and-gender-stats");
+
+    return {
+      statusCode: 200,
+      message: "Lấy thông tin thành công",
+      data: {
+        genders: {
+          male: {
+            amount: 126,
+            percent: 23.42
+          },
+          female: {
+            amount: 119,
+            percent: 22.12
+          },
+          other: {
+            amount: 293,
+            percent: 54.46
+          }
+        },
+        ages: {
+          "0-17": {
+            amount: 70,
+            percent: 13.01
+          },
+          "18-24": {
+            amount: 261,
+            percent: 48.51
+          },
+          "25-34": {
+            amount: 194,
+            percent: 36.06
+          },
+          "35-50": {
+            amount: 7,
+            percent: 1.3
+          },
+          "50+": {
+            amount: 3,
+            percent: 0.56
+          }
+        }
+      }
+    };
   },
 };
 

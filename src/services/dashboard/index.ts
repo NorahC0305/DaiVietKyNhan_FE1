@@ -6,6 +6,12 @@ const dashboardService = {
       cache: 'no-store',
     });
   },
+
+  getBirthdayAndGenderStats: async () => {
+    return await http.get("/dashboard/user/gender-ages", {
+      cache: 'no-store',
+    });
+  },
 };
 
 export default dashboardService;

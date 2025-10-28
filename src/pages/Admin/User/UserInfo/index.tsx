@@ -6,6 +6,7 @@ import Toolbar from "./Components/Toolbar";
 import ToolbarSkeleton from "./Components/ToolbarSkeleton";
 import UsersTable from "./Components/UsersTable";
 import UsersTableSkeleton from "./Components/UsersTableSkeleton";
+import StatisticsDialog from "./Components/StatisticsDialog";
 import { IMePaginationResponse } from "@models/user/response";
 import { EnhancedPagination } from "@/components/Atoms/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/Atoms/ui/select";
@@ -16,9 +17,10 @@ import useDebounce from "@hooks/useDebounce";
 interface UserInfoPageProps {
   listUsers: IMePaginationResponse['data'];
   initialUsersResponse?: IMePaginationResponse;
+  birthdayAndGenderStats: any;
 }
 
-const UserInfoPage = ({ listUsers: initialListUsers }: UserInfoPageProps) => {
+const UserInfoPage = ({ listUsers: initialListUsers, birthdayAndGenderStats  }: UserInfoPageProps) => {
   const [listUsers, setListUsers] = useState<IMePaginationResponse['data']>(initialListUsers);
   const [itemsPerPage, setItemsPerPage] = useState<number>(15);
   const [page, setPage] = useState<number>(1);
@@ -30,6 +32,7 @@ const UserInfoPage = ({ listUsers: initialListUsers }: UserInfoPageProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [hasInitialData, setHasInitialData] = useState<boolean>(!!initialListUsers);
   const [hasUserInteracted, setHasUserInteracted] = useState<boolean>(false);
+  const [isStatisticsDialogOpen, setIsStatisticsDialogOpen] = useState<boolean>(false);
 
   // Fetch users data
   const fetchUsers = async () => {
@@ -105,6 +108,10 @@ const UserInfoPage = ({ listUsers: initialListUsers }: UserInfoPageProps) => {
     setPage(1);
     setHasUserInteracted(true);
   };
+
+  const handleStatisticsClick = () => {
+    setIsStatisticsDialogOpen(true);
+  };
   //-----------------------------End-----------------------------//
 
   return (
@@ -123,6 +130,7 @@ const UserInfoPage = ({ listUsers: initialListUsers }: UserInfoPageProps) => {
           <Toolbar
             onSearch={handleSearch}
             onStatusFilter={handleStatusFilter}
+            onStatisticsClick={handleStatisticsClick}
             searchValue={search}
             statusValue={status}
           />
@@ -165,6 +173,13 @@ const UserInfoPage = ({ listUsers: initialListUsers }: UserInfoPageProps) => {
           )}
         </CardFooter>
       </Card>
+
+      {/* Statistics Dialog */}
+      <StatisticsDialog
+        open={isStatisticsDialogOpen}
+        onOpenChange={setIsStatisticsDialogOpen}
+        birthdayAndGenderStats={birthdayAndGenderStats}
+      />
     </div>
   );
 };

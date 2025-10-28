@@ -202,3 +202,43 @@ export type IUserRankPagination = z.infer<typeof userRankPagination>;
 export type IUserRankResponseData = z.infer<typeof userRankResponseData>;
 export type IUserRankResponse = z.infer<typeof userRankResponse>;
 //----------------------End----------------------//
+
+// User demographics statistics response
+const genderAmountData = z.object({
+    amount: z.number(),
+    percent: z.number(),
+});
+
+const gendersData = z.object({
+    male: genderAmountData,
+    female: genderAmountData,
+    other: genderAmountData,
+});
+
+const ageAmountData = z.object({
+    amount: z.number(),
+    percent: z.number(),
+});
+
+const agesData = z.object({
+    "0-17": ageAmountData,
+    "18-24": ageAmountData,
+    "25-34": ageAmountData,
+    "35-50": ageAmountData,
+    "50+": ageAmountData,
+});
+
+const userDemographicsStatsData = z.object({
+    genders: gendersData,
+    ages: agesData,
+});
+
+const userDemographicsStatsResponse = BackendResponseModel(userDemographicsStatsData);
+
+export type IGenderAmountData = z.infer<typeof genderAmountData>;
+export type IGendersData = z.infer<typeof gendersData>;
+export type IAgeAmountData = z.infer<typeof ageAmountData>;
+export type IAgesData = z.infer<typeof agesData>;
+export type IUserDemographicsStatsData = z.infer<typeof userDemographicsStatsData>;
+export type IUserDemographicsStatsResponse = z.infer<typeof userDemographicsStatsResponse>;
+//----------------------End----------------------//

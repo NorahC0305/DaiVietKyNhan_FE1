@@ -10,11 +10,12 @@ import { USER } from "@constants/user";
 interface ToolbarProps {
   onSearch: (value: string) => void;
   onStatusFilter: (value: string) => void;
+  onStatisticsClick: () => void;
   searchValue: string;
   statusValue: string;
 }
 
-const Toolbar = ({ onSearch, onStatusFilter, searchValue, statusValue }: ToolbarProps) => {
+const Toolbar = ({ onSearch, onStatusFilter, onStatisticsClick, searchValue, statusValue }: ToolbarProps) => {
   return (
     <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
       <div className="flex-1 flex items-center gap-2">
@@ -40,14 +41,25 @@ const Toolbar = ({ onSearch, onStatusFilter, searchValue, statusValue }: Toolbar
           </SelectContent>
         </Select>
       </div>
-      <Button
-        size="sm"
-        className="gap-2"
-        style={{ backgroundColor: COLORS.BACKGROUND.ORANGE }}
-      >
-        <LucideIcon name="Plus" iconSize={16} />
-        Thêm người dùng
-      </Button>
+      <div className="flex gap-2">
+        <Button
+          size="sm"
+          variant="outline"
+          className="gap-2"
+          onClick={onStatisticsClick}
+        >
+          <LucideIcon name="BarChart3" iconSize={16} />
+          Thống kê
+        </Button>
+        <Button
+          size="sm"
+          className="gap-2"
+          style={{ backgroundColor: COLORS.BACKGROUND.ORANGE }}
+        >
+          <LucideIcon name="Plus" iconSize={16} />
+          Thêm người dùng
+        </Button>
+      </div>
     </div>
   );
 };
