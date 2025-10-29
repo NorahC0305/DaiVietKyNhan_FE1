@@ -45,6 +45,7 @@ import {
   CheckCircle2,
   Save,
   ArrowLeft,
+  Rows,
 } from "lucide-react";
 import { IKyNhan } from "@models/ky-nhan/entity";
 import { IKyNhanResponseModel } from "@models/ky-nhan/response";
@@ -97,6 +98,12 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
   const [kyNhanSummaries, setKyNhanSummaries] = useState<IKyNhanSummary[]>([]);
   const [isLoadingSummaries, setIsLoadingSummaries] = useState(false);
   const [showSummaryList, setShowSummaryList] = useState(false);
+  const [summaryPagination, setSummaryPagination] = useState({
+    totalItem: 0,
+    current: 1,
+    totalPage: 1,
+    pageSize: 10,
+  });
 
   // Edit states
   const [editingSummary, setEditingSummary] = useState<IKyNhanSummary | null>(
@@ -122,6 +129,10 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
   }>({});
   const [successMessage, setSuccessMessage] = useState<string>("");
   const [isDragOver, setIsDragOver] = useState(false);
+  
+  // Pagination for summaries (client-side)
+  const [summaryPage, setSummaryPage] = useState<number>(1);
+  const [summaryItemsPerPage, setSummaryItemsPerPage] = useState<number>(10);
 
   // Search function
   const searchKyNhan = useCallback(
@@ -181,12 +192,28 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
   }, [debouncedSearchQuery]);
 
   // Fetch ky nhan summaries
-  const fetchKyNhanSummaries = useCallback(async () => {
+  const fetchKyNhanSummaries = useCallback(async (current: number, pageSize: number) => {
     setIsLoadingSummaries(true);
     try {
-      const response = await kyNhanSummaryService.getKyNhanSummary();
+      const response = await kyNhanSummaryService.getKyNhanSummary(undefined, current, pageSize);
       if (response.statusCode === 200 && response.data?.results) {
         setKyNhanSummaries(response.data.results);
+        if ((response as any).data?.pagination) {
+          const p = (response as any).data.pagination;
+          setSummaryPagination({
+            totalItem: p.totalItem || response.data.results.length,
+            current: p.current || current,
+            totalPage: p.totalPage || 1,
+            pageSize: p.pageSize || pageSize,
+          });
+        } else {
+          setSummaryPagination({
+            totalItem: response.data.results.length,
+            current,
+            totalPage: 1,
+            pageSize,
+          });
+        }
       }
     } catch (error) {
       console.error("Error fetching ky nhan summaries:", error);
@@ -199,9 +226,9 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
   // Load summaries when component mounts or when showSummaryList changes
   useEffect(() => {
     if (showSummaryList) {
-      fetchKyNhanSummaries();
+      fetchKyNhanSummaries(summaryPage, summaryItemsPerPage);
     }
-  }, [showSummaryList, fetchKyNhanSummaries]);
+  }, [showSummaryList, summaryPage, summaryItemsPerPage, fetchKyNhanSummaries]);
 
   // Handle edit summary
   const handleEditSummary = (summary: IKyNhanSummary) => {
@@ -271,6 +298,23 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
         .includes(summarySearchQuery.toLowerCase())
     );
   });
+
+  // Reset summaries page when search query changes (client-side filter still applies to current page)
+  useEffect(() => {
+    setSummaryPage(1);
+  }, [summarySearchQuery]);
+
+  // Use server pagination totals
+  const totalSummaryItems = summaryPagination.totalItem;
+  const totalSummaryPages = summaryPagination.totalPage;
+
+  const handleSummaryItemsPerPageChange = (value: string) => {
+    const newSize = Number(value);
+    if (!Number.isNaN(newSize) && newSize > 0) {
+      setSummaryItemsPerPage(newSize);
+      setSummaryPage(1);
+    }
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({
@@ -441,7 +485,7 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
 
         // Refresh summary list if it's being shown
         if (showSummaryList) {
-          fetchKyNhanSummaries();
+          fetchKyNhanSummaries(summaryPage, summaryItemsPerPage);
         }
 
         // Clear success message after 5 seconds
@@ -499,7 +543,7 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
               <div className="flex flex-wrap items-center gap-4 text-sm">
                 <div className="flex items-center gap-2 text-green-600">
                   <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span>Tổng: {kyNhanSummaries.length} tóm tắt</span>
+                  <span>Tổng: {summaryPagination.totalItem} tóm tắt</span>
                 </div>
                 {showSummaryList && (
                   <div className="flex items-center gap-2 text-blue-600">
@@ -549,7 +593,7 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                 onClick={() => {
                   setShowSummaryList(!showSummaryList);
                   if (!showSummaryList) {
-                    fetchKyNhanSummaries();
+                    fetchKyNhanSummaries(summaryPage, summaryItemsPerPage);
                   }
                 }}
                 className="flex items-center gap-2 border-blue-300 text-blue-600 hover:bg-blue-50"
@@ -569,7 +613,7 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={fetchKyNhanSummaries}
+                  onClick={() => fetchKyNhanSummaries(summaryPage, summaryItemsPerPage)}
                   disabled={isLoadingSummaries}
                   className="flex items-center gap-2"
                 >
@@ -1042,7 +1086,7 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                   </div>
                   Danh Sách Tóm Tắt Kỳ Nhân
                   <span className="text-sm font-normal text-gray-500">
-                    ({filteredSummaries.length} tóm tắt)
+                    ({summaryPagination.totalItem} tóm tắt)
                   </span>
                 </CardTitle>
 
@@ -1095,12 +1139,13 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                   </span>
                 </div>
               ) : filteredSummaries.length > 0 ? (
-                <div
-                  className={`${viewMode === "grid"
-                    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                    : "space-y-4"
-                    }`}
-                >
+                <>
+                  <div
+                    className={`${viewMode === "grid"
+                      ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                      : "space-y-4"
+                      }`}
+                  >
                   {filteredSummaries.map((summary) => {
                     const relatedKyNhan =
                       kyNhanList.find((k) => k.id === summary.kyNhanId) ||
@@ -1285,7 +1330,33 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                       </div>
                     );
                   })}
-                </div>
+                  </div>
+                  <div className="flex justify-between items-center mt-8 bg-white p-4 rounded-lg border border-gray-200">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Select value={String(summaryItemsPerPage)} onValueChange={handleSummaryItemsPerPageChange}>
+                        <SelectTrigger className="w-[100px] bg-background border-border text-foreground h-9">
+                          <Rows className="h-4 w-4 mr-2" />
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className="bg-card border-border">
+                          {[10, 20, 30, 50].map(size => (
+                            <SelectItem key={size} value={String(size)}>{size} / trang</SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    {totalSummaryPages > 1 && (
+                      <EnhancedPagination
+                        currentPage={summaryPage}
+                        totalPages={totalSummaryPages}
+                        totalItems={totalSummaryItems}
+                        itemsPerPage={summaryItemsPerPage}
+                        onPageChange={(p:number) => setSummaryPage(p)}
+                        showItemCount={true}
+                      />
+                    )}
+                  </div>
+                </>
               ) : (
                 <div className="text-center py-16 text-gray-500">
                   <div className="w-20 h-20 mx-auto mb-6 bg-gray-100 rounded-full flex items-center justify-center">
