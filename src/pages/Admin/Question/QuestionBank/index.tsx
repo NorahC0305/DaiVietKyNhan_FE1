@@ -56,14 +56,20 @@ const QuestionBankPage = ({ lands }: { lands: ILandEntity[] }) => {
   const createQuestionMutation = useCreateQuestion();
   const updateQuestionMutation = useUpdateQuestion();
 
-  // Fetch questions data using the hook
+  // Fetch questions data using the hook with server-side pagination and filters
   const {
-    data: allQuestions = [],
+    data: pagedQuestions = [],
     rawData: rawQuestions = [],
     isLoading,
     error,
     refetch,
-  } = useQuestions();
+    pagination: bePagination,
+  } = useQuestions({
+    currentPage: currentPage,
+    pageSize: pageSize,
+    search: searchTerm || undefined,
+    landId: selectedLandId !== null ? String(selectedLandId) : undefined,
+  });
   // Fetch editing question data
   const { data: editingQuestion, isLoading: isLoadingEditQuestion } =
     useGetQuestionById(editingQuestionId);
@@ -82,52 +88,7 @@ const QuestionBankPage = ({ lands }: { lands: ILandEntity[] }) => {
     refetch: refetchStats,
   } = useQuestionStats();
 
-  // Filter questions based on search and category using query data directly
-  const filteredQuestions = useMemo(() => {
-    const filtered = allQuestions.filter((question) => {
-      const matchesSearch =
-        !searchTerm ||
-        question.question.toLowerCase().includes(searchTerm.toLowerCase());
-      const matchesCategory =
-        selectedLandId === null ||
-        question.landId === selectedLandId.toString();
-      return matchesSearch && matchesCategory;
-    });
-
-    return filtered;
-  }, [allQuestions, searchTerm, selectedLandId]);
-
-  // Paginate filtered questions
-  const paginatedQuestions = useMemo(() => {
-    const startIndex = (currentPage - 1) * pageSize;
-    const endIndex = startIndex + pageSize;
-    const paginated = filteredQuestions.slice(startIndex, endIndex);
-
-    return paginated;
-  }, [filteredQuestions, currentPage, pageSize]);
-
-  // Update pagination info when filtered questions change
-  useEffect(() => {
-    const total = filteredQuestions.length;
-    setTotalItems(total);
-    setTotalPages(Math.ceil(total / pageSize));
-
-    // Debug logging
-    console.log("Pagination info updated:", {
-      totalFiltered: total,
-      pageSize,
-      totalPages: Math.ceil(total / pageSize),
-    });
-  }, [filteredQuestions, pageSize]);
-
-  // Reset to first page if current page is beyond total pages
-  useEffect(() => {
-    const total = filteredQuestions.length;
-    const maxPage = Math.ceil(total / pageSize);
-    if (currentPage > maxPage && total > 0) {
-      setCurrentPage(1);
-    }
-  }, [filteredQuestions, pageSize]);
+  // Rely on BE pagination directly; no client-side syncing
 
   // Use statistics from BE instead of calculating
   const totalQuestions = questionStats?.countQuestion || 0;
@@ -215,7 +176,7 @@ const QuestionBankPage = ({ lands }: { lands: ILandEntity[] }) => {
     setIsDeleteDialogOpen(false);
     setDeleteQuestionId(null);
   };
-
+console.log(bePagination);
   // Pagination handlers
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -279,17 +240,17 @@ const QuestionBankPage = ({ lands }: { lands: ILandEntity[] }) => {
           <QuestionsTable
             key={`questions-table-${currentPage}-${pageSize}`}
             lands={lands}
-            questions={paginatedQuestions}
+            questions={pagedQuestions}
             onView={handleView}
             onEdit={handleEdit}
             onDelete={handleDeleteClick}
             isLoading={isLoading}
             error={error}
             pagination={{
-              currentPage,
-              totalPages,
-              totalItems,
-              pageSize,
+              currentPage: bePagination?.current ?? currentPage,
+              totalPages: bePagination?.totalPage ?? totalPages,
+              totalItems: bePagination?.totalItem ?? totalItems,
+              pageSize: bePagination?.pageSize ?? pageSize,
               onPageChange: handlePageChange,
               onPageSizeChange: handlePageSizeChange,
             }}

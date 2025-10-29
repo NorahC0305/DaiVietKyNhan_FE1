@@ -68,7 +68,9 @@ const transformQuestionToUI = (question: any): UIQuestion => {
 };
 
 // Hook to get all questions
-export const useQuestions = (filters?: {
+export const useQuestions = (params?: {
+  currentPage?: number;
+  pageSize?: number;
   search?: string;
   landId?: string;
   type?: string;
@@ -77,13 +79,19 @@ export const useQuestions = (filters?: {
   const [rawData, setRawData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  const [pagination, setPagination] = useState<{ current: number; pageSize: number; totalPage: number; totalItem: number } | null>(null);
 
   const fetchQuestions = useCallback(async () => {
     try {
       setIsLoading(true);
       setError(null);
 
-      const response = await questionService.getAllQuestionsAdmin();
+      const response = await questionService.getAllQuestionsAdmin({
+        currentPage: params?.currentPage,
+        pageSize: params?.pageSize,
+        search: params?.search,
+        landId: params?.landId,
+      });
       console.log(response);
       // Handle different possible response structures
       let questionsData = null;
@@ -91,14 +99,21 @@ export const useQuestions = (filters?: {
       // Case 1: response.data.results (pagination structure)
       if (response.data?.results && Array.isArray(response.data.results)) {
         questionsData = response.data.results;
+        if (response.data.pagination) {
+          setPagination(response.data.pagination);
+        } else {
+          setPagination(null);
+        }
       }
       // Case 2: response.data is array directly
       else if (Array.isArray(response.data)) {
         questionsData = response.data;
+        setPagination(null);
       }
       // Case 3: response is array directly (as shown in the image)
       else if (Array.isArray(response)) {
         questionsData = response;
+        setPagination(null);
       }
 
       if (questionsData && Array.isArray(questionsData)) {
@@ -114,7 +129,7 @@ export const useQuestions = (filters?: {
     } finally {
       setIsLoading(false);
     }
-  }, [filters]);
+  }, [params?.currentPage, params?.pageSize, params?.search, params?.landId, params?.type]);
 
   useEffect(() => {
     fetchQuestions();
@@ -130,6 +145,7 @@ export const useQuestions = (filters?: {
     isLoading,
     error,
     refetch,
+    pagination,
   };
 };
 
