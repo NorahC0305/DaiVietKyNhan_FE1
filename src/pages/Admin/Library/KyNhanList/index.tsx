@@ -84,10 +84,15 @@ const KyNhanListPage = ({
     setIsLoading(true);
     setHasInitialData(false);
     try {
+      // Build qs to match format: sort:id,name:like=<encoded>
+      const qsString = debouncedSearch
+        ? `sort:id,name:like=${encodeURIComponent(debouncedSearch)}`
+        : "sort:id";
+
       const kyNhanResponse =
         (await kynhanService.getKyNhan(
-          debouncedSearch || undefined, 
-          page, 
+          qsString,
+          page,
           itemsPerPage
         )) as IBackendResponse<any>;
 

@@ -54,13 +54,21 @@ import kyNhanSummaryService from "@services/ky-nhan-summary";
 import kynhanService from "@services/kynhan";
 import { toast } from "react-toastify";
 import useDebounce from "@/hooks/useDebounce";
+import { EnhancedPagination } from "@/components/Atoms/ui/pagination";
 
 interface KyNhanSummaryPageProps {
   kyNhanList: IKyNhan[];
+  initialPagination?: {
+    totalItem: number;
+    current: number;
+    totalPage: number;
+    pageSize: number;
+  };
 }
 
 const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
   kyNhanList: initialKyNhanList,
+  initialPagination,
 }) => {
   const [formData, setFormData] = useState({
     kyNhanId: "",
@@ -74,6 +82,16 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
   const [kyNhanList, setKyNhanList] = useState<IKyNhan[]>(initialKyNhanList);
   const [isSearching, setIsSearching] = useState(false);
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
+
+  // Pagination for KyNhan selection (simple, 9 items/page)
+  const [itemsPerPage] = useState<number>(9);
+  const [page, setPage] = useState<number>(initialPagination?.current || 1);
+  const [pagination, setPagination] = useState({
+    totalItem: initialPagination?.totalItem || initialKyNhanList?.length || 0,
+    current: initialPagination?.current || 1,
+    totalPage: initialPagination?.totalPage || 1,
+    pageSize: initialPagination?.pageSize || 9,
+  });
 
   // Ky Nhan Summary List states
   const [kyNhanSummaries, setKyNhanSummaries] = useState<IKyNhanSummary[]>([]);
@@ -107,34 +125,60 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
 
   // Search function
   const searchKyNhan = useCallback(
-    async (query: string) => {
+    async (query: string, currentPage: number) => {
       if (!query.trim()) {
-        setKyNhanList(initialKyNhanList);
+        // Load initial page when no query (still paginated)
+        try {
+          setIsSearching(true);
+          const response = (await kynhanService.getKyNhan(
+            "sort:id",
+            currentPage,
+            itemsPerPage
+          )) as IKyNhanResponseModel;
+          setKyNhanList(response.data?.results || []);
+          if ((response as any).data?.pagination) {
+            setPagination((response as any).data.pagination);
+          }
+        } catch (error) {
+          setKyNhanList(initialKyNhanList);
+        } finally {
+          setIsSearching(false);
+        }
         return;
       }
 
       setIsSearching(true);
       try {
-        const qs = `name:like=${encodeURIComponent(query)}`;
+        const qs = `sort:id,name:like=${encodeURIComponent(query)}`;
         const response = (await kynhanService.getKyNhan(
-          qs
+          qs,
+          currentPage,
+          itemsPerPage
         )) as IKyNhanResponseModel;
         setKyNhanList(response.data?.results || []);
+        if ((response as any).data?.pagination) {
+          setPagination((response as any).data.pagination);
+        }
       } catch (error) {
         console.error("Error searching kỳ nhân:", error);
         toast.error("Không thể tìm kiếm kỳ nhân");
-        setKyNhanList(initialKyNhanList);
+        setKyNhanList([]);
       } finally {
         setIsSearching(false);
       }
     },
-    [initialKyNhanList]
+    [initialKyNhanList, itemsPerPage]
   );
 
   // Effect to handle debounced search
   useEffect(() => {
-    searchKyNhan(debouncedSearchQuery);
-  }, [debouncedSearchQuery, searchKyNhan]);
+    searchKyNhan(debouncedSearchQuery, page);
+  }, [debouncedSearchQuery, page, searchKyNhan]);
+
+  // Reset to first page when query changes
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearchQuery]);
 
   // Fetch ky nhan summaries
   const fetchKyNhanSummaries = useCallback(async () => {
@@ -857,6 +901,20 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                           </div>
                         )}
                       </div>
+
+                      {/* Simple Pagination (9 items/page) */}
+                      {pagination.totalPage > 1 && (
+                        <div className="flex justify-end mt-3">
+                          <EnhancedPagination
+                            currentPage={page}
+                            totalPages={pagination.totalPage}
+                            totalItems={pagination.totalItem}
+                            itemsPerPage={itemsPerPage}
+                            onPageChange={(p:number) => setPage(p)}
+                            showItemCount={true}
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>

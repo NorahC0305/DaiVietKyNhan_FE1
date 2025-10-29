@@ -12,7 +12,7 @@ import { Input } from "@/components/Atoms/ui/input";
 import { Textarea } from "@/components/Atoms/ui/textarea";
 import { Button } from "@/components/Atoms/ui/button";
 import { Label } from "@/components/Atoms/ui/label";
-import { Upload, Plus, Save, X, Edit, Trash2, Eye, Search } from "lucide-react";
+import { Upload, Plus, Save, X, Edit, Trash2, Eye, Search, Rows } from "lucide-react";
 import { toast } from "react-toastify";
 import libcardService from "@services/mo-ta-ky-nhan";
 import kynhanService from "@services/kynhan";
@@ -20,6 +20,7 @@ import { IKyNhan } from "@models/ky-nhan/entity";
 import { IKyNhanResponseModel } from "@models/ky-nhan/response";
 import { IMoTaKyNhan } from "@models/mo-ta-ky-nhan/entity";
 import { IMoTaKyNhanListResponseModel } from "@models/mo-ta-ky-nhan/response";
+import { EnhancedPagination } from "@/components/Atoms/ui/pagination";
 import {
   Select,
   SelectContent,
@@ -71,10 +72,18 @@ const LibCardPage = () => {
   const [isLoadingList, setIsLoadingList] = useState(false);
   const [editingItem, setEditingItem] = useState<IMoTaKyNhan | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  useEffect(() => {
+    const delayInputTimeout = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+    }, 500);
+    return () => clearTimeout(delayInputTimeout);
+  }, [searchTerm]);
 
   // Fetch Ky Nhans on component mount
   useEffect(() => {
@@ -82,7 +91,7 @@ const LibCardPage = () => {
       setIsLoadingKynhans(true);
       try {
         const response =
-          (await kynhanService.getKyNhan()) as IKyNhanResponseModel;
+          (await kynhanService.getKyNhan("sort:id", 1, 1000)) as IKyNhanResponseModel;
         if (response.data?.results) {
           setKynhans(response.data.results);
         }
@@ -100,11 +109,13 @@ const LibCardPage = () => {
   const fetchMoTaKyNhanList = async () => {
     setIsLoadingList(true);
     try {
+      const qsString = debouncedSearch
+        ? `sort:id,ten:like=${encodeURIComponent(debouncedSearch)}`
+        : "sort:id";
       const response = (await libcardService.getMoTaKyNhanList({
         currentPage,
         pageSize,
-        sort: "sort:id",
-        search: searchTerm || undefined,
+        sort: qsString,
       })) as IMoTaKyNhanListResponseModel;
 
       if (response.data?.results) {
@@ -126,7 +137,12 @@ const LibCardPage = () => {
       fetchMoTaKyNhanList();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [listView, currentPage, searchTerm]);
+  }, [listView, currentPage, debouncedSearch, pageSize]);
+
+  const handleItemsPerPageChange = (value: string) => {
+    setPageSize(parseInt(value));
+    setCurrentPage(1);
+  };
 
   const handleInputChange = (field: keyof FormData, value: string | number) => {
     setFormData((prev) => ({
@@ -373,6 +389,7 @@ const LibCardPage = () => {
                           setSearchTerm(e.target.value);
                           setCurrentPage(1);
                         }}
+                        color="black"
                         className="pl-10 rounded-4xl border-gray-300"
                       />
                     </div>
@@ -397,6 +414,9 @@ const LibCardPage = () => {
                     <table className="w-full">
                       <thead className="bg-gray-50">
                         <tr>
+                          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                            ID
+                          </th>
                           <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                             Hình ảnh
                           </th>
@@ -424,11 +444,14 @@ const LibCardPage = () => {
                           );
                           return (
                             <tr key={item.id} className="hover:bg-gray-50">
+                              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                {item.id}
+                              </td>
                               <td className="px-6 py-4 whitespace-nowrap">
                                 <img
                                   src={item.imgUrl}
                                   alt={item.ten}
-                                  className="h-12 w-12 rounded-full object-cover border border-gray-200"
+                                  className="h-20 w-20 rounded-full object-cover border border-gray-200"
                                 />
                               </td>
                               <td className="px-6 py-4 whitespace-nowrap">
@@ -486,139 +509,31 @@ const LibCardPage = () => {
             </Card>
 
             {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-4 py-4">
-                {/* Total items info */}
-                <div className="text-sm text-gray-600">
-                  Hiển thị {(currentPage - 1) * pageSize + 1} -{" "}
-                  {Math.min(currentPage * pageSize, totalItems)} của{" "}
-                  {totalItems} mục
-                </div>
-
-                {/* Pagination controls */}
-                <div className="flex items-center space-x-2">
-                  {/* First page */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(1)}
-                    className="hidden sm:block"
-                  >
-                    Đầu
-                  </Button>
-
-                  {/* Previous page */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage(currentPage - 1)}
-                  >
-                    Trước
-                  </Button>
-
-                  {/* Page numbers */}
-                  <div className="flex items-center space-x-1">
-                    {(() => {
-                      const pages = [];
-                      const startPage = Math.max(1, currentPage - 2);
-                      const endPage = Math.min(totalPages, currentPage + 2);
-
-                      // Show first page if not in range
-                      if (startPage > 1) {
-                        pages.push(
-                          <Button
-                            key={1}
-                            variant={currentPage === 1 ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => setCurrentPage(1)}
-                            className="min-w-[40px]"
-                          >
-                            1
-                          </Button>
-                        );
-                        if (startPage > 2) {
-                          pages.push(
-                            <span
-                              key="ellipsis1"
-                              className="px-2 text-gray-500"
-                            >
-                              ...
-                            </span>
-                          );
-                        }
-                      }
-
-                      // Show pages in range
-                      for (let i = startPage; i <= endPage; i++) {
-                        pages.push(
-                          <Button
-                            key={i}
-                            variant={currentPage === i ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => setCurrentPage(i)}
-                            className="min-w-[40px]"
-                          >
-                            {i}
-                          </Button>
-                        );
-                      }
-
-                      // Show last page if not in range
-                      if (endPage < totalPages) {
-                        if (endPage < totalPages - 1) {
-                          pages.push(
-                            <span
-                              key="ellipsis2"
-                              className="px-2 text-gray-500"
-                            >
-                              ...
-                            </span>
-                          );
-                        }
-                        pages.push(
-                          <Button
-                            key={totalPages}
-                            variant={
-                              currentPage === totalPages ? "default" : "outline"
-                            }
-                            size="sm"
-                            onClick={() => setCurrentPage(totalPages)}
-                            className="min-w-[40px]"
-                          >
-                            {totalPages}
-                          </Button>
-                        );
-                      }
-
-                      return pages;
-                    })()}
-                  </div>
-
-                  {/* Next page */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                  >
-                    Sau
-                  </Button>
-
-                  {/* Last page */}
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage(totalPages)}
-                    className="hidden sm:block"
-                  >
-                    Cuối
-                  </Button>
-                </div>
+            <div className="flex justify-between items-center mt-8 bg-white p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Select value={String(pageSize)} onValueChange={handleItemsPerPageChange}>
+                  <SelectTrigger className="w-[100px] bg-background border-border text-foreground h-9">
+                    <Rows className="h-4 w-4 mr-2" />
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-card border-border">
+                    {[10, 20, 30, 50].map(size => (
+                      <SelectItem key={size} value={String(size)}>{size} / trang</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
-            )}
+              {totalPages > 1 && (
+                <EnhancedPagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  totalItems={totalItems}
+                  itemsPerPage={pageSize}
+                  onPageChange={setCurrentPage}
+                  showItemCount={true}
+                />
+              )}
+            </div>
           </div>
         ) : (
           /* Form View */
