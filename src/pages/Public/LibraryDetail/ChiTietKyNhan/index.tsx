@@ -103,7 +103,7 @@ const ChiTietKyNhan: React.FC<ChiTietKyNhanProps> = ({ chiTietKyNhan }) => {
                 return (
                   <div
                     key={image.id}
-                    className="relative w-full aspect-square rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity"
+                    className="relative w-full h-[450px] aspect-square rounded-lg overflow-hidden cursor-pointer hover:opacity-80 transition-opacity"
                     onClick={() => {
                       openImageModal(actualIndex);
                     }}
@@ -112,7 +112,6 @@ const ChiTietKyNhan: React.FC<ChiTietKyNhanProps> = ({ chiTietKyNhan }) => {
                       src={image.url}
                       alt={image.alt || "media"}
                       fill
-                      className="object-cover"
                     />
                   </div>
                 );
