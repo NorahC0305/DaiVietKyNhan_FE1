@@ -16,15 +16,23 @@ const libcardService = {
   },
 
   getMoTaKyNhanList: async (params: GetMoTaKyNhanListParams = {}) => {
-    const queryParams = new URLSearchParams();
-
-    if (params.currentPage) queryParams.append('currentPage', params.currentPage.toString());
-    if (params.pageSize) queryParams.append('pageSize', params.pageSize.toString());
-    if (params.sort) queryParams.append('qs', params.sort);
-    if (params.search) queryParams.append('search', params.search);
-
-    const queryString = queryParams.toString();
-    const url = queryString ? `/mo-ta-ky-nhan?${queryString}` : '/mo-ta-ky-nhan';
+    const parts: string[] = [];
+    if (params.sort) {
+      // Keep qs as-is (already preformatted like: "sort:id,ten:like=%XX")
+      parts.push(`qs=${params.sort}`);
+    }
+    if (params.currentPage !== undefined) {
+      parts.push(`currentPage=${params.currentPage}`);
+    }
+    if (params.pageSize !== undefined) {
+      parts.push(`pageSize=${params.pageSize}`);
+    }
+    if (params.search) {
+      // If backend supports separate search param; this will be encoded normally
+      parts.push(`search=${encodeURIComponent(params.search)}`);
+    }
+    const queryString = parts.length ? `?${parts.join('&')}` : '';
+    const url = `/mo-ta-ky-nhan${queryString}`;
 
     return await http.get<IMoTaKyNhanListResponseModel>(url);
   },

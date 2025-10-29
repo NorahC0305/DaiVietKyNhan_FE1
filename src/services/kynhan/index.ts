@@ -9,14 +9,19 @@ import { IUpdateKyNhanRequest } from "@models/ky-nhan/request";
 
 const kynhanService = {
   getKyNhan: async (qs?: string, currentPage?: number, pageSize?: number) => {
-    const params = new URLSearchParams();
-    if (qs) params.append("qs", qs);
-    if (currentPage !== undefined)
-      params.append("currentPage", currentPage.toString());
-    if (pageSize !== undefined) params.append("pageSize", pageSize.toString());
-
-    const queryString = params.toString();
-    const url = queryString ? `/kynhan?${queryString}` : "/kynhan";
+    const parts: string[] = [];
+    if (qs && qs.length > 0) {
+      // qs is expected to be preformatted like: "sort:id,name:like=%XX%YY"
+      parts.push(`qs=${qs}`);
+    }
+    if (currentPage !== undefined) {
+      parts.push(`currentPage=${currentPage}`);
+    }
+    if (pageSize !== undefined) {
+      parts.push(`pageSize=${pageSize}`);
+    }
+    const queryString = parts.length ? `?${parts.join("&")}` : "";
+    const url = `/kynhan${queryString}`;
 
     return await http.get<IKyNhanResponseModel>(url, {
       cache: "no-store",
