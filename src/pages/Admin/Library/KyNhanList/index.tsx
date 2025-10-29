@@ -19,7 +19,7 @@ import {
 } from "@/components/Atoms/ui/dialog";
 import { Label } from "@/components/Atoms/ui/label";
 import { Textarea } from "@/components/Atoms/ui/textarea";
-import { Search, Filter, Eye, EyeOff, Edit, Trash2, RefreshCw, X, Upload, Image, BookUser } from "lucide-react";
+import { Search, Filter, Eye, EyeOff, Edit, Trash2, RefreshCw, X, Upload, Image, BookUser, Rows } from "lucide-react";
 import kynhanService from "@services/kynhan";
 import { IKyNhan } from "@models/ky-nhan/entity";
 import { IUpdateKyNhanRequest } from "@models/ky-nhan/request";
@@ -27,22 +27,44 @@ import { IBackendResponse } from "@models/backend";
 import { ILandEntity } from "@models/land/entity";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { EnhancedPagination } from "@/components/Atoms/ui/pagination";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/Atoms/ui/select";
+import useDebounce from "@hooks/useDebounce";
 
-const KyNhanListPage = ({
-  kyNhanList,
-  landList: initialLandList,
-}: {
+interface KyNhanListPageProps {
   kyNhanList: IKyNhan[];
   landList: ILandEntity[];
-}) => {
-  const [kyNhans, setKyNhans] = useState<IKyNhan[]>(kyNhanList);
-  const [filteredKyNhans, setFilteredKyNhans] = useState<IKyNhan[]>(kyNhanList);
+  initialPagination?: {
+    totalItem: number;
+    current: number;
+    totalPage: number;
+    pageSize: number;
+  };
+}
+
+const KyNhanListPage = ({
+  kyNhanList: initialKyNhanList,
+  landList: initialLandList,
+  initialPagination,
+}: KyNhanListPageProps) => {
+  const [kyNhans, setKyNhans] = useState<IKyNhan[]>(initialKyNhanList);
   const [landList, setLandList] = useState<ILandEntity[]>(initialLandList);
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState<
-    "all" | "active" | "inactive"
-  >("all");
+  const [itemsPerPage, setItemsPerPage] = useState<number>(initialPagination?.pageSize || 10);
+  const [page, setPage] = useState<number>(initialPagination?.current || 1);
+  const [search, setSearch] = useState<string>("");
+  const debouncedSearch = useDebounce(search, 500);
+  const [status, setStatus] = useState<string>("all");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [hasInitialData, setHasInitialData] = useState<boolean>(!!initialKyNhanList);
+  const [hasUserInteracted, setHasUserInteracted] = useState<boolean>(false);
+  
+  // Pagination state
+  const [pagination, setPagination] = useState({
+    totalItem: initialPagination?.totalItem || 0,
+    current: initialPagination?.current || 1,
+    totalPage: initialPagination?.totalPage || 1,
+    pageSize: initialPagination?.pageSize || 10,
+  });
 
   // Edit modal states
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -60,13 +82,36 @@ const KyNhanListPage = ({
   // Fetch ky-nhan data
   const fetchKyNhans = async () => {
     setIsLoading(true);
+    setHasInitialData(false);
     try {
       const kyNhanResponse =
-        (await kynhanService.getKyNhan()) as IBackendResponse<any>;
+        (await kynhanService.getKyNhan(
+          debouncedSearch || undefined, 
+          page, 
+          itemsPerPage
+        )) as IBackendResponse<any>;
 
       if (kyNhanResponse.statusCode === 200 && kyNhanResponse.data?.results) {
-        setKyNhans(kyNhanResponse.data.results);
-        setFilteredKyNhans(kyNhanResponse.data.results);
+        let filteredResults = kyNhanResponse.data.results;
+        
+        // Apply status filter on client side for now
+        if (status === "active") {
+          filteredResults = filteredResults.filter((kyNhan: IKyNhan) => kyNhan.active);
+        } else if (status === "inactive") {
+          filteredResults = filteredResults.filter((kyNhan: IKyNhan) => !kyNhan.active);
+        }
+        
+        setKyNhans(filteredResults);
+        
+        // Update pagination info
+        if (kyNhanResponse.data.pagination) {
+          setPagination({
+            totalItem: kyNhanResponse.data.pagination.totalItem,
+            current: kyNhanResponse.data.pagination.current,
+            totalPage: kyNhanResponse.data.pagination.totalPage,
+            pageSize: kyNhanResponse.data.pagination.pageSize,
+          });
+        }
       } else {
         throw new Error(
           kyNhanResponse.message || "Failed to fetch ky-nhan data"
@@ -79,10 +124,6 @@ const KyNhanListPage = ({
     }
   };
 
-  useEffect(() => {
-    fetchKyNhans();
-  }, []);
-
   // Update landList when prop changes
   useEffect(() => {
     setLandList(initialLandList);
@@ -94,33 +135,39 @@ const KyNhanListPage = ({
     return land ? land.name : `Đất ID: ${landId}`;
   };
 
-  // Filter and search functionality
   useEffect(() => {
-    let filtered = kyNhans;
-
-    // Filter by active status
-    if (activeFilter === "active") {
-      filtered = filtered?.filter((kyNhan) => kyNhan.active);
-    } else if (activeFilter === "inactive") {
-      filtered = filtered?.filter((kyNhan) => !kyNhan.active);
+    // Chỉ fetch khi user đã tương tác, không fetch lần đầu khi có initialData
+    if (hasUserInteracted) {
+      fetchKyNhans();
     }
+  }, [page, itemsPerPage, debouncedSearch, status, hasUserInteracted]);
 
-    // Filter by search query
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered?.filter(
-        (kyNhan) =>
-          kyNhan.name.toLowerCase().includes(query) ||
-          kyNhan.thoiKy.toLowerCase().includes(query) ||
-          kyNhan.chienCong.toLowerCase().includes(query)
-      );
-    }
+  const handleItemsPerPageChange = (value: string) => {
+    setItemsPerPage(parseInt(value));
+    setPage(1);
+    setHasUserInteracted(true);
+  };
 
-    setFilteredKyNhans(filtered);
-  }, [kyNhans, searchQuery, activeFilter]);
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    setHasUserInteracted(true);
+  };
+
+  const handleSearch = (searchValue: string) => {
+    setSearch(searchValue);
+    setPage(1);
+    setHasUserInteracted(true);
+  };
+
+  const handleStatusFilter = (statusValue: string) => {
+    setStatus(statusValue);
+    setPage(1);
+    setHasUserInteracted(true);
+  };
 
   const handleRefresh = () => {
-    fetchKyNhans();
+    setPage(1);
+    setHasUserInteracted(true);
   };
 
   // Edit modal functions
@@ -169,7 +216,6 @@ const KyNhanListPage = ({
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
-
   const handleToggleStatus = async (kyNhan: IKyNhan) => {
     try {
       const formData = new FormData();
@@ -263,9 +309,10 @@ const KyNhanListPage = ({
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                   <Input
                     placeholder="Tìm kiếm theo tên, thời kỳ, chiến công..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    value={search}
+                    onChange={(e) => handleSearch(e.target.value)}
                     className="pl-10 rounded-4xl border-gray-300"
+                    color="black"
                   />
                 </div>
               </div>
@@ -273,25 +320,25 @@ const KyNhanListPage = ({
               {/* Filter */}
               <div className="flex gap-2">
                 <Button
-                  variant={activeFilter === "all" ? "default" : "outline"}
-                  onClick={() => setActiveFilter("all")}
+                  variant={status === "all" ? "default" : "outline"}
+                  onClick={() => handleStatusFilter("all")}
                   className="rounded-full"
                 >
-                  Tất cả ({kyNhans?.length})
+                  Tất cả
                 </Button>
                 <Button
-                  variant={activeFilter === "active" ? "default" : "outline"}
-                  onClick={() => setActiveFilter("active")}
+                  variant={status === "active" ? "default" : "outline"}
+                  onClick={() => handleStatusFilter("active")}
                   className="rounded-full"
                 >
-                  Hoạt động ({kyNhans?.filter((k) => k.active)?.length})
+                  Hoạt động
                 </Button>
                 <Button
-                  variant={activeFilter === "inactive" ? "default" : "outline"}
-                  onClick={() => setActiveFilter("inactive")}
+                  variant={status === "inactive" ? "default" : "outline"}
+                  onClick={() => handleStatusFilter("inactive")}
                   className="rounded-full"
                 >
-                  Không hoạt động ({kyNhans?.filter((k) => !k.active)?.length})
+                  Không hoạt động
                 </Button>
               </div>
             </div>
@@ -299,7 +346,7 @@ const KyNhanListPage = ({
         </Card>
 
         {/* Loading State */}
-        {isLoading && (
+        {isLoading && !hasInitialData && (
           <div className="flex justify-center items-center py-12">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-stone-600"></div>
             <span className="ml-2 text-gray-600">Đang tải dữ liệu...</span>
@@ -311,12 +358,12 @@ const KyNhanListPage = ({
           <>
             {/* Results Summary */}
             <div className="text-sm text-gray-600">
-              Hiển thị {filteredKyNhans?.length} trong tổng số {kyNhans?.length}{" "}
+              Hiển thị {kyNhans?.length} trong tổng số {pagination.totalItem}{" "}
               kỳ nhân
             </div>
 
             {/* KyNhan List */}
-            {filteredKyNhans?.length === 0 ? (
+            {kyNhans?.length === 0 ? (
               <Card className="border-2 border-gray-300">
                 <CardContent className="p-12 text-center">
                   <div className="text-gray-400 mb-4">
@@ -330,7 +377,7 @@ const KyNhanListPage = ({
               </Card>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredKyNhans?.map((kyNhan) => (
+                {kyNhans?.map((kyNhan) => (
                   <Card
                     key={kyNhan.id}
                     className="border-2 border-gray-300 hover:shadow-lg transition-shadow"
@@ -462,6 +509,33 @@ const KyNhanListPage = ({
                 ))}
               </div>
             )}
+
+            {/* Pagination Footer */}
+            <div className="flex justify-between items-center mt-8 bg-white p-4 rounded-lg border border-gray-200">
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Select value={String(itemsPerPage)} onValueChange={handleItemsPerPageChange}>
+                  <SelectTrigger className="w-[100px] bg-background border-border text-foreground h-9">
+                    <Rows className="h-4 w-4 mr-2" />
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent className="bg-card border-border">
+                    {[10, 20, 30, 50].map(size => (
+                      <SelectItem key={size} value={String(size)}>{size} / trang</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              {pagination.totalPage > 1 && (
+                <EnhancedPagination
+                  currentPage={page}
+                  totalPages={pagination.totalPage}
+                  totalItems={pagination.totalItem}
+                  itemsPerPage={itemsPerPage}
+                  onPageChange={handlePageChange}
+                  showItemCount={true}
+                />
+              )}
+            </div>
           </>
         )}
       </div>

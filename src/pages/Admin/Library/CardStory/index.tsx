@@ -296,7 +296,7 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
     setHasInteracted(true);
     // Mark this specific field as touched
     const fieldKey = `${type}-${id}-${field}`;
-    setTouchedFields(prev => new Set([...prev, fieldKey]));
+    setTouchedFields((prev) => new Set([...prev, fieldKey]));
 
     if (type === "basic") {
       setBasicInfo(
@@ -340,19 +340,19 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
     setHasInteracted(true);
     // Mark this specific field as touched
     const fieldKey = `history-${sectionId}-${sentenceId}-${field}`;
-    setTouchedFields(prev => new Set([...prev, fieldKey]));
+    setTouchedFields((prev) => new Set([...prev, fieldKey]));
 
     setHistorySections((prev) =>
       prev.map((section) =>
         section.id === sectionId
           ? {
-            ...section,
-            sentences: section.sentences.map((sentence) =>
-              sentence.id === sentenceId
-                ? { ...sentence, [field]: value }
-                : sentence
-            ),
-          }
+              ...section,
+              sentences: section.sentences.map((sentence) =>
+                sentence.id === sentenceId
+                  ? { ...sentence, [field]: value }
+                  : sentence
+              ),
+            }
           : section
       )
     );
@@ -394,11 +394,11 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
       prev.map((section) =>
         section.id === sectionId
           ? {
-            ...section,
-            sentences: section.sentences.filter(
-              (sentence) => sentence.id !== sentenceId
-            ),
-          }
+              ...section,
+              sentences: section.sentences.filter(
+                (sentence) => sentence.id !== sentenceId
+              ),
+            }
           : section
       )
     );
@@ -513,7 +513,6 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
     setDraggedItem(null);
   };
 
-
   const [selectedKyNhanId, setSelectedKyNhanId] = useState<number | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -544,11 +543,14 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
   // Handle form errors
   useEffect(() => {
     const subscription = form.watch((value, { name, type }) => {
-      if (type === 'change' && name === 'kyNhanId' && !value.kyNhanId) {
+      if (type === "change" && name === "kyNhanId" && !value.kyNhanId) {
         // If kyNhanId becomes null/undefined, scroll to it
         setTimeout(() => {
           if (kyNhanSelectRef.current) {
-            kyNhanSelectRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            kyNhanSelectRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
           }
         }, 100);
       }
@@ -558,69 +560,84 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
 
   // Fill data from chiTietKyNhan when component mounts
   useEffect(() => {
-    if (chiTietKyNhan) {;
+    if (chiTietKyNhan) {
       // Set selected ky nhan
       setSelectedKyNhanId(chiTietKyNhan.kyNhanId);
 
       // Fill historical info (boiCanhLichSuVaSuuThan)
-      if (chiTietKyNhan.boiCanhLichSuVaSuuThan && chiTietKyNhan.boiCanhLichSuVaSuuThan.length > 0) {
-        const historicalSections = chiTietKyNhan.boiCanhLichSuVaSuuThan.map((item: any, index: number) => ({
-          id: item.id?.toString() || `historical-${index + 1}`,
-          title: item.tieuDe || "",
-          content: item.noiDung || "",
-          nguon: item.nguon || "",
-        }));
+      if (
+        chiTietKyNhan.boiCanhLichSuVaSuuThan &&
+        chiTietKyNhan.boiCanhLichSuVaSuuThan.length > 0
+      ) {
+        const historicalSections = chiTietKyNhan.boiCanhLichSuVaSuuThan.map(
+          (item: any, index: number) => ({
+            id: item.id?.toString() || `historical-${index + 1}`,
+            title: item.tieuDe || "",
+            content: item.noiDung || "",
+            nguon: item.nguon || "",
+          })
+        );
         setHistoricalInfo(historicalSections);
       }
 
       // Fill history sections (suSachVietGi)
       if (chiTietKyNhan.suSachVietGi && chiTietKyNhan.suSachVietGi.length > 0) {
-        const historySections = chiTietKyNhan.suSachVietGi.map((item: any, index: number) => ({
-          id: item.id?.toString() || `history-${index + 1}`,
-          title: item.tieuDe || "",
-          sentences: [{
-            id: `sentence-${index + 1}`,
-            content: item.doanVan || "",
-            source: item.nguonSach || "",
-            tacGia: item.tacGia || "",
-          }],
-        }));
+        const historySections = chiTietKyNhan.suSachVietGi.map(
+          (item: any, index: number) => ({
+            id: item.id?.toString() || `history-${index + 1}`,
+            title: item.tieuDe || "",
+            sentences: [
+              {
+                id: `sentence-${index + 1}`,
+                content: item.doanVan || "",
+                source: item.nguonSach || "",
+                tacGia: item.tacGia || "",
+              },
+            ],
+          })
+        );
         setHistorySections(historySections);
       }
 
       // Fill folklore sections (giaiThoaiDanGian)
-      if (chiTietKyNhan.giaiThoaiDanGian && chiTietKyNhan.giaiThoaiDanGian.length > 0) {
-        const folkloreSections = chiTietKyNhan.giaiThoaiDanGian.map((item: any, index: number) => ({
-          id: item.id?.toString() || `folklore-${index + 1}`,
-          title: item.tieuDe || "",
-          content: item.noiDung || "",
-          source: item.nguon || "",
-        }));
+      if (
+        chiTietKyNhan.giaiThoaiDanGian &&
+        chiTietKyNhan.giaiThoaiDanGian.length > 0
+      ) {
+        const folkloreSections = chiTietKyNhan.giaiThoaiDanGian.map(
+          (item: any, index: number) => ({
+            id: item.id?.toString() || `folklore-${index + 1}`,
+            title: item.tieuDe || "",
+            content: item.noiDung || "",
+            source: item.nguon || "",
+          })
+        );
         setFolkloreSections(folkloreSections);
       }
 
       // Fill reference sections (thamKhao)
       if (chiTietKyNhan.thamKhao && chiTietKyNhan.thamKhao.trim()) {
-        const referenceSections = [{
-          id: "reference-1",
-          content: chiTietKyNhan.thamKhao,
-        }];
+        const referenceSections = [
+          {
+            id: "reference-1",
+            content: chiTietKyNhan.thamKhao,
+          },
+        ];
         setReferenceSections(referenceSections);
       }
 
       // Fill media if available (only if no existing images)
       if (chiTietKyNhan.media && chiTietKyNhan.media.length > 0) {
-
         // Convert media URLs to imageLibraries format
         const mediaSections = chiTietKyNhan.media.map((mediaItem: any) => ({
           id: mediaItem.id?.toString() || `media-${Date.now()}`,
           file: null, // We can't convert URL back to File object
           preview: mediaItem.url, // Use URL directly as preview
-          mediaData: mediaItem // Store original media data for reference
+          mediaData: mediaItem, // Store original media data for reference
         }));
 
         // Only set if no existing images to avoid overriding uploaded files
-        setImageLibraries(prev => {
+        setImageLibraries((prev) => {
           if (prev.length === 0) {
             return mediaSections;
           } else {
@@ -633,7 +650,10 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
 
   // Sync selectedKyNhanId with form
   useEffect(() => {
-    if (selectedKyNhanId !== null && selectedKyNhanId !== form.getValues("kyNhanId")) {
+    if (
+      selectedKyNhanId !== null &&
+      selectedKyNhanId !== form.getValues("kyNhanId")
+    ) {
       form.setValue("kyNhanId", selectedKyNhanId);
     }
   }, [selectedKyNhanId, form]);
@@ -641,7 +661,6 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
   const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
     try {
-
       // Get current kyNhanId - values.kyNhanId should be the most reliable
       const currentKyNhanId = values.kyNhanId || selectedKyNhanId;
 
@@ -651,24 +670,36 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
         // Force scroll immediately
         setTimeout(() => {
           if (kyNhanSelectRef.current) {
-            kyNhanSelectRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            kyNhanSelectRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
           } else {
-            const kyNhanSelect = document.querySelector('[data-ky-nhan-select]');
+            const kyNhanSelect = document.querySelector(
+              "[data-ky-nhan-select]"
+            );
 
             if (kyNhanSelect) {
-              kyNhanSelect.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              kyNhanSelect.scrollIntoView({
+                behavior: "smooth",
+                block: "center",
+              });
             } else {
               // Try to find the actual select component
-              const selectElement = document.querySelector('button[role="combobox"]') ||
+              const selectElement =
+                document.querySelector('button[role="combobox"]') ||
                 document.querySelector('[role="combobox"]') ||
                 document.querySelector('input[placeholder*="Chọn Kỳ Nhân"]');
 
               if (selectElement) {
-                selectElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                selectElement.scrollIntoView({
+                  behavior: "smooth",
+                  block: "center",
+                });
               } else {
-                const form = document.querySelector('form');
+                const form = document.querySelector("form");
                 if (form) {
-                  form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  form.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
               }
             }
@@ -688,10 +719,18 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
         const contentKey = `historical-${section.id}-content`;
 
         if (!section.title.trim() && touchedFields.has(titleKey)) {
-          errors.push(`Bối cảnh Lịch sử & Xuất thân - Phần ${index + 1}: Vui lòng nhập tiêu đề phần`);
+          errors.push(
+            `Bối cảnh Lịch sử & Xuất thân - Phần ${
+              index + 1
+            }: Vui lòng nhập tiêu đề phần`
+          );
         }
         if (!section.content.trim() && touchedFields.has(contentKey)) {
-          errors.push(`Bối cảnh Lịch sử & Xuất thân - Phần ${index + 1}: Vui lòng nhập đoạn mô tả`);
+          errors.push(
+            `Bối cảnh Lịch sử & Xuất thân - Phần ${
+              index + 1
+            }: Vui lòng nhập đoạn mô tả`
+          );
         }
       });
 
@@ -700,13 +739,21 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
         const titleKey = `history-${section.id}-title`;
 
         if (!section.title.trim() && touchedFields.has(titleKey)) {
-          errors.push(`Sử Sách Viết Gì - Phần ${sectionIndex + 1}: Vui lòng nhập tiêu đề phần`);
+          errors.push(
+            `Sử Sách Viết Gì - Phần ${
+              sectionIndex + 1
+            }: Vui lòng nhập tiêu đề phần`
+          );
         }
         section.sentences.forEach((sentence, sentenceIndex) => {
           const contentKey = `history-${section.id}-${sentence.id}-content`;
 
           if (!sentence.content.trim() && touchedFields.has(contentKey)) {
-            errors.push(`Sử Sách Viết Gì - Phần ${sectionIndex + 1} - Câu ${sentenceIndex + 1}: Vui lòng nhập nội dung câu viết`);
+            errors.push(
+              `Sử Sách Viết Gì - Phần ${sectionIndex + 1} - Câu ${
+                sentenceIndex + 1
+              }: Vui lòng nhập nội dung câu viết`
+            );
           }
         });
       });
@@ -717,10 +764,16 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
         const contentKey = `folklore-${section.id}-content`;
 
         if (!section.title.trim() && touchedFields.has(titleKey)) {
-          errors.push(`Giai thoại dân gian - Phần ${index + 1}: Vui lòng nhập tiêu đề phần`);
+          errors.push(
+            `Giai thoại dân gian - Phần ${
+              index + 1
+            }: Vui lòng nhập tiêu đề phần`
+          );
         }
         if (!section.content.trim() && touchedFields.has(contentKey)) {
-          errors.push(`Giai thoại dân gian - Phần ${index + 1}: Vui lòng nhập nội dung`);
+          errors.push(
+            `Giai thoại dân gian - Phần ${index + 1}: Vui lòng nhập nội dung`
+          );
         }
       });
 
@@ -729,7 +782,9 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
         const contentKey = `reference-${section.id}-content`;
 
         if (!section.content.trim() && touchedFields.has(contentKey)) {
-          errors.push(`Tham khảo - Phần ${index + 1}: Vui lòng nhập nội dung tham khảo`);
+          errors.push(
+            `Tham khảo - Phần ${index + 1}: Vui lòng nhập nội dung tham khảo`
+          );
         }
       });
 
@@ -739,7 +794,10 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
         setTimeout(() => {
           const firstErrorField = document.querySelector('[data-error="true"]');
           if (firstErrorField) {
-            firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            firstErrorField.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
           }
         }, 100);
         return;
@@ -760,7 +818,7 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
         .map((s) => ({
           tieuDe: s.title || "",
           noiDung: s.content || "",
-          nguon: s.nguon || "" // Use the nguon field from the form
+          nguon: s.nguon || "", // Use the nguon field from the form
         }));
       fd.append("boiCanhLichSuVaXuatThan", JSON.stringify(boiCanh));
 
@@ -783,7 +841,7 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
         .map((s) => ({
           tieuDe: s.title || "",
           noiDung: s.content || "",
-          nguon: s.source || ""
+          nguon: s.source || "",
         }));
       fd.append("giaiThoaiDanGian", JSON.stringify(giaiThoai));
 
@@ -796,14 +854,19 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
           // New uploaded file - add to files array only, don't add to data array yet
           newFiles.push(img.file);
           // Don't add to thuVienAnhData yet - backend will handle this after upload
-        } else if (img.mediaData && img.mediaData.id && img.mediaData.url && isValidUrl(img.mediaData.url)) {
+        } else if (
+          img.mediaData &&
+          img.mediaData.id &&
+          img.mediaData.url &&
+          isValidUrl(img.mediaData.url)
+        ) {
           // Existing media from database - only add if has valid URL
           thuVienAnhData.push({
             id: img.mediaData.id,
             url: img.mediaData.url,
             fileName: img.mediaData.fileName || "",
             fileSize: img.mediaData.fileSize || 0,
-            mimeType: img.mediaData.mimeType || "image/jpeg"
+            mimeType: img.mediaData.mimeType || "image/jpeg",
           });
         }
       });
@@ -819,11 +882,13 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
       // Add kyNhanId to the data object (required by backend schema)
       fd.append("kyNhanId", String(currentKyNhanId));
 
-      const response = await chiTietKyNhanService.createChiTietKyNhanForm(fd) as any;
+      const response = (await chiTietKyNhanService.createChiTietKyNhanForm(
+        fd
+      )) as any;
       if (response.statusCode === 200 || response.statusCode === 201) {
         const successMessage = chiTietKyNhan
-          ? (response.message || "Cập nhật chi tiết kỳ nhân thành công!")
-          : (response.message || "Tạo chi tiết kỳ nhân thành công!");
+          ? response.message || "Cập nhật chi tiết kỳ nhân thành công!"
+          : response.message || "Tạo chi tiết kỳ nhân thành công!";
         toast.success(successMessage);
 
         // Only reset form if creating new (not updating)
@@ -842,26 +907,34 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
           // Clear content but keep sections
           setBasicInfo([{ id: "1", title: "", content: "", nguon: "" }]);
           setHistoricalInfo([{ id: "1", title: "", content: "", nguon: "" }]);
-          setHistorySections([{
-            id: "1",
-            title: "",
-            sentences: [{ id: "1", content: "", source: "", tacGia: "" }],
-          }]);
-          setFolkloreSections([{ id: "1", title: "", content: "", source: "" }]);
+          setHistorySections([
+            {
+              id: "1",
+              title: "",
+              sentences: [{ id: "1", content: "", source: "", tacGia: "" }],
+            },
+          ]);
+          setFolkloreSections([
+            { id: "1", title: "", content: "", source: "" },
+          ]);
           setReferenceSections([{ id: "1", content: "" }]);
           setImageLibraries([]);
         }
       } else {
-        toast.error(response.message || "Có lỗi xảy ra khi tạo chi tiết kỳ nhân");
+        toast.error(
+          response.message || "Có lỗi xảy ra khi tạo chi tiết kỳ nhân"
+        );
       }
     } catch (error: any) {
-      const msg = error?.response?.data?.message || error?.message || "Lỗi không xác định";
+      const msg =
+        error?.response?.data?.message ||
+        error?.message ||
+        "Lỗi không xác định";
       toast.error(msg);
     } finally {
       setIsSubmitting(false);
     }
   };
-
 
   return (
     <>
@@ -931,13 +1004,18 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
 
       <div className="min-h-screen rounded-xl bg-admin-primary p-6">
         <div className="max-w-7xl mx-auto space-y-6">
-          <form onSubmit={form.handleSubmit(onSubmit, (errors) => {
-            setTimeout(() => {
-              if (kyNhanSelectRef.current) {
-                kyNhanSelectRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
-            }, 100);
-          })}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit, (errors) => {
+              setTimeout(() => {
+                if (kyNhanSelectRef.current) {
+                  kyNhanSelectRef.current.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                }
+              }, 100);
+            })}
+          >
             {/* KyNhan Selection Section */}
             <Card variant="leftBorder" className="border-l-4 border-[#883C00]">
               <CardHeader className="bg-gray-100 rounded-tl-3xl">
@@ -981,14 +1059,18 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                     </div>
                   )}
                   <div className="text-xs text-gray-500 mt-2">
-                    Debug: Form value = {form.watch("kyNhanId")}, Selected = {selectedKyNhanId}
+                    Debug: Form value = {form.watch("kyNhanId")}, Selected ={" "}
+                    {selectedKyNhanId}
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Historical Context Section */}
-            <Card variant="leftBorder" className="border-l-4 border-[#883C00] mt-8">
+            <Card
+              variant="leftBorder"
+              className="border-l-4 border-[#883C00] mt-8"
+            >
               <CardHeader className="bg-gray-100 rounded-tl-3xl">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                   <LucideIcon name="BookOpen" iconSize={20} />
@@ -1030,21 +1112,30 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                         )
                       }
                       color="black"
-                      className={`rounded-4xl ${!section.title.trim() && touchedFields.has(`historical-${section.id}-title`) ? 'border-red-500' : 'border-gray-300'
-                        }`}
-                      data-error={!section.title.trim() && touchedFields.has(`historical-${section.id}-title`)}
+                      className={`rounded-4xl ${
+                        !section.title.trim() &&
+                        touchedFields.has(`historical-${section.id}-title`)
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      }`}
+                      data-error={
+                        !section.title.trim() &&
+                        touchedFields.has(`historical-${section.id}-title`)
+                      }
                     />
-                    {!section.title.trim() && touchedFields.has(`historical-${section.id}-title`) && (
-                      <p className="text-red-500 text-sm mt-1">
-                        Vui lòng nhập tiêu đề phần
-                      </p>
-                    )}
+                    {!section.title.trim() &&
+                      touchedFields.has(`historical-${section.id}-title`) && (
+                        <p className="text-red-500 text-sm mt-1">
+                          Vui lòng nhập tiêu đề phần
+                        </p>
+                      )}
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">
                         Đoạn văn mô tả
                       </label>
                       <div>
                         <TipTapEditor
+                          textColor="black"
                           placeholder="Nhập đoạn văn mô tả dài..."
                           value={section.content}
                           onChange={(value) =>
@@ -1055,15 +1146,29 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                               value
                             )
                           }
-                          className={`min-h-32 rounded-4xl ${!section.content.trim() && touchedFields.has(`historical-${section.id}-content`) ? 'border-red-500' : 'border-gray-300'
-                            }`}
-                          data-error={!section.content.trim() && touchedFields.has(`historical-${section.id}-content`)}
+                          className={`min-h-32 rounded-4xl ${
+                            !section.content.trim() &&
+                            touchedFields.has(
+                              `historical-${section.id}-content`
+                            )
+                              ? "border-red-500"
+                              : "border-gray-300"
+                          }`}
+                          data-error={
+                            !section.content.trim() &&
+                            touchedFields.has(
+                              `historical-${section.id}-content`
+                            )
+                          }
                         />
-                        {!section.content.trim() && touchedFields.has(`historical-${section.id}-content`) && (
-                          <p className="text-red-500 text-sm mt-1">
-                            Vui lòng nhập đoạn mô tả
-                          </p>
-                        )}
+                        {!section.content.trim() &&
+                          touchedFields.has(
+                            `historical-${section.id}-content`
+                          ) && (
+                            <p className="text-red-500 text-sm mt-1">
+                              Vui lòng nhập đoạn mô tả
+                            </p>
+                          )}
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -1112,7 +1217,10 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
             </Card>
 
             {/* Sử Sách Viết Gì Section */}
-            <Card variant="leftBorder" className="border-l-4 border-[#883C00] mt-8">
+            <Card
+              variant="leftBorder"
+              className="border-l-4 border-[#883C00] mt-8"
+            >
               <CardHeader className="bg-gray-100 rounded-tl-3xl">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                   <LucideIcon name="BookOpen" iconSize={20} />
@@ -1131,7 +1239,9 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                       <div
                         className="cursor-grab active:cursor-grabbing p-1 hover:bg-gray-100 rounded"
                         draggable={true}
-                        onDragStart={(e) => handleDragStart(e, section.id, "history")}
+                        onDragStart={(e) =>
+                          handleDragStart(e, section.id, "history")
+                        }
                         onDragEnd={handleDragEnd}
                       >
                         <GripVertical className="h-4 w-4 text-gray-400" />
@@ -1152,15 +1262,23 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                         )
                       }
                       color="black"
-                      className={`rounded-4xl ${!section.title.trim() && touchedFields.has(`history-${section.id}-title`) ? 'border-red-500' : 'border-gray-300'
-                        }`}
-                      data-error={!section.title.trim() && touchedFields.has(`history-${section.id}-title`)}
+                      className={`rounded-4xl ${
+                        !section.title.trim() &&
+                        touchedFields.has(`history-${section.id}-title`)
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      }`}
+                      data-error={
+                        !section.title.trim() &&
+                        touchedFields.has(`history-${section.id}-title`)
+                      }
                     />
-                    {!section.title.trim() && touchedFields.has(`history-${section.id}-title`) && (
-                      <p className="text-red-500 text-sm mt-1">
-                        Vui lòng nhập tiêu đề phần
-                      </p>
-                    )}
+                    {!section.title.trim() &&
+                      touchedFields.has(`history-${section.id}-title`) && (
+                        <p className="text-red-500 text-sm mt-1">
+                          Vui lòng nhập tiêu đề phần
+                        </p>
+                      )}
 
                     {section.sentences.map((sentence, sentenceIndex) => (
                       <div
@@ -1201,6 +1319,7 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                         </div>
                         <div>
                           <TipTapEditor
+                            textColor="black"
                             placeholder="Nhập đoạn câu viết dài..."
                             value={sentence.content}
                             onChange={(value) =>
@@ -1211,15 +1330,29 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                                 value
                               )
                             }
-                            className={`min-h-24 rounded-4xl ${!sentence.content.trim() && touchedFields.has(`history-${section.id}-${sentence.id}-content`) ? 'border-red-500' : 'border-gray-300'
-                              }`}
-                            data-error={!sentence.content.trim() && touchedFields.has(`history-${section.id}-${sentence.id}-content`)}
+                            className={`min-h-24 rounded-4xl ${
+                              !sentence.content.trim() &&
+                              touchedFields.has(
+                                `history-${section.id}-${sentence.id}-content`
+                              )
+                                ? "border-red-500"
+                                : "border-gray-300"
+                            }`}
+                            data-error={
+                              !sentence.content.trim() &&
+                              touchedFields.has(
+                                `history-${section.id}-${sentence.id}-content`
+                              )
+                            }
                           />
-                          {!sentence.content.trim() && touchedFields.has(`history-${section.id}-${sentence.id}-content`) && (
-                            <p className="text-red-500 text-sm mt-1">
-                              Vui lòng nhập nội dung câu viết
-                            </p>
-                          )}
+                          {!sentence.content.trim() &&
+                            touchedFields.has(
+                              `history-${section.id}-${sentence.id}-content`
+                            ) && (
+                              <p className="text-red-500 text-sm mt-1">
+                                Vui lòng nhập nội dung câu viết
+                              </p>
+                            )}
                         </div>
                         <div className="space-y-2">
                           <label className="text-sm font-medium text-gray-700">
@@ -1289,7 +1422,10 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
             </Card>
 
             {/* Giai thoại dân gian và Truyền thuyết Section */}
-            <Card variant="leftBorder" className="border-l-4 border-[#883C00] mt-8">
+            <Card
+              variant="leftBorder"
+              className="border-l-4 border-[#883C00] mt-8"
+            >
               <CardHeader className="bg-gray-100 rounded-tl-3xl">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                   <LucideIcon name="BookOpen" iconSize={20} />
@@ -1331,35 +1467,59 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                         )
                       }
                       color="black"
-                      className={`rounded-4xl ${!section.title.trim() && touchedFields.has(`folklore-${section.id}-title`) ? 'border-red-500' : 'border-gray-300'
-                        }`}
-                      data-error={!section.title.trim() && touchedFields.has(`folklore-${section.id}-title`)}
+                      className={`rounded-4xl ${
+                        !section.title.trim() &&
+                        touchedFields.has(`folklore-${section.id}-title`)
+                          ? "border-red-500"
+                          : "border-gray-300"
+                      }`}
+                      data-error={
+                        !section.title.trim() &&
+                        touchedFields.has(`folklore-${section.id}-title`)
+                      }
                     />
-                    {!section.title.trim() && touchedFields.has(`folklore-${section.id}-title`) && (
-                      <p className="text-red-500 text-sm mt-1">
-                        Vui lòng nhập tiêu đề phần
-                      </p>
-                    )}
+                    {!section.title.trim() &&
+                      touchedFields.has(`folklore-${section.id}-title`) && (
+                        <p className="text-red-500 text-sm mt-1">
+                          Vui lòng nhập tiêu đề phần
+                        </p>
+                      )}
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-700">
                         Nội dung
                       </label>
                       <div>
                         <TipTapEditor
+                          textColor="black"
                           placeholder="Nhập đoạn văn mô tả dài..."
                           value={section.content}
                           onChange={(value) =>
-                            updateSection("folklore", section.id, "content", value)
+                            updateSection(
+                              "folklore",
+                              section.id,
+                              "content",
+                              value
+                            )
                           }
-                          className={`min-h-32 rounded-4xl ${!section.content.trim() && touchedFields.has(`folklore-${section.id}-content`) ? 'border-red-500' : 'border-gray-300'
-                            }`}
-                          data-error={!section.content.trim() && touchedFields.has(`folklore-${section.id}-content`)}
+                          className={`min-h-32 rounded-4xl ${
+                            !section.content.trim() &&
+                            touchedFields.has(`folklore-${section.id}-content`)
+                              ? "border-red-500"
+                              : "border-gray-300"
+                          }`}
+                          data-error={
+                            !section.content.trim() &&
+                            touchedFields.has(`folklore-${section.id}-content`)
+                          }
                         />
-                        {!section.content.trim() && touchedFields.has(`folklore-${section.id}-content`) && (
-                          <p className="text-red-500 text-sm mt-1">
-                            Vui lòng nhập nội dung
-                          </p>
-                        )}
+                        {!section.content.trim() &&
+                          touchedFields.has(
+                            `folklore-${section.id}-content`
+                          ) && (
+                            <p className="text-red-500 text-sm mt-1">
+                              Vui lòng nhập nội dung
+                            </p>
+                          )}
                       </div>
                     </div>
                     <div className="space-y-2">
@@ -1409,7 +1569,10 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
             </Card>
 
             {/* Tham khảo Section */}
-            <Card variant="leftBorder" className="border-l-4 border-[#883C00] mt-8">
+            <Card
+              variant="leftBorder"
+              className="border-l-4 border-[#883C00] mt-8"
+            >
               <CardHeader className="bg-gray-100 rounded-tl-3xl">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                   <LucideIcon name="BookOpen" iconSize={20} />
@@ -1441,20 +1604,36 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                     </div>
                     <div>
                       <TipTapEditor
+                        textColor="black"
                         placeholder="Nhập các nguồn tham khảo..."
                         value={section.content}
                         onChange={(value) =>
-                          updateSection("reference", section.id, "content", value)
+                          updateSection(
+                            "reference",
+                            section.id,
+                            "content",
+                            value
+                          )
                         }
-                        className={`min-h-24 rounded-4xl ${!section.content.trim() && touchedFields.has(`reference-${section.id}-content`) ? 'border-red-500' : 'border-gray-300'
-                          }`}
-                        data-error={!section.content.trim() && touchedFields.has(`reference-${section.id}-content`)}
+                        className={`min-h-24 rounded-4xl ${
+                          !section.content.trim() &&
+                          touchedFields.has(`reference-${section.id}-content`)
+                            ? "border-red-500"
+                            : "border-gray-300"
+                        }`}
+                        data-error={
+                          !section.content.trim() &&
+                          touchedFields.has(`reference-${section.id}-content`)
+                        }
                       />
-                      {!section.content.trim() && touchedFields.has(`reference-${section.id}-content`) && (
-                        <p className="text-red-500 text-sm mt-1">
-                          Vui lòng nhập nội dung tham khảo
-                        </p>
-                      )}
+                      {!section.content.trim() &&
+                        touchedFields.has(
+                          `reference-${section.id}-content`
+                        ) && (
+                          <p className="text-red-500 text-sm mt-1">
+                            Vui lòng nhập nội dung tham khảo
+                          </p>
+                        )}
                     </div>
 
                     {referenceSections.length > 1 && (
@@ -1484,7 +1663,10 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
             </Card>
 
             {/* Thư viện ảnh Section */}
-            <Card variant="leftBorder" className="border-l-4 border-[#883C00] mt-8">
+            <Card
+              variant="leftBorder"
+              className="border-l-4 border-[#883C00] mt-8"
+            >
               <CardHeader className="bg-gray-100 rounded-tl-3xl">
                 <CardTitle className="flex items-center gap-2 text-lg font-semibold text-gray-800">
                   <LucideIcon name="BookOpen" iconSize={20} />
@@ -1522,11 +1704,16 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                 </div>
 
                 {/* Danh sách các ảnh đã upload */}
-                {imageLibraries.filter((img) => img.file || img.preview).length > 0 && (
+                {imageLibraries.filter((img) => img.file || img.preview)
+                  .length > 0 && (
                   <div className="space-y-4">
                     <h4 className="text-md font-medium text-gray-700">
                       Hình ảnh đã tải lên (
-                      {imageLibraries.filter((img) => img.file || img.preview).length})
+                      {
+                        imageLibraries.filter((img) => img.file || img.preview)
+                          .length
+                      }
+                      )
                     </h4>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {imageLibraries
@@ -1649,215 +1836,220 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                     {basicInfo.filter(
                       (section) => section.title || section.content
                     ).length > 0 && (
-                        <div className="space-y-8 mb-12">
-                          {basicInfo
-                            .filter((section) => section.title || section.content)
-                            .map((section, index) => (
-                              <div key={section.id} className="space-y-4">
-                                {section.title && (
-                                  <h3 className="text-2xl font-bold text-amber-300 border-b-2 border-amber-500 pb-3 mb-6">
-                                    {section.title.toUpperCase()}
-                                  </h3>
-                                )}
-                                {section.content && (
-                                  <div
-                                    className="text-gray-200 leading-relaxed text-lg preview-content"
-                                    style={{
-                                      fontFamily: "Georgia, serif",
-                                      lineHeight: "1.8",
-                                    }}
-                                    dangerouslySetInnerHTML={{
-                                      __html: section.content,
-                                    }}
-                                  />
-                                )}
-                              </div>
-                            ))}
-                        </div>
-                      )}
+                      <div className="space-y-8 mb-12">
+                        {basicInfo
+                          .filter((section) => section.title || section.content)
+                          .map((section, index) => (
+                            <div key={section.id} className="space-y-4">
+                              {section.title && (
+                                <h3 className="text-2xl font-bold text-amber-300 border-b-2 border-amber-500 pb-3 mb-6">
+                                  {section.title.toUpperCase()}
+                                </h3>
+                              )}
+                              {section.content && (
+                                <div
+                                  className="text-gray-200 leading-relaxed text-lg preview-content"
+                                  style={{
+                                    fontFamily: "Georgia, serif",
+                                    lineHeight: "1.8",
+                                  }}
+                                  dangerouslySetInnerHTML={{
+                                    __html: section.content,
+                                  }}
+                                />
+                              )}
+                            </div>
+                          ))}
+                      </div>
+                    )}
 
                     {/* Historical Context Sections */}
                     {historicalInfo.filter(
                       (section) => section.title || section.content
                     ).length > 0 && (
-                        <div className="space-y-8 mb-12">
-                          <div className="text-center mb-8">
-                            <h2 className="text-3xl font-bold text-amber-300 mb-2 tracking-wide">
-                              BỐI CẢNH LỊCH SỬ VÀ XUẤT THÂN
-                            </h2>
-                            <div className="w-32 h-1 bg-amber-500 mx-auto rounded"></div>
-                          </div>
-                          {historicalInfo
-                            .filter((section) => section.title || section.content)
-                            .map((section, index) => (
-                              <div key={section.id} className="space-y-4">
-                                {section.title && (
-                                  <h3 className="text-2xl font-bold text-amber-300 border-b border-amber-500 pb-3 mb-6">
-                                    {section.title.toUpperCase()}
-                                  </h3>
-                                )}
-                                {section.content && (
-                                  <div
-                                    className="text-gray-200 leading-relaxed text-lg preview-content"
-                                    style={{
-                                      fontFamily: "Georgia, serif",
-                                      lineHeight: "1.8",
-                                    }}
-                                    dangerouslySetInnerHTML={{
-                                      __html: section.content,
-                                    }}
-                                  />
-                                )}
-                              </div>
-                            ))}
+                      <div className="space-y-8 mb-12">
+                        <div className="text-center mb-8">
+                          <h2 className="text-3xl font-bold text-amber-300 mb-2 tracking-wide">
+                            BỐI CẢNH LỊCH SỬ VÀ XUẤT THÂN
+                          </h2>
+                          <div className="w-32 h-1 bg-amber-500 mx-auto rounded"></div>
                         </div>
-                      )}
+                        {historicalInfo
+                          .filter((section) => section.title || section.content)
+                          .map((section, index) => (
+                            <div key={section.id} className="space-y-4">
+                              {section.title && (
+                                <h3 className="text-2xl font-bold text-amber-300 border-b border-amber-500 pb-3 mb-6">
+                                  {section.title.toUpperCase()}
+                                </h3>
+                              )}
+                              {section.content && (
+                                <div
+                                  className="text-gray-200 leading-relaxed text-lg preview-content"
+                                  style={{
+                                    fontFamily: "Georgia, serif",
+                                    lineHeight: "1.8",
+                                  }}
+                                  dangerouslySetInnerHTML={{
+                                    __html: section.content,
+                                  }}
+                                />
+                              )}
+                            </div>
+                          ))}
+                      </div>
+                    )}
 
                     {/* History Books Sections */}
                     {historySections.filter(
                       (section) =>
-                        section.title || section.sentences.some((s) => s.content)
+                        section.title ||
+                        section.sentences.some((s) => s.content)
                     ).length > 0 && (
-                        <div className="space-y-8 mb-12">
-                          <div className="text-center mb-8">
-                            <h2 className="text-3xl font-bold text-amber-300 mb-2 tracking-wide">
-                              SỬ SÁCH VIẾT GÌ?
-                            </h2>
-                            <div className="w-32 h-1 bg-amber-500 mx-auto rounded"></div>
-                          </div>
-                          {historySections
-                            .filter(
-                              (section) =>
-                                section.title ||
-                                section.sentences.some((s) => s.content)
-                            )
-                            .map((section, index) => (
-                              <div key={section.id} className="space-y-6">
-                                {section.title && (
-                                  <h3 className="text-2xl font-bold text-amber-300 border-b border-amber-500 pb-3 mb-6">
-                                    {section.title.toUpperCase()}
-                                  </h3>
-                                )}
+                      <div className="space-y-8 mb-12">
+                        <div className="text-center mb-8">
+                          <h2 className="text-3xl font-bold text-amber-300 mb-2 tracking-wide">
+                            SỬ SÁCH VIẾT GÌ?
+                          </h2>
+                          <div className="w-32 h-1 bg-amber-500 mx-auto rounded"></div>
+                        </div>
+                        {historySections
+                          .filter(
+                            (section) =>
+                              section.title ||
+                              section.sentences.some((s) => s.content)
+                          )
+                          .map((section, index) => (
+                            <div key={section.id} className="space-y-6">
+                              {section.title && (
+                                <h3 className="text-2xl font-bold text-amber-300 border-b border-amber-500 pb-3 mb-6">
+                                  {section.title.toUpperCase()}
+                                </h3>
+                              )}
 
-                                <div className="space-y-6">
-                                  {section.sentences
-                                    .filter(
-                                      (sentence) =>
-                                        sentence.content || sentence.source
-                                    )
-                                    .map((sentence, sentenceIndex) => (
-                                      <div key={sentence.id} className="space-y-3">
-                                        {sentence.content && (
+                              <div className="space-y-6">
+                                {section.sentences
+                                  .filter(
+                                    (sentence) =>
+                                      sentence.content || sentence.source
+                                  )
+                                  .map((sentence, sentenceIndex) => (
+                                    <div
+                                      key={sentence.id}
+                                      className="space-y-3"
+                                    >
+                                      {sentence.content && (
+                                        <div
+                                          className="text-gray-200 leading-relaxed text-lg pl-4 preview-content"
+                                          style={{
+                                            fontFamily: "Georgia, serif",
+                                            lineHeight: "1.8",
+                                            borderLeft: "3px solid #f59e0b",
+                                          }}
+                                          dangerouslySetInnerHTML={{
+                                            __html: sentence.content,
+                                          }}
+                                        />
+                                      )}
+                                      {sentence.source && (
+                                        <div className="ml-8">
                                           <div
-                                            className="text-gray-200 leading-relaxed text-lg pl-4 preview-content"
-                                            style={{
-                                              fontFamily: "Georgia, serif",
-                                              lineHeight: "1.8",
-                                              borderLeft: "3px solid #f59e0b",
-                                            }}
+                                            className="text-amber-200 italic text-base font-medium preview-content"
                                             dangerouslySetInnerHTML={{
-                                              __html: sentence.content,
+                                              __html: sentence.source,
                                             }}
                                           />
-                                        )}
-                                        {sentence.source && (
-                                          <div className="ml-8">
-                                            <div
-                                              className="text-amber-200 italic text-base font-medium preview-content"
-                                              dangerouslySetInnerHTML={{
-                                                __html: sentence.source,
-                                              }}
-                                            />
-                                          </div>
-                                        )}
-                                      </div>
-                                    ))}
-                                </div>
+                                        </div>
+                                      )}
+                                    </div>
+                                  ))}
                               </div>
-                            ))}
-                        </div>
-                      )}
+                            </div>
+                          ))}
+                      </div>
+                    )}
 
                     {/* Folklore Sections */}
                     {folkloreSections.filter(
                       (section) => section.title || section.content
                     ).length > 0 && (
-                        <div className="space-y-8 mb-12">
-                          <div className="text-center mb-8">
-                            <h2 className="text-3xl font-bold text-amber-300 mb-2 tracking-wide">
-                              GIAI THOẠI DÂN GIAN VÀ TRUYỀN THUYẾT
-                            </h2>
-                            <div className="w-32 h-1 bg-amber-500 mx-auto rounded"></div>
-                          </div>
-                          {folkloreSections
-                            .filter((section) => section.title || section.content)
-                            .map((section, index) => (
-                              <div key={section.id} className="space-y-4">
-                                {section.title && (
-                                  <h3 className="text-2xl font-bold text-amber-300 border-b border-amber-500 pb-3 mb-6">
-                                    {section.title.toUpperCase()}
-                                  </h3>
-                                )}
-                                {section.content && (
+                      <div className="space-y-8 mb-12">
+                        <div className="text-center mb-8">
+                          <h2 className="text-3xl font-bold text-amber-300 mb-2 tracking-wide">
+                            GIAI THOẠI DÂN GIAN VÀ TRUYỀN THUYẾT
+                          </h2>
+                          <div className="w-32 h-1 bg-amber-500 mx-auto rounded"></div>
+                        </div>
+                        {folkloreSections
+                          .filter((section) => section.title || section.content)
+                          .map((section, index) => (
+                            <div key={section.id} className="space-y-4">
+                              {section.title && (
+                                <h3 className="text-2xl font-bold text-amber-300 border-b border-amber-500 pb-3 mb-6">
+                                  {section.title.toUpperCase()}
+                                </h3>
+                              )}
+                              {section.content && (
+                                <div
+                                  className="text-gray-200 leading-relaxed text-lg preview-content"
+                                  style={{
+                                    fontFamily: "Georgia, serif",
+                                    lineHeight: "1.8",
+                                  }}
+                                  dangerouslySetInnerHTML={{
+                                    __html: section.content,
+                                  }}
+                                />
+                              )}
+                              {section.source && (
+                                <div className="ml-8 mt-4">
                                   <div
-                                    className="text-gray-200 leading-relaxed text-lg preview-content"
-                                    style={{
-                                      fontFamily: "Georgia, serif",
-                                      lineHeight: "1.8",
-                                    }}
+                                    className="text-amber-200 italic text-base font-medium preview-content"
                                     dangerouslySetInnerHTML={{
-                                      __html: section.content,
+                                      __html: section.source,
                                     }}
                                   />
-                                )}
-                                {section.source && (
-                                  <div className="ml-8 mt-4">
-                                    <div
-                                      className="text-amber-200 italic text-base font-medium preview-content"
-                                      dangerouslySetInnerHTML={{
-                                        __html: section.source,
-                                      }}
-                                    />
-                                  </div>
-                                )}
-                              </div>
-                            ))}
-                        </div>
-                      )}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                      </div>
+                    )}
 
                     {/* References */}
                     {referenceSections.filter((section) => section.content)
                       .length > 0 && (
-                        <div className="space-y-6 mb-12">
-                          <div className="text-center mb-8">
-                            <h2 className="text-3xl font-bold text-amber-300 mb-2 tracking-wide">
-                              THAM KHẢO
-                            </h2>
-                            <div className="w-32 h-1 bg-amber-500 mx-auto rounded"></div>
-                          </div>
-                          <div className="space-y-4">
-                            {referenceSections
-                              .filter((section) => section.content)
-                              .map((section, index) => (
-                                <div key={section.id}>
-                                  <div
-                                    className="text-gray-200 leading-relaxed text-lg preview-content"
-                                    style={{
-                                      fontFamily: "Georgia, serif",
-                                      lineHeight: "1.8",
-                                    }}
-                                    dangerouslySetInnerHTML={{
-                                      __html: section.content,
-                                    }}
-                                  />
-                                </div>
-                              ))}
-                          </div>
+                      <div className="space-y-6 mb-12">
+                        <div className="text-center mb-8">
+                          <h2 className="text-3xl font-bold text-amber-300 mb-2 tracking-wide">
+                            THAM KHẢO
+                          </h2>
+                          <div className="w-32 h-1 bg-amber-500 mx-auto rounded"></div>
                         </div>
-                      )}
+                        <div className="space-y-4">
+                          {referenceSections
+                            .filter((section) => section.content)
+                            .map((section, index) => (
+                              <div key={section.id}>
+                                <div
+                                  className="text-gray-200 leading-relaxed text-lg preview-content"
+                                  style={{
+                                    fontFamily: "Georgia, serif",
+                                    lineHeight: "1.8",
+                                  }}
+                                  dangerouslySetInnerHTML={{
+                                    __html: section.content,
+                                  }}
+                                />
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    )}
 
                     {/* Image Library */}
-                    {imageLibraries.filter((img) => img.file || img.preview).length > 0 && (
+                    {imageLibraries.filter((img) => img.file || img.preview)
+                      .length > 0 && (
                       <div className="space-y-8 mb-12">
                         <div className="text-center mb-8">
                           <h2 className="text-3xl font-bold text-amber-300 mb-2 tracking-wide">
@@ -1875,7 +2067,8 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                               >
                                 <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-yellow-600 rounded-lg opacity-0 group-hover:opacity-75 transition-opacity duration-300 blur-sm"></div>
                                 <div className="relative border-2 border-amber-500 rounded-lg overflow-hidden bg-gray-800">
-                                  {(imageSection.file || imageSection.preview) && (
+                                  {(imageSection.file ||
+                                    imageSection.preview) && (
                                     <img
                                       src={imageSection.preview}
                                       alt={`Gallery ${index + 1}`}
@@ -1894,7 +2087,7 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                       !imageInfo.summary &&
                       !imageInfo.shortDescription &&
                       basicInfo.filter((s) => s.title || s.content).length ===
-                      0 &&
+                        0 &&
                       historicalInfo.filter((s) => s.title || s.content)
                         .length === 0 &&
                       historySections.filter(
@@ -1903,7 +2096,8 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                       folkloreSections.filter((s) => s.title || s.content)
                         .length === 0 &&
                       referenceSections.filter((s) => s.content).length === 0 &&
-                      imageLibraries.filter((img) => img.file || img.preview).length === 0 && (
+                      imageLibraries.filter((img) => img.file || img.preview)
+                        .length === 0 && (
                         <div className="text-center text-gray-400 mt-32">
                           <div className="relative">
                             <div className="absolute -inset-4 bg-amber-500 opacity-20 rounded-full blur-xl"></div>
@@ -1965,8 +2159,10 @@ const CardStoryPage = ({ chiTietKyNhan }: { chiTietKyNhan?: any }) => {
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                     Đang xử lý...
                   </>
+                ) : chiTietKyNhan ? (
+                  "Cập nhật"
                 ) : (
-                  chiTietKyNhan ? "Cập nhật" : "Tạo mới"
+                  "Tạo mới"
                 )}
               </Button>
             </div>

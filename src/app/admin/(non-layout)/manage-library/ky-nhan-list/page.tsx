@@ -19,7 +19,11 @@ export default async function KyNhanListServer() {
   const lands = await getLands();
   return (
     <>
-      <KyNhanListPage kyNhanList={kyNhanList?.results || []} landList={lands?.results || []} />
+      <KyNhanListPage 
+        kyNhanList={kyNhanList?.results || []} 
+        landList={lands?.results || []} 
+        initialPagination={kyNhanList?.pagination}
+      />
     </>
   );
 }
