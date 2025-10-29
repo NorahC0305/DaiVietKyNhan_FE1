@@ -1144,22 +1144,25 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                             </div>
 
                             {/* Summary Text */}
-                            <div className="bg-gray-50 p-4 rounded-lg max-h-32 overflow-hidden">
-                              <p className="text-gray-700 text-sm leading-relaxed">
-                                {shouldTruncate
-                                  ? `${summary.summary.substring(0, 150)}...`
-                                  : summary.summary}
-                              </p>
+                            <div className="bg-gray-50 p-4 rounded-lg">
+                              <div className="max-h-32 overflow-hidden">
+                                <div
+                                  className="prose prose-sm max-w-none text-gray-700 leading-relaxed"
+                                  dangerouslySetInnerHTML={{ __html: summary.summary }}
+                                />
+                              </div>
                               {shouldTruncate && (
-                                <button
-                                  type="button"
-                                  className="text-blue-600 text-xs mt-2 hover:underline font-medium"
-                                  onClick={() =>
-                                    handleShowSummaryModal(summary)
-                                  }
-                                >
-                                  Xem đầy đủ
-                                </button>
+                                <div className="mt-2">
+                                  <button
+                                    type="button"
+                                    className="text-blue-600 text-xs hover:underline font-medium"
+                                    onClick={() =>
+                                      handleShowSummaryModal(summary)
+                                    }
+                                  >
+                                    Xem đầy đủ
+                                  </button>
+                                </div>
                               )}
                             </div>
 
@@ -1242,21 +1245,24 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
 
                             {/* Summary Text */}
                             <div className="bg-gray-50 p-4 rounded-lg">
-                              <p className="text-gray-700 text-sm leading-relaxed">
-                                {shouldTruncate
-                                  ? `${summary.summary.substring(0, 150)}...`
-                                  : summary.summary}
-                              </p>
+                              <div className="max-h-32 overflow-hidden">
+                                <div
+                                  className="prose prose-sm max-w-none text-gray-700 leading-relaxed"
+                                  dangerouslySetInnerHTML={{ __html: summary.summary }}
+                                />
+                              </div>
                               {shouldTruncate && (
-                                <button
-                                  type="button"
-                                  className="text-blue-600 text-xs mt-2 hover:underline font-medium"
-                                  onClick={() =>
-                                    handleShowSummaryModal(summary)
-                                  }
-                                >
-                                  Xem đầy đủ
-                                </button>
+                                <div className="mt-2">
+                                  <button
+                                    type="button"
+                                    className="text-blue-600 text-xs hover:underline font-medium"
+                                    onClick={() =>
+                                      handleShowSummaryModal(summary)
+                                    }
+                                  >
+                                    Xem đầy đủ
+                                  </button>
+                                </div>
                               )}
                             </div>
 
@@ -1314,7 +1320,7 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
 
         {/* Summary Detail Modal */}
         <Dialog open={showSummaryModal} onOpenChange={setShowSummaryModal}>
-          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+          <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto bg-white ">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-3">
                 <div className="p-2 bg-blue-100 rounded-lg">
@@ -1367,9 +1373,10 @@ const KyNhanSummaryPage: React.FC<KyNhanSummaryPageProps> = ({
                   <h4 className="font-semibold text-gray-900 mb-3">
                     Nội dung tóm tắt:
                   </h4>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                    {selectedSummaryForModal.summary}
-                  </p>
+                  <div
+                    className="prose max-w-none text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: selectedSummaryForModal.summary }}
+                  />
                 </div>
 
                 <div className="flex justify-between items-center pt-4 border-t">

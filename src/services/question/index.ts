@@ -24,9 +24,17 @@ const questionService = {
     return await http.post<ICreateQuestionResponse>(`/question`, data);
   },
 
-  // Get all questions
-  getAllQuestionsAdmin: async () => {
-    return await http.get<IQuestionResponse>(`/question`);
+  // Get all questions with server-side pagination and optional filters
+  getAllQuestionsAdmin: async (params?: { currentPage?: number; pageSize?: number; search?: string; landId?: string | number }) => {
+    const queryParts: string[] = [];
+    if (params?.currentPage) queryParts.push(`currentPage=${encodeURIComponent(String(params.currentPage))}`);
+    if (params?.pageSize) queryParts.push(`pageSize=${encodeURIComponent(String(params.pageSize))}`);
+    if (params?.search) queryParts.push(`search=${encodeURIComponent(params.search)}`);
+    if (params?.landId !== undefined && params?.landId !== null && params?.landId !== "all") {
+      queryParts.push(`landId=${encodeURIComponent(String(params.landId))}`);
+    }
+    const query = queryParts.length ? `?${queryParts.join("&")}` : "";
+    return await http.get<IQuestionResponse>(`/question${query}`);
   },
 
   // Get a single question by ID

@@ -49,6 +49,7 @@ const QuestionsTable: React.FC<QuestionsTableProps> = ({
   error,
   pagination,
 }) => {
+  console.log(pagination);
   const getAnswerOptionTypeBadgeStyle = (answerOptionType: string) => {
     switch (answerOptionType) {
       case "ONE":
@@ -156,9 +157,7 @@ const QuestionsTable: React.FC<QuestionsTableProps> = ({
                 questions?.map((question) => (
                   <TableRow key={question.id}>
                     <TableCell className="font-medium max-w-xs">
-                      <div className="truncate" title={question.question}>
-                        {question.question}
-                      </div>
+                      <div className="truncate" dangerouslySetInnerHTML={{ __html: question.question as string }} />
                     </TableCell>
                     <TableCell>
                       <span className="border border-gray-300 rounded-full p-1 px-2">
