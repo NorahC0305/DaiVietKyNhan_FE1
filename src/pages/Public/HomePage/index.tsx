@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ROUTES } from "@routes";
 import { IUser } from "@models/user/entity";
 import { IGetSystemConfigWithAmountUserResponse } from "@models/system/response";
-import { IUserRankData } from "@models/user/response";
+import { IUserRankData, IUserRankResponse } from "@models/user/response";
 import RadialGradial from "@components/Atoms/RadialGradient";
 import { useUserRank } from "@hooks/useUser";
 import { useAttendance } from "@hooks/useAttendance";
@@ -136,12 +136,41 @@ const HomePageClient = ({
   const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState(1); // Bắt đầu từ testimonial thứ 2 (index 1) làm chính
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+  const [currentRankPage, setCurrentRankPage] = useState(1); // Trang hiện tại của bảng xếp hạng (1-5)
 
-  // Memoize params để tránh re-creation mỗi lần render
-  const rankParams = useMemo(() => ({ currentPage: 1, pageSize: 15 }), []);
+  // Cache cho các trang đã fetch - lưu theo page number
+  const [rankCache, setRankCache] = useState<Map<number, IUserRankResponse>>(new Map());
 
-  const { data: userRankData, isLoading: isLoadingRank } =
-    useUserRank(rankParams);
+  // Kiểm tra xem trang hiện tại đã có trong cache chưa
+  const cachedData = rankCache.get(currentRankPage);
+  const hasCachedData = !!cachedData;
+
+  // Memoize params - chỉ truyền params khi chưa có cache để trigger fetch
+  const rankParams = useMemo(() =>
+    !hasCachedData ? { currentPage: currentRankPage, pageSize: 15 } : undefined,
+    [currentRankPage, hasCachedData]
+  );
+
+  // Fetch dữ liệu từ hook - truyền cached data nếu có để hook không fetch lại
+  const { data: userRankData, isLoading: isLoadingRank } = useUserRank(
+    rankParams,
+    cachedData // Truyền cached data nếu có để hook không fetch lại
+  );
+
+  // Lưu dữ liệu vào cache khi fetch xong (chỉ khi chưa có cache)
+  useEffect(() => {
+    if (userRankData && !isLoadingRank && !hasCachedData) {
+      setRankCache(prev => {
+        const newCache = new Map(prev);
+        newCache.set(currentRankPage, userRankData);
+        return newCache;
+      });
+    }
+  }, [userRankData, isLoadingRank, currentRankPage, hasCachedData]);
+
+  // Dùng cached data nếu có, ngược lại dùng data mới fetch
+  const displayData = hasCachedData ? cachedData : userRankData;
+  const isCurrentlyLoading = !hasCachedData && isLoadingRank;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -165,18 +194,39 @@ const HomePageClient = ({
   };
 
   // Process user rank data for display - memoized để tránh re-computation
+  // Sử dụng displayData (có thể từ cache hoặc fetch mới)
   const leaderboardData = useMemo(() => {
-    if (!userRankData?.data?.results) {
+    if (!displayData?.data?.results) {
       return { leftColumn: [], rightColumn: [], thirdColumn: [] };
     }
 
-    const users = userRankData.data.results;
+    const users = displayData.data.results;
     const leftColumn = users.slice(0, 5);
     const rightColumn = users.slice(5, 10);
     const thirdColumn = users.slice(10, 15);
 
     return { leftColumn, rightColumn, thirdColumn };
-  }, [userRankData?.data?.results]);
+  }, [displayData?.data?.results]);
+
+  // Tính toán rank number dựa trên trang hiện tại
+  const getRankNumber = useCallback((index: number, columnIndex: number) => {
+    // Trang 1: 1-15, Trang 2: 16-30, Trang 3: 31-45, Trang 4: 46-60, Trang 5: 61-75
+    const baseRank = (currentRankPage - 1) * 15;
+    return baseRank + columnIndex * 5 + index + 1;
+  }, [currentRankPage]);
+
+  // Navigation handlers
+  const handleNext = useCallback(() => {
+    if (currentRankPage < 5) {
+      setCurrentRankPage(prev => prev + 1);
+    }
+  }, [currentRankPage]);
+
+  const handlePrev = useCallback(() => {
+    if (currentRankPage > 1) {
+      setCurrentRankPage(prev => prev - 1);
+    }
+  }, [currentRankPage]);
 
   const renderRankItem = useCallback(
     (item: IUserRankData | undefined, rank: number) => (
@@ -302,43 +352,115 @@ const HomePageClient = ({
                   BẢNG XẾP HẠNG
                 </RadialGradial>
               </div>
-              <div className="w-full flex justify-center items-center gap-3 md:gap-4">
-                <div className="w-[80%] flex justify-around items-center">
-                  {isLoadingRank ? (
-                    <div className="flex justify-center items-center w-full py-8">
-                      <div className="text-primary">Đang tải dữ liệu...</div>
-                    </div>
-                  ) : (
-                    <>
-                      {/* Left Column - 1-5 */}
-                      <div className="space-y-1 md:space-y-2">
-                        {Array.from({ length: 5 }, (_, index) => {
-                          const rank = index + 1;
-                          const item = leaderboardData.leftColumn[index];
-                          return renderRankItem(item, rank);
-                        })}
-                      </div>
-
-                      {/* Right Column - 6-10 */}
-                      <div className="space-y-1 md:space-y-2">
-                        {Array.from({ length: 5 }, (_, index) => {
-                          const rank = index + 6;
-                          const item = leaderboardData.rightColumn[index];
-                          return renderRankItem(item, rank);
-                        })}
-                      </div>
-
-                      {/* Third Column - 11-15 */}
-                      <div className="space-y-1 md:space-y-2">
-                        {Array.from({ length: 5 }, (_, index) => {
-                          const rank = index + 11;
-                          const item = leaderboardData.thirdColumn[index];
-                          return renderRankItem(item, rank);
-                        })}
-                      </div>
-                    </>
+              <div className="w-full flex justify-center items-center gap-3 md:gap-4 relative">
+                {/* Previous Button - Cố định vị trí */}
+                <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0">
+                  {currentRankPage > 1 && (
+                    <button
+                      onClick={handlePrev}
+                      disabled={isCurrentlyLoading}
+                      className="relative left-8 w-full h-full flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/40 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      aria-label="Trang trước"
+                    >
+                      <svg
+                        className="w-5 h-5 md:w-6 md:h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 19l-7-7 7-7"
+                        />
+                      </svg>
+                    </button>
                   )}
                 </div>
+
+                {/* Content Container - Giữ cấu trúc 3 cột cố định */}
+                <div className="w-[80%] flex justify-around items-center relative min-h-[200px]">
+                  {isCurrentlyLoading ? (
+                    <div className="absolute inset-0 flex justify-center items-center bg-transparent z-10">
+                      <div className="text-primary">Đang tải dữ liệu...</div>
+                    </div>
+                  ) : null}
+
+                  <div className={`w-full flex justify-around items-center ${isCurrentlyLoading ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
+                    {/* Left Column */}
+                    <div className="space-y-1 md:space-y-2 flex-shrink-0">
+                      {Array.from({ length: 5 }, (_, index) => {
+                        const rank = getRankNumber(index, 0);
+                        const item = leaderboardData.leftColumn[index];
+                        return renderRankItem(item, rank);
+                      })}
+                    </div>
+
+                    {/* Right Column */}
+                    <div className="space-y-1 md:space-y-2 flex-shrink-0">
+                      {Array.from({ length: 5 }, (_, index) => {
+                        const rank = getRankNumber(index, 1);
+                        const item = leaderboardData.rightColumn[index];
+                        return renderRankItem(item, rank);
+                      })}
+                    </div>
+
+                    {/* Third Column */}
+                    <div className="space-y-1 md:space-y-2 flex-shrink-0">
+                      {Array.from({ length: 5 }, (_, index) => {
+                        const rank = getRankNumber(index, 2);
+                        const item = leaderboardData.thirdColumn[index];
+                        return renderRankItem(item, rank);
+                      })}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Next Button - Cố định vị trí */}
+                <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0">
+                  {currentRankPage < 5 && (
+                    <button
+                      onClick={handleNext}
+                      disabled={isCurrentlyLoading}
+                      className="relative right-8 w-full h-full flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/40 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                      aria-label="Trang sau"
+                    >
+                      <svg
+                        className="w-5 h-5 md:w-6 md:h-6 text-primary"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                </div>
+              </div>
+
+              {/* Page Indicators - Luôn hiển thị */}
+              <div className="w-full flex justify-center items-center gap-2 mt-4">
+                {Array.from({ length: 5 }, (_, index) => {
+                  const pageNumber = index + 1;
+                  return (
+                    <button
+                      key={pageNumber}
+                      onClick={() => !isCurrentlyLoading && setCurrentRankPage(pageNumber)}
+                      disabled={isCurrentlyLoading}
+                      className={`w-2 h-2 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed ${pageNumber === currentRankPage
+                        ? 'bg-primary w-6'
+                        : 'bg-primary/30 hover:bg-primary/50'
+                        }`}
+                      aria-label={`Trang ${pageNumber}`}
+                    />
+                  );
+                })}
               </div>
               {/* <div className="w-full flex items-center justify-center mt-0 lg:mt-4">
                 <button className="text-primary cursor-pointer font-bold text-sm lg:text-lg hover:underline">

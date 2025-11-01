@@ -149,6 +149,9 @@ const ImageModal: React.FC<ImageModalProps> = ({
 
     if (!currentImage) return null
 
+    console.log(currentImage.url);
+    
+
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-90">
             {/* Close button */}

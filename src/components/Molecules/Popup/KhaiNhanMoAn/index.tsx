@@ -127,7 +127,7 @@ export default function KhaiNhanMoAn({
                                 <div className="absolute -inset-1 rounded-2xl border border-transparent bg-gradient-to-r from-blue-400 via-cyan-500 to-blue-400 animate-led-border -z-10" />
                             )}
                             {isCharacterClickable('Chử Đồng Tử') ? (
-                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760714057/Logo_C%C4%90T_dvt4yb.svg' alt="Chử Đồng Tử - Chương 2" fill className="relative z-10" />
+                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760862149/Ch%E1%BB%AD_%C4%90%E1%BB%93ng_T%E1%BB%AD_-_Ch%C6%B0%C6%A1ng_2_sxhcav.png' alt="Chử Đồng Tử - Chương 2" fill className="relative z-10" />
                             ) : (
                                 <div className="absolute inset-0.5 bg-[#6E6B63] rounded-xl z-10"></div>
                             )}
@@ -143,7 +143,7 @@ export default function KhaiNhanMoAn({
                                 <div className="absolute -inset-1 rounded-2xl border border-transparent bg-gradient-to-r from-red-400 via-pink-500 to-red-400 animate-led-border -z-10" />
                             )}
                             {isCharacterClickable('Thánh Gióng') ? (
-                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760714074/Logo_TG_ybvbuo.svg' alt="Thánh Gióng - Chương 3" fill className="relative z-10" />
+                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760862212/Th%C3%A1nh_Gi%C3%B3ng_-_Ch%C6%B0%C6%A1ng_3_wlwpux.png' alt="Thánh Gióng - Chương 3" fill className="relative z-10" />
                             ) : (
                                 <div className="absolute inset-0.5 bg-[#6E6B63] rounded-xl z-10" />
                             )}
@@ -159,7 +159,7 @@ export default function KhaiNhanMoAn({
                                 <div className="absolute -inset-1 rounded-2xl border border-transparent bg-gradient-to-r from-purple-400 via-violet-500 to-purple-400 animate-led-border -z-10" />
                             )}
                             {isCharacterClickable('Liễu Hạnh') ? (
-                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760714053/Logo_LH_owmwjj.svg' alt="Liễu Hạnh - Chương 4" fill className="relative z-10" />
+                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760862249/Li%E1%BB%85u_H%E1%BA%A1nh_-_Ch%C6%B0%C6%A1ng_4_l8xkci.png' alt="Liễu Hạnh - Chương 4" fill className="relative z-10" />
                             ) : (
                                 <div className="absolute inset-0.5 bg-[#6E6B63] rounded-xl z-10" />
                             )}
