@@ -103,6 +103,9 @@ const mobileRegionsConfig = {
 const mainMapImage =
   "https://res.cloudinary.com/dznt9yias/image/upload/v1761121694/Trang_map_Ky%CC%80_Gio%CC%9B%CC%81i_e6kyap.svg";
 
+// TODO: Tạm thời mở khóa tất cả map để review. Sau khi hoàn thành, đổi thành false
+const TEMP_UNLOCK_ALL = false;
+
 // Mapping từ region ID đến land ID dựa trên userLand data
 // Dựa trên userLand response:
 // - land ID 1="Sơn Tinh" (PENDING)
@@ -306,8 +309,8 @@ export default function MapPageClient({
   };
 
   const handleRegionClick = (regionId: string) => {
-    // Only allow navigation if region is unlocked
-    if (isRegionUnlocked(regionId)) {
+    // Only allow navigation if region is unlocked (or if TEMP_UNLOCK_ALL is enabled)
+    if (TEMP_UNLOCK_ALL || isRegionUnlocked(regionId)) {
       // Set a flag to refresh data when user returns from detail page
       sessionStorage.setItem("shouldRefreshMapData", "true");
       // Set navigation timestamp to track when user navigated away
@@ -369,7 +372,7 @@ export default function MapPageClient({
                 onClick={() => handleRegionClick(region.id)}
                 zIndex={region.zIndex || 10 + index}
                 isFullscreen={true}
-                isLocked={shouldShowLock(region.id)}
+                isLocked={TEMP_UNLOCK_ALL ? false : shouldShowLock(region.id)}
               />
             ))}
           </div>
@@ -404,7 +407,7 @@ export default function MapPageClient({
                   mobileSize={mobileConfig?.size}
                   onClick={() => handleRegionClick(region.id)}
                   zIndex={region.zIndex || 10}
-                  isLocked={shouldShowLock(region.id)}
+                  isLocked={TEMP_UNLOCK_ALL ? false : shouldShowLock(region.id)}
                 />
               );
             })}
