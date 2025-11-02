@@ -21,6 +21,7 @@ const PUBLIC = {
   CONTACT: "/contact",
   PLAY_GROUND: "/starter/test-playground",
   TEST_PLAYGROUND_RESULT: "/starter/test-playground-result",
+  INTRODUCE: "/introduce",
 } as const;
 
 // Auth routes
