@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 import { Plus } from 'lucide-react'
+import TrangSuConDoiAiDua from '@components/Atoms/TrangSuConDoiAiDua'
 
 const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void, user: any | null }) => {
 
@@ -67,17 +68,7 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                 <div className="max-h-[80vh] overflow-y-auto custom-scrollbar-elegant">
                                     {/* --- Title --- */}
                                     <h1 className="lg:text-6xl text-4xl pt-3 text-center font-bd-street-sign" style={{ color: user?.godProfile?.text_color }}>CHÀO MỪNG ĐẾN VỚI HÀNH TRÌNH “KHAI NHÂN MỞ ẤN”</h1>
-                                    <div className="flex items-center justify-center">
-                                        <div className='relative w-[300px] lg:w-[400px] h-[80px] lg:h-[117px] flex items-center justify-center my-5'>
-                                            <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726766/frame_hfc9ot.svg" alt="frame" fill />
-                                            <div className='absolute inset-0 flex items-center justify-center '>
-                                                <div className='flex  flex-col items-center justify-center w-[64%]'>
-                                                    <span className='text-center lg:text-2xl text-base font-bd-street-sign text-[#CE7346]'>Trang sử còn đợi ai đưa,</span>
-                                                    <span className='text-center lg:text-2xl text-base font-bd-street-sign text-[#CE7346]'>Khai Nhân Mở Ấn, chuyện xưa hóa gần.</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <TrangSuConDoiAiDua />
 
                                     {/* --- Content --- */}
                                     <div className='flex items-center justify-around pb-2'>
@@ -98,7 +89,7 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                             <br />
                                             <br />
                                             <span className='lg:text-xl text-sm font-extrabold text-secondary text-justify leading-relaxed'>
-                                              Thế nhưng, một thế lực bí ẩn đã xâm nhập vào Kỳ Giới, khiến linh khí suy yếu và các Kỳ Nhân bị phong ấn trong những cuộn giấy cổ, gọi là Kỳ Ấn.
+                                                Thế nhưng, một thế lực bí ẩn đã xâm nhập vào Kỳ Giới, khiến linh khí suy yếu và các Kỳ Nhân bị phong ấn trong những cuộn giấy cổ, gọi là Kỳ Ấn.
                                             </span>
                                         </div>
                                     </div>
