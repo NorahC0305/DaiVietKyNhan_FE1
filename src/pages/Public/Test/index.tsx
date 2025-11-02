@@ -396,7 +396,7 @@ const KyAnDocBan = ({ onClose, onBack }: { onClose: () => void; onBack: () => vo
     )
 }
 
-const TestPageClient = ({ children }: { children: React.ReactNode }) => {
+const TestPageClient = () => {
     const [selectedActivity, setSelectedActivity] = useState<'trai-nghiem' | 'san-thuong' | 'su-kien' | 'ky-an-doc-bao' | null>(null);
 
     const onClose = () => {
