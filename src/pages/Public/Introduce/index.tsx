@@ -344,7 +344,7 @@ const ChuoiHoatDongSanThuong = ({ onClose, onOpenKyAnDocBao }: { onClose: () => 
                 </div>
 
                 <div className="flex flex-col items-center justify-center mx-10 mt-10">
-                    <div className="relative w-[220px] lg:w-[220px] h-[250px] lg:h-[280px]">
+                    <div className="relative w-[120px] lg:w-[220px] h-[150px] lg:h-[280px]">
                         <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762097672/Gemini_Generated_Image_mnkmapmnkmapmnkm_2_v9zc3l.png" alt="frame" fill className="w-full h-full" />
                     </div>
                     <div className="relative w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] cursor-pointer mt-5" onClick={onOpenKyAnDocBao}>
@@ -396,7 +396,7 @@ const KyAnDocBan = ({ onClose, onBack }: { onClose: () => void; onBack: () => vo
     )
 }
 
-const TestPageClient = ({ children }: { children: React.ReactNode }) => {
+const IntroducePageClient = () => {
     const [selectedActivity, setSelectedActivity] = useState<'trai-nghiem' | 'san-thuong' | 'su-kien' | 'ky-an-doc-bao' | null>(null);
 
     const onClose = () => {
@@ -526,4 +526,4 @@ const TestPageClient = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-export default TestPageClient
+export default IntroducePageClient
