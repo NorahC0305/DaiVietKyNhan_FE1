@@ -29,11 +29,16 @@ const request = async <Response>(
       // Kiểm tra nếu session không tồn tại (token đã bị xóa)
       if (!session || !session.user || !session.accessToken) {
         if (typeof window !== "undefined") {
-          // Chỉ hiển thị toast nếu không phải đang ở trang login/register
+          // Chỉ chuyển hướng nếu không nằm trong các trang public
           const currentPath = window.location.pathname;
+          const publicPaths = ["/", "/introduce", "/contact", "/about"]; // các trang public phía client
+          const isPublicPath = publicPaths.some(
+            (p) => currentPath === p || (p !== "/" && currentPath.startsWith(p))
+          );
+
           const isAuthPage = currentPath.includes('/auth/') || currentPath.includes('/login') || currentPath.includes('/register');
 
-          if (!isAuthPage) {
+          if (!isAuthPage && !isPublicPath) {
             await signOut({ callbackUrl: ROUTES.AUTH.LOGIN });
             toast.error("Phiên làm việc hết hạn, vui lòng đăng nhập lại");
           }
