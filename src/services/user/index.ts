@@ -152,8 +152,8 @@ const userService = {
       currentPage: params?.currentPage || 1,
       pageSize: params?.pageSize || 15,
     });
-
-    return await http.get<IUserRankResponse>(`/user/user-rank?${queryParams}`, {
+    // Public endpoint - do not require auth
+    return await http.getPublic<IUserRankResponse>(`/user/user-rank?${queryParams}`, {
       next: { tags: ["userRank"] },
     });
   },
