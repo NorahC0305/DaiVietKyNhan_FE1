@@ -12,7 +12,7 @@ const SuKienTuongTac = ({ onClose }: { onClose: () => void }) => {
     return (
         <div className="mt-10 w-full flex items-center">
             <div className="bg-[#a4a89d29] border border-[#000000] lg:w-[93%] w-[98%] h-full rounded-xl py-7">
-                <div className="relative">
+                <div className="relative flex justify-center items-start">
                     {/* Title */}
                     <h2 className="text-center lg:text-4xl text-3xl font-bd-street-sign text-[#CE7346] mb-5">
                         SỰ KIỆN “KHAI HOA HUYỀN ẤN”
@@ -22,7 +22,7 @@ const SuKienTuongTac = ({ onClose }: { onClose: () => void }) => {
                         tại Parc Mall, TP.HCM
                     </h2>
                     <button
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 cursor-pointer p-2"
+                        className="absolute right-3 z-10 cursor-pointer px-2"
                         onClick={onClose}
                         aria-label="Đóng"
                     >
@@ -49,14 +49,14 @@ const TraiNghiemWebsite = ({ onClose }: { onClose: () => void }) => {
         <div className="mt-10 w-full flex items-center">
             <div className="bg-[#a4a89d29] border border-[#000000] lg:w-[93%] w-[98%] h-full rounded-xl py-7">
                 {/* Title */}
-                <div className="relative">  {/* Button Close */}
+                <div className="relative flex justify-center items-start">  {/* Button Close */}
                     <h2 className="text-center lg:text-4xl text-3xl font-bd-street-sign text-[#CE7346] mb-5">
                         TRẢI NGHIỆM WEBSITE KỲ NHÂN
                         <br />
                         22/10 - 05/12
                     </h2>
                     <button
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 cursor-pointer p-2"
+                        className="absolute right-3 z-10 cursor-pointer px-2"
                         onClick={onClose}
                         aria-label="Đóng"
                     >
@@ -197,14 +197,14 @@ const ChuoiHoatDongSanThuong = ({ onClose, onOpenKyAnDocBao }: { onClose: () => 
         <div className="mt-10 w-full flex items-center">
             <div className="bg-[#a4a89d29] border border-[#000000] lg:w-[93%] w-[98%] h-full rounded-xl py-7">
                 {/* Title */}
-                <div className="relative">
+                <div className="relative flex justify-center">
                     <h2 className="text-center lg:text-4xl text-3xl font-bd-street-sign text-[#CE7346] mb-5">
                         MỞ ẤN TÍCH XU, THƯỞNG QUÀ KỲ CHỦ
                         <br />
                         20/10 - 30/11
                     </h2>
                     <button
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 cursor-pointer p-2"
+                        className="absolute right-3 sm:right-4 z-10 cursor-pointer px-2"
                         onClick={onClose}
                         aria-label="Đóng"
                     >
@@ -360,7 +360,7 @@ const KyAnDocBan = ({ onClose, onBack }: { onClose: () => void; onBack: () => vo
     return (
         <div className="mt-10 w-full flex items-center">
             <div className="bg-[#a4a89d29] border border-[#000000] lg:w-[93%] w-[98%] h-full rounded-xl py-7">
-                <div className="relative">
+                <div className="relative flex items-start justify-center">
                     {/* Title */}
                     <h2 className="text-center lg:text-4xl text-3xl font-bd-street-sign text-[#CE7346] mb-5">
                         KỲ ẤN ĐỘC BẢN
@@ -368,7 +368,7 @@ const KyAnDocBan = ({ onClose, onBack }: { onClose: () => void; onBack: () => vo
                         22/10 - 19/11
                     </h2>
                     <button
-                        className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 cursor-pointer p-2"
+                        className="absolute right-3 z-10 cursor-pointer px-2"
                         onClick={onClose}
                         aria-label="Đóng"
                     >
@@ -480,8 +480,8 @@ const IntroducePageClient = () => {
                                         <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726766/frame_hfc9ot.svg" alt="frame" fill />
                                         <div className='absolute inset-0 flex items-center justify-center '>
                                             <div className='flex  flex-col items-center justify-center w-[80%]'>
-                                                <span className='text-center lg:text-2xl text-lg font-bd-street-sign text-[#AD844A]'>Trải nghiệm website</span>
-                                                <span className='text-center lg:text-2xl text-lg font-bd-street-sign text-[#E3A12B]'>22/10 - 05/12</span>
+                                                <span className='text-center lg:text-[17px] text-sm font-bd-street-sign text-[#AD844A]'>Trải nghiệm website</span>
+                                                <span className='text-center lg:text-[17px] text-sm font-bd-street-sign text-[#E3A12B]'>22/10 - 05/12</span>
                                             </div>
                                         </div>
                                     </div>
@@ -492,8 +492,8 @@ const IntroducePageClient = () => {
                                         <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726766/frame_hfc9ot.svg" alt="frame" fill />
                                         <div className='absolute inset-0 flex items-center justify-center '>
                                             <div className='flex  flex-col items-center justify-center w-[80%]'>
-                                                <span className='text-center lg:text-[22px] text-[15px] font-bd-street-sign text-[#AD844A]'>Chuỗi hoạt động săn thưởng đổi quà</span>
-                                                <span className='text-center lg:text-2xl text-lg font-bd-street-sign text-[#E3A12B]'>22/10 - 30/11</span>
+                                                <span className='text-center lg:text-[17px] text-sm font-bd-street-sign text-[#AD844A]'>Chuỗi hoạt động săn thưởng đổi quà</span>
+                                                <span className='text-center lg:text-[17px] text-sm font-bd-street-sign text-[#E3A12B]'>22/10 - 30/11</span>
                                             </div>
                                         </div>
                                     </div>
@@ -504,8 +504,8 @@ const IntroducePageClient = () => {
                                         <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726766/frame_hfc9ot.svg" alt="frame" fill />
                                         <div className='absolute inset-0 flex items-center justify-center '>
                                             <div className='flex  flex-col items-center justify-center w-[80%]'>
-                                                <span className='text-center lg:text-2xl text-lg font-bd-street-sign text-[#AD844A]'>Sự kiện tương tác</span>
-                                                <span className='text-center lg:text-2xl text-lg font-bd-street-sign text-[#E3A12B]'>28,29,30/11 tại TP.HCM</span>
+                                                <span className='text-center lg:text-[17px] text-sm font-bd-street-sign text-[#AD844A]'>Sự kiện tương tác</span>
+                                                <span className='text-center lg:text-[17px] text-sm font-bd-street-sign text-[#E3A12B]'>28,29,30/11 tại TP.HCM</span>
                                             </div>
                                         </div>
                                     </div>
