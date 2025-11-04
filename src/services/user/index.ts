@@ -57,18 +57,6 @@ const userService = {
       skipNulls: true,
     });
 
-    // Debug logging for search query
-    if (params?.search) {
-      console.log('🔍 [SEARCH DEBUG] User search query (email only):', {
-        searchTerm: params.search,
-        qsParts: qsParts,
-        qsValue: qsValue,
-        finalQueryString: queryString,
-        timestamp: new Date().toISOString(),
-        searchField: 'email only'
-      });
-    }
-
     return await http.get(`/user/user-list?${queryString}`, {
       next: { tags: ["modifyUser"] },
     });
@@ -148,14 +136,23 @@ const userService = {
     currentPage?: number;
     pageSize?: number;
   }) => {
+    const page = params?.currentPage ?? 1;
+    const size = params?.pageSize ?? 15;
     const queryParams = qs.stringify({
-      currentPage: params?.currentPage || 1,
-      pageSize: params?.pageSize || 15,
+      currentPage: page,
+      pageSize: size,
     });
+
+    const url = `/user/user-rank?${queryParams}`;
+    if (typeof window !== 'undefined') {
+    }
+
     // Public endpoint - do not require auth
-    return await http.getPublic<IUserRankResponse>(`/user/user-rank?${queryParams}`, {
+    const res = await http.getPublic<IUserRankResponse>(url, {
       next: { tags: ["userRank"] },
     });
+
+    return res;
   },
   getUserDemographicsStats: async (): Promise<IUserDemographicsStatsResponse> => {
     // Mock API - Replace with actual API call later

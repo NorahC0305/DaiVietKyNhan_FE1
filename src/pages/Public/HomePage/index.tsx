@@ -138,39 +138,12 @@ const HomePageClient = ({
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentRankPage, setCurrentRankPage] = useState(1); // Trang hiện tại của bảng xếp hạng (1-5)
 
-  // Cache cho các trang đã fetch - lưu theo page number
-  const [rankCache, setRankCache] = useState<Map<number, IUserRankResponse>>(new Map());
+  // Luôn fetch theo trang hiện tại (bỏ cache để tránh trùng dữ liệu)
+  const rankParams = useMemo(() => ({ currentPage: currentRankPage, pageSize: 15 }), [currentRankPage]);
 
-  // Kiểm tra xem trang hiện tại đã có trong cache chưa
-  const cachedData = rankCache.get(currentRankPage);
-  const hasCachedData = !!cachedData;
-
-  // Memoize params - chỉ truyền params khi chưa có cache để trigger fetch
-  const rankParams = useMemo(() =>
-    !hasCachedData ? { currentPage: currentRankPage, pageSize: 15 } : undefined,
-    [currentRankPage, hasCachedData]
-  );
-
-  // Fetch dữ liệu từ hook - truyền cached data nếu có để hook không fetch lại
   const { data: userRankData, isLoading: isLoadingRank } = useUserRank(
-    rankParams,
-    cachedData // Truyền cached data nếu có để hook không fetch lại
+    rankParams
   );
-
-  // Lưu dữ liệu vào cache khi fetch xong (chỉ khi chưa có cache)
-  useEffect(() => {
-    if (userRankData && !isLoadingRank && !hasCachedData) {
-      setRankCache(prev => {
-        const newCache = new Map(prev);
-        newCache.set(currentRankPage, userRankData);
-        return newCache;
-      });
-    }
-  }, [userRankData, isLoadingRank, currentRankPage, hasCachedData]);
-
-  // Dùng cached data nếu có, ngược lại dùng data mới fetch
-  const displayData = hasCachedData ? cachedData : userRankData;
-  const isCurrentlyLoading = !hasCachedData && isLoadingRank;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -196,17 +169,17 @@ const HomePageClient = ({
   // Process user rank data for display - memoized để tránh re-computation
   // Sử dụng displayData (có thể từ cache hoặc fetch mới)
   const leaderboardData = useMemo(() => {
-    if (!displayData?.data?.results) {
+    if (!userRankData?.data?.results) {
       return { leftColumn: [], rightColumn: [], thirdColumn: [] };
     }
 
-    const users = displayData.data.results;
+    const users = userRankData.data.results;
     const leftColumn = users.slice(0, 5);
     const rightColumn = users.slice(5, 10);
     const thirdColumn = users.slice(10, 15);
 
     return { leftColumn, rightColumn, thirdColumn };
-  }, [displayData?.data?.results]);
+  }, [userRankData?.data?.results]);
 
   // Tính toán rank number dựa trên trang hiện tại
   const getRankNumber = useCallback((index: number, columnIndex: number) => {
@@ -231,7 +204,7 @@ const HomePageClient = ({
   const renderRankItem = useCallback(
     (item: IUserRankData | undefined, rank: number) => (
       <div
-        key={item?.id || rank}
+        key={item?.id ?? `r-${rank}`}
         className="flex items-center space-x-1 md:space-x-2 p-1 md:p-2 rounded"
       >
         <div className="text-lg md:text-xl font-bold text-primary opacity-70">
@@ -365,7 +338,7 @@ const HomePageClient = ({
                   {currentRankPage > 1 && (
                     <button
                       onClick={handlePrev}
-                      disabled={isCurrentlyLoading}
+                      disabled={isLoadingRank}
                       className="relative left-8 w-full h-full flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/40 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label="Trang trước"
                     >
@@ -388,13 +361,13 @@ const HomePageClient = ({
 
                 {/* Content Container - Giữ cấu trúc 3 cột cố định */}
                 <div className="w-[80%] flex justify-around items-center relative min-h-[200px]">
-                  {isCurrentlyLoading ? (
+                  {isLoadingRank ? (
                     <div className="absolute inset-0 flex justify-center items-center bg-transparent z-10">
                       <div className="text-primary">Đang tải dữ liệu...</div>
                     </div>
                   ) : null}
 
-                  <div className={`w-full flex justify-around items-center ${isCurrentlyLoading ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
+                  <div className={`w-full flex justify-around items-center ${isLoadingRank ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
                     {/* Left Column */}
                     <div className="space-y-1 md:space-y-2 flex-shrink-0">
                       {Array.from({ length: 5 }, (_, index) => {
@@ -429,7 +402,7 @@ const HomePageClient = ({
                   {currentRankPage < 5 && (
                     <button
                       onClick={handleNext}
-                      disabled={isCurrentlyLoading}
+                      disabled={isLoadingRank}
                       className="relative right-8 w-full h-full flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/40 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                       aria-label="Trang sau"
                     >
@@ -458,8 +431,8 @@ const HomePageClient = ({
                   return (
                     <button
                       key={pageNumber}
-                      onClick={() => !isCurrentlyLoading && setCurrentRankPage(pageNumber)}
-                      disabled={isCurrentlyLoading}
+                      onClick={() => !isLoadingRank && setCurrentRankPage(pageNumber)}
+                      disabled={isLoadingRank}
                       className={`w-2 h-2 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed ${pageNumber === currentRankPage
                         ? 'bg-primary w-6'
                         : 'bg-primary/30 hover:bg-primary/50'
