@@ -131,7 +131,7 @@ const damDaTrachScrollPositions: ScrollPosition[] = [
 const langPhuDongScrollPositions: ScrollPosition[] = [
   // { top: "24%", left: "26%", rotate: "-11deg" },
   // { top: "62%", left: "26%", rotate: "-8deg" },
-  { top: "47%", left: "2%", rotate: "-13deg" },
+  { top: "47%", left: "62%", rotate: "-13deg" },
   { top: "26%", left: "10%", rotate: "-9deg" },
   { top: "42%", left: "14%", rotate: "-11deg" },
   { top: "20%", left: "32%", rotate: "-8deg" },
