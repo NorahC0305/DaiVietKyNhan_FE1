@@ -40,8 +40,13 @@ const LibraryPage = () => {
   const [showNoKyNhanModal, setShowNoKyNhanModal] = useState(false);
   const isLandscapeMobile = useLandscapeMobile();
 
+  const STORAGE_KEY_LAST_CARD_ID = "dvkn:lastLibraryCardId";
+
   // Handle CTA button click - navigate to library detail page
   const handleCtaClick = (cardId: number) => {
+    try {
+      sessionStorage.setItem(STORAGE_KEY_LAST_CARD_ID, String(cardId));
+    } catch (e) {}
     router.push(`/library/${cardId}`);
   };
 
@@ -174,6 +179,26 @@ const LibraryPage = () => {
       setHiddenSearchId(null);
     }
   }, [hiddenSearchId, cards, isLoading, triggerSearchScroll]);
+
+  // Restore last viewed card position if returning from detail page
+  useEffect(() => {
+    if (cards.length > 0 && !isLoading) {
+      try {
+        const lastId = sessionStorage.getItem(STORAGE_KEY_LAST_CARD_ID);
+        if (lastId) {
+          const asNumber = Number(lastId);
+          if (!Number.isNaN(asNumber)) {
+            const index = cards.findIndex((c) => c.id === asNumber);
+            if (index >= 0) {
+              setScrollToIndex(index);
+              setHighlightQuery("");
+            }
+          }
+          sessionStorage.removeItem(STORAGE_KEY_LAST_CARD_ID);
+        }
+      } catch (e) {}
+    }
+  }, [cards, isLoading]);
 
   // Wrapper function for search button clicks
   const handleSearchClick = () => {
