@@ -239,20 +239,20 @@ const HomePageClient = ({
     <div className="min-h-screen">
       {/* Banner 1 - Main Hero Section */}
       <section className="relative w-full lg:h-[750px] h-[510px] flex items-center justify-center overflow-hidden">
-        <div className="absolute z-0 flex justify-center w-full h-full">
+        <div className="absolute z-0 flex justify-center lg:w-[1330px] w-full h-full">
           <Image
             src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103211/Key_visual_trong_web_3_dldjch.png"
             alt="HomePage Banner"
             fill
             priority
           />
-        </div>
-        <div className="flex w-full">
-          <div className="absolute bottom-16 lg:bottom-25 left-20 lg:left-20 lg:w-[250px] lg:h-[80px] w-[150px] h-[50px] cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => router.push(ROUTES.PUBLIC.MAP)}>
-            <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103336/Group_117_jdhguy.png" alt="HomePage Banner" fill />
-          </div>
-          <div className="absolute bottom-16 lg:bottom-25 left-[250px] lg:left-[350px] lg:w-[250px] lg:h-[80px] w-[150px] h-[50px] cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => router.push(ROUTES.PUBLIC.INTRODUCE)}>
-            <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103394/Group_116_nvwx5n.png" alt="HomePage Banner" fill />
+          <div className="flex w-[1330px]">
+            <div className="absolute bottom-16 lg:bottom-25 left-20 lg:left-20 lg:w-[250px] lg:h-[80px] w-[150px] h-[50px] cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => router.push(ROUTES.PUBLIC.MAP)}>
+              <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103336/Group_117_jdhguy.png" alt="HomePage Banner" fill />
+            </div>
+            <div className="absolute bottom-16 lg:bottom-25 left-[250px] lg:left-[350px] lg:w-[250px] lg:h-[80px] w-[150px] h-[50px] cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => router.push(ROUTES.PUBLIC.INTRODUCE)}>
+              <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103394/Group_116_nvwx5n.png" alt="HomePage Banner" fill />
+            </div>
           </div>
         </div>
       </section>
@@ -296,7 +296,7 @@ const HomePageClient = ({
 
       {/* Banner 2 - Khí Chất Section */}
       <section className="relative mt-12 lg:mt-32 w-full lg:h-[870px] h-[591px] flex items-center justify-center overflow-hidden">
-        <div className="absolute z-0 cursor-pointer flex justify-center w-full h-full">
+        <div className="absolute z-0 cursor-pointer flex justify-center w-[1330px] h-full">
           <Image
             src="https://res.cloudinary.com/dznt9yias/image/upload/v1760803844/KhiChatCuaBanLa_wmxfip.svg"
             alt="Khí Chất Của Bạn Là"
@@ -304,9 +304,6 @@ const HomePageClient = ({
             onClick={() => router.push(ROUTES.STARTER.TEST_PLAYGROUND)}
             priority
           />
-
-
-          <></>
         </div>
       </section>
 
