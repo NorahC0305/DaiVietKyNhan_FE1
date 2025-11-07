@@ -7,10 +7,12 @@ import React from 'react'
 type ChiTietThuProps = {
     isOpen: boolean
     onClose: () => void
+    onParticipate?: () => void
 }
 
 //TODO: Integrate with API
-const ChiTietThu = ({ isOpen, onClose }: ChiTietThuProps) => {
+const ChiTietThu = ({ isOpen, onClose, onParticipate }: ChiTietThuProps) => {
+    const handleParticipate = onParticipate ?? onClose
     return (
         <AnimatePresence>
             {isOpen && (
@@ -106,6 +108,15 @@ const ChiTietThu = ({ isOpen, onClose }: ChiTietThuProps) => {
                                                     Con xin được phép viết đôi dòng, như một lời tri ân gửi về quá khứ, nơi Người – với tấm lòng vì dân vì nước, đã để lại dấu ấn không phai trong lòng hậu thế.
                                                     Trải qua bao thế kỷ, tên tuổi của Người vẫn sáng rọi giữa non sông, như ánh sao dẫn đường cho những thế hệ sau trong hành trình tìm về lẽ nhân nghĩa và lòng trung hiếu. Những áng văn trong Bình Ngô đại cáo vẫn còn vang vọng như tiếng sấm giữa trời Nam, khẳng định tinh thần độc lập tự cường của dân tộc Việt. Những vần thơ trong Quốc âm thi tập vẫn mộc mạc, thấm đượm tình yêu thiên nhiên, thương dân, quý đời – khiến người đời sau đọc lên mà thấy lòng mình lắng lại.
                                                 </span>
+                                            </div>
+
+                                            <div className='absolute lg:bottom-[-96px] bottom-[-55px] flex justify-center items-center w-full h-fit'>
+                                                <button className='lg:w-[200px] w-[120px] lg:h-[50px] h-[35px] cursor-pointer flex items-center justify-center hover:opacity-80 transition-all duration-300' onClick={handleParticipate}>
+                                                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760718877/Button_bb7ywk.svg' alt='join' fill />
+                                                    <div className='absolute inset-0 flex items-center justify-center'>
+                                                        <span className='text-secondary lg:text-sm text-[10px] font-bold'>Để tham gia ngay</span>
+                                                    </div>
+                                                </button>
                                             </div>
 
                                             <button type='button' className='absolute lg:bottom-[-10px] lg:right-[-100px] bottom-[-5px] right-[-70px] lg:w-[48px] lg:h-[48px] w-[35px] h-[35px] cursor-pointer flex items-center justify-center z-10' onClick={onClose}>

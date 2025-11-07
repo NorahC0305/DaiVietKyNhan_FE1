@@ -83,7 +83,7 @@ const VietThuGuiHauThe = ({ isOpen, onClose }: VietThuGuiHauTheProps) => {
                                         </div>
 
                                         <div className='flex items-center justify-center h-full inset-0 bg-[#C6BE9F] rounded-xl'>
-                                            <Textarea className='border-4 border-secondary !h-full rounded-xl p-4 !text-lg placeholder:text-gray-600 placeholder:text-sm placeholder:italic focus:outline-none focus:ring-0' disabled placeholder='Hãy ghi những lời chia sẻ vào đây.....' />
+                                            <Textarea className='border-4 border-secondary !h-full rounded-xl p-4 !text-lg placeholder:text-gray-600 placeholder:text-sm placeholder:italic focus:outline-none focus:ring-0' placeholder='Hãy ghi những lời chia sẻ vào đây.....' />
                                         </div>
                                     </div>
                                 </div>
