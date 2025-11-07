@@ -1,5 +1,6 @@
 "use client";
 
+import ButtonImage from "@components/Atoms/ButtonImage";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
@@ -19,6 +20,7 @@ export type LetterDetailModalProps = {
   letters: LetterDetail[];
   currentIndex?: number;
   onIndexChange?: (index: number) => void;
+  onJoinClick?: () => void;
 };
 
 export default function LetterDetailModal({
@@ -27,6 +29,7 @@ export default function LetterDetailModal({
   letters,
   currentIndex = 0,
   onIndexChange,
+  onJoinClick,
 }: LetterDetailModalProps) {
   const [activeIndex, setActiveIndex] = useState(currentIndex);
 
@@ -67,7 +70,7 @@ export default function LetterDetailModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -180,10 +183,16 @@ export default function LetterDetailModal({
                       <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 flex-shrink-0">
                         <button
                           onClick={handlePrevious}
-                          className="p-1.5 sm:p-2 md:p-2.5 lg:p-3 rounded-full bg-[#FFD700] border-2 sm:border-[3px] border-[#835D26] hover:opacity-80 transition-opacity flex items-center justify-center shadow-[0_4px_0_rgba(131,93,38,0.4)] sm:shadow-[0_5px_0_rgba(131,93,38,0.4)] md:shadow-[0_6px_0_rgba(131,93,38,0.4)]"
                           aria-label="Thư trước"
+                          type="button"
                         >
-                          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-[#835D26]" />
+                          <Image
+                            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721544/Back_cwp7tx.svg"
+                            alt="Thư trước"
+                            width={64}
+                            height={64}
+                            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 transition-transform duration-200 hover:scale-105"
+                          />
                         </button>
 
                         <div className="flex items-center gap-1.5 sm:gap-2 md:gap-2.5 lg:gap-3">
@@ -209,10 +218,16 @@ export default function LetterDetailModal({
 
                         <button
                           onClick={handleNext}
-                          className="p-1.5 sm:p-2 md:p-2.5 lg:p-3 rounded-full bg-[#FFD700] border-2 sm:border-[3px] border-[#835D26] hover:opacity-80 transition-opacity flex items-center justify-center shadow-[0_4px_0_rgba(131,93,38,0.4)] sm:shadow-[0_5px_0_rgba(131,93,38,0.4)] md:shadow-[0_6px_0_rgba(131,93,38,0.4)]"
                           aria-label="Thư sau"
+                          type="button"
                         >
-                          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-[#835D26]" />
+                          <Image
+                            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760725883/next_xshxeb.svg"
+                            alt="Thư sau"
+                            width={64}
+                            height={64}
+                            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 transition-transform duration-200 hover:scale-105"
+                          />
                         </button>
                       </div>
                     )}
@@ -221,6 +236,15 @@ export default function LetterDetailModal({
               </div>
             </div>
           </motion.div>
+          <ButtonImage
+            className=""
+            width={200}
+            height={200}
+            classNameText="text-lg sm:text-xl md:text-2xl"
+            onClick={() => onJoinClick?.()}
+          >
+            Tham gia ngay
+          </ButtonImage>
         </div>
       )}
     </AnimatePresence>

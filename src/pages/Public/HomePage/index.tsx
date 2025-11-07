@@ -20,6 +20,9 @@ import dynamic from "next/dynamic";
 import { useSession } from "next-auth/react";
 import TamSuTuHauTheModal, { Letter } from "@components/Molecules/Popup/TamSuTuHauTheModal";
 import LetterDetailModal, { LetterDetail } from "@components/Molecules/Popup/LetterDetailModal";
+import WriteLetterModal, {
+  WriteLetterValues,
+} from "@components/Molecules/Popup/WriteLetterModal";
 interface HomePageClientProps {
   user: IUser;
   activeWithAmountUser: IGetSystemConfigWithAmountUserResponse;
@@ -142,6 +145,11 @@ const HomePageClient = ({
   const [isTamSuModalOpen, setIsTamSuModalOpen] = useState(true); // Modal danh sách thư - Demo: tự động mở
   const [isLetterDetailOpen, setIsLetterDetailOpen] = useState(false); // Modal chi tiết thư
   const [currentLetterIndex, setCurrentLetterIndex] = useState(0); // Index thư hiện tại
+  const [isWriteLetterModalOpen, setIsWriteLetterModalOpen] = useState(false);
+  const [isSubmittingLetter, setIsSubmittingLetter] = useState(false);
+  const [writeLetterDefaults, setWriteLetterDefaults] = useState<
+    Partial<WriteLetterValues>
+  >({});
 
   // Luôn fetch theo trang hiện tại (bỏ cache để tránh trùng dữ liệu)
   const rankParams = useMemo(() => ({ currentPage: currentRankPage, pageSize: 15 }), [currentRankPage]);
@@ -242,6 +250,27 @@ const HomePageClient = ({
     }
   };
 
+  const handleOpenWriteLetter = useCallback(() => {
+    const selectedLetter = letterDetails[currentLetterIndex];
+    setWriteLetterDefaults({
+      to: selectedLetter?.to ?? "",
+    });
+    setIsTamSuModalOpen(false);
+    setIsLetterDetailOpen(false);
+    setIsWriteLetterModalOpen(true);
+  }, [letterDetails, currentLetterIndex]);
+
+  const handleWriteLetterSubmit = useCallback(
+    (values: WriteLetterValues) => {
+      setIsSubmittingLetter(true);
+      // TODO: Tích hợp API gửi thư
+      setIsSubmittingLetter(false);
+      setIsWriteLetterModalOpen(false);
+      setWriteLetterDefaults({});
+    },
+    [],
+  );
+
   // Process user rank data for display - memoized để tránh re-computation
   // Sử dụng displayData (có thể từ cache hoặc fetch mới)
   const leaderboardData = useMemo(() => {
@@ -339,6 +368,8 @@ const HomePageClient = ({
         onClose={() => setIsTamSuModalOpen(false)}
         letters={demoLetters}
         onLetterClick={handleLetterClick}
+        onJoinClick={handleOpenWriteLetter}
+
       />
 
       {/* Letter Detail Modal - Chi tiết thư */}
@@ -351,6 +382,19 @@ const HomePageClient = ({
         letters={letterDetails}
         currentIndex={currentLetterIndex}
         onIndexChange={setCurrentLetterIndex}
+        onJoinClick={handleOpenWriteLetter}
+      />
+
+      {/* Write Letter Modal - Viết thư mới */}
+      <WriteLetterModal
+        isOpen={isWriteLetterModalOpen}
+        onClose={() => {
+          setIsWriteLetterModalOpen(false);
+          setWriteLetterDefaults({});
+        }}
+        onSubmit={handleWriteLetterSubmit}
+        defaultValues={writeLetterDefaults}
+        isSubmitting={isSubmittingLetter}
       />
       {/* Check-in Modal Dialog - dynamically loaded to avoid SSR issues */}
       <DynamicAuthenticatedFeatures user={user} />

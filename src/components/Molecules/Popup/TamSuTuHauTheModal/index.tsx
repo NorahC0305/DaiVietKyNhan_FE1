@@ -1,5 +1,6 @@
 "use client";
 
+import ButtonImage from "@components/Atoms/ButtonImage";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
@@ -20,6 +21,7 @@ export type TamSuTuHauTheModalProps = {
   onClose: () => void;
   letters?: Letter[];
   onLetterClick?: (letter: Letter) => void;
+  onJoinClick?: () => void;
 };
 
 // Default letters data - can be replaced with API data
@@ -73,6 +75,7 @@ export default function TamSuTuHauTheModal({
   onClose,
   letters = defaultLetters,
   onLetterClick,
+  onJoinClick,
 }: TamSuTuHauTheModalProps) {
   const displayLetters = useMemo(() => {
     return letters;
@@ -89,7 +92,7 @@ export default function TamSuTuHauTheModal({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -219,6 +222,15 @@ export default function TamSuTuHauTheModal({
               </div>
             </div>
           </motion.div>
+          <ButtonImage
+            className=""
+            width={200}
+            height={200}
+            classNameText="text-lg sm:text-xl md:text-2xl"
+            onClick={() => onJoinClick?.()}
+          >
+            Tham gia ngay
+          </ButtonImage>
         </div>
       )}
     </AnimatePresence>
