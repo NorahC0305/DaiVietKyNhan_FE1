@@ -1,8 +1,10 @@
+"use client";
+
 import { Input } from '@components/Atoms/ui/input'
 import { Textarea } from '@components/Atoms/ui/textarea'
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SendLetterRequestSchema, ISendLetterRequest } from '@models/letter/request'
@@ -10,8 +12,6 @@ import letterService from '@services/letter'
 import { toast } from 'react-toastify'
 import { IBackendResponse } from '@models/backend'
 import { z } from 'zod'
-import { useMe } from '@hooks/useUser'
-import { IMeResponse } from '@models/user/response'
 
 type VietThuGuiHauTheProps = {
     isOpen: boolean

@@ -29,8 +29,8 @@ export async function serverMutation<T = any>(
     method: "POST" | "PUT" | "DELETE" | "PATCH",
     data?: any,
     options?: {
-        tag?: string;
-        path?: string;
+        tag?: string | string[];
+        path?: string | string[];
         skipAuth?: boolean;
     }
 ): Promise<T> {
@@ -84,10 +84,16 @@ export async function serverMutation<T = any>(
 
         // Bước 4: Nếu thành công → NextJS tự động gọi revalidateTag và/hoặc revalidatePath
         if (options?.tag) {
-            revalidateTag(options.tag);
+            const tags = Array.isArray(options.tag) ? options.tag : [options.tag];
+            for (const tag of tags) {
+                revalidateTag(tag);
+            }
         }
         if (options?.path) {
-            revalidatePath(options.path);
+            const paths = Array.isArray(options.path) ? options.path : [options.path];
+            for (const path of paths) {
+                revalidatePath(path);
+            }
         }
 
         // Bước 5: Trả kết quả về lại client
@@ -109,10 +115,10 @@ export async function serverMutation<T = any>(
  * const result = await createApi("/letter", { from: "...", to: "..." }, { tag: "letters" });
  * ```
  */
-export async function createApi<T = any>(
+export async function postMutation<T = any>(
     endpoint: string,
     data?: any,
-    options?: { tag?: string; path?: string; skipAuth?: boolean }
+    options?: { tag?: string | string[]; path?: string | string[]; skipAuth?: boolean }
 ): Promise<T> {
     return serverMutation<T>(endpoint, "POST", data, options);
 }
@@ -128,10 +134,10 @@ export async function createApi<T = any>(
  * const result = await updateApi("/kynhan/1", formData, { tag: "kynhan" });
  * ```
  */
-export async function updateApi<T = any>(
+export async function putMutation<T = any>(
     endpoint: string,
     data?: any,
-    options?: { tag?: string; path?: string; skipAuth?: boolean }
+    options?: { tag?: string | string[]; path?: string | string[]; skipAuth?: boolean }
 ): Promise<T> {
     return serverMutation<T>(endpoint, "PUT", data, options);
 }
@@ -139,10 +145,10 @@ export async function updateApi<T = any>(
 /**
  * Helper function để cập nhật một phần (PATCH)
  */
-export async function patchApi<T = any>(
+export async function patchMutation<T = any>(
     endpoint: string,
     data?: any,
-    options?: { tag?: string; path?: string; skipAuth?: boolean }
+    options?: { tag?: string | string[]; path?: string | string[]; skipAuth?: boolean }
 ): Promise<T> {
     return serverMutation<T>(endpoint, "PATCH", data, options);
 }
@@ -158,10 +164,10 @@ export async function patchApi<T = any>(
  * const result = await deleteApi("/posts/1", undefined, { tag: "posts" });
  * ```
  */
-export async function deleteApi<T = any>(
+export async function deleteMutation<T = any>(
     endpoint: string,
     data?: any,
-    options?: { tag?: string; path?: string; skipAuth?: boolean }
+    options?: { tag?: string | string[]; path?: string | string[]; skipAuth?: boolean }
 ): Promise<T> {
     return serverMutation<T>(endpoint, "DELETE", data, options);
 }
@@ -169,5 +175,5 @@ export async function deleteApi<T = any>(
 /**
  * Alias cho serverMutation - có thể dùng trực tiếp nếu cần custom method
  */
-export { serverMutation as mutateApi };
+export { serverMutation as mutateMutation };
 
