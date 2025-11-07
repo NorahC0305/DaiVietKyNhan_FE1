@@ -1,4 +1,4 @@
-import TestPageClient from "@pages/Public/Test";
+import TestPageClient from "@containers/Public/Test";
 import { UserDataProvider } from "@contexts/UserDataContext";
 
 export default function TestPage() {

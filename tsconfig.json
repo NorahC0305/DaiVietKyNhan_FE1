@@ -47,8 +47,8 @@
       "@middlewares/*": [
         "./src/middlewares/*"
       ],
-      "@pages/*": [
-        "./src/pages/*"
+      "@containers/*": [
+        "./src/containers/*"
       ],
       "@redux/*": [
         "./src/redux/*"
@@ -86,8 +86,9 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
-, "src/app/(header)/layout.tsx"  ],
+    ".next/types/**/*.ts",
+    "src/app/(header)/layout.tsx"
+  ],
   "exclude": [
     "node_modules"
   ]

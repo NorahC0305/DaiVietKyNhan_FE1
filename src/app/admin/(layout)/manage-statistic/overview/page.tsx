@@ -1,4 +1,4 @@
-import StatisticOverViewPage from "@pages/Admin/Statistic/Overview";
+import StatisticOverViewPage from "@containers/Admin/Statistic/Overview";
 
 export const dynamic = 'force-dynamic';
 

@@ -1,4 +1,4 @@
-import UserStatisticPage from "@pages/Admin/Statistic/User";
+import UserStatisticPage from "@containers/Admin/Statistic/User";
 
 export const dynamic = 'force-dynamic';
 

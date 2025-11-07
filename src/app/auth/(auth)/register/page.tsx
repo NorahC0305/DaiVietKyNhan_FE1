@@ -1,4 +1,4 @@
-import RegisterPageClient from "@pages/Auth/RegisterPage";
+import RegisterPageClient from "@containers/Auth/RegisterPage";
 
 export default function RegisterPage() {
     return (

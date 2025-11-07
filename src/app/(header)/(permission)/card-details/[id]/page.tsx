@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import CardDetailsPage from "@pages/Public/CardDetails";
+import CardDetailsPage from "@containers/Public/CardDetails";
 
 // type PageProps = {
 //   params: { id: string };

@@ -1,5 +1,5 @@
 import { ITestHomeResponseModel } from "@models/test-home/response";
-import EntryTestPage from "@pages/Starter/Entry-test";
+import EntryTestPage from "@containers/Starter/Entry-test";
 import testHomeService from "@services/test-home";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

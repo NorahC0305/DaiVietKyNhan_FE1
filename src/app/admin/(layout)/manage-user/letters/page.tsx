@@ -1,5 +1,5 @@
 import { ILetterResponseModel } from "@models/letter/response";
-import LetterPage from "@pages/Admin/Letter";
+import LetterPage from "@containers/Admin/Letter";
 import letterService from "@services/letter";
 
 export const dynamic = 'force-dynamic';

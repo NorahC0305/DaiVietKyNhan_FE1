@@ -1,5 +1,5 @@
 import { IUserLandWithLandArrayResponseModel } from "@models/user-land/response";
-import MapPageClient from "@pages/Map";
+import MapPageClient from "@containers/Map";
 import userService from "@services/user";
 import userLandService from "@services/user-land";
 import { IMeResponse } from "@models/user/response";

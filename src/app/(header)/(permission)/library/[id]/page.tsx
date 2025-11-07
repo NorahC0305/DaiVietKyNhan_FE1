@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import LibraryDetailPage from "@pages/Public/LibraryDetail";
+import LibraryDetailPage from "@containers/Public/LibraryDetail";
 import chiTietKyNhanService from "@services/chi-tiet-ky-nhan";
 import libcardService from "@services/mo-ta-ky-nhan";
 

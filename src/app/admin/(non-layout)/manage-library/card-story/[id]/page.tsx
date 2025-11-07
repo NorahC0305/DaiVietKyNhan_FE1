@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 
-import CardStoryPage from "@pages/Admin/Library/CardStory";
+import CardStoryPage from "@containers/Admin/Library/CardStory";
 import chiTietKyNhanService from "@services/chi-tiet-ky-nhan";
 
 async function getChiTietKyNhan(id: number) {

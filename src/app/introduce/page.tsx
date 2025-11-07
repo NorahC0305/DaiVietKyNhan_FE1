@@ -1,4 +1,4 @@
-import IntroducePageClient from "@pages/Public/Introduce";
+import IntroducePageClient from "@containers/Public/Introduce";
 
 export default function IntroducePage() {
     return (

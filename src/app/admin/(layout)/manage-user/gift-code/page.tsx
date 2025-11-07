@@ -1,5 +1,5 @@
 export const dynamic = 'force-dynamic';
-import UserGiftCode from "@pages/Admin/User/UserGiftCode";
+import UserGiftCode from "@containers/Admin/User/UserGiftCode";
 import rewardService from "@services/reward";
 import userRewardService from "@services/user-reward";
 import { IRewardCodeResponse, IUserRewardPaginationResponse } from "@models/user-reward/response";

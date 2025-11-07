@@ -1,4 +1,4 @@
-import LoginPageClient from "@pages/Auth/LoginPage";
+import LoginPageClient from "@containers/Auth/LoginPage";
 
 
 export default function LoginPage() {

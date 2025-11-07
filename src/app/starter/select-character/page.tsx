@@ -1,6 +1,6 @@
 import { authOptions } from "@lib/authOptions";
 import { IFigureResponseModel } from "@models/figure/repsonse";
-import SelectCharacterPage from "@pages/Starter/Select-character";
+import SelectCharacterPage from "@containers/Starter/Select-character";
 import figureService from "@services/figure";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";

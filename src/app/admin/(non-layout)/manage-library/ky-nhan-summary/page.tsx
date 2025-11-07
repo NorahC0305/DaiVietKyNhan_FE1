@@ -4,7 +4,7 @@ import React from "react";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOptions";
-import KyNhanSummaryPage from "@pages/Admin/Library/KyNhanSummary";
+import KyNhanSummaryPage from "@containers/Admin/Library/KyNhanSummary";
 import kynhanService from "@services/kynhan";
 import { IKyNhanResponseModel } from "@models/ky-nhan/response";
 import { IKyNhan } from "@models/ky-nhan/entity";

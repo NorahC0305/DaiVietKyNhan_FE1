@@ -1,4 +1,4 @@
-import QuestionStatistic from "@pages/Admin/Question/QuestionStatistic";
+import QuestionStatistic from "@containers/Admin/Question/QuestionStatistic";
 
 export const dynamic = 'force-dynamic';
 
