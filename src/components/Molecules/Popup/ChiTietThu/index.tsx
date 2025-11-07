@@ -8,11 +8,19 @@ type ChiTietThuProps = {
     isOpen: boolean
     onClose: () => void
     onParticipate?: () => void
+    onBack?: () => void
 }
 
 //TODO: Integrate with API
-const ChiTietThu = ({ isOpen, onClose, onParticipate }: ChiTietThuProps) => {
+const ChiTietThu = ({ isOpen, onClose, onParticipate, onBack }: ChiTietThuProps) => {
     const handleParticipate = onParticipate ?? onClose
+    const handleBack = () => {
+        if (onBack) {
+            onBack()
+            return
+        }
+        onClose()
+    }
     return (
         <AnimatePresence>
             {isOpen && (
@@ -43,6 +51,16 @@ const ChiTietThu = ({ isOpen, onClose, onParticipate }: ChiTietThuProps) => {
                             </span>
                         </button>
                     </div>
+
+                    <button
+                        type='button'
+                        className='absolute bottom-3 right-3 z-10 cursor-pointer p-2 w-[70px] h-[70px]'
+                        onClick={handleBack}
+                    >
+                        <span className='relative block h-full w-full'>
+                            <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                        </span>
+                    </button>
 
                     {/* Modal Content */}
                     <motion.div
@@ -118,9 +136,10 @@ const ChiTietThu = ({ isOpen, onClose, onParticipate }: ChiTietThuProps) => {
                                                     </div>
                                                 </button>
                                             </div>
-
-                                            <button type='button' className='absolute lg:bottom-[-10px] lg:right-[-100px] bottom-[-5px] right-[-70px] lg:w-[48px] lg:h-[48px] w-[35px] h-[35px] cursor-pointer flex items-center justify-center z-10' onClick={onClose}>
-                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                                            <button type='button' className='absolute bottom-3 right-3 z-10 cursor-pointer p-2 w-[40px] h-[40px]' onClick={handleBack}>
+                                                <span className='relative block h-full w-full'>
+                                                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                                                </span>
                                             </button>
                                         </div>
                                     </div>
@@ -129,6 +148,8 @@ const ChiTietThu = ({ isOpen, onClose, onParticipate }: ChiTietThuProps) => {
                         </div>
 
                     </motion.div>
+
+
                 </div>
             )}
         </AnimatePresence>

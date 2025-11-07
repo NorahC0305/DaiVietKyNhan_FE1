@@ -7,10 +7,21 @@ import React from 'react'
 type VietThuGuiHauTheProps = {
     isOpen: boolean
     onClose: () => void
+    onBack?: () => void
 }
 
 //TODO: Integrate with API
-const VietThuGuiHauThe = ({ isOpen, onClose }: VietThuGuiHauTheProps) => {
+const VietThuGuiHauThe = ({ isOpen, onClose, onBack }: VietThuGuiHauTheProps) => {
+    const handleBack = () => {
+        if (onBack) {
+            onBack()
+            return
+        }
+        onClose()
+    }
+    const handleClose = () => {
+        onClose()
+    }
     return (
         <AnimatePresence>
             {isOpen && (
@@ -21,13 +32,13 @@ const VietThuGuiHauThe = ({ isOpen, onClose }: VietThuGuiHauTheProps) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center"
-                        onClick={onClose}
+                        onClick={handleClose}
                     />
 
-                    <div className="absolute inset-0" onClick={onClose} >
+                    <div className="absolute inset-0" onClick={handleClose} >
                         <button
                             className="absolute top-3 right-3 sm:top-4 sm:right-4 z-10 cursor-pointer p-2"
-                            onClick={onClose}
+                            onClick={handleClose}
                             aria-label="Đóng"
                         >
                             <span className="relative block h-8 w-8 sm:h-10 sm:w-10">
@@ -42,6 +53,16 @@ const VietThuGuiHauThe = ({ isOpen, onClose }: VietThuGuiHauTheProps) => {
                         </button>
                     </div>
 
+                    <button
+                        type='button'
+                        className='absolute bottom-3 right-3 z-10 cursor-pointer p-2 w-[70px] h-[70px]'
+                        onClick={handleBack}
+                    >
+                        <span className='relative block h-full w-full'>
+                            <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                        </span>
+                    </button>
+
                     {/* Modal Content */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -51,7 +72,7 @@ const VietThuGuiHauThe = ({ isOpen, onClose }: VietThuGuiHauTheProps) => {
                         className='relative mx-3 w-full lg:max-w-5xl max-w-3xl flex items-center justify-center'
                     >
                         <div className='flex flex-col items-center justify-center'>
-                            <h2 className='text-black text-xl lg:text-2xl font-extrabold text-center'>Hãy viết một lá thư để bày tỏ đôi lời gửi tới vị Kỳ Nhân yêu thích</h2>
+                            <h2 className='text-white text-xl lg:text-2xl font-extrabold text-center'>Hãy viết một lá thư để bày tỏ đôi lời gửi tới vị Kỳ Nhân yêu thích</h2>
 
                             <div className='relative lg:w-[900px] lg:h-[500px] w-[700px] h-[350px]'>
                                 <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg' alt='Viet Thu Gui Hau The' fill />
@@ -74,12 +95,10 @@ const VietThuGuiHauThe = ({ isOpen, onClose }: VietThuGuiHauTheProps) => {
                                                 </div>
                                             </div>
 
-                                            <div className='relative w-[120px] h-[40px] cursor-pointer'>
+                                            <button type='button' className='relative w-[120px] h-[40px] cursor-pointer'>
                                                 <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760718877/Button_bb7ywk.svg' alt='Gui' fill />
-                                                <div className='absolute inset-0 flex items-center justify-center'>
-                                                    <span className='text-secondary text-lg font-bold'>Gửi</span>
-                                                </div>
-                                            </div>
+                                                <span className='absolute inset-0 flex items-center justify-center text-secondary text-lg font-bold'>Gửi</span>
+                                            </button>
                                         </div>
 
                                         <div className='flex items-center justify-center h-full inset-0 bg-[#C6BE9F] rounded-xl'>
