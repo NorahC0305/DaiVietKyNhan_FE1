@@ -46,7 +46,7 @@ const LibraryPage = () => {
   const handleCtaClick = (cardId: number) => {
     try {
       sessionStorage.setItem(STORAGE_KEY_LAST_CARD_ID, String(cardId));
-    } catch (e) {}
+    } catch (e) { }
     router.push(`/library/${cardId}`);
   };
 
@@ -56,7 +56,7 @@ const LibraryPage = () => {
     unlocked: kynhanData.unlocked,
     imageSrc: kynhanData.imgUrl || undefined,
     backContent: {
-      backgroundSrc: "/revealedBG.svg",
+      backgroundSrc: "https://res.cloudinary.com/dznt9yias/image/upload/v1760726112/revealedBG_gzuiid.svg",
       name: kynhanData.name,
       thoiKy: kynhanData.thoiKy,
       chienCong: kynhanData.chienCong,
@@ -196,7 +196,7 @@ const LibraryPage = () => {
           }
           sessionStorage.removeItem(STORAGE_KEY_LAST_CARD_ID);
         }
-      } catch (e) {}
+      } catch (e) { }
     }
   }, [cards, isLoading]);
 

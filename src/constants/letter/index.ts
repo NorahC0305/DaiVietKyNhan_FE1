@@ -1,0 +1,9 @@
+enum LETTER_STATUS {
+    PENDING = 'PENDING',
+    PUBLIC = 'PUBLIC',
+    REMOVE = 'REMOVE'
+}
+
+export const LETTER_ENUMS = {
+    LETTER_STATUS: LETTER_STATUS,
+}
