@@ -107,6 +107,10 @@ const ChiTietThu = ({ isOpen, onClose }: ChiTietThuProps) => {
                                                     Trải qua bao thế kỷ, tên tuổi của Người vẫn sáng rọi giữa non sông, như ánh sao dẫn đường cho những thế hệ sau trong hành trình tìm về lẽ nhân nghĩa và lòng trung hiếu. Những áng văn trong Bình Ngô đại cáo vẫn còn vang vọng như tiếng sấm giữa trời Nam, khẳng định tinh thần độc lập tự cường của dân tộc Việt. Những vần thơ trong Quốc âm thi tập vẫn mộc mạc, thấm đượm tình yêu thiên nhiên, thương dân, quý đời – khiến người đời sau đọc lên mà thấy lòng mình lắng lại.
                                                 </span>
                                             </div>
+
+                                            <button type='button' className='absolute lg:bottom-[-10px] lg:right-[-100px] bottom-[-5px] right-[-70px] lg:w-[48px] lg:h-[48px] w-[35px] h-[35px] cursor-pointer flex items-center justify-center z-10' onClick={onClose}>
+                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
