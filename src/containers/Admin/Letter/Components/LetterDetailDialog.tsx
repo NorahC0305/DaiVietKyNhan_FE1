@@ -30,6 +30,7 @@ interface LetterDetailDialogProps {
     letter: ILetterEntity | null;
     onSave: (letterId: number, data: { from: string; to: string; content: string; status: string }) => Promise<void>;
     initialEditMode?: boolean;
+    isSaving?: boolean;
 }
 
 const LetterDetailDialog: React.FC<LetterDetailDialogProps> = ({
@@ -38,6 +39,7 @@ const LetterDetailDialog: React.FC<LetterDetailDialogProps> = ({
     letter,
     onSave,
     initialEditMode = false,
+    isSaving: externalIsSaving = false,
 }) => {
     const [isEditMode, setIsEditMode] = useState(initialEditMode);
     const [formData, setFormData] = useState({
@@ -47,6 +49,9 @@ const LetterDetailDialog: React.FC<LetterDetailDialogProps> = ({
         status: LETTER_ENUMS.LETTER_STATUS.PUBLIC,
     });
     const [isSaving, setIsSaving] = useState(false);
+
+    // Use external isSaving if provided, otherwise use internal state
+    const isActuallySaving = externalIsSaving || isSaving;
 
     useEffect(() => {
         if (letter && open) {
@@ -64,14 +69,19 @@ const LetterDetailDialog: React.FC<LetterDetailDialogProps> = ({
         e.preventDefault();
         if (!letter) return;
 
-        setIsSaving(true);
+        // Only use internal state if external isSaving is not provided
+        if (!externalIsSaving) {
+            setIsSaving(true);
+        }
         try {
             await onSave(letter.id, formData);
             setIsEditMode(false);
         } catch (error) {
             console.error("Error saving letter:", error);
         } finally {
-            setIsSaving(false);
+            if (!externalIsSaving) {
+                setIsSaving(false);
+            }
         }
     };
 
@@ -263,7 +273,7 @@ const LetterDetailDialog: React.FC<LetterDetailDialogProps> = ({
                                     type="button"
                                     variant="outline"
                                     onClick={handleCancel}
-                                    disabled={isSaving}
+                                    disabled={isActuallySaving}
                                     className="flex items-center gap-2 min-w-[100px]"
                                 >
                                     <X className="h-4 w-4" />
@@ -271,11 +281,11 @@ const LetterDetailDialog: React.FC<LetterDetailDialogProps> = ({
                                 </Button>
                                 <Button
                                     type="submit"
-                                    disabled={isSaving || !formData.from.trim() || !formData.to.trim() || !formData.content.trim()}
+                                    disabled={isActuallySaving || !formData.from.trim() || !formData.to.trim() || !formData.content.trim()}
                                     className="bg-stone-600 hover:bg-stone-700 flex items-center gap-2 min-w-[120px]"
                                 >
                                     <Save className="h-4 w-4" />
-                                    {isSaving ? "Đang lưu..." : "Lưu thay đổi"}
+                                    {isActuallySaving ? "Đang lưu..." : "Lưu thay đổi"}
                                 </Button>
                             </div>
                         </form>

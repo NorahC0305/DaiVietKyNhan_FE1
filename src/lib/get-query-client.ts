@@ -8,10 +8,16 @@ function makeQueryClient() {
     return new QueryClient({
         defaultOptions: {
             queries: {
-                staleTime: 60 * 1000,
+                // With SSR, we usually want to set some default staleTime
+                // to avoid refetching immediately on the client
+                staleTime: 60 * 1000, // 1 minute
+                gcTime: 5 * 60 * 1000, // 5 minutes (formerly cacheTime)
+                refetchOnWindowFocus: false,
+                retry: 1,
             },
             dehydrate: {
-                // include pending queries in dehydration
+                // Include pending queries in dehydration
+                // This is important for SSR to work correctly
                 shouldDehydrateQuery: (query) =>
                     defaultShouldDehydrateQuery(query) ||
                     query.state.status === 'pending',
@@ -24,14 +30,16 @@ let browserQueryClient: QueryClient | undefined = undefined
 
 export function getQueryClient() {
     if (isServer) {
-        // Server: always make a new query client
+        // Server: always make a new query client for each request
+        // This ensures that data is not shared between requests
         return makeQueryClient()
     } else {
-        // Browser: make a new query client if we don't already have one
-        // This is very important, so we don't re-make a new client if React
-        // suspends during the initial render. This may not be needed if we
-        // have a suspense boundary BELOW the creation of the query client
-        if (!browserQueryClient) browserQueryClient = makeQueryClient()
+        // Browser: use singleton pattern to ensure we use the same client
+        // This is very important so we don't re-make a new client if React
+        // suspends during the initial render. This ensures proper hydration.
+        if (!browserQueryClient) {
+            browserQueryClient = makeQueryClient()
+        }
         return browserQueryClient
     }
 }

@@ -1,25 +1,23 @@
-import { ILetterResponseModel } from "@models/letter/response";
-import LetterPage from "@containers/Admin/Letter";
-import letterService from "@services/letter";
-import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { letterOptions } from "@hooks/use-letter-queries";
 import { getQueryClient } from "@lib/get-query-client";
+import LetterPage from "@containers/Admin/Letter";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 export const dynamic = 'force-dynamic';
 
-async function getLetters() {
-    const qs = "sort:-id";
-    return await letterService.getLetters(qs, 1, 10);
-}
-
 export default async function LetterServer() {
     const queryClient = getQueryClient();
-    
-    const letters = await getLetters() as ILetterResponseModel;
+
+    try {
+        await queryClient.prefetchQuery(letterOptions);
+    } catch (error) {
+        console.error("Failed to prefetch letters:", error);
+    }
+    const dehydratedState = dehydrate(queryClient);
+
     return (
-        <>
-            <HydrationBoundary state={dehydrate(queryClient)}>
-                <LetterPage letters={letters?.data} />
-            </HydrationBoundary>
-        </>
+        <HydrationBoundary state={dehydratedState}>
+            <LetterPage />
+        </HydrationBoundary>
     );
 }
