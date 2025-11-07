@@ -9,6 +9,7 @@ import VietnameseHistoryLoading from "@components/Molecules/HistoryLoading";
 import localFont from "next/font/local";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import GoogleAnalytics from "@components/Atoms/GoogleAnalytics";
+import Providers from "@components/providers/TanstackProvider/inderx";
 
 const StreetSignSans = localFont({
   src: "./fonts/StreetSignSans.otf",
@@ -40,17 +41,19 @@ export default function RootLayout({
       >
         <ToastContainer />
         <GoogleAnalytics />
-        <SessionProviderWrapper>
-          <AntdProvider>
-            <SpeedInsights />
-            <Suspense fallback={<VietnameseHistoryLoading />}>
-              {children}
-            </Suspense>
-            <div className="hidden lg:block fixed right-0 top-1/2 transform -translate-y-1/2 z-50 pointer-events-auto">
-              <SocialMediaIcons />
-            </div>
-          </AntdProvider>
-        </SessionProviderWrapper>
+        <Providers>
+          <SessionProviderWrapper>
+            <AntdProvider>
+              <SpeedInsights />
+              <Suspense fallback={<VietnameseHistoryLoading />}>
+                {children}
+              </Suspense>
+              <div className="hidden lg:block fixed right-0 top-1/2 transform -translate-y-1/2 z-50 pointer-events-auto">
+                <SocialMediaIcons />
+              </div>
+            </AntdProvider>
+          </SessionProviderWrapper>
+        </Providers>
       </body>
     </html>
   );
