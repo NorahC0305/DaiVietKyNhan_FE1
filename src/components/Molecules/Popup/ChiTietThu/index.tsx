@@ -4,13 +4,13 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import React from 'react'
 
-type VietThuGuiHauTheProps = {
+type ChiTietThuProps = {
     isOpen: boolean
     onClose: () => void
 }
 
 //TODO: Integrate with API
-const VietThuGuiHauThe = ({ isOpen, onClose }: VietThuGuiHauTheProps) => {
+const ChiTietThu = ({ isOpen, onClose }: ChiTietThuProps) => {
     return (
         <AnimatePresence>
             {isOpen && (
@@ -51,39 +51,46 @@ const VietThuGuiHauThe = ({ isOpen, onClose }: VietThuGuiHauTheProps) => {
                         className='relative mx-3 w-full lg:max-w-5xl max-w-3xl flex items-center justify-center'
                     >
                         <div className='flex flex-col items-center justify-center'>
-                            <h2 className='text-black text-xl lg:text-2xl font-extrabold text-center'>Hãy viết một lá thư để bày tỏ đôi lời gửi tới vị Kỳ Nhân yêu thích</h2>
-
+                            {/* Cuộn giấy */}
                             <div className='relative lg:w-[900px] lg:h-[500px] w-[700px] h-[350px]'>
                                 <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg' alt='Viet Thu Gui Hau The' fill />
 
                                 <div className='absolute w-full h-[100%] flex items-center justify-center inset-0'>
-                                    <div className='absolute lg:w-[70%] w-[60%] lg:h-[70%] h-[60%] flex flex-col justify-center'>
+                                    <div className='absolute lg:w-[70%] w-[60%] lg:h-[70%] h-[70%] flex flex-col justify-center'>
+                                        {/* Title */}
+                                        <div className='flex justify-center items-center lg:mb-5 mb-2'>
+                                            <span className='text-secondary font-bd-street-sign lg:text-5xl text-3xl'>LÁ THƯ GỬI KỲ NHÂN - TÂM SỰ TỪ HẬU THẾ</span>
+                                        </div>
+
+                                        {/* Content */}
                                         <div className='flex justify-between items-center'>
                                             <div className='w-full'>
-                                                <div className='flex items-center justify-start mb-4'>
+                                                <div className='flex items-center justify-start lg:mb-4 mb-1'>
                                                     <div className='lg:w-[10%] w-[15%]'>
-                                                        <span className='text-secondary text-lg font-bold'>Từ: </span>
+                                                        <span className='text-secondary lg:text-lg text-sm font-bold'>Từ: </span>
                                                     </div>
-                                                    <Input className='border-4 border-secondary !h-10 rounded-xl lg:!w-[70%] !w-[70%] !text-black bg-[#C6BE9F] placeholder:text-gray-600 placeholder:text-sm placeholder:italic focus:outline-none focus:ring-0' placeholder='Tên của bạn' />
+                                                    <span className='text-[#CE7346] lg:text-sm text-sm font-bold italic'>Vũ Tiến Hùng nhí nhảnh</span>
                                                 </div>
-                                                <div className='flex items-center justify-start mb-4'>
+                                                <div className='flex items-center justify-start lg:mb-4 mb-1'>
                                                     <div className='lg:w-[10%] w-[15%]'>
-                                                        <span className='text-secondary text-lg font-bold'>Đến: </span>
+                                                        <span className='text-secondary lg:text-lg text-sm font-bold'>Đến: </span>
                                                     </div>
-                                                    <Input className='border-4 border-secondary !h-10 rounded-xl lg:!w-[70%] !w-[70%] !text-black bg-[#C6BE9F] placeholder:text-gray-600 placeholder:text-sm placeholder:italic focus:outline-none focus:ring-0' placeholder='Tên của vị Kỳ Nhân bạn muốn gửi' />
+                                                    <span className='text-[#CE7346] lg:text-lg text-sm font-bold italic'>Trần Hưng Đạo</span>
                                                 </div>
                                             </div>
 
-                                            <div className='relative w-[120px] h-[40px] cursor-pointer'>
-                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760718877/Button_bb7ywk.svg' alt='Gui' fill />
-                                                <div className='absolute inset-0 flex items-center justify-center'>
-                                                    <span className='text-secondary text-lg font-bold'>Gửi</span>
-                                                </div>
+                                            <div className='relative w-[120px] h-[40px] cursor-pointer flex flex-col items-end justify-end'>
+                                                <p className='text-secondary lg:text-lg text-sm font-bold'>Ngày gửi</p>
+                                                <p className='text-secondary lg:text-base text-sm italic'>01/11/2025</p>
                                             </div>
                                         </div>
 
-                                        <div className='flex items-center justify-center h-full inset-0 bg-[#C6BE9F] rounded-xl'>
-                                            <Textarea className='border-4 border-secondary !h-full rounded-xl p-4 !text-lg placeholder:text-gray-600 placeholder:text-sm placeholder:italic focus:outline-none focus:ring-0' disabled placeholder='Hãy ghi những lời chia sẻ vào đây.....' />
+                                        <div className='flex items-start justify-start h-full bg-[#F4ECD0] overflow-y-auto border-4 border-secondary rounded-xl px-4 py-2'>
+                                            <span className='lg:text-base text-sm leading-relaxed whitespace-pre-line'>
+                                                Kính gửi Danh nhân Nguyễn Trãi – bậc anh hùng khai quốc, nhà văn hóa kiệt xuất của muôn đời,
+                                                Con xin được phép viết đôi dòng, như một lời tri ân gửi về quá khứ, nơi Người – với tấm lòng vì dân vì nước, đã để lại dấu ấn không phai trong lòng hậu thế.
+                                                Trải qua bao thế kỷ, tên tuổi của Người vẫn sáng rọi giữa non sông, như ánh sao dẫn đường cho những thế hệ sau trong hành trình tìm về lẽ nhân nghĩa và lòng trung hiếu. Những áng văn trong Bình Ngô đại cáo vẫn còn vang vọng như tiếng sấm giữa trời Nam, khẳng định tinh thần độc lập tự cường của dân tộc Việt. Những vần thơ trong Quốc âm thi tập vẫn mộc mạc, thấm đượm tình yêu thiên nhiên, thương dân, quý đời – khiến người đời sau đọc lên mà thấy lòng mình lắng lại.
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -97,4 +104,4 @@ const VietThuGuiHauThe = ({ isOpen, onClose }: VietThuGuiHauTheProps) => {
     )
 }
 
-export default VietThuGuiHauThe
+export default ChiTietThu

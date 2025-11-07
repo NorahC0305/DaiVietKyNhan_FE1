@@ -51,15 +51,18 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                         className='relative mx-3 w-full lg:max-w-5xl max-w-3xl flex items-center justify-center'
                     >
                         <div className='flex flex-col items-center justify-center'>
+                            {/* Cuộn giấy */}
                             <div className='relative lg:w-[1300px] lg:h-[700px] w-[700px] h-[400px]'>
                                 <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg' alt='Viet Thu Gui Hau The' fill />
 
                                 <div className='absolute w-full h-[100%] flex items-center justify-center inset-0'>
                                     <div className='absolute lg:w-[70%] w-[80%] lg:h-[80%] h-[60%] flex flex-col justify-center'>
+                                        {/* Title */}
                                         <div className='flex justify-center items-center mb-5'>
                                             <span className='text-secondary font-bd-street-sign lg:text-5xl text-3xl'>LÁ THƯ GỬI KỲ NHÂN - TÂM SỰ TỪ HẬU THẾ</span>
                                         </div>
 
+                                        {/* List */}
                                         <div className='grid lg:grid-cols-3 grid-cols-2 h-[75%] gap-5 overflow-y-auto px-3'>
                                             <div className='relative lg:w-72 w-60 lg:h-52 h-48 rounded-2xl lg:border-4 border-2 border-secondary bg-[#F4ECD1] shadow-[0_8px_0_0_rgba(131,93,38,0.6)]'>
                                                 <div className='p-4 lg:p-5'>
@@ -229,7 +232,7 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
