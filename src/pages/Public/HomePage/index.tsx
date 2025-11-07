@@ -18,6 +18,8 @@ import { AttendanceProvider } from "@contexts/AttendanceContext";
 import { IAttendanceItem } from "@models/attendance/response";
 import dynamic from "next/dynamic";
 import { useSession } from "next-auth/react";
+import TamSuTuHauTheModal, { Letter } from "@components/Molecules/Popup/TamSuTuHauTheModal";
+import LetterDetailModal, { LetterDetail } from "@components/Molecules/Popup/LetterDetailModal";
 interface HomePageClientProps {
   user: IUser;
   activeWithAmountUser: IGetSystemConfigWithAmountUserResponse;
@@ -137,6 +139,9 @@ const HomePageClient = ({
   const [currentIndex, setCurrentIndex] = useState(1); // Bắt đầu từ testimonial thứ 2 (index 1) làm chính
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const [currentRankPage, setCurrentRankPage] = useState(1); // Trang hiện tại của bảng xếp hạng (1-5)
+  const [isTamSuModalOpen, setIsTamSuModalOpen] = useState(true); // Modal danh sách thư - Demo: tự động mở
+  const [isLetterDetailOpen, setIsLetterDetailOpen] = useState(false); // Modal chi tiết thư
+  const [currentLetterIndex, setCurrentLetterIndex] = useState(0); // Index thư hiện tại
 
   // Luôn fetch theo trang hiện tại (bỏ cache để tránh trùng dữ liệu)
   const rankParams = useMemo(() => ({ currentPage: currentRankPage, pageSize: 15 }), [currentRankPage]);
@@ -164,6 +169,77 @@ const HomePageClient = ({
       return "w-3.5 h-3.5 bg-red-600 rounded-full cursor-pointer";
     }
     return "w-2.5 h-2.5 bg-gray-500 rounded-full cursor-pointer hover:bg-gray-400";
+  };
+
+  // Dữ liệu demo cho danh sách thư
+  const demoLetters: Letter[] = [
+    {
+      id: "1",
+      from: "HA",
+      to: "Trần Hưng Đạo",
+      date: "01/11/2025",
+      preview: "Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng",
+      content: "Kính gửi Danh nhân Trần Hưng Đạo – bậc anh hùng dân tộc vĩ đại,\n\nCon xin được phép viết đôi dòng, như một lời tri ân gửi về quá khứ, nơi Người – với tấm lòng vì dân vì nước, đã để lại dấu ấn không phai trong lòng hậu thế.\n\nTrải qua bao thế kỷ, tên tuổi của Người vẫn sáng rọi giữa non sông, như ánh sao dẫn đường cho những thế hệ sau trong hành trình tìm về lẽ nhân nghĩa và lòng trung hiếu."
+    },
+    {
+      id: "2",
+      from: "HA",
+      to: "Nguyễn Trãi",
+      date: "02/11/2025",
+      preview: "Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng",
+      content: "Kính gửi Danh nhân Nguyễn Trãi – bậc anh hùng khai quốc, nhà văn hóa kiệt xuất của muôn đời,\n\nCon xin được phép viết đôi dòng, như một lời tri ân gửi về quá khứ, nơi Người – với tấm lòng vì dân vì nước, đã để lại dấu ấn không phai trong lòng hậu thế.\n\nTrải qua bao thế kỷ, tên tuổi của Người vẫn sáng rọi giữa non sông, như ánh sao dẫn đường cho những thế hệ sau trong hành trình tìm về lẽ nhân nghĩa và lòng trung hiếu. Những áng văn trong Bình Ngô đại cáo vẫn còn vang vọng như tiếng sấm giữa trời Nam, khẳng định tinh thần độc lập tự cường của dân tộc Việt."
+    },
+    {
+      id: "3",
+      from: "Vũ Tiến Hùng nhí nhảnh",
+      to: "Nguyễn Trãi",
+      date: "02/11/2025",
+      preview: "Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng",
+      content: "Kính gửi Danh nhân Nguyễn Trãi – bậc anh hùng khai quốc, nhà văn hóa kiệt xuất của muôn đời,\n\nCon xin được phép viết đôi dòng, như một lời tri ân gửi về quá khứ, nơi Người – với tấm lòng vì dân vì nước, đã để lại dấu ấn không phai trong lòng hậu thế.\n\nTrải qua bao thế kỷ, tên tuổi của Người vẫn sáng rọi giữa non sông, như ánh sao dẫn đường cho những thế hệ sau trong hành trình tìm về lẽ nhân nghĩa và lòng trung hiếu. Những áng văn trong Bình Ngô đại cáo vẫn còn vang vọng như tiếng sấm giữa trời Nam, khẳng định tinh thần độc lập tự cường của dân tộc Việt. Những vần thơ trong Quốc âm thi tập vẫn mộc mạc, thấm đượm tình yêu thiên nhiên, thương dân, quý đời – khiến người đời sau đọc lên mà thấy lòng mình lắng lại."
+    },
+    {
+      id: "4",
+      from: "HA",
+      to: "Lý Thường Kiệt",
+      date: "03/11/2025",
+      preview: "Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng",
+      content: "Kính gửi Danh nhân Lý Thường Kiệt – vị tướng tài ba, người đã làm nên những chiến công hiển hách trong lịch sử dân tộc.\n\nCon xin được phép viết đôi dòng, như một lời tri ân gửi về quá khứ, nơi Người đã thể hiện tài năng quân sự và lòng yêu nước nồng nàn."
+    },
+    {
+      id: "5",
+      from: "HA",
+      to: "Quang Trung",
+      date: "04/11/2025",
+      preview: "Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng",
+      content: "Kính gửi Danh nhân Quang Trung – vị vua anh hùng, người đã đánh tan quân xâm lược, bảo vệ độc lập dân tộc.\n\nCon xin được phép viết đôi dòng, như một lời tri ân gửi về quá khứ, nơi Người đã thể hiện tài năng quân sự và tinh thần dũng cảm."
+    },
+    {
+      id: "6",
+      from: "HA",
+      to: "Hồ Chí Minh",
+      date: "05/11/2025",
+      preview: "Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng",
+      content: "Kính gửi Bác Hồ kính yêu – vị lãnh tụ vĩ đại của dân tộc Việt Nam.\n\nCon xin được phép viết đôi dòng, như một lời tri ân gửi về Người – người đã dẫn dắt dân tộc ta đi đến thắng lợi vẻ vang, giành lại độc lập tự do."
+    },
+  ];
+
+  // Chuyển đổi Letter sang LetterDetail để dùng cho modal chi tiết
+  const letterDetails: LetterDetail[] = demoLetters.map((letter) => ({
+    id: letter.id,
+    from: letter.from,
+    to: letter.to,
+    date: letter.date,
+    content: letter.content || letter.preview,
+  }));
+
+  // Handler khi click vào thư trong danh sách
+  const handleLetterClick = (letter: Letter) => {
+    const index = demoLetters.findIndex((l) => l.id === letter.id);
+    if (index !== -1) {
+      setCurrentLetterIndex(index);
+      setIsTamSuModalOpen(false);
+      setIsLetterDetailOpen(true);
+    }
   };
 
   // Process user rank data for display - memoized để tránh re-computation
@@ -257,6 +333,25 @@ const HomePageClient = ({
         </div>
       </section>
 
+      {/* Tam Su Tu Ha The Modal - Danh sách thư */}
+      <TamSuTuHauTheModal
+        isOpen={isTamSuModalOpen}
+        onClose={() => setIsTamSuModalOpen(false)}
+        letters={demoLetters}
+        onLetterClick={handleLetterClick}
+      />
+
+      {/* Letter Detail Modal - Chi tiết thư */}
+      <LetterDetailModal
+        isOpen={isLetterDetailOpen}
+        onClose={() => {
+          setIsLetterDetailOpen(false);
+          setIsTamSuModalOpen(true); // Mở lại modal danh sách khi đóng chi tiết
+        }}
+        letters={letterDetails}
+        currentIndex={currentLetterIndex}
+        onIndexChange={setCurrentLetterIndex}
+      />
       {/* Check-in Modal Dialog - dynamically loaded to avoid SSR issues */}
       <DynamicAuthenticatedFeatures user={user} />
 
