@@ -89,33 +89,6 @@ const Toolbar: React.FC<ToolbarProps> = ({
                     </Select>
                 </div>
             </div>
-
-            {/* Sort Section */}
-            <div className="flex items-center gap-2 border-l border-gray-300 pl-4">
-                <ArrowUpDown className="h-4 w-4 text-gray-400" />
-                <span className="text-sm text-gray-600 font-medium whitespace-nowrap">Sắp xếp:</span>
-                <Select value={sortBy} onValueChange={handleSortByChange}>
-                    <SelectTrigger className="w-[140px] bg-background border-border text-foreground">
-                        <SelectValue placeholder="Trường" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-card border-border">
-                        {sortOptions.map((option) => (
-                            <SelectItem key={option.value} value={option.value}>
-                                {option.label}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-                <Select value={sortOrder} onValueChange={handleSortOrderChange}>
-                    <SelectTrigger className="w-[120px] bg-background border-border text-foreground">
-                        <SelectValue placeholder="Thứ tự" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-card border-border">
-                        <SelectItem value="desc">Giảm dần</SelectItem>
-                        <SelectItem value="asc">Tăng dần</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
         </div>
     );
 };

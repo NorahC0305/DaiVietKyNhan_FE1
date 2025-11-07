@@ -1,6 +1,8 @@
 import UserStatisticPage from "@pages/Admin/Statistic/User";
 
-export default function UserStatisticServer() {
+export const dynamic = 'force-dynamic';
+
+export default async function UserStatisticServer() {
   return (
     <>
       <UserStatisticPage />
