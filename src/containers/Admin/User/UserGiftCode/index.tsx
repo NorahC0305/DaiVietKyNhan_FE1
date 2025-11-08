@@ -1,89 +1,70 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/Atoms/ui/card";
 import Toolbar from "./Components/Toolbar";
-import ToolbarSkeleton from "./Components/ToolbarSkeleton";
 import UsersTable from "./Components/UsersTable";
 import UsersTableSkeleton from "./Components/UsersTableSkeleton";
-import { IUserRewardPaginationResponse, IRewardCodeResponse } from "@models/user-reward/response";
 import { EnhancedPagination } from "@/components/Atoms/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/Atoms/ui/select";
 import { Rows } from "lucide-react";
-import userRewardService from "@services/user-reward";
-import useDebounce from "@hooks/useDebounce";
+import { useQuery } from "@tanstack/react-query";
+import { getUserRewardsQueryOptions, getGiftCodesQueryOptions } from "@hooks/use-user-reward-queries";
 
-interface UserGiftCodeProps {
-    giftCodes: IRewardCodeResponse;
-    initialUserRewardsResponse?: IUserRewardPaginationResponse;
-}
-
-const UserGiftCode = ({ giftCodes, initialUserRewardsResponse }: UserGiftCodeProps) => {
-    const [listUserRewards, setListUserRewards] = useState<IUserRewardPaginationResponse['data']>(
-        initialUserRewardsResponse?.data || {
-            results: [],
-            pagination: {
-                current: 1,
-                pageSize: 10,
-                totalPage: 0,
-                totalItem: 0
-            }
-        }
-    );
+const UserGiftCode = () => {
     const [itemsPerPage, setItemsPerPage] = useState<number>(10);
     const [page, setPage] = useState<number>(1);
     const [selectedCode, setSelectedCode] = useState<string>("all");
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [hasInitialData, setHasInitialData] = useState<boolean>(!!initialUserRewardsResponse);
-    const [hasUserInteracted, setHasUserInteracted] = useState<boolean>(false);
 
-    // Fetch user rewards data
-    const fetchUserRewards = async () => {
-        setIsLoading(true);
-        setHasInitialData(false); // Đánh dấu không còn dùng initial data nữa
-        try {
-            // Build query string for filtering
-            let queryString = "";
-            if (selectedCode && selectedCode !== "all") {
-                queryString += `reward.code:=${selectedCode}`;
-            }
-
-            const response = await userRewardService.getUserRewards({
-                currentPage: page,
-                pageSize: itemsPerPage,
-                qs: queryString || undefined,
-            }) as IUserRewardPaginationResponse;
-            setListUserRewards(response.data);
-        } catch (error) {
-            console.error("Error fetching user rewards:", error);
-        } finally {
-            setIsLoading(false);
+    // Build query params
+    const queryParams = useMemo(() => {
+        // Build query string parts
+        const parts: string[] = [];
+        
+        // Always include sort
+        parts.push("sort:-id");
+        
+        // Add filter if code is selected
+        if (selectedCode && selectedCode !== "all") {
+            parts.push(`reward.code:=${selectedCode}`);
         }
-    };
+        
+        return {
+            qs: parts.join(","),
+            currentPage: page,
+            pageSize: itemsPerPage,
+        };
+    }, [page, itemsPerPage, selectedCode]);
 
+    // Fetch user rewards with TanStack Query
+    const userRewardsQueryOptions = useMemo(
+        () => getUserRewardsQueryOptions(queryParams),
+        [queryParams]
+    );
+    const {
+        data: listUserRewards,
+        isLoading,
+        error,
+        isError,
+    } = useQuery(userRewardsQueryOptions);
 
-    useEffect(() => {
-        // Chỉ fetch khi user đã tương tác, không fetch lần đầu khi có initialData
-        if (hasUserInteracted) {
-            fetchUserRewards();
-        }
-    }, [page, itemsPerPage, selectedCode, hasUserInteracted]);
+    // Fetch gift codes with TanStack Query
+    const {
+        data: giftCodes,
+    } = useQuery(getGiftCodesQueryOptions("CODE"));
 
     const handleItemsPerPageChange = (value: string) => {
         setItemsPerPage(parseInt(value));
         setPage(1);
-        setHasUserInteracted(true);
     };
 
     const handlePageChange = (newPage: number) => {
         setPage(newPage);
-        setHasUserInteracted(true);
     };
 
     const handleCodeFilter = (codeValue: string) => {
         setSelectedCode(codeValue);
         setPage(1);
-        setHasUserInteracted(true);
     };
 
     const handleViewUserReward = (userReward: any) => {
@@ -95,7 +76,20 @@ const UserGiftCode = ({ giftCodes, initialUserRewardsResponse }: UserGiftCodePro
         console.log("Edit user reward:", userReward);
         // TODO: Implement edit user reward modal/page
     };
-    //-----------------------------End-----------------------------//
+
+    // Use fetched data
+    const userRewardsResults = listUserRewards?.results ?? [];
+    const pagination = listUserRewards?.pagination || {
+        current: 1,
+        pageSize: 10,
+        totalPage: 0,
+        totalItem: 0,
+    };
+
+    // Show error if there's an error
+    if (isError && error) {
+        console.error("Error fetching user rewards:", error);
+    }
 
     return (
         <div className="space-y-6">
@@ -109,17 +103,16 @@ const UserGiftCode = ({ giftCodes, initialUserRewardsResponse }: UserGiftCodePro
                     </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-
                     <Toolbar
                         onCodeFilter={handleCodeFilter}
                         codeValue={selectedCode}
-                        giftCodes={giftCodes?.data || []}
+                        giftCodes={giftCodes || []}
                     />
-                    {isLoading && !hasInitialData ? (
+                    {isLoading ? (
                         <UsersTableSkeleton />
                     ) : (
                         <UsersTable
-                            rows={listUserRewards?.results}
+                            rows={userRewardsResults}
                             onViewUserReward={handleViewUserReward}
                             onEditUserReward={handleEditUserReward}
                         />
@@ -143,8 +136,8 @@ const UserGiftCode = ({ giftCodes, initialUserRewardsResponse }: UserGiftCodePro
                     {listUserRewards && (
                         <EnhancedPagination
                             currentPage={page}
-                            totalPages={Math.max(1, Math.ceil((listUserRewards?.pagination?.totalItem || 0) / (itemsPerPage || 1)))}
-                            totalItems={listUserRewards?.pagination?.totalItem || 0}
+                            totalPages={Math.max(1, Math.ceil((pagination?.totalItem || 0) / (itemsPerPage || 1)))}
+                            totalItems={pagination?.totalItem || 0}
                             itemsPerPage={itemsPerPage}
                             onPageChange={handlePageChange}
                         />
