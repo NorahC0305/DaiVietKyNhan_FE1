@@ -309,14 +309,17 @@ const HomePageClient = ({
 
       {/* Banner 3 - Letter Guide Section */}
       <section className="relative mt-12 lg:mt-32 w-full lg:h-[870px] h-[591px] flex items-center justify-center overflow-hidden">
-        <div className="absolute z-0 cursor-pointer flex justify-center w-[1330px] h-full">
+        <div className="absolute z-0 flex justify-center lg:w-[1330px] w-full  h-full">
           <Image
             src="https://res.cloudinary.com/dznt9yias/image/upload/v1762595082/FIGMA_la%CC%81_thu%CC%9B_1_yp04is.png"
-            alt="Khí Chất Của Bạn Là"
+            alt="Letter Guide"
             fill
-            onClick={() => router.push(`${ROUTES.PUBLIC.MAP}?openLetterGuide=true`)}
+
             priority
           />
+          <div className="absolute bottom-14 lg:bottom-16 left-[160px] lg:left-[300px] lg:w-[250px] lg:h-[80px] w-[150px] h-[50px] cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => router.push(`${ROUTES.PUBLIC.MAP}?openLetterGuide=true`)}>
+            <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103336/Group_117_jdhguy.png" alt="HomePage Banner" fill />
+          </div>
         </div>
       </section>
 
