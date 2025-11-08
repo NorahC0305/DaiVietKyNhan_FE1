@@ -1,6 +1,6 @@
 "use client";
 
-import CharacterCard from "@pages/Starter/Select-character/Components/CharacterCard";
+import CharacterCard from "@containers/Starter/Select-character/Components/CharacterCard";
 import React, { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@routes";

@@ -9,9 +9,10 @@ type LetterGuideProps = {
   isOpen: boolean;
   onClose: () => void;
   onNext?: () => void;
+  onBack?: () => void;
 };
 
-export default function LetterGuide({ isOpen, onClose, onNext }: LetterGuideProps) {
+export default function LetterGuide({ isOpen, onClose, onNext, onBack }: LetterGuideProps) {
   // Check if current date is after October 27th, 2024
   const isParticipationEnabled = () => {
     const currentDate = getCurrentVietnamTime();
@@ -19,10 +20,20 @@ export default function LetterGuide({ isOpen, onClose, onNext }: LetterGuideProp
     return currentDate >= targetDate;
   };
 
-  const handleNext = () => {
+  const handleParticipate = () => {
     if (onNext) {
       onNext();
+      return;
     }
+    onClose();
+  };
+
+  const handleViewLetters = () => {
+    if (onBack) {
+      onBack();
+      return;
+    }
+    onClose();
   };
   return (
     <ModalBackdrop
@@ -99,13 +110,22 @@ export default function LetterGuide({ isOpen, onClose, onNext }: LetterGuideProp
           </div>
 
           {/* Next Button */}
-          <div className="flex justify-center mt-6 sm:mt-8">
-            <button 
-              onClick={handleNext}
+          <div className="flex justify-center mt-6 sm:mt-8 gap-3 sm:gap-4">
+            <button
+              onClick={handleParticipate}
               className="relative overflow-hidden hover:scale-105 transition-all duration-300 cursor-pointer px-6 sm:px-8 py-3 sm:py-4 min-w-[180px] rounded-xl font-semibold text-lg flex items-center justify-center"
             >
               <ButtonImage width={180} height={48}>
-                Tiếp theo
+                Tham gia ngay
+              </ButtonImage>
+            </button>
+
+            <button
+              onClick={handleViewLetters}
+              className="relative overflow-hidden hover:scale-105 transition-all duration-300 cursor-pointer px-6 sm:px-8 py-3 sm:py-4 min-w-[180px] rounded-xl font-semibold text-lg flex items-center justify-center"
+            >
+              <ButtonImage width={180} height={48}>
+                Xem hòm thư
               </ButtonImage>
             </button>
           </div>

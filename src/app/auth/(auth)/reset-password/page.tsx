@@ -1,4 +1,4 @@
-import ResetPasswordPageClient from "@pages/Auth/ResetPasswordPage";
+import ResetPasswordPageClient from "@containers/Auth/ResetPasswordPage";
 
 export default function ResetPasswordPage() {
     return (

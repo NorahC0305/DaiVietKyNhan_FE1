@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import QuestionBankPage from "@pages/Admin/Question/QuestionBank";
+import QuestionBankPage from "@containers/Admin/Question/QuestionBank";
 import landService from "@services/land";
 
  async function getLands() {

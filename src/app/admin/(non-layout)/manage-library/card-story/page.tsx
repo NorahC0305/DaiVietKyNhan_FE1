@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import CardStoryPage from "@pages/Admin/Library/CardStory";
+import CardStoryPage from "@containers/Admin/Library/CardStory";
 
 export default async function CardStoryServer() {
   return (

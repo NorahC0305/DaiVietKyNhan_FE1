@@ -1,4 +1,4 @@
-import GoogleCompletePage from "@pages/Auth/GoogleSuccess";
+import GoogleCompletePage from "@containers/Auth/GoogleSuccess";
 
 export const dynamic = 'force-dynamic';
 

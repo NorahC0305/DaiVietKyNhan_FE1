@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import KyNhanListPage from "@pages/Admin/Library/KyNhanList";
+import KyNhanListPage from "@containers/Admin/Library/KyNhanList";
 import kynhanService from "@services/kynhan";
 import landService from "@services/land";
 

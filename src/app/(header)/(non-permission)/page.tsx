@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 
-import HomePageClient from "@pages/Public/HomePage";
+import HomePageClient from "@containers/Public/HomePage";
 import userService from "@services/user";
 import { UserSchema } from "@models/user/entity";
 import { IBackendResponse } from "@models/backend";

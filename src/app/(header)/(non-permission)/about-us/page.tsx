@@ -1,4 +1,4 @@
-import AboutUsPage from "@pages/Public/About-us";
+import AboutUsPage from "@containers/Public/About-us";
 
 export default function ContactServer() {
   return (

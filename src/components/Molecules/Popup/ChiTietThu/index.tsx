@@ -7,10 +7,20 @@ import React from 'react'
 type ChiTietThuProps = {
     isOpen: boolean
     onClose: () => void
+    onParticipate?: () => void
+    onBack?: () => void
 }
 
 //TODO: Integrate with API
-const ChiTietThu = ({ isOpen, onClose }: ChiTietThuProps) => {
+const ChiTietThu = ({ isOpen, onClose, onParticipate, onBack }: ChiTietThuProps) => {
+    const handleParticipate = onParticipate ?? onClose
+    const handleBack = () => {
+        if (onBack) {
+            onBack()
+            return
+        }
+        onClose()
+    }
     return (
         <AnimatePresence>
             {isOpen && (
@@ -42,6 +52,16 @@ const ChiTietThu = ({ isOpen, onClose }: ChiTietThuProps) => {
                         </button>
                     </div>
 
+                    <button
+                        type='button'
+                        className='absolute bottom-3 right-3 z-10 cursor-pointer p-2 w-[70px] h-[70px]'
+                        onClick={handleBack}
+                    >
+                        <span className='relative block h-full w-full'>
+                            <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                        </span>
+                    </button>
+
                     {/* Modal Content */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -52,45 +72,75 @@ const ChiTietThu = ({ isOpen, onClose }: ChiTietThuProps) => {
                     >
                         <div className='flex flex-col items-center justify-center'>
                             {/* Cuộn giấy */}
-                            <div className='relative lg:w-[900px] lg:h-[500px] w-[700px] h-[350px]'>
+                            <div className='relative lg:w-[1300px] lg:h-[700px] w-[700px] h-[400px]'>
                                 <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg' alt='Viet Thu Gui Hau The' fill />
 
                                 <div className='absolute w-full h-[100%] flex items-center justify-center inset-0'>
-                                    <div className='absolute lg:w-[70%] w-[60%] lg:h-[70%] h-[70%] flex flex-col justify-center'>
+                                    <div className='absolute lg:w-[60%] w-[60%] lg:h-[70%] h-[60%] flex flex-col justify-center'>
                                         {/* Title */}
                                         <div className='flex justify-center items-center lg:mb-5 mb-2'>
                                             <span className='text-secondary font-bd-street-sign lg:text-5xl text-3xl'>LÁ THƯ GỬI KỲ NHÂN - TÂM SỰ TỪ HẬU THẾ</span>
                                         </div>
 
                                         {/* Content */}
-                                        <div className='flex justify-between items-center'>
-                                            <div className='w-full'>
-                                                <div className='flex items-center justify-start lg:mb-4 mb-1'>
-                                                    <div className='lg:w-[10%] w-[15%]'>
-                                                        <span className='text-secondary lg:text-lg text-sm font-bold'>Từ: </span>
+                                        <div className='relative w-full h-full'>
+                                            <button
+                                                type='button'
+                                                className='absolute left-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center'
+                                            >
+                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721544/Back_cwp7tx.svg' alt='Prev' fill />
+                                            </button>
+
+                                            <button
+                                                type='button'
+                                                className='absolute right-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center'
+                                            >
+                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760725883/next_xshxeb.svg' alt='Next' fill />
+                                            </button>
+
+                                            <div className='flex justify-between items-center'>
+                                                <div className='w-full'>
+                                                    <div className='flex items-center justify-start lg:mb-4 mb-1'>
+                                                        <div className='lg:w-[10%] w-[15%]'>
+                                                            <span className='text-secondary lg:text-lg text-sm font-bold'>Từ: </span>
+                                                        </div>
+                                                        <span className='text-[#CE7346] lg:text-lg text-sm font-bold italic'>Vũ Tiến Hùng nhí nhảnh</span>
                                                     </div>
-                                                    <span className='text-[#CE7346] lg:text-sm text-sm font-bold italic'>Vũ Tiến Hùng nhí nhảnh</span>
+                                                    <div className='flex items-center justify-start lg:mb-4 mb-1'>
+                                                        <div className='lg:w-[10%] w-[15%]'>
+                                                            <span className='text-secondary lg:text-lg text-sm font-bold'>Đến: </span>
+                                                        </div>
+                                                        <span className='text-[#CE7346] lg:text-lg text-sm font-bold italic'>Trần Hưng Đạo</span>
+                                                    </div>
                                                 </div>
-                                                <div className='flex items-center justify-start lg:mb-4 mb-1'>
-                                                    <div className='lg:w-[10%] w-[15%]'>
-                                                        <span className='text-secondary lg:text-lg text-sm font-bold'>Đến: </span>
-                                                    </div>
-                                                    <span className='text-[#CE7346] lg:text-lg text-sm font-bold italic'>Trần Hưng Đạo</span>
+
+                                                <div className='relative w-[120px] h-[40px] cursor-pointer flex flex-col items-end justify-end'>
+                                                    <p className='text-secondary lg:text-lg text-sm font-bold'>Ngày gửi</p>
+                                                    <p className='text-secondary lg:text-base text-sm italic'>01/11/2025</p>
                                                 </div>
                                             </div>
 
-                                            <div className='relative w-[120px] h-[40px] cursor-pointer flex flex-col items-end justify-end'>
-                                                <p className='text-secondary lg:text-lg text-sm font-bold'>Ngày gửi</p>
-                                                <p className='text-secondary lg:text-base text-sm italic'>01/11/2025</p>
+                                            <div className='flex items-start justify-start lg:h-[80%] h-[70%] bg-[#F4ECD0] overflow-y-auto border-4 border-secondary rounded-xl px-4 py-2'>
+                                                <span className='lg:text-base text-sm leading-relaxed whitespace-pre-line'>
+                                                    Kính gửi Danh nhân Nguyễn Trãi – bậc anh hùng khai quốc, nhà văn hóa kiệt xuất của muôn đời,
+                                                    Con xin được phép viết đôi dòng, như một lời tri ân gửi về quá khứ, nơi Người – với tấm lòng vì dân vì nước, đã để lại dấu ấn không phai trong lòng hậu thế.
+                                                    Trải qua bao thế kỷ, tên tuổi của Người vẫn sáng rọi giữa non sông, như ánh sao dẫn đường cho những thế hệ sau trong hành trình tìm về lẽ nhân nghĩa và lòng trung hiếu. Những áng văn trong Bình Ngô đại cáo vẫn còn vang vọng như tiếng sấm giữa trời Nam, khẳng định tinh thần độc lập tự cường của dân tộc Việt. Những vần thơ trong Quốc âm thi tập vẫn mộc mạc, thấm đượm tình yêu thiên nhiên, thương dân, quý đời – khiến người đời sau đọc lên mà thấy lòng mình lắng lại.
+                                                </span>
                                             </div>
-                                        </div>
 
-                                        <div className='flex items-start justify-start h-full bg-[#F4ECD0] overflow-y-auto border-4 border-secondary rounded-xl px-4 py-2'>
-                                            <span className='lg:text-base text-sm leading-relaxed whitespace-pre-line'>
-                                                Kính gửi Danh nhân Nguyễn Trãi – bậc anh hùng khai quốc, nhà văn hóa kiệt xuất của muôn đời,
-                                                Con xin được phép viết đôi dòng, như một lời tri ân gửi về quá khứ, nơi Người – với tấm lòng vì dân vì nước, đã để lại dấu ấn không phai trong lòng hậu thế.
-                                                Trải qua bao thế kỷ, tên tuổi của Người vẫn sáng rọi giữa non sông, như ánh sao dẫn đường cho những thế hệ sau trong hành trình tìm về lẽ nhân nghĩa và lòng trung hiếu. Những áng văn trong Bình Ngô đại cáo vẫn còn vang vọng như tiếng sấm giữa trời Nam, khẳng định tinh thần độc lập tự cường của dân tộc Việt. Những vần thơ trong Quốc âm thi tập vẫn mộc mạc, thấm đượm tình yêu thiên nhiên, thương dân, quý đời – khiến người đời sau đọc lên mà thấy lòng mình lắng lại.
-                                            </span>
+                                            <div className='absolute lg:bottom-[-96px] bottom-[-55px] flex justify-center items-center w-full h-fit'>
+                                                <button className='lg:w-[200px] w-[120px] lg:h-[50px] h-[35px] cursor-pointer flex items-center justify-center hover:opacity-80 transition-all duration-300' onClick={handleParticipate}>
+                                                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760718877/Button_bb7ywk.svg' alt='join' fill />
+                                                    <div className='absolute inset-0 flex items-center justify-center'>
+                                                        <span className='text-secondary lg:text-sm text-[10px] font-bold'>Để tham gia ngay</span>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                            <button type='button' className='absolute bottom-3 right-3 z-10 cursor-pointer p-2 w-[40px] h-[40px]' onClick={handleBack}>
+                                                <span className='relative block h-full w-full'>
+                                                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                                                </span>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -98,6 +148,8 @@ const ChiTietThu = ({ isOpen, onClose }: ChiTietThuProps) => {
                         </div>
 
                     </motion.div>
+
+
                 </div>
             )}
         </AnimatePresence>

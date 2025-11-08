@@ -1,4 +1,4 @@
-import UserMailPage from "@pages/Admin/User/UserMails";
+import UserMailPage from "@containers/Admin/User/UserMails";
 
 export default async function UserMailServer() {
   return (

@@ -1,4 +1,4 @@
-import ForgotPasswordPageClient from "@pages/Auth/ForgotPasswordPage";
+import ForgotPasswordPageClient from "@containers/Auth/ForgotPasswordPage";
 
 export default function ForgotPasswordPage() {
     return (

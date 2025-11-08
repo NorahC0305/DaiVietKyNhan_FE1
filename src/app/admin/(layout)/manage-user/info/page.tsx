@@ -1,6 +1,6 @@
 import { authOptions } from "@lib/authOptions";
 import { IMePaginationResponse } from "@models/user/response";
-import UserInfoPage from "@pages/Admin/User/UserInfo";
+import UserInfoPage from "@containers/Admin/User/UserInfo";
 import userService from "@services/user";
 import { getServerSession } from "next-auth";
 import dashboardService from "@services/dashboard";

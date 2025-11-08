@@ -1,4 +1,4 @@
-import ReleaseDateManager from "@pages/Admin/System-Config/ReleaseDateManager";
+import ReleaseDateManager from "@containers/Admin/System-Config/ReleaseDateManager";
 
 export default function ReleaseDatePage() {
   return <ReleaseDateManager />;

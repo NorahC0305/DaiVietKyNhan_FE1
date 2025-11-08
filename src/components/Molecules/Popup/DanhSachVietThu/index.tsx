@@ -7,10 +7,27 @@ import React from 'react'
 type DanhSachVietThuProps = {
     isOpen: boolean
     onClose: () => void
+    onBack?: () => void
+    onOpenDetail?: () => void
 }
 
 //TODO: Integrate with API
-const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
+const DanhSachVietThu = ({ isOpen, onClose, onBack, onOpenDetail }: DanhSachVietThuProps) => {
+    const handleBack = () => {
+        if (onBack) {
+            onBack()
+            return
+        }
+        onClose()
+    }
+
+    const handleOpenDetail = () => {
+        if (onOpenDetail) {
+            onOpenDetail()
+            return
+        }
+        onClose()
+    }
     return (
         <AnimatePresence>
             {isOpen && (
@@ -41,6 +58,16 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                             </span>
                         </button>
                     </div>
+
+                    <button
+                        type='button'
+                        className='absolute bottom-3 right-3 z-10 cursor-pointer p-2 w-[70px] h-[70px]'
+                        onClick={handleBack}
+                    >
+                        <span className='relative block h-full w-full'>
+                            <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                        </span>
+                    </button>
 
                     {/* Modal Content */}
                     <motion.div
@@ -82,7 +109,11 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                                                     <p className='italic text-secondary lg:text-sm text-[12px] mt-2 line-clamp-2'>“Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng”</p>
 
                                                     <div className='mt-3 flex justify-center items-center hover:text-[#E17100] hover:underline'>
-                                                        <button className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'>
+                                                        <button
+                                                            type='button'
+                                                            onClick={handleOpenDetail}
+                                                            className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'
+                                                        >
                                                             Bấm để xem chi tiết →
                                                         </button>
                                                     </div>
@@ -106,7 +137,11 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                                                     <p className='italic text-secondary lg:text-sm text-[12px] mt-2 line-clamp-2'>“Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng”</p>
 
                                                     <div className='mt-3 flex justify-center items-center hover:text-[#E17100] hover:underline'>
-                                                        <button className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'>
+                                                        <button
+                                                            type='button'
+                                                            onClick={handleOpenDetail}
+                                                            className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'
+                                                        >
                                                             Bấm để xem chi tiết →
                                                         </button>
                                                     </div>
@@ -130,7 +165,11 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                                                     <p className='italic text-secondary lg:text-sm text-[12px] mt-2 line-clamp-2'>“Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng”</p>
 
                                                     <div className='mt-3 flex justify-center items-center hover:text-[#E17100] hover:underline'>
-                                                        <button className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'>
+                                                        <button
+                                                            type='button'
+                                                            onClick={handleOpenDetail}
+                                                            className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'
+                                                        >
                                                             Bấm để xem chi tiết →
                                                         </button>
                                                     </div>
@@ -154,7 +193,11 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                                                     <p className='italic text-secondary lg:text-sm text-[12px] mt-2 line-clamp-2'>“Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng”</p>
 
                                                     <div className='mt-3 flex justify-center items-center hover:text-[#E17100] hover:underline'>
-                                                        <button className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'>
+                                                        <button
+                                                            type='button'
+                                                            onClick={handleOpenDetail}
+                                                            className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'
+                                                        >
                                                             Bấm để xem chi tiết →
                                                         </button>
                                                     </div>
@@ -178,7 +221,11 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                                                     <p className='italic text-secondary lg:text-sm text-[12px] mt-2 line-clamp-2'>“Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng”</p>
 
                                                     <div className='mt-3 flex justify-center items-center hover:text-[#E17100] hover:underline'>
-                                                        <button className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'>
+                                                        <button
+                                                            type='button'
+                                                            onClick={handleOpenDetail}
+                                                            className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'
+                                                        >
                                                             Bấm để xem chi tiết →
                                                         </button>
                                                     </div>
@@ -202,7 +249,11 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                                                     <p className='italic text-secondary lg:text-sm text-[12px] mt-2 line-clamp-2'>“Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng”</p>
 
                                                     <div className='mt-3 flex justify-center items-center hover:text-[#E17100] hover:underline'>
-                                                        <button className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'>
+                                                        <button
+                                                            type='button'
+                                                            onClick={handleOpenDetail}
+                                                            className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'
+                                                        >
                                                             Bấm để xem chi tiết →
                                                         </button>
                                                     </div>
@@ -226,7 +277,11 @@ const DanhSachVietThu = ({ isOpen, onClose }: DanhSachVietThuProps) => {
                                                     <p className='italic text-secondary lg:text-sm text-[12px] mt-2 line-clamp-2'>“Tình yêu lặng lẽ của tôi đã kéo dài từ những ngày tháng”</p>
 
                                                     <div className='mt-3 flex justify-center items-center hover:text-[#E17100] hover:underline'>
-                                                        <button className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'>
+                                                        <button
+                                                            type='button'
+                                                            onClick={handleOpenDetail}
+                                                            className='relative text-[#E17100] font-black lg:text-[12px] text-[10px] text-center cursor-pointer'
+                                                        >
                                                             Bấm để xem chi tiết →
                                                         </button>
                                                     </div>

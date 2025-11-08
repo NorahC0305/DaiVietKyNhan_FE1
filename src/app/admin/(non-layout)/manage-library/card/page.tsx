@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 
-import CardPage from "@pages/Admin/Library/Card";
+import CardPage from "@containers/Admin/Library/Card";
 import landService from "@services/land";
 
 async function getLands() {

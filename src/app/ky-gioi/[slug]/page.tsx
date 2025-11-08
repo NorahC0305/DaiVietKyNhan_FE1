@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import MapRegionDetail from "@pages/Map/Components/MapRegionDetail";
+import MapRegionDetail from "@containers/Map/Components/MapRegionDetail";
 
 export const dynamic = "force-dynamic";
 

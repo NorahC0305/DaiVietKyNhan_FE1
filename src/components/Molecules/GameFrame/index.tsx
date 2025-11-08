@@ -24,6 +24,9 @@ import userService from "@services/user";
 import userAchievementService from "@services/user-achievement";
 import { toast } from "react-toastify";
 import { usePathname, useRouter } from "next/navigation";
+import ChiTietThu from "../Popup/ChiTietThu";
+import VietThuGuiHauThe from "../Popup/VietThuGuiHauThe";
+import DanhSachVietThu from "../Popup/DanhSachVietThu";
 
 interface GameFrameProps {
   children: React.ReactNode;
@@ -99,13 +102,52 @@ export const GameFrame: React.FC<GameFrameProps> = ({
 
   const handleLetterGuideNext = useCallback(() => {
     setIsLetterGuideModalOpen(false);
-    setIsAirEventModalOpen(true);
+    // setIsAirEventModalOpen(true);
+    setIsVietThuGuiHauTheModalOpen(true);
+  }, []);
+
+  const [isDanhSachVietThuModalOpen, setIsDanhSachVietThuModalOpen] =
+    useState<boolean>(false);
+
+  const [isChiTietThuModalOpen, setIsChiTietThuModalOpen] =
+    useState<boolean>(false);
+
+  const handleLetterGuideViewLetters = useCallback(() => {
+    setIsLetterGuideModalOpen(false);
+    setIsDanhSachVietThuModalOpen(true);
+  }, []);
+
+  const handleVietThuBack = useCallback(() => {
+    setIsVietThuGuiHauTheModalOpen(false);
+    setIsLetterGuideModalOpen(true);
+  }, []);
+
+  const handleChiTietParticipate = useCallback(() => {
+    setIsChiTietThuModalOpen(false);
+    setIsVietThuGuiHauTheModalOpen(true);
+  }, []);
+
+  const handleDanhSachBack = useCallback(() => {
+    setIsDanhSachVietThuModalOpen(false);
+    setIsLetterGuideModalOpen(true);
+  }, []);
+
+  const handleDanhSachOpenDetail = useCallback(() => {
+    setIsDanhSachVietThuModalOpen(false);
+    setIsChiTietThuModalOpen(true);
+  }, []);
+
+  const handleChiTietBack = useCallback(() => {
+    setIsChiTietThuModalOpen(false);
+    setIsDanhSachVietThuModalOpen(true);
   }, []);
 
   /**
    * Air Event Modal (shows after LetterGuide)
    */
   const [isAirEventModalOpen, setIsAirEventModalOpen] =
+    useState<boolean>(false);
+  const [isVietThuGuiHauTheModalOpen, setIsVietThuGuiHauTheModalOpen] =
     useState<boolean>(false);
   //--------------------------End--------------------------//
 
@@ -397,6 +439,19 @@ export const GameFrame: React.FC<GameFrameProps> = ({
         isOpen={isLetterGuideModalOpen}
         onClose={() => setIsLetterGuideModalOpen(false)}
         onNext={handleLetterGuideNext}
+        onBack={handleLetterGuideViewLetters}
+      />
+      <DanhSachVietThu
+        isOpen={isDanhSachVietThuModalOpen}
+        onClose={() => setIsDanhSachVietThuModalOpen(false)}
+        onBack={handleDanhSachBack}
+        onOpenDetail={handleDanhSachOpenDetail}
+      />
+      <ChiTietThu
+        isOpen={isChiTietThuModalOpen}
+        onClose={() => setIsChiTietThuModalOpen(false)}
+        onBack={handleChiTietBack}
+        onParticipate={handleChiTietParticipate}
       />
       <AirEvent
         isOpen={isAirEventModalOpen}
@@ -432,6 +487,11 @@ export const GameFrame: React.FC<GameFrameProps> = ({
         user={user}
         isOpen={isGuideModalOpen}
         onClose={() => setIsGuideModalOpen(false)}
+      />
+      <VietThuGuiHauThe
+        isOpen={isVietThuGuiHauTheModalOpen}
+        onClose={() => setIsVietThuGuiHauTheModalOpen(false)}
+        onBack={handleVietThuBack}
       />
     </div>
   );

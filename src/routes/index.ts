@@ -43,7 +43,7 @@ const ADMIN_DASHBOARD = {
     POINTS: `${BASE_PATHS.MANAGE_USER}/points`,
     GIFT_CODE: `${BASE_PATHS.MANAGE_USER}/gift-code`,
     SUBMITTED_IMAGE: `${BASE_PATHS.MANAGE_USER}/submitted-image`,
-    SENT_MAIL: `${BASE_PATHS.MANAGE_USER}/sent-mail`,
+    SENT_MAIL: `${BASE_PATHS.MANAGE_USER}/letters`,
     TRANSACTIONS: `${BASE_PATHS.MANAGE_USER}/transactions`,
     NOTIFICATIONS: `${BASE_PATHS.MANAGE_USER}/notifications`,
     SETTINGS: `${BASE_PATHS.MANAGE_USER}/settings`,

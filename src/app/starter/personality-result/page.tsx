@@ -1,4 +1,4 @@
-import PersonalityResultPage from "@pages/Starter/Personality-result";
+import PersonalityResultPage from "@containers/Starter/Personality-result";
 
 export default function PersonalityResult() {
   return <PersonalityResultPage />;
