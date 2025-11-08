@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import Image from 'next/image'
 import React, { useMemo } from 'react'
+import { createPortal } from 'react-dom'
 import { useQuery } from '@tanstack/react-query'
 import { getLetterByIdQueryOptions } from '@hooks/use-letter-queries'
 import { DateMonthYear } from '@utils/Date'
@@ -44,7 +45,7 @@ const ChiTietThu = ({ isOpen, letterId, onClose, onParticipate, onBack, letters 
         }
 
         const index = letters.findIndex((l) => l.id === letterId)
-        
+
         if (index === -1) {
             return {
                 currentIndex: -1,
@@ -76,7 +77,7 @@ const ChiTietThu = ({ isOpen, letterId, onClose, onParticipate, onBack, letters 
     }, [letters, letterId])
 
     const handleParticipate = onParticipate ?? onClose
-    
+
     const handleBack = () => {
         if (onBack) {
             onBack()
@@ -102,10 +103,14 @@ const ChiTietThu = ({ isOpen, letterId, onClose, onParticipate, onBack, letters 
             onLetterChange(id)
         }
     }
-    return (
+
+    // Use React Portal to render modal at root level
+    if (typeof window === "undefined") return null;
+
+    return createPortal(
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center">
                     {/* Backdrop */}
                     <motion.div
                         initial={{ opacity: 0 }}
@@ -170,9 +175,8 @@ const ChiTietThu = ({ isOpen, letterId, onClose, onParticipate, onBack, letters 
                                                 type='button'
                                                 onClick={handlePrevious}
                                                 disabled={!hasPrevious}
-                                                className={`absolute left-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center transition-opacity ${
-                                                    hasPrevious ? 'hover:opacity-80' : 'opacity-50 cursor-not-allowed'
-                                                }`}
+                                                className={`absolute left-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center transition-opacity ${hasPrevious ? 'hover:opacity-80' : 'opacity-50 cursor-not-allowed'
+                                                    }`}
                                             >
                                                 <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721544/Back_cwp7tx.svg' alt='Prev' fill />
                                             </button>
@@ -182,9 +186,8 @@ const ChiTietThu = ({ isOpen, letterId, onClose, onParticipate, onBack, letters 
                                                 type='button'
                                                 onClick={handleNext}
                                                 disabled={!hasNext}
-                                                className={`absolute right-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center transition-opacity ${
-                                                    hasNext ? 'hover:opacity-80' : 'opacity-50 cursor-not-allowed'
-                                                }`}
+                                                className={`absolute right-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center transition-opacity ${hasNext ? 'hover:opacity-80' : 'opacity-50 cursor-not-allowed'
+                                                    }`}
                                             >
                                                 <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760725883/next_xshxeb.svg' alt='Next' fill />
                                             </button>
@@ -252,7 +255,8 @@ const ChiTietThu = ({ isOpen, letterId, onClose, onParticipate, onBack, letters 
                     </motion.div>
                 </div>
             )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
     )
 }
 

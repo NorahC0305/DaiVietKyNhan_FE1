@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
+import { createPortal } from "react-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getLetterQueryOptions } from "@hooks/use-letter-queries";
 import { ILetterEntity } from "@models/letter/entity";
@@ -49,10 +50,14 @@ const DanhSachVietThu = ({
     }
     onClose();
   };
-  return (
+
+  // Use React Portal to render modal at root level
+  if (typeof window === "undefined") return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -214,7 +219,8 @@ const DanhSachVietThu = ({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 

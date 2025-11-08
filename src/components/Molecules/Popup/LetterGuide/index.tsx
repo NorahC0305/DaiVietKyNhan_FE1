@@ -5,6 +5,7 @@ import Image from "next/image";
 import ModalBackdrop from "../../../Atoms/ModalBackdrop";
 import ButtonImage from "../../../Atoms/ButtonImage";
 import { getCurrentVietnamTime } from "@/utils/ReleaseDateUtils";
+import { createPortal } from "react-dom";
 
 export type LetterGuideProps = {
   isOpen: boolean;
@@ -36,7 +37,9 @@ const LetterGuide: React.FC<LetterGuideProps> = ({ isOpen, onClose, onNext, onBa
     }
     onClose();
   };
-  return (
+  if (typeof window === "undefined") return null;
+
+  return createPortal(
     <ModalBackdrop
       isOpen={isOpen}
       onClose={onClose}
@@ -184,7 +187,8 @@ const LetterGuide: React.FC<LetterGuideProps> = ({ isOpen, onClose, onNext, onBa
           </div>
         </div>
       </div>
-    </ModalBackdrop>
+    </ModalBackdrop>,
+    document.body
   );
 };
 
