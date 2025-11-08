@@ -8,12 +8,17 @@ import MobileRegion from "./Components/MobileRegion";
 import ForceLandscape from "@/components/Atoms/ForceLandscape";
 import IncompleteRegion from "@/components/Molecules/Popup/IncompleteRegion";
 import WaitingOthers from "@/components/Molecules/Popup/WaitingOthers";
+import LetterGuide from "@/components/Molecules/Popup/LetterGuide";
+import DanhSachVietThu from "@/components/Molecules/Popup/DanhSachVietThu";
+import ChiTietThu from "@/components/Molecules/Popup/ChiTietThu";
+import VietThuGuiHauThe from "@/components/Molecules/Popup/VietThuGuiHauThe";
 import { IUserLandWithLandEntity } from "@models/user-land/entity";
 import { IUserLandWithLandResponseModel } from "@models/user-land/response";
 import { LAND } from "@constants/land";
 import userLandService from "@services/user-land";
 import { ROUTES } from "@routes";
 import { IMeResponse } from "@models/user/response";
+import { ILetterEntity } from "@models/letter/entity";
 
 // --- Dữ liệu gốc của các regions, bao gồm `position` ---
 const baseRegions: ICOMPONENTS.Region[] = [
@@ -140,6 +145,17 @@ export default function MapPageClient({
   const [isLoading, setIsLoading] = useState(false);
   const [lastRefreshTimestamp, setLastRefreshTimestamp] = useState<number>(0);
 
+  // Letter Guide Modal states
+  const [isLetterGuideModalOpen, setIsLetterGuideModalOpen] = useState(false);
+  const [isDanhSachVietThuModalOpen, setIsDanhSachVietThuModalOpen] =
+    useState<boolean>(false);
+  const [isChiTietThuModalOpen, setIsChiTietThuModalOpen] =
+    useState<boolean>(false);
+  const [selectedLetterId, setSelectedLetterId] = useState<number | null>(null);
+  const [lettersList, setLettersList] = useState<ILetterEntity[]>([]);
+  const [isVietThuGuiHauTheModalOpen, setIsVietThuGuiHauTheModalOpen] =
+    useState<boolean>(false);
+
   // Function to fetch fresh userLand data
   const fetchUserLandData = useCallback(async () => {
     try {
@@ -232,6 +248,66 @@ export default function MapPageClient({
   useEffect(() => {
     setUserLand(initialUserLand);
   }, [initialUserLand]);
+
+  // Effect to check query parameter and open LetterGuide modal
+  useEffect(() => {
+    // Check URL search params on client side
+    if (typeof window !== "undefined") {
+      const searchParams = new URLSearchParams(window.location.search);
+      const openLetterGuide = searchParams.get("openLetterGuide");
+      if (openLetterGuide === "true") {
+        setIsLetterGuideModalOpen(true);
+        // Remove query parameter from URL without page reload
+        const newUrl = window.location.pathname;
+        window.history.replaceState({}, "", newUrl);
+      }
+    }
+  }, []);
+
+  // Letter Guide handlers
+  const handleLetterGuideNext = useCallback(() => {
+    setIsLetterGuideModalOpen(false);
+    setIsVietThuGuiHauTheModalOpen(true);
+  }, []);
+
+  const handleLetterGuideViewLetters = useCallback(() => {
+    setIsLetterGuideModalOpen(false);
+    setIsDanhSachVietThuModalOpen(true);
+  }, []);
+
+  const handleVietThuBack = useCallback(() => {
+    setIsVietThuGuiHauTheModalOpen(false);
+    setIsLetterGuideModalOpen(true);
+  }, []);
+
+  const handleDanhSachBack = useCallback(() => {
+    setIsDanhSachVietThuModalOpen(false);
+    setIsLetterGuideModalOpen(true);
+  }, []);
+
+  const handleDanhSachOpenDetail = useCallback(
+    (letter: ILetterEntity, letters: ILetterEntity[]) => {
+      setLettersList(letters);
+      setSelectedLetterId(letter.id);
+      setIsDanhSachVietThuModalOpen(false);
+      setIsChiTietThuModalOpen(true);
+    },
+    []
+  );
+
+  const handleLetterChange = useCallback((letterId: number) => {
+    setSelectedLetterId(letterId);
+  }, []);
+
+  const handleChiTietBack = useCallback(() => {
+    setIsChiTietThuModalOpen(false);
+    setIsDanhSachVietThuModalOpen(true);
+  }, []);
+
+  const handleChiTietParticipate = useCallback(() => {
+    setIsChiTietThuModalOpen(false);
+    setIsVietThuGuiHauTheModalOpen(true);
+  }, []);
 
   // Function to check if current date is after a specific date
   const isAfterDate = (
@@ -392,7 +468,7 @@ export default function MapPageClient({
             {baseRegions.map((region) => {
               const mobileConfig =
                 mobileRegionsConfig[
-                  region.id as keyof typeof mobileRegionsConfig
+                region.id as keyof typeof mobileRegionsConfig
                 ];
               return (
                 <MobileRegion
@@ -426,6 +502,45 @@ export default function MapPageClient({
         userLand={userLand}
         isOpen={isWaitingOthersModalOpen}
         onClose={() => setIsWaitingOthersModalOpen(false)}
+      />
+
+      {/* Letter Guide Modal */}
+      <LetterGuide
+        isOpen={isLetterGuideModalOpen}
+        onClose={() => setIsLetterGuideModalOpen(false)}
+        onNext={handleLetterGuideNext}
+        onBack={handleLetterGuideViewLetters}
+      />
+
+      {/* Danh Sách Viết Thư Modal */}
+      <DanhSachVietThu
+        isOpen={isDanhSachVietThuModalOpen}
+        onClose={() => setIsDanhSachVietThuModalOpen(false)}
+        onBack={handleDanhSachBack}
+        onOpenDetail={handleDanhSachOpenDetail}
+      />
+
+      {/* Chi Tiết Thư Modal */}
+      <ChiTietThu
+        key={selectedLetterId || "chi-tiet-thu"}
+        isOpen={isChiTietThuModalOpen}
+        letterId={selectedLetterId}
+        letters={lettersList}
+        onLetterChange={handleLetterChange}
+        onClose={() => {
+          setIsChiTietThuModalOpen(false);
+          setSelectedLetterId(null);
+          setLettersList([]);
+        }}
+        onBack={handleChiTietBack}
+        onParticipate={handleChiTietParticipate}
+      />
+
+      {/* Viết Thư Gửi Hậu Thế Modal */}
+      <VietThuGuiHauThe
+        isOpen={isVietThuGuiHauTheModalOpen}
+        onClose={() => setIsVietThuGuiHauTheModalOpen(false)}
+        onBack={handleVietThuBack}
       />
     </ForceLandscape>
   );

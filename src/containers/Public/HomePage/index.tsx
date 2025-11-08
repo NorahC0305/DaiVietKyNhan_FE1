@@ -307,6 +307,19 @@ const HomePageClient = ({
         </div>
       </section>
 
+      {/* Banner 3 - Letter Guide Section */}
+      <section className="relative mt-12 lg:mt-32 w-full lg:h-[870px] h-[591px] flex items-center justify-center overflow-hidden">
+        <div className="absolute z-0 cursor-pointer flex justify-center w-[1330px] h-full">
+          <Image
+            src="https://res.cloudinary.com/dznt9yias/image/upload/v1762595082/FIGMA_la%CC%81_thu%CC%9B_1_yp04is.png"
+            alt="Khí Chất Của Bạn Là"
+            fill
+            onClick={() => router.push(`${ROUTES.PUBLIC.MAP}?openLetterGuide=true`)}
+            priority
+          />
+        </div>
+      </section>
+
       {/* Ranking Section */}
       <section className="relative w-full flex items-center justify-center py-16">
         <div className="relative">
