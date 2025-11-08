@@ -12,7 +12,7 @@ const userRewardService = {
             pageSize: params?.pageSize,
             qs: params?.qs,
         });
-        return await http.get(`/user-reward/reward?${queryParams}`, {
+        return await http.get(`/user-reward-history?${queryParams}`, {
             cache: "no-store",
         });
     },

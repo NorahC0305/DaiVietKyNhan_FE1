@@ -1,62 +1,27 @@
 export const dynamic = 'force-dynamic';
 import UserGiftCode from "@containers/Admin/User/UserGiftCode";
-import rewardService from "@services/reward";
-import userRewardService from "@services/user-reward";
-import { IRewardCodeResponse, IUserRewardPaginationResponse } from "@models/user-reward/response";
-
-async function getGiftCodes(): Promise<IRewardCodeResponse> {
-    try {
-        const giftCodes = await rewardService.getGiftCodes("CODE");
-        return giftCodes as IRewardCodeResponse;
-    } catch (error) {
-        console.error("Error fetching gift codes:", error);
-        return {
-            statusCode: 200,
-            data: [],
-            message: "Success"
-        };
-    }
-}
-
-async function getUserRewards(): Promise<IUserRewardPaginationResponse> {
-    try {
-        const userRewards = await userRewardService.getUserRewards({
-            qs: "reward.code:=LYNHATTON,status=COMPLETED",
-            currentPage: 1,
-            pageSize: 10,
-        });
-        console.log(userRewards);
-        return userRewards as IUserRewardPaginationResponse;
-    } catch (error) {
-        console.error("Error fetching user rewards:", error);
-        return {
-            statusCode: 200,
-            message: "Success",
-            data: {
-                results: [],
-                pagination: {
-                    current: 1,
-                    pageSize: 10,
-                    totalPage: 0,
-                    totalItem: 0
-                }
-            }
-        };
-    }
-}
+import { getQueryClient } from "@lib/get-query-client";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { userRewardsOptions, giftCodesOptions } from "@hooks/use-user-reward-queries";
 
 export default async function GiftCodePage() {
-    const [giftCodes, userRewards] = await Promise.all([
-        getGiftCodes(),
-        getUserRewards()
-    ]);
+    const queryClient = getQueryClient();
+
+    try {
+        // Prefetch both queries in parallel
+        await Promise.all([
+            queryClient.prefetchQuery(userRewardsOptions),
+            queryClient.prefetchQuery(giftCodesOptions),
+        ]);
+    } catch (error) {
+        console.error("Failed to prefetch gift code data:", error);
+    }
+
+    const dehydratedState = dehydrate(queryClient);
 
     return (
-        <>
-            <UserGiftCode
-                giftCodes={giftCodes}
-                initialUserRewardsResponse={userRewards}
-            />
-        </>
+        <HydrationBoundary state={dehydratedState}>
+            <UserGiftCode />
+        </HydrationBoundary>
     );
 }
