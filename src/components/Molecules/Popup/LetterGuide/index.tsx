@@ -71,42 +71,94 @@ const LetterGuide: React.FC<LetterGuideProps> = ({ isOpen, onClose, onNext, onBa
           </div>
 
           {/* Content Grid - Fully responsive layout */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-3 sm:gap-4 md:gap-6 items-start">
+          <div className="gap-3 sm:gap-4 md:gap-6 items-start">
             {/* Left Content - Text content */}
-            <div className="col-span-1 md:col-span-3 space-y-2 sm:space-y-3 md:space-y-4">
-              <div className="text-secondary space-y-2 sm:space-y-3 md:space-y-4">
-                <p className="text-xs sm:text-sm md:text-base leading-relaxed text-left px-1">
-                  Giữa nhịp sống của hiện tại, những dòng chữ được viết ra như
-                  lời nhắn gửi vượt qua lớp bụi thời gian, tìm đến nơi linh hồn
-                  các Kỳ Nhân để tỏ bày cảm xúc.
-                </p>
+            <div className="flex gap-3 sm:gap-4 md:gap-6 items-center">
+              <div className="space-y-2 sm:space-y-3 md:space-y-4">
+                <div className="text-secondary space-y-2 sm:space-y-3 md:space-y-4 leading-relaxed">
+                  <p className="text-xs sm:text-sm md:text-base leading-relaxed text-left px-1">
+                    Giữa nhịp sống của hiện tại, những dòng chữ được viết ra như
+                    lời nhắn gửi vượt qua lớp bụi thời gian, tìm đến nơi linh hồn
+                    các Kỳ Nhân để tỏ bày cảm xúc.
+                  </p>
 
-                <p className="text-xs sm:text-sm md:text-base leading-relaxed text-left px-1">
-                  Đó có thể là một lời tri ân, một câu hỏi chưa từng được thốt,
-                  hay chỉ là niềm cảm mến dành cho những con người đã khắc tên
-                  mình vào lịch sử.
-                </p>
+                  <p className="text-xs sm:text-sm md:text-base leading-relaxed text-left px-1">
+                    Đó có thể là một lời tri ân, một câu hỏi chưa từng được thốt,
+                    hay chỉ là niềm cảm mến dành cho những con người đã khắc tên
+                    mình vào lịch sử.
+                  </p>
 
-                <p className="text-xs sm:text-sm md:text-base leading-relaxed text-left px-1">
-                  LÁ THƯ GỬI KỲ NHÂN mở ra để những suy tư ấy được cất thành lời
-                  – một cuộc đối thoại giữa quá khứ và hiện tại, giữa con chữ và
-                  ký ức.
-                </p>
+                  <p className="text-xs sm:text-sm md:text-base leading-relaxed text-left px-1">
+                    LÁ THƯ GỬI KỲ NHÂN mở ra để những suy tư ấy được cất thành lời
+                    – một cuộc đối thoại giữa quá khứ và hiện tại, giữa con chữ và
+                    ký ức.
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Content - Scrolls image */}
+              <div className="col-span-1 md:col-span-2 flex justify-center md:justify-end items-start pt-3 sm:pt-4 md:pt-0 px-2">
+                <div className="relative w-[200px] lg:w-[300px] h-[200px] lg:h-[300px]">
+                  <Image
+                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760861352/FA25MC15_SLIDE_1_1_gby9iz.svg"
+                    alt="Letter Guide"
+                    width={280}
+                    height={280}
+                    className="w-full h-auto object-contain"
+                    sizes="(max-width: 640px) 200px, (max-width: 768px) 220px, (max-width: 1024px) 240px, 280px"
+                  />
+                </div>
               </div>
             </div>
 
-            {/* Right Content - Scrolls image */}
-            <div className="col-span-1 md:col-span-2 flex justify-center md:justify-end items-start pt-3 sm:pt-4 md:pt-0 px-2">
-              <div className="relative w-full max-w-[200px] sm:max-w-[220px] md:max-w-[240px] lg:max-w-[280px]">
-                <Image
-                  src="https://res.cloudinary.com/dznt9yias/image/upload/v1760861352/FA25MC15_SLIDE_1_1_gby9iz.svg"
-                  alt="Letter Guide"
-                  width={280}
-                  height={280}
-                  className="w-full h-auto object-contain"
-                  sizes="(max-width: 640px) 200px, (max-width: 768px) 220px, (max-width: 1024px) 240px, 280px"
-                />
+            <div className="flex flex-col justify-center items-start  px-2 py-4 my-10 bg-[#a4a89d57] rounded-2xl border border-[#aaaaaa]">
+              <div className="flex justify-center items-center w-full my-4">
+                <h3 className="text-center font-bd-street-sign text-3xl lg:text-4xl text-[#CE7346]">Cách tham gia</h3>
               </div>
+
+              <div className="flex gap-3 sm:gap-4 md:gap-6 items-center">
+                <div className="relative w-[400px] lg:w-[400px] h-[200px] lg:h-[200px]">
+                  <Image
+                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1762593929/mapcl_3_sew4en.png"
+                    alt="Letter Guide"
+                    fill
+                    style={{ objectFit: "contain" }}
+                    priority
+                  />
+                </div>
+
+                <ul className="list-disc list-inside text-secondary lg:text-base text-sm">
+                  <li>Đăng nhập vào tài khoản trên website Đại Việt Kỳ Nhân để tham gia.</li>
+                  <li>Viết những lời tâm sự, hoặc những điều bạn muốn bày tỏ tới một vị Kỳ Nhân bất kì.</li>
+                  <li>Những lá thư được xét duyệt sẽ được đăng tải trên website Đại Việt Kỳ Nhân.</li>
+                  <li>Không giới hạn số lần viết thư.</li>
+                  <li>Nhận ngay <span className="font-bold">200 xu</span> cho lần viết thư đầu tiên (sau khi đã được xét duyệt và đăng tải)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="flex flex-col justify-center items-start lg:px-24 px-10 py-5 bg-[#a4a89d57] rounded-2xl border border-[#aaaaaa]">
+              <div className="flex justify-center items-center w-full my-4">
+                <h3 className="text-center font-bd-street-sign text-3xl lg:text-4xl text-[#CE7346]">Lưu ý</h3>
+              </div>
+
+              <ul className="list-disc list-inside italic text-secondary lg:text-base text-sm">
+                <h4 className="font-bold text-base lg:text-xl">Để giữ tinh thần tôn trọng lịch sử và giá trị văn hóa dân tộc, mọi lá thư cần tuân thủ các quy định sau:</h4>
+                <li>Không sử dụng ngôn từ phản cảm, thô tục, xúc phạm cá nhân hoặc tôn giáo.</li>
+                <li>Không xuyên tạc, bịa đặt, chế giễu hay bóp méo hình tượng các nhân vật lịch sử.</li>
+                <li>Không lồng ghép nội dung chính trị, kích động, phân biệt giới tính, vùng miền, tôn giáo hay dân tộc.                </li>
+                <li>Không đăng tải liên kết, hình ảnh hoặc nội dung quảng cáo, thương mại.</li>
+                <li>Không sao chép nội dung của người khác hoặc vi phạm bản quyền.</li>
+              </ul>
+
+              <br />
+
+              <ul className="list-disc list-inside italic text-secondary lg:text-base text-sm">
+                <h4 className="font-bold text-base lg:text-xl">Quyền sử dụng nội dung:</h4>
+                <li>Ban Tổ Chức có toàn quyền xét duyệt hoặc loại bỏ các lá thư vi phạm quy định.</li>
+                <li>Các lá thư hợp lệ có thể được sử dụng cho mục đích trưng bày, truyền thông và quảng bá trong khuôn khổ chiến dịch Đại Việt Kỳ Nhân, bao gồm cả sự kiện trực tiếp tại TP.HCM và các kênh truyền thông trực tuyến.</li>
+                <li>Việc tham gia gửi thư đồng nghĩa với việc người viết đồng ý cho phép Ban Tổ Chức sử dụng nội dung thư cho các hoạt động nêu trên, không yêu cầu thù lao hoặc quyền lợi phát sinh.</li>
+              </ul>
             </div>
           </div>
 
