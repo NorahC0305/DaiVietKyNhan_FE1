@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery, useMutation, useQueryClient, queryOptions } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery, useMutation, useQueryClient, queryOptions, infiniteQueryOptions } from "@tanstack/react-query";
 import letterService from "@services/letter";
 import { ILetterResponseModel } from "@models/letter/response";
 import { ILetterEntity, LetterSchema } from "@models/letter/entity";
@@ -12,6 +12,7 @@ export interface UseLettersParams {
     qs?: string;
     currentPage?: number;
     pageSize?: number;
+    filterByUserId?: boolean;
 }
 
 // Query keys
@@ -19,6 +20,8 @@ export const letterKeys = {
     all: ["letters"] as const,
     lists: () => [...letterKeys.all, "list"] as const,
     list: (params?: UseLettersParams) => [...letterKeys.lists(), params] as const,
+    infinite: () => [...letterKeys.all, "infinite"] as const,
+    infiniteList: (params?: Omit<UseLettersParams, "currentPage">) => [...letterKeys.infinite(), params] as const,
     details: () => [...letterKeys.all, "detail"] as const,
     detail: (id: number) => [...letterKeys.details(), id] as const,
 };
@@ -32,7 +35,8 @@ export const getLetterQueryOptions = (params?: UseLettersParams) => {
                 const response = await letterService.getLetters(
                     params?.qs,
                     params?.currentPage,
-                    params?.pageSize
+                    params?.pageSize,
+                    params?.filterByUserId
                 ) as ILetterResponseModel;
 
                 if (response.statusCode === 200 && response.data) {
@@ -55,6 +59,55 @@ export const letterOptions = getLetterQueryOptions({
     currentPage: 1,
     pageSize: 10,
 });
+
+// Infinite query options factory function
+export interface UseInfiniteLettersParams {
+    qs?: string;
+    pageSize?: number;
+    filterByUserId?: boolean;
+}
+
+export const getInfiniteLetterQueryOptions = (params?: UseInfiniteLettersParams) => {
+    const pageSize = params?.pageSize || 20;
+    
+    return infiniteQueryOptions({
+        queryKey: letterKeys.infiniteList({
+            qs: params?.qs,
+            pageSize: pageSize,
+            filterByUserId: params?.filterByUserId,
+        }),
+        queryFn: async ({ pageParam = 1 }) => {
+            try {
+                const response = await letterService.getLetters(
+                    params?.qs,
+                    pageParam,
+                    pageSize,
+                    params?.filterByUserId
+                ) as ILetterResponseModel;
+
+                if (response.statusCode === 200 && response.data) {
+                    return response.data;
+                }
+                throw new Error(response.message || "Failed to fetch letters");
+            } catch (error) {
+                console.error("Error fetching letters:", error);
+                throw error;
+            }
+        },
+        initialPageParam: 1,
+        getNextPageParam: (lastPage) => {
+            if (!lastPage?.pagination) return undefined;
+            const { current, totalPage } = lastPage.pagination;
+            return current < totalPage ? current + 1 : undefined;
+        },
+        staleTime: 30 * 1000, // 30 seconds
+    });
+};
+
+// Hook for infinite letters query
+export const useInfiniteLetters = (params?: UseInfiniteLettersParams) => {
+    return useInfiniteQuery(getInfiniteLetterQueryOptions(params));
+};
 
 // Query options factory function for single letter
 export const getLetterByIdQueryOptions = (letterId: number) => {

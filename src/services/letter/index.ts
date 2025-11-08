@@ -5,7 +5,7 @@ const letterService = {
     sendLetter: async (data: ISendLetterRequest) => {
         return await http.post("/letter", data, { cache: "no-store" });
     },
-    getLetters: async (qs?: string, currentPage?: number, pageSize?: number) => {
+    getLetters: async (qs?: string, currentPage?: number, pageSize?: number, filterByUserId?: boolean) => {
         const parts: string[] = [];
         if (qs && qs.length > 0) {
             parts.push(`qs=${encodeURIComponent(qs)}`);
@@ -15,6 +15,9 @@ const letterService = {
         }
         if (pageSize !== undefined) {
             parts.push(`pageSize=${pageSize}`);
+        }
+        if (filterByUserId !== undefined) {
+            parts.push(`filterByUserId=${filterByUserId}`);
         }
         const queryString = parts.length ? `?${parts.join("&")}` : "";
         const url = `/letter${queryString}`;
