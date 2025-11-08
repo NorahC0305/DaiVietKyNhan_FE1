@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import { useInfiniteLetters } from "@hooks/use-letter-queries";
 import { createPortal } from "react-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getLetterQueryOptions } from "@hooks/use-letter-queries";
 import { ILetterEntity } from "@models/letter/entity";
 import { DateMonthYear } from "@utils/Date";
+import ButtonImage from "@components/Atoms/ButtonImage";
 
 type DanhSachVietThuProps = {
   isOpen: boolean;
@@ -20,20 +20,60 @@ const DanhSachVietThu = ({
   onBack,
   onOpenDetail,
 }: DanhSachVietThuProps) => {
-  // Fetch PUBLIC letters
+  // State for filter - default to false (show all letters)
+  const [filterByUserId, setFilterByUserId] = useState<boolean>(false);
+  
+  // Ref for scroll container
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Fetch PUBLIC letters with infinite scroll
   const {
-    data: lettersData,
+    data,
     isLoading,
     isError,
-  } = useQuery(
-    getLetterQueryOptions({
-      qs: "sort:-id,status=PUBLIC",
-      currentPage: 1,
-      pageSize: 100, // Get more letters to display
-    })
-  );
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteLetters({
+    qs: "sort:-id,status=PUBLIC",
+    pageSize: 20,
+    filterByUserId: filterByUserId,
+  });
 
-  const letters = lettersData?.results || [];
+  // Flatten all pages into a single array of letters
+  const letters = useMemo(() => {
+    return data?.pages.flatMap((page) => page.results) || [];
+  }, [data]);
+
+  // Reset scroll position when modal opens or filter changes
+  useEffect(() => {
+    if (scrollContainerRef.current && isOpen) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [isOpen, filterByUserId]);
+
+  // Handle scroll to load more
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer || !isOpen) return;
+
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = scrollContainer;
+      // Load more when user scrolls to within 100px of the bottom
+      if (
+        scrollHeight - scrollTop - clientHeight < 100 &&
+        hasNextPage &&
+        !isFetchingNextPage
+      ) {
+        fetchNextPage();
+      }
+    };
+
+    scrollContainer.addEventListener("scroll", handleScroll);
+    return () => {
+      scrollContainer.removeEventListener("scroll", handleScroll);
+    };
+  }, [isOpen, hasNextPage, isFetchingNextPage, fetchNextPage]);
   const handleBack = () => {
     if (onBack) {
       onBack();
@@ -125,8 +165,33 @@ const DanhSachVietThu = ({
                       </span>
                     </div>
 
+                    {/* Filter Buttons */}
+                    <div className="flex justify-center items-center gap-4 mb-4">
+                      <ButtonImage
+                        onClick={() => setFilterByUserId(false)}
+                        className={filterByUserId === false ? "opacity-100" : "opacity-70"}
+                        width={120}
+                        height={50}
+                        classNameText="text-sm"
+                      >
+                        Toàn bộ thư
+                      </ButtonImage>
+                      <ButtonImage
+                        onClick={() => setFilterByUserId(true)}
+                        className={filterByUserId === true ? "opacity-100" : "opacity-70"}
+                        width={120}
+                        height={50}
+                        classNameText="text-sm"
+                      >
+                        Của tôi
+                      </ButtonImage>
+                    </div>
+
                     {/* List */}
-                    <div className="grid lg:grid-cols-3 grid-cols-2 h-[75%] gap-5 overflow-y-auto px-3">
+                    <div 
+                      ref={scrollContainerRef}
+                      className="grid lg:grid-cols-3 grid-cols-2 h-[68%] gap-5 overflow-y-auto px-3"
+                    >
                       {isLoading ? (
                         <div className="col-span-full flex justify-center items-center py-10">
                           <p className="text-secondary text-lg">Đang tải...</p>
@@ -210,6 +275,20 @@ const DanhSachVietThu = ({
                             </div>
                           </div>
                         ))
+                      )}
+                      
+                      {/* Loading indicator for fetching next page */}
+                      {isFetchingNextPage && (
+                        <div className="col-span-full flex justify-center items-center py-4">
+                          <p className="text-secondary text-sm">Đang tải thêm...</p>
+                        </div>
+                      )}
+                      
+                      {/* End of list message */}
+                      {!hasNextPage && letters.length > 0 && (
+                        <div className="col-span-full flex justify-center items-center py-4">
+                          <p className="text-secondary text-sm">Đã hiển thị tất cả thư</p>
+                        </div>
                       )}
                     </div>
                   </div>
