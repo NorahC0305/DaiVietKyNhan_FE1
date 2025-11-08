@@ -27,8 +27,7 @@ export default function LetterSentSuccess({
           !
         </p>
         <p className="mt-4 text-secondary text-sm sm:text-base md:text-lg leading-relaxed">
-          Cảm ơn bạn đã chia sẻ những tình cảm của mình. Lá thư của bạn sẽ được
-          gửi đến vị Kỳ Nhân yêu thích.
+          Cảm ơn bạn đã chia sẻ. Lá thư của bạn sẽ được xét duyệt và đăng tải trong hòm thư.
         </p>
       </div>
     </ModalBackdrop>

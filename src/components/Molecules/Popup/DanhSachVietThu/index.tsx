@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import { useInfiniteLetters } from "@hooks/use-letter-queries";
+import { createPortal } from "react-dom";
 import { ILetterEntity } from "@models/letter/entity";
 import { DateMonthYear } from "@utils/Date";
 import ButtonImage from "@components/Atoms/ButtonImage";
@@ -89,10 +90,14 @@ const DanhSachVietThu = ({
     }
     onClose();
   };
-  return (
+
+  // Use React Portal to render modal at root level
+  if (typeof window === "undefined") return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -293,7 +298,8 @@ const DanhSachVietThu = ({
           </motion.div>
         </div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 
