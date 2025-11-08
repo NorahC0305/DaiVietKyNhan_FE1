@@ -41,7 +41,7 @@ const ContentChuong4 = () => {
             </div>
 
             {/* --- Content 2 --- */}
-            <div className="px-10 mt-6 flex items-center justify-between">
+            <div className="px-10 mt-6 mb-6 flex items-center justify-between">
                 <div className="relative w-[300px] h-[350px]">
                     <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760869022/4_logo_1_1_epeehj.png' alt="NgonLuaTat" fill />
                 </div>
@@ -72,12 +72,35 @@ const ContentChuong3 = () => {
             </div>
 
             {/* --- Content 2 --- */}
-            <div className="px-10 mt-6 flex items-center justify-between">
+            <div className="px-10 mt-6 mb-6 flex items-center justify-between">
                 <div className="relative w-[240px] h-[200px]">
                     <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760868510/l%E1%BB%ADa_t%E1%BA%AFt_1_jdahkz.svg' alt="NgonLuaTat" fill />
                 </div>
                 <div className="w-[60%] ml-10">
                     <span className="text-secondary lg:text-xl text-base text-justify mb-0.5 leading-relaxed">Và rồi, khi sức mạnh đủ lớn, bóng tối ấy bắt đầu len lỏi vào Kỳ Giới – nơi lẽ ra chỉ có ánh sáng của ký ức và niềm tin tồn tại. Biến cố ập đến khi nó thổi tắt Kỳ Linh Việt Hỏa, dập tắt ánh sáng thiêng liêng vốn nuôi dưỡng linh hồn đất Việt. Hậu quả là toàn bộ các Kỳ Nhân – những danh nhân đã góp phần làm nên linh hồn dân tộc – bị phong ấn trong những  cuộn giấy cổ.</span>
+                </div>
+            </div>
+
+            {/* --- Content 3 --- */}
+            <div className="px-10 mt-6 mb-6 flex items-center justify-between">
+                <div className="w-[50%] mr-10">
+                    <span className="text-secondary lg:text-xl text-base text-justify mb-0.5 leading-relaxed">Và rồi, khi sức mạnh đủ lớn, bóng tối ấy bắt đầu len lỏi vào Kỳ Giới – nơi lẽ ra chỉ có ánh sáng của ký ức và niềm tin tồn tại. Biến cố ập đến khi nó thổi tắt Kỳ Linh Việt Hỏa, dập tắt ánh sáng thiêng liêng vốn nuôi dưỡng linh hồn đất Việt. Hậu quả là toàn bộ các Kỳ Nhân – những danh nhân đã góp phần làm nên linh hồn dân tộc – bị phong ấn trong những  cuộn giấy cổ.</span>
+                </div>
+                <div className="relative lg:w-[350px] lg:h-[250px] w-[250px] h-[150px]">
+                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1762617362/557595175_1129889679256040_6828254329627511677_n_1_huveib.png' alt="NgonLuaTat" fill />
+                </div>
+            </div>
+
+            {/* --- Content 4 --- */}
+            <div className="px-10 mt-6 mb-6 flex items-center justify-between">
+                <div className="relative lg:w-[350px] lg:h-[550px] w-[250px] h-[400px]">
+                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1762617364/sa%CC%81ch_ta%CC%81ch_ne%CC%82%CC%80n_1_mcxjjg.png' alt="NgonLuaTat" fill />
+                </div>
+                <div className="w-[50%] ml-10">
+                    <span className="text-secondary lg:text-xl text-base text-justify mb-0.5 leading-relaxed">Trước biến cố ấy, Tứ Bất Tử không thể khoanh tay đứng nhìn. Họ cảm nhận rõ bóng tối đang len sâu vào linh hồn dân tộc, khiến ánh lửa ký ức dần lụi tàn. Nhưng là những đấng thần linh, họ hiểu hơn ai hết rằng vận mệnh của một dân tộc phải do chính con người của dân tộc ấy quyết định.
+                        <br />
+                        <br />
+                        Vì vậy, họ chọn cách gửi gắm vào hậu thế. Tứ Bất Tử hợp lực, kết tụ ánh sáng còn sót lại của Kỳ Linh Việt Hỏa vào một cuốn sách và gửi nó xuống Nhân Giới, chờ đợi người mở ra. Đó chính là cánh cổng dẫn đến Kỳ Giới dành cho người hữu duyên tìm được. Và người đó không ai khác, chính là bạn - một Kỳ Chủ mang trong mình sứ mệnh KHAI NHÂN MỞ ẤN.</span>
                 </div>
             </div>
         </>
@@ -104,7 +127,7 @@ const ContentChuong2 = () => {
             </div>
 
             {/* --- Content 2 --- */}
-            <div className="px-10 mt-6 flex items-center justify-between">
+            <div className="px-10 mt-6 mb-6 flex items-center justify-between">
                 <span className="text-secondary lg:text-xl text-base text-justify leading-relaxed">Thế nhưng, chúng không thể khuất phục được ý chí quật cường của người Việt – ngọn lửa ấy đã được rèn trong máu và niềm tin của muôn thế hệ. Không thể chiến thắng trực diện, Tà Ảnh rút vào bóng tối, tồn tại dai dẳng, âm thầm len vào tâm trí con người. Không thể chiến thắng, Tà Ảnh rút vào bóng tối, chọn một cách tồn tại khác. Nó không xóa bỏ ký ức, mà lăm le tắt đi những cảm xúc trong ký ức ấy.
                     <br />
                     <br />
@@ -135,7 +158,7 @@ const ContentChuong1 = () => {
             </div>
 
             {/* --- Content 2 --- */}
-            <div className="px-10 mt-6 flex items-center justify-between">
+            <div className="px-10 mt-6 mb-6 flex items-center justify-between">
                 <div className="relative w-[300px] h-[280px]">
                     <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760865503/POST_TBT_1_js9xab.png' alt="Post TBT 1" fill />
                 </div>
@@ -179,7 +202,7 @@ const ContentKhaiNhanMoAn = ({ isHidden, an }: { isHidden: boolean, an: string }
 
     return (
         <div className={`mt-10 w-full flex items-center justify-center ${isHidden ? 'hidden' : ''}`}>
-            <div className="bg-[#a4a89d29] lg:w-[93%] w-[98%] h-full rounded-xl py-10">
+            <div className="bg-[#a4a89d29] lg:w-[93%] w-[98%] lg:h-full rounded-xl lg:py-10">
                 <h1
                     className="font-bd-street-sign text-center lg:text-6xl text-3xl mb-10"
                     style={{

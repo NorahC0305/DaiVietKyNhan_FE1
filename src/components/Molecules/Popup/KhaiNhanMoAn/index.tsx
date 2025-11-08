@@ -117,7 +117,7 @@ export default function KhaiNhanMoAn({
                         </div>
 
                         <div
-                            className={`relative flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] bg-[#6E6B63] rounded-xl border-2 border-[#2B638F] transition-all duration-300 ${isCharacterClickable('Chử Đồng Tử')
+                            className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] transition-all duration-300 ${isCharacterClickable('Chử Đồng Tử')
                                 ? `cursor-pointer ${an === 'Chử Đồng Tử' ? 'scale-105' : ''}`
                                 : 'cursor-not-allowed opacity-50'
                                 }`}
@@ -129,18 +129,18 @@ export default function KhaiNhanMoAn({
                             {isCharacterClickable('Chử Đồng Tử') ? (
                                 <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760862149/Ch%E1%BB%AD_%C4%90%E1%BB%93ng_T%E1%BB%AD_-_Ch%C6%B0%C6%A1ng_2_sxhcav.png' alt="Chử Đồng Tử - Chương 2" fill className="relative z-10" />
                             ) : (
-                                <div className="absolute inset-0.5 bg-[#6E6B63] rounded-xl z-10"></div>
+                                <div className="absolute inset-0.5 bg-[#6E6B63] rounded-xl z-10" />
                             )}
                         </div>
                         <div
-                            className={`relative flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] bg-[#6E6B63] rounded-xl border-2 border-[#EF493D] transition-all duration-300 ${isCharacterClickable('Thánh Gióng')
+                            className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] transition-all duration-300 ${isCharacterClickable('Thánh Gióng')
                                 ? `cursor-pointer ${an === 'Thánh Gióng' ? 'scale-105' : ''}`
                                 : 'cursor-not-allowed opacity-50'
                                 }`}
                             onClick={() => handleSetAn('Thánh Gióng')}
                         >
                             {an === 'Thánh Gióng' && isCharacterClickable('Thánh Gióng') && (
-                                <div className="absolute -inset-1 rounded-2xl border border-transparent bg-gradient-to-r from-red-400 via-pink-500 to-red-400 animate-led-border -z-10" />
+                                <div className="absolute inset-0 rounded-2xl border border-transparent bg-gradient-to-r from-red-400 via-pink-500 to-red-400 animate-led-border -z-10" />
                             )}
                             {isCharacterClickable('Thánh Gióng') ? (
                                 <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760862212/Th%C3%A1nh_Gi%C3%B3ng_-_Ch%C6%B0%C6%A1ng_3_wlwpux.png' alt="Thánh Gióng - Chương 3" fill className="relative z-10" />
@@ -149,7 +149,7 @@ export default function KhaiNhanMoAn({
                             )}
                         </div>
                         <div
-                            className={`relative flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] bg-[#6E6B63] rounded-xl border-2 border-[#8D3BBB] transition-all duration-300 ${isCharacterClickable('Liễu Hạnh')
+                            className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] transition-all duration-300 ${isCharacterClickable('Liễu Hạnh')
                                 ? `cursor-pointer ${an === 'Liễu Hạnh' ? 'scale-105' : ''}`
                                 : 'cursor-not-allowed opacity-50'
                                 }`}
