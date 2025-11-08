@@ -4,7 +4,7 @@ import { useQuery, useMutation, useQueryClient, queryOptions } from "@tanstack/r
 import letterService from "@services/letter";
 import { ILetterResponseModel } from "@models/letter/response";
 import { ILetterEntity } from "@models/letter/entity";
-import { ISendLetterRequest } from "@models/letter/request";
+import { ISendLetterRequest, IUpdateLetterStatusRequest } from "@models/letter/request";
 import { toast } from "react-toastify";
 import { IBackendResponse } from "@models/backend";
 
@@ -145,6 +145,73 @@ export const useSendLetter = () => {
         onError: (error: Error) => {
             console.error("Error sending letter:", error);
             toast.error(error.message || "Không thể gửi thư");
+        },
+    });
+};
+
+// Hook to update multiple letter statuses
+export const useUpdateLetterStatus = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: async (data: IUpdateLetterStatusRequest) => {
+            const response = await letterService.updateLetterStatus(data) as IBackendResponse<any>;
+
+            if (response.statusCode === 200 || response.statusCode === 201) {
+                return response;
+            }
+            throw new Error(response.message || "Failed to update letter status");
+        },
+        // Optimistic update
+        onMutate: async ({ letters, status }) => {
+            // Cancel any outgoing refetches
+            await queryClient.cancelQueries({ queryKey: letterKeys.all });
+
+            // Snapshot the previous value for all queries
+            const previousQueries: Array<[any, any]> = [];
+            const letterIds = letters.map(l => l.letterId);
+
+            // Update all matching queries optimistically
+            queryClient.getQueriesData({ queryKey: letterKeys.lists() }).forEach(([queryKey, queryData]) => {
+                if (queryData) {
+                    // Save previous state
+                    previousQueries.push([queryKey, queryData]);
+
+                    // Optimistically update
+                    const updatedData = queryData as ILetterResponseModel['data'];
+                    if (updatedData?.results) {
+                        queryClient.setQueryData(queryKey, {
+                            ...updatedData,
+                            results: updatedData.results.map((letter: ILetterEntity) =>
+                                letterIds.includes(letter.id)
+                                    ? { ...letter, status: status as typeof letter.status }
+                                    : letter
+                            ),
+                        });
+                    }
+                }
+            });
+
+            // Return a context object with the snapshotted value
+            return { previousQueries };
+        },
+        // If the mutation fails, use the context returned from onMutate to roll back
+        onError: (error: Error, variables, context) => {
+            // Rollback all queries
+            if (context?.previousQueries) {
+                context.previousQueries.forEach(([queryKey, data]) => {
+                    queryClient.setQueryData(queryKey, data);
+                });
+            }
+            console.error("Error updating letter status:", error);
+            toast.error(error.message || "Không thể cập nhật trạng thái thư");
+        },
+        // Always refetch after error or success to ensure data consistency
+        onSettled: () => {
+            queryClient.invalidateQueries({ queryKey: letterKeys.all });
+        },
+        onSuccess: (_, variables) => {
+            toast.success(`Cập nhật trạng thái ${variables.letters.length} thư thành công!`);
         },
     });
 };

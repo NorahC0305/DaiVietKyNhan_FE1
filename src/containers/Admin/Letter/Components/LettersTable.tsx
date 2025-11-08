@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/Atoms/ui/table";
 import { Badge } from "@/components/Atoms/ui/badge";
 import { Button } from "@/components/Atoms/ui/button";
@@ -10,6 +10,7 @@ import { EnhancedPagination } from "@/components/Atoms/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/Atoms/ui/select";
 import { Rows } from "lucide-react";
 import { LETTER_ENUMS } from "@constants/letter";
+import { Checkbox } from "@/components/Atoms/ui/checkbox";
 
 interface LettersTableProps {
     rows?: ILetterEntity[];
@@ -19,6 +20,8 @@ interface LettersTableProps {
     sortBy?: string;
     sortOrder?: 'asc' | 'desc';
     isLoading?: boolean;
+    onBulkStatusUpdate?: (letters: Array<{ letterId: number; fromUserId: number }>, status: string) => void;
+    isUpdatingStatus?: boolean;
     pagination?: {
         currentPage: number;
         totalPages: number;
@@ -37,11 +40,61 @@ const LettersTable: React.FC<LettersTableProps> = ({
     sortBy,
     sortOrder = 'desc',
     isLoading = false,
+    onBulkStatusUpdate,
+    isUpdatingStatus = false,
     pagination,
 }) => {
+    const [selectedLetters, setSelectedLetters] = useState<Set<number>>(new Set());
+    const [bulkStatus, setBulkStatus] = useState<string>("");
+
     const handleSort = (field: string) => {
         onSort?.(field);
     };
+
+    // Select all functionality
+    const allSelected = useMemo(() => {
+        return rows.length > 0 && selectedLetters.size === rows.length;
+    }, [rows.length, selectedLetters.size]);
+
+    const handleSelectAll = (checked: boolean) => {
+        if (checked) {
+            setSelectedLetters(new Set(rows.map(letter => letter.id)));
+        } else {
+            setSelectedLetters(new Set());
+        }
+    };
+
+    const handleSelectLetter = (letterId: number, checked: boolean) => {
+        const newSelected = new Set(selectedLetters);
+        if (checked) {
+            newSelected.add(letterId);
+        } else {
+            newSelected.delete(letterId);
+        }
+        setSelectedLetters(newSelected);
+    };
+
+    const handleBulkStatusUpdate = () => {
+        if (!bulkStatus || selectedLetters.size === 0 || !onBulkStatusUpdate) {
+            return;
+        }
+
+        const lettersToUpdate = rows
+            .filter(letter => selectedLetters.has(letter.id))
+            .map(letter => ({
+                letterId: letter.id,
+                fromUserId: letter.fromUserId,
+            }));
+
+        onBulkStatusUpdate(lettersToUpdate, bulkStatus);
+        setSelectedLetters(new Set());
+        setBulkStatus("");
+    };
+
+    // Reset selected letters when rows change (e.g., pagination)
+    React.useEffect(() => {
+        setSelectedLetters(new Set());
+    }, [rows]);
 
     const SortIcon = ({ field }: { field: string }) => {
         if (sortBy !== field) {
@@ -106,10 +159,57 @@ const LettersTable: React.FC<LettersTableProps> = ({
 
     return (
         <div className="space-y-4">
+            {/* Bulk Actions Bar */}
+            {selectedLetters.size > 0 && (
+                <div className="flex items-center gap-3 p-3 bg-muted rounded-md border border-border">
+                    <span className="text-sm text-foreground font-medium">
+                        Đã chọn: {selectedLetters.size} thư
+                    </span>
+                    <div className="flex items-center gap-2">
+                        <Select value={bulkStatus} onValueChange={setBulkStatus}>
+                            <SelectTrigger className="w-[150px] bg-background border-border text-foreground h-9">
+                                <SelectValue placeholder="Chọn trạng thái" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-card border-border">
+                                <SelectItem value={LETTER_ENUMS.LETTER_STATUS.PUBLIC}>Công khai</SelectItem>
+                                <SelectItem value={LETTER_ENUMS.LETTER_STATUS.PENDING}>Chờ duyệt</SelectItem>
+                                <SelectItem value={LETTER_ENUMS.LETTER_STATUS.REMOVE}>Đã xóa</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <Button
+                            onClick={handleBulkStatusUpdate}
+                            disabled={!bulkStatus || isUpdatingStatus}
+                            size="sm"
+                            className="h-9"
+                        >
+                            {isUpdatingStatus ? "Đang cập nhật..." : "Cập nhật"}
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                setSelectedLetters(new Set());
+                                setBulkStatus("");
+                            }}
+                            variant="ghost"
+                            size="sm"
+                            className="h-9"
+                        >
+                            Hủy
+                        </Button>
+                    </div>
+                </div>
+            )}
+
             <div className="rounded-md border border-border bg-background">
                 <Table>
                     <TableHeader>
                         <TableRow className="hover:bg-muted/50">
+                            <TableHead className="w-1">
+                                <Checkbox
+                                    checked={allSelected}
+                                    onCheckedChange={handleSelectAll}
+                                    aria-label="Select all"
+                                />
+                            </TableHead>
                             <TableHead
                                 className="text-foreground font-medium cursor-pointer hover:bg-gray-50 select-none"
                                 onClick={() => handleSort('id')}
@@ -155,6 +255,13 @@ const LettersTable: React.FC<LettersTableProps> = ({
                     <TableBody>
                         {rows.map((letter) => (
                             <TableRow key={letter.id} className="hover:bg-muted/50">
+                                <TableCell>
+                                    <Checkbox
+                                        checked={selectedLetters.has(letter.id)}
+                                        onCheckedChange={(checked) => handleSelectLetter(letter.id, checked as boolean)}
+                                        aria-label={`Select letter ${letter.id}`}
+                                    />
+                                </TableCell>
                                 <TableCell className="text-foreground">{letter.id}</TableCell>
                                 <TableCell className="text-foreground">
                                     <div className="flex items-center gap-2">

@@ -11,3 +11,16 @@ export const SendLetterRequestSchema = z.object({
 
 export type ISendLetterRequest = z.infer<typeof SendLetterRequestSchema>;
 //-------------------End-------------------//
+
+/**
+ * Update letter status request schema
+ */
+export const UpdateLetterStatusRequestSchema = z.object({
+    letters: z.array(z.object({
+        letterId: z.number(),
+        fromUserId: z.number(),
+    })),
+    status: z.string(),
+});
+
+export type IUpdateLetterStatusRequest = z.infer<typeof UpdateLetterStatusRequestSchema>;

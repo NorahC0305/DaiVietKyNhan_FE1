@@ -1,5 +1,5 @@
 import http from "@configs/fetch";
-import { ISendLetterRequest } from "@models/letter/request";
+import { ISendLetterRequest, IUpdateLetterStatusRequest } from "@models/letter/request";
 
 const letterService = {
     sendLetter: async (data: ISendLetterRequest) => {
@@ -23,6 +23,9 @@ const letterService = {
     },
     updateLetter: async (letterId: number, data: Partial<ISendLetterRequest & { status?: string }>) => {
         return await http.put(`/letter/${letterId}`, data);
+    },
+    updateLetterStatus: async (data: IUpdateLetterStatusRequest) => {
+        return await http.put("/letter/status", data);
     }
 };
 
