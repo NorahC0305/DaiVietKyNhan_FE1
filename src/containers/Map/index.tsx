@@ -249,14 +249,13 @@ export default function MapPageClient({
   // Function to check if all previous 4 lands are completed
   const areAllPreviousLandsCompleted = (): boolean => {
     // Check if lands 1, 2, 3, 4 are all completed
-    // For "Kỳ Linh Việt Hỏa" to unlock, all 4 previous lands should be unlocked (not locked)
+    // For "Kỳ Linh Việt Hỏa" to unlock, all 4 previous lands must be COMPLETED
     const requiredLandIds = [1, 2, 3, 4];
 
     return requiredLandIds.every((landId) => {
       const userLandData = userLand?.find((item) => item.landId === landId);
-      // Land is considered "completed" if it exists and is not LOCKED
-      // This means PENDING or UNLOCKED status both allow progression
-      return userLandData && userLandData.status !== LAND.LAND_STATUS.LOCKED;
+      // Land is considered "completed" only if status is COMPLETED
+      return userLandData && userLandData.status === LAND.LAND_STATUS.COMPLETED;
     });
   };
 

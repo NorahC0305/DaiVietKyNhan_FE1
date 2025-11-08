@@ -1,18 +1,19 @@
 "use client";
 
+import React from "react";
 import Image from "next/image";
 import ModalBackdrop from "../../../Atoms/ModalBackdrop";
 import ButtonImage from "../../../Atoms/ButtonImage";
 import { getCurrentVietnamTime } from "@/utils/ReleaseDateUtils";
 
-type LetterGuideProps = {
+export type LetterGuideProps = {
   isOpen: boolean;
   onClose: () => void;
   onNext?: () => void;
   onBack?: () => void;
 };
 
-export default function LetterGuide({ isOpen, onClose, onNext, onBack }: LetterGuideProps) {
+const LetterGuide: React.FC<LetterGuideProps> = ({ isOpen, onClose, onNext, onBack }) => {
   // Check if current date is after October 27th, 2024
   const isParticipationEnabled = () => {
     const currentDate = getCurrentVietnamTime();
@@ -133,4 +134,6 @@ export default function LetterGuide({ isOpen, onClose, onNext, onBack }: LetterG
       </div>
     </ModalBackdrop>
   );
-}
+};
+
+export default LetterGuide;

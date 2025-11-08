@@ -6,7 +6,7 @@ import Toolbar from './Components/Toolbar';
 import LettersTable from './Components/LettersTable';
 import LetterDetailDialog from './Components/LetterDetailDialog';
 import { ILetterEntity } from '@models/letter/entity';
-import { useUpdateLetter, getLetterQueryOptions } from '@hooks/use-letter-queries';
+import { useUpdateLetter, useUpdateLetterStatus, getLetterQueryOptions } from '@hooks/use-letter-queries';
 import { useQuery } from '@tanstack/react-query';
 
 const LetterPage = () => {
@@ -77,6 +77,10 @@ const LetterPage = () => {
     // Update letter mutation
     const updateLetterMutation = useUpdateLetter();
     const { isPending: isUpdating } = updateLetterMutation;
+
+    // Bulk update letter status mutation
+    const updateLetterStatusMutation = useUpdateLetterStatus();
+    const { isPending: isUpdatingStatus } = updateLetterStatusMutation;
 
     // Use fetched data
     const listLetters = lettersData?.results ?? [];
@@ -193,6 +197,19 @@ const LetterPage = () => {
         }
     };
 
+    const handleBulkStatusUpdate = async (letters: Array<{ letterId: number; fromUserId: number }>, status: string) => {
+        try {
+            await updateLetterStatusMutation.mutateAsync({
+                letters,
+                status,
+            });
+            // Note: Data will be automatically updated via TanStack Query's optimistic update and refetch
+        } catch (error) {
+            // Error is already handled in the mutation's onError
+            console.error("Failed to update letter status:", error);
+        }
+    };
+
     return (
         <div className="space-y-6">
             <Card className="border-gray-300 bg-admin-primary">
@@ -224,6 +241,8 @@ const LetterPage = () => {
                         sortBy={sortBy}
                         sortOrder={sortOrder as 'asc' | 'desc'}
                         isLoading={isLoading}
+                        onBulkStatusUpdate={handleBulkStatusUpdate}
+                        isUpdatingStatus={isUpdatingStatus}
                         pagination={{
                             currentPage: pagination.current,
                             totalPages: pagination.totalPage,

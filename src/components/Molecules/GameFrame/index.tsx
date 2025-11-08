@@ -27,6 +27,7 @@ import { usePathname, useRouter } from "next/navigation";
 import ChiTietThu from "../Popup/ChiTietThu";
 import VietThuGuiHauThe from "../Popup/VietThuGuiHauThe";
 import DanhSachVietThu from "../Popup/DanhSachVietThu";
+import { ILetterEntity } from "@models/letter/entity";
 
 interface GameFrameProps {
   children: React.ReactNode;
@@ -111,6 +112,9 @@ export const GameFrame: React.FC<GameFrameProps> = ({
 
   const [isChiTietThuModalOpen, setIsChiTietThuModalOpen] =
     useState<boolean>(false);
+  
+  const [selectedLetterId, setSelectedLetterId] = useState<number | null>(null);
+  const [lettersList, setLettersList] = useState<ILetterEntity[]>([]);
 
   const handleLetterGuideViewLetters = useCallback(() => {
     setIsLetterGuideModalOpen(false);
@@ -132,9 +136,18 @@ export const GameFrame: React.FC<GameFrameProps> = ({
     setIsLetterGuideModalOpen(true);
   }, []);
 
-  const handleDanhSachOpenDetail = useCallback(() => {
+  const handleDanhSachOpenDetail = useCallback((letter: ILetterEntity, letters: ILetterEntity[]) => {
+    console.log('Opening detail for letter:', letter.id); // Debug log
+    // Store letters list for navigation
+    setLettersList(letters);
+    // Set letterId first, then close current modal and open detail modal
+    setSelectedLetterId(letter.id);
     setIsDanhSachVietThuModalOpen(false);
     setIsChiTietThuModalOpen(true);
+  }, []);
+
+  const handleLetterChange = useCallback((letterId: number) => {
+    setSelectedLetterId(letterId);
   }, []);
 
   const handleChiTietBack = useCallback(() => {
@@ -448,8 +461,16 @@ export const GameFrame: React.FC<GameFrameProps> = ({
         onOpenDetail={handleDanhSachOpenDetail}
       />
       <ChiTietThu
+        key={selectedLetterId || 'chi-tiet-thu'} // Force re-render when letterId changes
         isOpen={isChiTietThuModalOpen}
-        onClose={() => setIsChiTietThuModalOpen(false)}
+        letterId={selectedLetterId}
+        letters={lettersList}
+        onLetterChange={handleLetterChange}
+        onClose={() => {
+          setIsChiTietThuModalOpen(false);
+          setSelectedLetterId(null);
+          setLettersList([]);
+        }}
         onBack={handleChiTietBack}
         onParticipate={handleChiTietParticipate}
       />
