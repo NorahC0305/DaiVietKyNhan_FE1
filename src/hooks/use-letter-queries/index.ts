@@ -3,7 +3,7 @@
 import { useQuery, useMutation, useQueryClient, queryOptions } from "@tanstack/react-query";
 import letterService from "@services/letter";
 import { ILetterResponseModel } from "@models/letter/response";
-import { ILetterEntity } from "@models/letter/entity";
+import { ILetterEntity, LetterSchema } from "@models/letter/entity";
 import { ISendLetterRequest, IUpdateLetterStatusRequest } from "@models/letter/request";
 import { toast } from "react-toastify";
 import { IBackendResponse } from "@models/backend";
@@ -55,6 +55,28 @@ export const letterOptions = getLetterQueryOptions({
     currentPage: 1,
     pageSize: 10,
 });
+
+// Query options factory function for single letter
+export const getLetterByIdQueryOptions = (letterId: number) => {
+    return queryOptions({
+        queryKey: letterKeys.detail(letterId),
+        queryFn: async () => {
+            try {
+                const response = await letterService.getLetterById(letterId) as IBackendResponse<typeof LetterSchema>;
+
+                if (response.statusCode === 200 && response.data) {
+                    return response.data as ILetterEntity;
+                }
+                throw new Error(response.message || "Failed to fetch letter");
+            } catch (error) {
+                console.error("Error fetching letter:", error);
+                throw error;
+            }
+        },
+        enabled: !!letterId && letterId > 0,
+        staleTime: 30 * 1000, // 30 seconds
+    });
+};
 
 // Hook to update a letter
 export const useUpdateLetter = () => {

@@ -13,13 +13,13 @@ import { toast } from 'react-toastify'
 import { IBackendResponse } from '@models/backend'
 import { z } from 'zod'
 
-type VietThuGuiHauTheProps = {
+export type VietThuGuiHauTheProps = {
     isOpen: boolean
     onClose: () => void
     onBack?: () => void
 }
 
-const VietThuGuiHauThe = ({ isOpen, onClose, onBack }: VietThuGuiHauTheProps) => {
+const VietThuGuiHauThe: React.FC<VietThuGuiHauTheProps> = ({ isOpen, onClose, onBack }) => {
     const [isSubmitting, setIsSubmitting] = useState(false)
 
     const {

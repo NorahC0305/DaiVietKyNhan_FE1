@@ -21,6 +21,9 @@ const letterService = {
 
         return await http.get(url, { cache: "no-store" });
     },
+    getLetterById: async (letterId: number) => {
+        return await http.get(`/letter/${letterId}`, { cache: "no-store" });
+    },
     updateLetter: async (letterId: number, data: Partial<ISendLetterRequest & { status?: string }>) => {
         return await http.put(`/letter/${letterId}`, data);
     },
