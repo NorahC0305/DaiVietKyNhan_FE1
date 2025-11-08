@@ -1,10 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getLetterQueryOptions } from "@hooks/use-letter-queries";
 import { ILetterEntity } from "@models/letter/entity";
 import { DateMonthYear } from "@utils/Date";
+import ButtonImage from "@components/Atoms/ButtonImage";
 
 type DanhSachVietThuProps = {
   isOpen: boolean;
@@ -19,6 +20,14 @@ const DanhSachVietThu = ({
   onBack,
   onOpenDetail,
 }: DanhSachVietThuProps) => {
+  // State for filter - default to false (show all letters)
+  const [isMine, setIsMine] = useState<boolean>(false);
+
+  // Build query string based on isMine filter
+  const queryString = useMemo(() => {
+    return `sort:-id,status=PUBLIC,isMine=${isMine}`;
+  }, [isMine]);
+
   // Fetch PUBLIC letters
   const {
     data: lettersData,
@@ -26,7 +35,7 @@ const DanhSachVietThu = ({
     isError,
   } = useQuery(
     getLetterQueryOptions({
-      qs: "sort:-id,status=PUBLIC",
+      qs: queryString,
       currentPage: 1,
       pageSize: 100, // Get more letters to display
     })
@@ -120,8 +129,30 @@ const DanhSachVietThu = ({
                       </span>
                     </div>
 
+                    {/* Filter Buttons */}
+                    <div className="flex justify-center items-center gap-4 mb-4">
+                      <ButtonImage
+                        onClick={() => setIsMine(false)}
+                        className={isMine === false ? "opacity-100" : "opacity-70"}
+                        width={120}
+                        height={50}
+                        classNameText="text-sm"
+                      >
+                        Toàn bộ thư
+                      </ButtonImage>
+                      <ButtonImage
+                        onClick={() => setIsMine(true)}
+                        className={isMine === true ? "opacity-100" : "opacity-70"}
+                        width={120}
+                        height={50}
+                        classNameText="text-sm"
+                      >
+                        Của tôi
+                      </ButtonImage>
+                    </div>
+
                     {/* List */}
-                    <div className="grid lg:grid-cols-3 grid-cols-2 h-[75%] gap-5 overflow-y-auto px-3">
+                    <div className="grid lg:grid-cols-3 grid-cols-2 h-[68%] gap-5 overflow-y-auto px-3">
                       {isLoading ? (
                         <div className="col-span-full flex justify-center items-center py-10">
                           <p className="text-secondary text-lg">Đang tải...</p>
