@@ -495,7 +495,7 @@ const ChuoiHoatDongSanThuong = ({ onClose, onOpenKyAnDocBao }: { onClose: () => 
                 </div>
 
                 <div className="flex flex-col items-center justify-center mx-10 mt-10">
-                    <div className="relative w-[120px] lg:w-[220px] h-[150px] lg:h-[280px]">
+                    <div className="relative w-[120px] lg:w-[220px] h-[140px] lg:h-[240px]">
                         <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762097672/Gemini_Generated_Image_mnkmapmnkmapmnkm_2_v9zc3l.png" alt="frame" fill className="w-full h-full" />
                     </div>
                     <div className="relative w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] cursor-pointer mt-5" onClick={onOpenKyAnDocBao}>
@@ -534,8 +534,41 @@ const KyAnDocBan = ({ onClose, onBack }: { onClose: () => void; onBack: () => vo
                         </span>
                     </button>
                 </div>
-                <div className="flex flex-col items-center justify-center mx-10 mt-10">
-                    <p className="text-secondary text-center lg:text-xl text-base font-bold">THÔNG TIN VỀ HOẠT ĐỘNG NÀY SẼ ĐƯỢC CẬP NHẬT SAU</p>
+                <div className="flex flex-col items-center justify-center mx-10 lg:mx-16 mt-10">
+                    <h2 className="text-center lg:text-2xl text-lg font-bold text-secondary">KỲ ẤN ĐỘC BẢN – PHẦN THƯỞNG CHO NHỮNG KỲ CHỦ XUẤT SẮC NHẤT</h2>
+
+                    <div>
+                        <p className="text-secondary text-base text-justify leading-relaxed">Vô cùng đặc biệt, chỉ dành cho <b>TOP 15 người có điểm cao nhất toàn hệ thống</b> (tính cả trường hợp trùng điểm).</p>
+                        <p className="text-secondary text-base text-justify leading-relaxed">Những người được vinh danh sẽ nhận phần thưởng <b>độc bản và được custom riêng cho từng người, không ai có thể sở hữu một phần quà thứ hai giống bạn.</b></p>
+
+                        <ul className="list-disc list-inside">
+                            <p className="text-secondary text-base text-justify leading-relaxed"><b>Phần thưởng bao gồm:</b></p>
+                            <li className="text-secondary text-base text-justify leading-relaxed">1 card in hình Đại tướng Võ Nguyên Giáp, chỉ được thiết kế dành riêng cho chiến dịch lần này</li>
+                            <li className="text-secondary text-base text-justify leading-relaxed">1 badge tròn được thiết kế theo Kỳ Văn ứng với vị thần bảo hộ của bạn</li>
+                            <li className="text-secondary text-base text-justify leading-relaxed">1 tấm card “Kỳ Ấn Độc Bản” được thiết kế riêng:</li>
+
+                            <span className="text-secondary text-base text-justify leading-relaxed">- Mặt sau là background lấy cảm hứng từ Kỳ Văn ứng với vị thần bảo hộ của bạn</span>
+                            <span className="text-secondary text-base text-justify leading-relaxed">- Mặt trước được in hình vị Kỳ Nhân yêu thích mà bạn chọn</span>
+                            <span className="text-secondary text-base text-justify leading-relaxed">- Thêm vào đó, được ghi trên mỗi card sẽ có <b>một chữ duy nhất trong một bài thơ. Vì thế thẻ của bạn là duy nhất.</b> Và hỡi những Kỳ Chủ xuất sắc, mỗi người trong các bạn là người nắm giữ một phần trong thông điệp trên các thẻ bài. </span>
+                        </ul>
+
+                        <div className="flex items-center justify-center my-5">
+                            <div className="relative w-[450px] lg:w-[700px] h-[280px] lg:h-[400px] mb-10">
+                                <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762795131/image_9_ftjfb1.png" alt="frame" fill />
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col">
+                            <ul className="list-disc list-inside">
+                                <span className="text-secondary text-base text-justify leading-relaxed"><b>Thời gian & Hướng dẫn nhận thưởng:</b></span>
+                                <li className="text-secondary text-base text-justify leading-relaxed"><b>Hạn chốt bảng xếp hạng: 20h00 ngày 18/11</b></li>
+                                <li className="text-secondary text-base text-justify leading-relaxed">Sau đó, các Kỳ Chủ trong <b>Top 15 số điểm cao nhất</b> (tính cả trường hợp trùng điểm). sẽ nhận được <b>form thông tin qua email</b> các bạn đã dùng để đăng ký tài khoản website) để chọn <b>Kỳ Nhân yêu thích để in lên tấm card</b></li>
+                                <li className="text-secondary text-base text-justify leading-relaxed">Hạn điền form: <b>2 ngày sau khi nhận email.</b></li>
+
+                                <span className="text-secondary text-base text-justify leading-relaxed">Sau khi hoàn tất, <b>Đại Việt Kỳ Nhân</b> sẽ thiết kế và gửi phần quà đến bạn.</span>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div className="flex flex-col items-center justify-center mx-10 mt-10">
                     <div className="relative w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] cursor-pointer" onClick={onBack}>
