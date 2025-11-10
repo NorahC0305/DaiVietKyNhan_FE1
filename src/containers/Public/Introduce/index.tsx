@@ -38,9 +38,160 @@ const SuKienTuongTac = ({ onClose }: { onClose: () => void }) => {
                     </button>
                 </div>
 
-                <p className="text-center text-secondary text-sm lg:text-base font-black mt-10">THÔNG TIN VỀ HOẠT ĐỘNG NÀY SẼ ĐƯỢC CẬP NHẬT SAU</p>
+                <div className="flex flex-col items-center justify-center lg:mx-16 mx-10">
+                    <div className="relative w-[300px] lg:w-[400px] h-[400px] lg:h-[500px] mb-5">
+                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762751940/unnamed_3_1_ypcajn.png" alt="poster" fill />
+                    </div>
+
+                    <div className="">
+                        <p className="text-secondary text-base lg:text-xl text-justify leading-relaxed">Từ những câu chuyện ẩn sâu trong dòng chảy lịch sử Việt, <span className="font-bold text-secondary">“Khai Hoa Huyền Ấn”</span> sẽ đưa bạn bước vào hành trình khai mở những phong ấn, nơi mỗi người tham dự trở thành “Kỳ Chủ” - người trực tiếp giải mã, khám phá và hồi sinh những câu chuyện về các Kỳ Nhân Đại Việt.</p>
+                    </div>
+                    <br />
+                    <div className="">
+                        <p className="text-secondary text-base lg:text-xl text-justify leading-relaxed"><span className="font-bold text-secondary">“Khai Hoa Huyền Ấn”</span> là chương tiếp theo của <span className="font-bold text-secondary">hành trình Khai Nhân Mở Ấn</span>, nơi cánh cổng Kỳ Giới từ không gian trực tuyến được tái hiện giữa đời thực qua chuỗi hoạt động trưng bày và trải nghiệm tương tác. Sự kiện sẽ diễn ra trong <span className="font-bold text-secondary">ba ngày cuối tháng 11/2025</span>, với <span className="font-bold text-secondary">ba hoạt động chính: Showcase Tranh Minh Họa - Chuỗi Talkshow, Giao Lưu - Chạy Trạm Giải Đố Lịch Sử.</span></p>
+                    </div>
+                </div>
+
+                <div className="flex flex-col items-center justify-center lg:mx-16 mx-10">
+                    <h2 className="text-center lg:text-4xl text-3xl font-bd-street-sign text-secondary mt-24 mb-5">SHOWCASE TRANH MINH HỌA</h2>
+
+                    <p className="text-secondary text-base lg:text-xl text-justify leading-relaxed">Khu vực Showcase sẽ <span className="font-bold text-secondary">trưng bày 30-40 tác phẩm minh họa nhân vật lịch sử</span>, được chọn lọc từ gần 500 nhân vật trong kho tư liệu của dự án Đại Việt Kỳ Nhân. Mỗi bức minh họa đều được <span className="font-bold text-secondary">tích hợp mã QR dẫn đến thông tin, tư liệu lịch sử, câu chuyện giai thoại về nhân vật,</span> giúp người xem “mở ấn” từng mảnh ghép lịch sử ngay trên thiết bị của mình.</p>
+
+                    <div className="flex items-center justify-center">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="flex items-center justify-center">
+                                <div className="relative w-[100px] lg:w-[120px] h-[120px] lg:h-[150px] mb-5 mr-4">
+                                    <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762752489/565814567_122269906166021250_7007171700066709869_n_c7sowt.png" alt="poster" fill />
+                                </div>
+                                <div className="relative w-[100px] lg:w-[120px] h-[120px] lg:h-[150px] mb-5">
+                                    <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762752468/576482492_122269906106021250_6495097013342839511_n_h9lymm.png" alt="poster" fill />
+                                </div>
+                            </div>
+
+                            <div className="flex items-center justify-center">
+                                <div className="relative w-[220px] lg:w-[260px] h-[140px] lg:h-[170px] mb-5">
+                                    <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762753246/481976061_968016582110018_4828967741859625264_n_o2h9tr.png" alt="poster" fill />
+                                </div>
+                            </div>
+
+                            <div className="flex items-center justify-center">
+                                <div className="relative w-[220px] lg:w-[260px] h-[140px] lg:h-[170px] mb-5">
+                                    <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762753248/Tha%CC%81nh_1_nmsfe3.png" alt="poster" fill />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col items-start justify-center ml-5 lg:ml-10">
+                            <ul className="list-disc list-inside">
+                                <span className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Ngoài khu trưng bày, người tham gia còn có thể tham gia loạt hoạt động tương tác độc đáo:</span>
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Trải Nghiệm Mặc Giáp</li>
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Trải Nghiệm Việt Phục (dự kiến)</li>
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Trải Nghiệm Boardgame Đại Việt Kỳ Nhân</li>
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Truy Kỳ Nhân - Mở Câu Chuyện</li>
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Trải Nghiệm Motion Capture 3D</li>
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Trải Nghiệm Website Đại Việt Kỳ Nhân</li>
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Tô Màu Bản Đồ Kỳ Giới, Thắp Sáng Kỳ Linh Việt Hỏa</li>
+                            </ul>
+                            <br />
+
+                            <>
+                                <h4 className="text-secondary text-sm font-bold lg:text-xl text-justify leading-relaxed">Thời gian: </h4>
+                                <p className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">28, 29, 30/11/2025 | 10h30 - 22h00</p>
+                                <br />
+                                <h4 className="text-secondary text-sm font-bold lg:text-xl text-justify leading-relaxed">Địa điểm: </h4>
+                                <p className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Tầng 5 - Parc Mall | 547-549 Đường Tạ Quang Bửu, Phường Chánh Hưng, TP. Hồ Chí Minh</p>
+                            </>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex flex-col items-center justify-center lg:mx-16 mx-10">
+                    <h2 className="text-center lg:text-4xl text-3xl font-bd-street-sign text-secondary mt-24 mb-5">CHUỖI TALKSHOW, GIAO LƯU - CHẠY TRẠM GIẢI ĐỐ LỊCH SỬ</h2>
+
+                    <p className="text-secondary text-base lg:text-xl text-justify leading-relaxed">Không chỉ là không gian trưng bày, đây còn là dịp để bạn <span className="font-bold text-secondary">gặp gỡ những người đứng sau dự án Đại Việt Kỳ Nhân</span>. Chúng ta sẽ được cùng nhau lắng nghe những câu chuyện hậu trường, hành trình phát triển dự án và <span className="font-bold text-secondary">công bố những dự định cực kì “hot hit”</span> được triển khai trong thời gian sắp tới.</p>
+
+                    <div className="flex items-center justify-between mt-5">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="relative w-[90px] lg:w-[130px] h-[90px] lg:h-[130px] mb-5">
+                                <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760727086/big-logo_zq7jb4.svg" alt="poster" fill />
+                            </div>
+                            <div className="relative w-[90px] lg:w-[130px] h-[90px] lg:h-[130px] mb-5">
+                                <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762754351/image_7_ro9hrx.png" alt="poster" fill />
+                            </div>
+                            <div className="relative w-[90px] lg:w-[130px] h-[90px] lg:h-[130px] mb-5">
+                                <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762754353/image_8_aawwqw.png" alt="poster" fill />
+                            </div>
+                        </div>
+                        <div className="flex flex-col items-start justify-center ml-5 lg:ml-10">
+                            <ul className="list-disc list-inside">
+                                <span className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Chương trình còn có sự tham gia của <span className="font-bold text-secondary">nhiều đối tác đình đám, những cá nhân và tập thể</span> cùng hướng đến tầm nhìn đưa văn hóa lịch sử Việt Nam đến gần hơn với giới trẻ:  </span>
+
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Giao lưu cùng <span className="font-bold text-secondary">Sino Studio</span> với việc hợp tác cho dự án "Linh"</li>
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Giao lưu cùng <span className="font-bold text-secondary">The Kas</span> với việc ra mắt cho sản phẩm boardgame "Đại Việt Kỳ Nhân" sắp tới</li>
+                                <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Giao lưu cùng <span className="font-bold text-secondary">3 khách mời trẻ</span> với việc hợp tác triển khai các sản phẩm Kinh dịch/Game/Phim hoạt hình sắp tới</li>
+                            </ul>
+                            <br />
+
+                            <>
+
+                                <h4 className="text-secondary text-sm font-bold lg:text-xl text-justify leading-relaxed">Thời gian: </h4>
+                                <p className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">29/11/2025 | 14h00 - 17h00</p>
+                                <br />
+                                <h4 className="text-secondary text-sm font-bold lg:text-xl text-justify leading-relaxed">Địa điểm: </h4>
+                                <p className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Tầng 5 - Parc Mall | 547-549 Đường Tạ Quang Bửu, Phường Chánh Hưng, TP. Hồ Chí Minh</p>
+                            </>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex flex-col items-center justify-center lg:mx-16 mx-10">
+                    <>
+                        <h3 className="text-center lg:text-4xl text-3xl font-bd-street-sign text-secondary mt-24 mb-5">CHẠY TRẠM GIẢI ĐỐ LỊCH SỬ</h3>
+                        <p className="text-secondary text-base lg:text-xl text-justify leading-relaxed">Hành trình giải phong ấn cho các câu chuyện Kỳ Nhân sẽ hoàn toàn được hiện thực hóa thông qua hoạt động “Chạy trạm giải đố”. Bạn sẽ được cùng đồng đội “đột kích” hàng loạt trạm thử thách giữa trung tâm TP.HCM!</p>
+
+                        <p className="text-secondary text-base lg:text-xl text-justify leading-relaxed"><span className="font-bold text-secondary">Mỗi trạm dừng là một phong ấn ẩn giấu câu chuyện của một vị Kỳ Nhân.</span> Các bạn sẽ phải cùng nhau suy luận, giải mã manh mối, vượt qua thử thách và đánh thức ký ức đang ngủ quên trong từng góc phố.</p>
+                    </>
+
+                    <div className="mt-10">
+                        <div className="w-full flex flex-col items-start justify-center">
+                            <h4 className="text-secondary text-sm font-bold lg:text-xl text-start leading-relaxed">THỂ LỆ CHƠI: </h4>
+                        </div>
+                        <ul className="list-disc list-inside">
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed"><b>Mỗi đội chơi gồm 4-6 người (tối đa 5 đội chơi),</b> sẽ bắt đầu tại địa điểm tập kết (điểm bắt đầu) do BTC cung cấp thông tin, tại đây đội chơi sẽ nhận được phong bì chứa câu đố mật mã để tìm ra địa điểm tiếp theo cần đến;</li>
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Sau khi đội chơi giải được mật mã và di chuyển đến đúng địa điểm, đội chơi tìm đến vị trí của BTC tại địa điểm đó để nhận thông tin và phong bì mật mã cho địa điểm tiếp theo;</li>
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Đội chơi <b>di chuyển bằng phương tiện cá nhân (ưu tiên xe máy, BTC sẽ hỗ trợ tiền xăng);</b></li>
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Đội chơi được tính là hoàn thành hành trình khi <b>cả team có mặt tại khu vực đích đến cuối cùng</b>và BTC sẽ <b>ghi nhận thời gian để xếp hạng</b> các đội chơi;</li>
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Đội chơi được tính là hoàn thành hành trình khi <b>cả team có mặt tại khu vực đích đến cuối cùng</b>và BTC sẽ <b>ghi nhận thời gian để xếp hạng</b> các đội chơi;</li>
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed"><b>Mỗi mật mã sẽ có 2 gợi ý,</b> đội chơi sử dụng mật mã sẽ bị <b>cộng thêm 10 phút/gợi ý/đội vào kết quả cuối cùng;</b></li>
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Mỗi đội chơi đều sẽ có tối thiểu 2 bạn CTV đi theo để hỗ trợ và giữ liên lạc với BTC trong quá trình các bạn tham gia chạy trạm</li>
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Mọi thông tin các bạn CTV đi theo sẽ cập nhật liên tục qua nền tảng di động (VD: Discord, Zalo group,...) để BTC nắm được tình hình tổng quan.</li>
+                        </ul>
+                    </div>
+
+                    <div className="mt-10">
+                        <div className="w-full flex flex-col items-start justify-center">
+                            <h4 className="text-secondary text-sm font-bold lg:text-xl text-start leading-relaxed">PHẦN THƯỞNG</h4>
+                        </div>
+                        <ul className="list-disc list-inside">
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed"><b>Mỗi cá nhân đăng kí tham gia đều sẽ nhận được một phần quà</b></li>
+                            <li className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Riêng đội chiến thắng sẽ nhận được phần thưởng tiền mặt trị giá <b>2.000.000đ</b>, kèm theo những phần quà đặc biệt dành riêng cho quán quân.</li>
+                        </ul>
+                    </div>
+
+                    <div className="w-full flex flex-col items-start justify-center mt-10">
+                        <h4 className="text-secondary text-sm font-bold lg:text-xl text-justify leading-relaxed">Thời gian: </h4>
+                        <p className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">30/11/2025 | Bắt đầu từ 9h00</p>
+                        <br />
+                        <h4 className="text-secondary text-sm font-bold lg:text-xl text-justify leading-relaxed">Địa điểm: </h4>
+                        <span className="text-secondary text-sm lg:text-xl text-justify leading-relaxed">Trung tâm Thành phố Hồ Chí Minh</span>
+                    </div>
+                </div>
+
+                <>
+
+                </>
             </div>
-        </div>
+        </div >
     )
 }
 
@@ -417,8 +568,8 @@ const IntroducePageClient = () => {
 
     return (
         <div>
-            <div className="relative bg-primary-light border-4 border-secondary rounded-2xl w-full lg:max-w-5xl max-w-3xl mx-auto my-8 p-6 sm:p-8 md:p-10 max-h-[90vh]">
-                <div className="max-h-[73vh] overflow-y-auto ancient-scrollbar">
+            <div className="relative bg-primary-light border-4 border-secondary rounded-2xl w-full lg:max-w-5xl max-w-3xl min-h-screen lg:min-h-[90vh] mx-auto lg:my-8 p-6 pt-3 lg:p-6 max-h-[90vh]">
+                <div className="max-h-[87vh] lg:max-h-[83vh] overflow-y-auto ancient-scrollbar">
                     <div className="p-4">
                         {/* --- Title --- */}
                         <div className="flex items-center justify-center gap-2">
