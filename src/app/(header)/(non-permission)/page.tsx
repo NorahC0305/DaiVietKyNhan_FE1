@@ -14,6 +14,7 @@ import {
 import { getServerSession } from "next-auth";
 import { authOptions } from "@lib/authOptions";
 import { getAttendanceListSSR } from "@lib/attendance";
+import SocialMediaIcons from "@components/Atoms/SocialMediaIcons";
 
 async function userMe() {
   try {
@@ -33,13 +34,19 @@ export default async function Home() {
   const initialAttendanceList = await getAttendanceListSSR();
 
   return (
-    <HomePageClient
-      user={user.data as IUser}
-      activeWithAmountUser={
-        activeWithAmountUser.data as IGetSystemConfigWithAmountUserResponse
-      }
-      accessToken={session?.accessToken}
-      initialAttendanceList={initialAttendanceList}
-    />
+    <>
+      <HomePageClient
+        user={user.data as IUser}
+        activeWithAmountUser={
+          activeWithAmountUser.data as IGetSystemConfigWithAmountUserResponse
+        }
+        accessToken={session?.accessToken}
+        initialAttendanceList={initialAttendanceList}
+      />
+
+      <div className="hidden lg:block fixed right-0 top-1/2 transform -translate-y-1/2 z-50 pointer-events-auto">
+        <SocialMediaIcons />
+      </div>
+    </>
   );
 }

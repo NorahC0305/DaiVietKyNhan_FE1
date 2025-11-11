@@ -48,9 +48,6 @@ export default function RootLayout({
               <Suspense fallback={<VietnameseHistoryLoading />}>
                 {children}
               </Suspense>
-              <div className="hidden lg:block fixed right-0 top-1/2 transform -translate-y-1/2 z-50 pointer-events-auto">
-                <SocialMediaIcons />
-              </div>
             </AntdProvider>
           </SessionProviderWrapper>
         </Providers>
