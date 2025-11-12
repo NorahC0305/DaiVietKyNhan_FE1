@@ -450,7 +450,7 @@ export default function FixedScrollsPageResponsive({
                 <motion.div
                   key={idx}
                   // ⭐ THAY ĐỔI CHÍNH: Kích thước responsive, không còn h-auto
-                  className="absolute drop-shadow-[0_6px_6px_rgba(0,0,0,0.25)] w-[28vw] sm:w-[160px] md:w-[200px] lg:w-[240px]"
+                  className="absolute drop-shadow-[0_6px_6px_rgba(0,0,0,0.25)] w-[12vw] sm:w-[70px] md:w-[100px] lg:w-[200px] xl:w-[240px]"
                   style={{
                     top: pos.top,
                     left: pos.left,
@@ -478,7 +478,7 @@ export default function FixedScrollsPageResponsive({
                       alt={`Cuộn giấy ${idx + 1}`}
                       fill
                       className="object-contain pointer-events-none select-none"
-                      sizes="(max-width: 640px) 28vw, (max-width: 768px) 160px, (max-width: 1024px) 200px, 240px"
+                      sizes="(max-width: 640px) 12vw, (max-width: 768px) 70px, (max-width: 1024px) 100px, (max-width: 1280px) 200px, 240px"
                       priority
                     />
 
@@ -501,16 +501,16 @@ export default function FixedScrollsPageResponsive({
                     <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
                       <div
                         className={`rounded-full shadow-lg border flex items-center justify-center
-                       w-[28px] h-[28px] sm:w-[30px] sm:h-[30px] md:w-[32px] md:h-[32px] lg:w-[36px] lg:h-[36px] xl:w-[40px] xl:h-[40px]
+                       w-[16px] h-[16px] sm:w-[18px] sm:h-[18px] md:w-[20px] md:h-[20px] lg:w-[32px] lg:h-[32px] xl:w-[36px] xl:h-[36px]
                        ${isAnswered
                             ? "bg-green-500 border-green-600"
                             : "bg-white/95 border-gray-300"
                           }`}
                       >
                         {isAnswered ? (
-                          <Check className="w-[16px] h-[16px] sm:w-[17px] sm:h-[17px] md:w-[18px] md:h-[18px] lg:w-[20px] lg:h-[20px] xl:w-[22px] xl:h-[22px] text-white" />
+                          <Check className="w-[10px] h-[10px] sm:w-[11px] sm:h-[11px] md:w-[12px] md:h-[12px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-white" />
                         ) : (
-                          <Circle className="w-[16px] h-[16px] sm:w-[17px] sm:h-[17px] md:w-[18px] md:h-[18px] lg:w-[20px] lg:h-[20px] xl:w-[22px] xl:h-[22px] text-gray-400" />
+                          <Circle className="w-[10px] h-[10px] sm:w-[11px] sm:h-[11px] md:w-[12px] md:h-[12px] lg:w-[18px] lg:h-[18px] xl:w-[20px] xl:h-[20px] text-gray-400" />
                         )}
                       </div>
                     </div>
