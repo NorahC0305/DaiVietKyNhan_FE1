@@ -63,7 +63,7 @@ export default function FixedScrollsPageResponsive({
   answeredQuestionIds,
 }: ICOMPONENTS.MapRegionDetailProps) {
   const router = useRouter();
-  
+
   // Get user data context for refreshing user data after actions
   const context = useUserDataContextSafe();
   const refreshUserData = context?.refreshUserData || null;

@@ -60,6 +60,14 @@ export default function KhaiNhanMoAn({
         }
     }, [an, isCharacterClickable]);
 
+    const handleClaim = useCallback(() => {
+        if (!an || !isCharacterClickable(an)) {
+            return;
+        }
+
+        onClaim(an);
+    }, [an, isCharacterClickable, onClaim]);
+
     // Use React Portal to render modal at root level
     if (typeof window === "undefined") return null;
 
@@ -164,6 +172,22 @@ export default function KhaiNhanMoAn({
                                 <div className="absolute inset-0.5 bg-[#6E6B63] rounded-xl z-10" />
                             )}
                         </div>
+
+                        <button
+                            type="button"
+                            aria-label="Mở ấn"
+                            onClick={handleClaim}
+                            disabled={!an || !isCharacterClickable(an)}
+                            className={`absolute lg:bottom-70 bottom-28 lg:right-2 right-0 flex-shrink-0 w-14 h-14 lg:w-16 lg:h-16 transition-transform duration-300 ${an && isCharacterClickable(an) ? 'hover:scale-105 cursor-pointer' : 'cursor-not-allowed opacity-50'}`}
+                        >
+                            <div className="relative w-11 h-11 lg:w-16 lg:h-16">
+                                <Image
+                                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760725883/next_xshxeb.svg"
+                                    alt="Tiếp tục"
+                                    fill
+                                />
+                            </div>
+                        </button>
                     </div>
 
                     {/* --- Main Content --- */}
