@@ -11,11 +11,12 @@ interface ToolbarProps {
   onSearch: (value: string) => void;
   onStatusFilter: (value: string) => void;
   onStatisticsClick: () => void;
+  onBehaviorStatsClick: () => void;
   searchValue: string;
   statusValue: string;
 }
 
-const Toolbar = ({ onSearch, onStatusFilter, onStatisticsClick, searchValue, statusValue }: ToolbarProps) => {
+const Toolbar = ({ onSearch, onStatusFilter, onStatisticsClick, onBehaviorStatsClick, searchValue, statusValue }: ToolbarProps) => {
   return (
     <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
       <div className="flex-1 flex items-center gap-2">
@@ -41,7 +42,7 @@ const Toolbar = ({ onSearch, onStatusFilter, onStatisticsClick, searchValue, sta
           </SelectContent>
         </Select>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 flex-wrap justify-end">
         <Button
           size="sm"
           variant="outline"
@@ -49,7 +50,16 @@ const Toolbar = ({ onSearch, onStatusFilter, onStatisticsClick, searchValue, sta
           onClick={onStatisticsClick}
         >
           <LucideIcon name="BarChart3" iconSize={16} />
-          Thống kê
+          Thống kê người dùng
+        </Button>
+        <Button
+          size="sm"
+          variant="outline"
+          className="gap-2"
+          onClick={onBehaviorStatsClick}
+        >
+          <LucideIcon name="Activity" iconSize={16} />
+          Hành vi sử dụng
         </Button>
         <Button
           size="sm"

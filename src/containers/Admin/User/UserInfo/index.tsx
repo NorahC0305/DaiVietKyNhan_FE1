@@ -7,6 +7,7 @@ import ToolbarSkeleton from "./Components/ToolbarSkeleton";
 import UsersTable from "./Components/UsersTable";
 import UsersTableSkeleton from "./Components/UsersTableSkeleton";
 import StatisticsDialog from "./Components/StatisticsDialog";
+import BehaviorStatsDialog from "./Components/BehaviorStatsDialog";
 import { IMePaginationResponse } from "@models/user/response";
 import { EnhancedPagination } from "@/components/Atoms/ui/pagination";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@components/Atoms/ui/select";
@@ -33,6 +34,7 @@ const UserInfoPage = ({ listUsers: initialListUsers, birthdayAndGenderStats }: U
   const [hasInitialData, setHasInitialData] = useState<boolean>(!!initialListUsers);
   const [hasUserInteracted, setHasUserInteracted] = useState<boolean>(false);
   const [isStatisticsDialogOpen, setIsStatisticsDialogOpen] = useState<boolean>(false);
+  const [isBehaviorStatsDialogOpen, setIsBehaviorStatsDialogOpen] = useState<boolean>(false);
 
   // Fetch users data
   const fetchUsers = async () => {
@@ -112,6 +114,10 @@ const UserInfoPage = ({ listUsers: initialListUsers, birthdayAndGenderStats }: U
   const handleStatisticsClick = () => {
     setIsStatisticsDialogOpen(true);
   };
+
+  const handleBehaviorStatsClick = () => {
+    setIsBehaviorStatsDialogOpen(true);
+  };
   //-----------------------------End-----------------------------//
 
   return (
@@ -131,6 +137,7 @@ const UserInfoPage = ({ listUsers: initialListUsers, birthdayAndGenderStats }: U
             onSearch={handleSearch}
             onStatusFilter={handleStatusFilter}
             onStatisticsClick={handleStatisticsClick}
+            onBehaviorStatsClick={handleBehaviorStatsClick}
             searchValue={search}
             statusValue={status}
           />
@@ -179,6 +186,11 @@ const UserInfoPage = ({ listUsers: initialListUsers, birthdayAndGenderStats }: U
         open={isStatisticsDialogOpen}
         onOpenChange={setIsStatisticsDialogOpen}
         birthdayAndGenderStats={birthdayAndGenderStats}
+      />
+
+      <BehaviorStatsDialog
+        open={isBehaviorStatsDialogOpen}
+        onOpenChange={setIsBehaviorStatsDialogOpen}
       />
     </div>
   );

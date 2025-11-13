@@ -12,6 +12,12 @@ const dashboardService = {
       cache: 'no-store',
     });
   },
+
+  getDasboardBehaviorStats: async () => {
+    return await http.get("/dashboard/user/behavior", {
+      cache: 'no-store',
+    });
+  },
 };
 
 export default dashboardService;
