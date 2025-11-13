@@ -87,7 +87,7 @@ export default function KhaiNhanMoAn({
   return createPortal(
     <>
       <ModalBackdrop
-        isOpen={isOpen}
+        isOpen={isOpen && !isFinalModalOpen}
         onClose={onClose}
         className="w-full lg:max-w-5xl max-w-3xl mx-auto overflow-y-hidden"
       >
@@ -272,7 +272,7 @@ export default function KhaiNhanMoAn({
         cardClassName="relative bg-transparent border-none p-0"
         showCloseButton
       >
-        <div className="relative w-full h-[60vh] min-h-[320px]">
+        <div className="relative w-full h-[80vh] min-h-[420px]">
           <Image
             src="https://res.cloudinary.com/dznt9yias/image/upload/v1762751940/unnamed_3_1_ypcajn.png"
             alt="Kỳ Linh Việt Hỏa"
