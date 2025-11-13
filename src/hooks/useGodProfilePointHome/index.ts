@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useState } from "react";
 import godProfileService from "@services/god-profile";
 import { IGodProfile } from "@models/god-profile/entity";
+import { useQuery } from "@tanstack/react-query";
+import { godProfileKeys } from "@hooks/useGodProfile";
 
 export type UseGodProfilePointHomeResult = {
   loading: boolean;
@@ -44,4 +46,8 @@ export function useGodProfilePointHome(): UseGodProfilePointHomeResult {
   }, [fetchData]);
 
   return { loading, error, data, refetch: fetchData };
+}
+
+export function useGodProfileRanking() {
+  return useQuery(godProfileKeys.ranking());
 }

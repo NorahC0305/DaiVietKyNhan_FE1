@@ -17,6 +17,12 @@ const godProfileService = {
       }
     );
   },
+
+  godRanking: async () => {
+    return await http.getPublic(`/god-profile/rank-home`, {
+      cache: "no-store",
+    });
+  },
 };
 
 export default godProfileService;

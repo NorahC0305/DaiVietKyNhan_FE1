@@ -20,3 +20,16 @@ export const GodProfileSchema = z.object({
     point: z.number(),
 });
 export type IGodProfile = z.infer<typeof GodProfileSchema>;
+
+
+/**
+ * God ranking response
+ */
+export const GodRankingSchema = z.object({
+    name: z.string(),
+    img: z.string(),
+    points: z.number(),
+    rank: z.number(),
+});
+export type IGodRanking = z.infer<typeof GodRankingSchema>;
+//----------------------End----------------------//

@@ -9,6 +9,7 @@ import { IGetSystemConfigWithAmountUserResponse } from "@models/system/response"
 import { IUserRankData, IUserRankResponse } from "@models/user/response";
 import RadialGradial from "@components/Atoms/RadialGradient";
 import { useUserRank } from "@hooks/useUser";
+import { useGodProfileRanking } from "@hooks/useGodProfilePointHome";
 import { useAttendance } from "@hooks/useAttendance";
 import ModalLayout from "@components/Molecules/DailyCheckin/Layouts/ModalLayout";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@components/Atoms/ui/tooltip";
@@ -144,6 +145,25 @@ const HomePageClient = ({
   const { data: userRankData, isLoading: isLoadingRank } = useUserRank(
     rankParams
   );
+
+  const {
+    data: godRankingData,
+    isLoading: isLoadingGodRanking,
+  } = useGodProfileRanking();
+
+  const houseRanking = useMemo(() => {
+    if (!Array.isArray(godRankingData)) {
+      return [];
+    }
+    return [...godRankingData].sort((a, b) => a.rank - b.rank).slice(0, 4);
+  }, [godRankingData]);
+
+  const formatPoints = useCallback((points?: number) => { 
+    if (typeof points !== "number") return "--";
+    return new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 0 }).format(
+      Math.round(points)
+    );
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -460,6 +480,81 @@ const HomePageClient = ({
                   Xem thêm
                 </button>
               </div> */}
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      {/* Ranking Section */}
+      <section className="relative w-full flex items-center justify-center py-16">
+        <div className="relative">
+          {/* Scroll Paper Background - Điều chỉnh kích thước */}
+          <Image
+            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760804373/CuonGiayHaiBenMauTrang_w8cxky.svg"
+            alt="Bảng Xếp Hạng"
+            width={1000}
+            height={600}
+            className="w-full h-auto max-h-[600px] object-contain"
+            priority
+          />
+
+          {/* Content Overlay - Điều chỉnh positioning */}
+          <div className="absolute top-3 left-0 right-0 bottom-0 z-10  mx-auto h-[100%] flex flex-col justify-center">
+            {/* Content Container - Giới hạn kích thước */}
+            <div className="w-full overflow-hidden">
+              <div className="flex items-center justify-center">
+                <RadialGradial className="text-center lg:text-5xl lg:py-3 py-1 text-4xl font-bd-street-sign">
+                  BẢNG XẾP HẠNG NHÀ
+                </RadialGradial>
+              </div>
+              <div className="w-full flex justify-center items-center relative">
+                {isLoadingGodRanking ? (
+                  <div className="py-8 px-6 rounded-xl bg-white/60 text-primary font-semibold">
+                    Đang tải dữ liệu...
+                  </div>
+                ) : houseRanking.length === 0 ? (
+                  <div className="py-8 px-6 rounded-xl bg-white/60 text-primary font-semibold">
+                    Chưa có dữ liệu xếp hạng.
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center gap-2">
+                    <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+                      {houseRanking.map((item) => (
+                        <div
+                          key={`${item.rank}-${item.name}`}
+                          className="flex flex-col items-center gap-2 text-center"
+                        >
+                          <RadialGradial className="md:text-4xl text-3xl font-bold text-primary uppercase tracking-wide">
+                            TOP {item.rank}
+                          </RadialGradial>
+                          <span className="text-sm md:text-xl font-semibold italic text-black">
+                            {formatPoints(item.points)} điểm
+                          </span>
+                          <div className="relative w-16 h-32 md:w-32 md:h-64 rounded-[10px] overflow-hidden shadow-lg  bg-white">
+                            {item.img ? (
+                              <div className="relative w-16 h-32 md:w-32 md:h-64 overflow-hidden">
+                                <Image
+                                  src={item.img}
+                                  alt={item.name}
+                                  fill
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center text-primary/60 text-sm">
+                                Không có ảnh
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-black lg:text-base text-xs italic">
+                      (Điểm trên là điểm trung bình cho từng nhà)
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
