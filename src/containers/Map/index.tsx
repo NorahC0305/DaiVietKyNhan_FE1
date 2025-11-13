@@ -12,6 +12,7 @@ import LetterGuide from "@/components/Molecules/Popup/LetterGuide";
 import DanhSachVietThu from "@/components/Molecules/Popup/DanhSachVietThu";
 import ChiTietThu from "@/components/Molecules/Popup/ChiTietThu";
 import VietThuGuiHauThe from "@/components/Molecules/Popup/VietThuGuiHauThe";
+import KhaiNhanMoAn from "@/components/Molecules/Popup/KhaiNhanMoAn";
 import { IUserLandWithLandEntity } from "@models/user-land/entity";
 import { IUserLandWithLandResponseModel } from "@models/user-land/response";
 import { LAND } from "@constants/land";
@@ -155,6 +156,16 @@ export default function MapPageClient({
   const [lettersList, setLettersList] = useState<ILetterEntity[]>([]);
   const [isVietThuGuiHauTheModalOpen, setIsVietThuGuiHauTheModalOpen] =
     useState<boolean>(false);
+  const [isKhaiNhanMoAnModalOpen, setIsKhaiNhanMoAnModalOpen] =
+    useState<boolean>(false);
+
+  const handleCloseKhaiNhanMoAnModal = useCallback(() => {
+    setIsKhaiNhanMoAnModalOpen(false);
+  }, []);
+
+  const handleClaimKhaiNhanMoAn = useCallback((achievementId: string) => {
+    setIsKhaiNhanMoAnModalOpen(false);
+  }, []);
 
   // Function to fetch fresh userLand data
   const fetchUserLandData = useCallback(async () => {
@@ -384,6 +395,15 @@ export default function MapPageClient({
   };
 
   const handleRegionClick = (regionId: string) => {
+    if (regionId === "ky-linh-viet-hoa") {
+      if (TEMP_UNLOCK_ALL || isRegionUnlocked(regionId)) {
+        setIsKhaiNhanMoAnModalOpen(true);
+      } else {
+        setIsWaitingOthersModalOpen(true);
+      }
+      return;
+    }
+
     // Only allow navigation if region is unlocked (or if TEMP_UNLOCK_ALL is enabled)
     if (TEMP_UNLOCK_ALL || isRegionUnlocked(regionId)) {
       // Set a flag to refresh data when user returns from detail page
@@ -395,10 +415,7 @@ export default function MapPageClient({
       const landId = regionToLandIdMap[regionId];
       const userLandData = userLand?.find((item) => item.landId === landId);
 
-      // Special case for "ky-linh-viet-hoa" - show WaitingOthers popup
-      if (regionId === "ky-linh-viet-hoa") {
-        setIsWaitingOthersModalOpen(true);
-      } else if (userLandData && userLandData.land?.startDate) {
+      if (userLandData && userLandData.land?.startDate) {
         // Check if region is locked due to date restriction
         const isDateUnlocked = isAfterDate(userLandData.land.startDate);
         if (!isDateUnlocked) {
@@ -541,6 +558,14 @@ export default function MapPageClient({
         isOpen={isVietThuGuiHauTheModalOpen}
         onClose={() => setIsVietThuGuiHauTheModalOpen(false)}
         onBack={handleVietThuBack}
+      />
+
+      {/* Khai Nhân Mở Ấn Modal */}
+      <KhaiNhanMoAn
+        isOpen={isKhaiNhanMoAnModalOpen}
+        onClose={handleCloseKhaiNhanMoAnModal}
+        onClaim={handleClaimKhaiNhanMoAn}
+        userLand={userLand}
       />
     </ForceLandscape>
   );
