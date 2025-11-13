@@ -50,6 +50,7 @@ const ADMIN_DASHBOARD = {
     LOGS: `${BASE_PATHS.MANAGE_USER}/logs`,
     REPORTS: `${BASE_PATHS.MANAGE_USER}/reports`,
     ANALYTICS: `${BASE_PATHS.MANAGE_USER}/analytics`,
+    SPECIAL_GIFT: `${BASE_PATHS.MANAGE_USER}/special-gift`,
   },
   CONTENT: {
     INFO: `${BASE_PATHS.ADMIN}/content-info`,

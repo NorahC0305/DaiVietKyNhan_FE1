@@ -42,6 +42,7 @@ const MENU_ITEMS: IPAGES.MenuItem[] = [
       { id: "audience-info", label: "Thông tin khán giả", icon: "User" },
       { id: "scores-edit", label: "Điểm số & chỉnh sửa điểm", icon: "Star" },
       { id: "gift-code", label: "Mã GIF", icon: "Gift" },
+      { id: "special-gift", label: "Quà tặng đặc biệt", icon: "Gem" },
 
       {
         id: "received-letters",
@@ -147,6 +148,7 @@ const AdminSideBar = () => {
       "statistics-overview": ROUTES.ADMIN_DASHBOARD.STATISTICS.OVERVIEW,
       "statistics-user": ROUTES.ADMIN_DASHBOARD.STATISTICS.USER,
       "release-date": ROUTES.ADMIN_DASHBOARD.SYSTEM.RELEASE_DATE,
+      "special-gift": ROUTES.ADMIN_DASHBOARD.USER.SPECIAL_GIFT,
     }),
     []
   );
@@ -228,6 +230,10 @@ const AdminSideBar = () => {
       [ROUTES.ADMIN_DASHBOARD.LIBRARY.KY_NHAN_SUMMARY]: {
         parentId: "manage-library",
         subId: "ky-nhan-summary",
+      },
+      [ROUTES.ADMIN_DASHBOARD.USER.SPECIAL_GIFT]: {
+        parentId: "user-management",
+        subId: "special-gift",
       },
     }),
     []

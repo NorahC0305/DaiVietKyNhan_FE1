@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useCallback } from "react";
 import rewardService from "@services/reward";
 import userService from "@services/user";
@@ -5,10 +7,12 @@ import {
   IReward,
   IExchangeRewardRequest,
   IUserRewardExchange,
-  UserRewardExchangeListResponseSchema,
 } from "@models/reward";
 import { IMeResponse } from "@models/user/response";
 import { toast } from "react-toastify";
+import { useQuery, queryOptions } from "@tanstack/react-query";
+import userRewardService from "@services/user-reward";
+import { ISpecialGiftResponseModel } from "@models/user-reward/response";
 
 export const useRewards = (isOpen: boolean) => {
   const [rewards, setRewards] = useState<IReward[]>([]);
@@ -31,6 +35,7 @@ export const useRewards = (isOpen: boolean) => {
 
   const fetchUserRewardExchanges = useCallback(async () => {
     try {
+      setIsLoading(true);
       const userRewardsResponse: any = await rewardService.getUserRewards({
         currentPage: 1,
         pageSize: 1000,
@@ -41,7 +46,6 @@ export const useRewards = (isOpen: boolean) => {
         userRewardsResponse.statusCode === 200 &&
         userRewardsResponse.data
       ) {
-        // Validate the response data using Zod schema to ensure proper parsing
         setRewards(
           userRewardsResponse.data.map(
             (item: IUserRewardExchange) => item.reward
@@ -51,6 +55,8 @@ export const useRewards = (isOpen: boolean) => {
       }
     } catch (error) {
       console.error("Error fetching user reward exchanges:", error);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
 
@@ -66,11 +72,8 @@ export const useRewards = (isOpen: boolean) => {
 
         if (response && response.statusCode === 200) {
           toast.success("Đổi quà thành công!");
-          // Refresh user data to update points/coins
           await fetchUserData();
-          // Refresh userRewardExchanges to update button status (without loading state)
           await fetchUserRewardExchanges();
-          // Call the optional onRedeem callback
           onRedeem?.(rewardId.toString());
         } else {
           toast.error(response?.message || "Không thể đổi quà tặng");
@@ -85,7 +88,6 @@ export const useRewards = (isOpen: boolean) => {
     [fetchUserData, fetchUserRewardExchanges]
   );
 
-  // Fetch data when modal opens
   useEffect(() => {
     if (isOpen) {
       fetchUserRewardExchanges();
@@ -103,4 +105,40 @@ export const useRewards = (isOpen: boolean) => {
     fetchUserData,
     fetchUserRewardExchanges,
   };
+};
+
+export const specialGiftKeys = {
+  all: ["special-gifts"] as const,
+  list: (params?: { currentPage?: number; pageSize?: number }) =>
+    [...specialGiftKeys.all, params] as const,
+};
+
+export const specialGiftOptions = (params?: {
+  currentPage?: number;
+  pageSize?: number;
+}) =>
+  queryOptions({
+    queryKey: specialGiftKeys.list(params),
+    queryFn: async () => {
+      const response =
+        (await userRewardService.getSpecialGifts(
+          params
+        )) as ISpecialGiftResponseModel;
+
+      const items = response?.data?.results ?? [];
+      const pagination = response?.data?.pagination;
+
+      return {
+        items,
+        pagination,
+      };
+    },
+    staleTime: 30 * 1000,
+  });
+
+export const useSpecialGifts = (params?: {
+  currentPage?: number;
+  pageSize?: number;
+}) => {
+  return useQuery(specialGiftOptions(params));
 };

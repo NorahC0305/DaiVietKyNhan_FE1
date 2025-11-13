@@ -98,3 +98,59 @@ export interface IRewardCodeResponse {
     data: IRewardCode[];
     message: string;
 }
+
+export interface ISpecialGiftItem {
+    id: number;
+    userId: number;
+    rewardId: number;
+    status: string;
+    exchangedAt: string | null;
+    code: string | null;
+    valuePaid: number | null;
+    createdById: number | null;
+    updatedById: number | null;
+    deletedById: number | null;
+    deletedAt: string | null;
+    createdAt: string;
+    updatedAt: string;
+    user: {
+        id: number;
+        name: string | null;
+        email: string | null;
+        avatar: string | null;
+    };
+    reward: {
+        id: number;
+        name: string;
+        description: string | null;
+        requireValue: number | null;
+        gift: string | null;
+        code: string | null;
+        type: string | null;
+        limit: number | null;
+        startDate: string | null;
+        endDate: string | null;
+        isActive: boolean | null;
+        imageUrl: string | null;
+        createdById: number | null;
+        updatedById: number | null;
+        deletedById: number | null;
+        deletedAt: string | null;
+        createdAt: string;
+        updatedAt: string;
+    };
+}
+
+export interface ISpecialGiftResponseModel {
+    statusCode: number;
+    data: {
+        results: ISpecialGiftItem[];
+        pagination: {
+            current: number;
+            pageSize: number;
+            totalPage: number;
+            totalItem: number;
+        };
+    };
+    message: string;
+}

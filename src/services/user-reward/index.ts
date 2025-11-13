@@ -7,12 +7,28 @@ const userRewardService = {
         pageSize?: number;
         qs?: string;
     }) => {
-        const queryParams = qs.stringify({
-            currentPage: params?.currentPage,
-            pageSize: params?.pageSize,
-            qs: params?.qs,
+        const queryParams = qs.stringify(
+            {
+                currentPage: params?.currentPage,
+                pageSize: params?.pageSize,
+                qs: params?.qs,
+            },
+            { addQueryPrefix: true, skipNulls: true }
+        );
+        return await http.get(`/user-reward-history${queryParams}`, {
+            cache: "no-store",
         });
-        return await http.get(`/user-reward-history?${queryParams}`, {
+    },
+
+    getSpecialGifts: async (params?: { currentPage?: number; pageSize?: number }) => {
+        const queryParams = qs.stringify(
+            {
+                currentPage: params?.currentPage,
+                pageSize: params?.pageSize,
+            },
+            { addQueryPrefix: true, skipNulls: true }
+        );
+        return await http.get(`/user-reward-history/special${queryParams}`, {
             cache: "no-store",
         });
     },
