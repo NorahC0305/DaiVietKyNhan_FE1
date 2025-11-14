@@ -158,7 +158,7 @@ const HomePageClient = ({
     return [...godRankingData].sort((a, b) => a.rank - b.rank).slice(0, 4);
   }, [godRankingData]);
 
-  const formatPoints = useCallback((points?: number) => { 
+  const formatPoints = useCallback((points?: number) => {
     if (typeof points !== "number") return "--";
     return new Intl.NumberFormat("vi-VN", { maximumFractionDigits: 0 }).format(
       Math.round(points)
@@ -225,12 +225,12 @@ const HomePageClient = ({
     (item: IUserRankData | undefined, rank: number) => (
       <div
         key={item?.id ?? `r-${rank}`}
-        className="flex items-center space-x-1 md:space-x-2 p-1 md:p-2 rounded"
+        className="flex items-center space-x-1 lg:space-x-2 p-1 lg:p-2 rounded"
       >
-        <div className="text-lg md:text-xl font-bold text-primary opacity-70">
+        <div className="text-lg lg:text-xl font-bold text-primary opacity-70">
           {rank}.
         </div>
-        <div className="w-6 h-6 md:w-8 md:h-8 rounded flex items-center justify-center flex-shrink-0">
+        <div className="w-6 h-6 lg:w-8 lg:h-8 rounded flex items-center justify-center flex-shrink-0">
           {item?.avatar ? (
             <Image
               src={item.avatar}
@@ -246,7 +246,7 @@ const HomePageClient = ({
           )}
         </div>
         <div className="flex-1 min-w-0">
-          <div className="font-bold text-primary text-xs md:text-sm truncate">
+          <div className="font-bold text-primary text-xs lg:text-sm truncate">
             {item?.name || "Chưa có dữ liệu"}
           </div>
           <div className="text-primary text-xs">{item?.point || 0}</div>
@@ -365,9 +365,9 @@ const HomePageClient = ({
                   BẢNG XẾP HẠNG
                 </RadialGradial>
               </div>
-              <div className="w-full flex justify-center items-center gap-3 md:gap-4 relative">
+              <div className="w-full flex justify-center items-center gap-3 lg:gap-4 relative">
                 {/* Previous Button - Cố định vị trí */}
-                <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0">
+                <div className="w-8 h-8 lg:w-10 lg:h-10 flex-shrink-0">
                   {currentRankPage > 1 && (
                     <button
                       onClick={handlePrev}
@@ -376,7 +376,7 @@ const HomePageClient = ({
                       aria-label="Trang trước"
                     >
                       <svg
-                        className="w-5 h-5 md:w-6 md:h-6 text-primary"
+                        className="w-5 h-5 lg:w-6 lg:h-6 text-primary"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -402,7 +402,7 @@ const HomePageClient = ({
 
                   <div className={`w-full flex justify-around items-center ${isLoadingRank ? 'opacity-50 pointer-events-none' : 'opacity-100'}`}>
                     {/* Left Column */}
-                    <div className="space-y-1 md:space-y-2 flex-shrink-0">
+                    <div className="space-y-1 lg:space-y-2 flex-shrink-0">
                       {Array.from({ length: 5 }, (_, index) => {
                         const rank = getRankNumber(index, 0);
                         const item = leaderboardData.leftColumn[index];
@@ -411,7 +411,7 @@ const HomePageClient = ({
                     </div>
 
                     {/* Right Column */}
-                    <div className="space-y-1 md:space-y-2 flex-shrink-0">
+                    <div className="space-y-1 lg:space-y-2 flex-shrink-0">
                       {Array.from({ length: 5 }, (_, index) => {
                         const rank = getRankNumber(index, 1);
                         const item = leaderboardData.rightColumn[index];
@@ -420,7 +420,7 @@ const HomePageClient = ({
                     </div>
 
                     {/* Third Column */}
-                    <div className="space-y-1 md:space-y-2 flex-shrink-0">
+                    <div className="space-y-1 lg:space-y-2 flex-shrink-0">
                       {Array.from({ length: 5 }, (_, index) => {
                         const rank = getRankNumber(index, 2);
                         const item = leaderboardData.thirdColumn[index];
@@ -503,10 +503,13 @@ const HomePageClient = ({
           <div className="absolute top-3 left-0 right-0 bottom-0 z-10  mx-auto h-[100%] flex flex-col justify-center">
             {/* Content Container - Giới hạn kích thước */}
             <div className="w-full overflow-hidden">
-              <div className="flex items-center justify-center">
-                <RadialGradial className="text-center lg:text-5xl lg:py-3 py-1 text-4xl font-bd-street-sign">
+              <div className="flex flex-col items-center justify-center">
+                <RadialGradial className="text-center lg:text-5xl lg:py-3 py-1 lg:pb-1 text-4xl font-bd-street-sign">
                   BẢNG XẾP HẠNG NHÀ
                 </RadialGradial>
+                <p className="text-black text-xs italic">
+                  (Điểm trên là điểm trung bình cho từng nhà)
+                </p>
               </div>
               <div className="w-full flex justify-center items-center relative">
                 {isLoadingGodRanking ? (
@@ -549,9 +552,6 @@ const HomePageClient = ({
                         </div>
                       ))}
                     </div>
-                    <p className="text-black lg:text-base text-xs italic">
-                      (Điểm trên là điểm trung bình cho từng nhà)
-                    </p>
                   </div>
                 )}
               </div>
@@ -692,6 +692,119 @@ const HomePageClient = ({
                 onClick={() => setCurrentIndex(index)}
               ></div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative w-full bg-gradient-to-b from-gray-900 to-black py-16 pb-24 overflow-hidden">
+        <div className="w-full max-w-7xl mx-auto px-4">
+          <h3 className="text-3xl lg:text-5xl text-white font-bd-street-sign text-center">
+            ĐỐI TÁC
+          </h3>
+
+          <div className="flex flex-wrap justify-center gap-6 md:gap-10">
+            <div className="flex flex-col items-center gap-2 mt-5">
+              <div className="flex flex-col items-center justify-center">
+                <div>
+                  <p className="text-xl lg:text-2xl text-white font-bold text-center mb-4">
+                    ĐƠN VỊ TỔ CHỨC
+                  </p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="relative w-20 h-20 lg:w-32 md:h-28 rounded-[10px] overflow-hidden shadow-lg">
+                      <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760727086/big-logo_zq7jb4.svg" alt="logo_dvkn" fill />
+                    </div>
+                    <div className="relative w-28 h-20 lg:w-32 md:h-28 rounded-[10px] overflow-hidden shadow-lg">
+                      <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763135045/Thie%CC%82%CC%81t_ke%CC%82%CC%81_chu%CC%9Ba_co%CC%81_te%CC%82n_23_1_vbp3yr.svg" alt="khainhanmoan" fill />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-16">
+                  <div className="grid grid-cols-3 gap-24 items-start justify-center">
+                    {/* Nhà tài trợ Kim cương */}
+                    <div className="flex flex-col items-center justify-center">
+                      <p className="text-base lg:text-xl text-white font-bold text-center mb-2">
+                        NHÀ TÀI TRỢ KIM CƯƠNG
+                      </p>
+                      <div className="relative w-36 h-20 lg:w-36 md:h-24 rounded-[10px] overflow-hidden shadow-lg">
+                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763135720/bo%CC%A3%CC%82_logo_PARC_MALL.pdf_2_1_pc5hvj.svg" alt="parc_mall" fill />
+                      </div>
+                    </div>
+
+                    {/* Nhà tài trợ đồng */}
+                    <div className="flex flex-col items-center justify-center">
+                      <p className="text-base lg:text-xl text-white font-bold text-center mb-4">
+                        NHÀ TÀI TRỢ ĐỒNG
+                      </p>
+                      <div className="flex items-center justify-center">
+                        <div className="relative w-20 h-20 lg:w-32 md:h-24 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763137645/bo%CC%A3%CC%82_logo_PARC_MALL.pdf_3_1_1_zjqabz.svg" alt="thuan_tien" fill />
+                        </div>
+                        <div className="relative w-20 h-20 lg:w-26 md:h-26 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763135789/MR.BROWN_2_vvfy5i.svg" alt="mr_brown" fill />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Đối tác công nghệ */}
+                    <div className="flex flex-col items-center justify-center">
+                      <p className="text-base lg:text-xl text-white font-bold text-center mb-4">
+                        NHÀ TÀI TRỢ ĐỒNG
+                      </p>
+                      <div className="relative w-50 h-20 lg:w-52 md:h-20 rounded-[10px] overflow-hidden shadow-lg">
+                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763135823/bo%CC%A3%CC%82_logo_PARC_MALL.pdf_4_1_ljv7my.svg" alt="dimo" fill />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-16">
+                  <div className="grid grid-cols-2 gap-20 items-start justify-center">
+                    {/* Đối tác đồng hành */}
+                    <div className="flex flex-col items-center justify-center">
+                      <p className="text-base lg:text-xl text-white font-bold text-center mb-4">
+                        ĐỐI TÁC ĐỒNG HÀNH
+                      </p>
+                      <div className="flex items-center justify-center gap-4">
+                        <div className="relative w-20 h-20 lg:w-24 md:h-24 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138061/Thie%CC%82%CC%81t_ke%CC%82%CC%81_chu%CC%9Ba_co%CC%81_te%CC%82n_75_qvoijk.svg" alt="vicu_vietnhan" fill />
+                        </div>
+                        <div className="relative w-20 h-20 lg:w-24 md:h-24 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138057/Thie%CC%82%CC%81t_ke%CC%82%CC%81_chu%CC%9Ba_co%CC%81_te%CC%82n_76_rveyqx.svg" alt="citycodes" fill />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bảo trợ truyền thông */}
+                    <div className="flex flex-col items-center justify-center">
+                      <p className="text-base lg:text-xl text-white font-bold text-center mb-2">
+                        BẢO TRỢ TRUYỀN THÔNG
+                      </p>
+                      <div className="flex items-center justify-center">
+                        <div className="relative w-20 h-11 lg:w-32 lg:h-11 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138394/ybox_1_1_b2qiry.svg" alt="ybox" fill />
+                        </div>
+                        <div className="relative w-20 h-11 lg:w-26 lg:h-11 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138365/LOGO_HVDV_1_uz9cxu.svg" alt="hoavandaiviet" fill />
+                        </div>
+                        <div className="relative w-20 h-11 lg:w-26 lg:h-11 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138360/GTVH1_1_rhatpn.svg" alt="giaitrivanhoa" fill />
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-center gap-4">
+                        <div className="relative w-30 h-11 lg:w-36 lg:h-24 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138355/golive_1_f6y60e.svg" alt="golive" fill />
+                        </div>
+                        <div className="relative w-30 h-11 lg:w-44 lg:h-24 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138352/The%CC%82%CC%81_Gio%CC%9B%CC%81i_Gia%CC%89i_Tri%CC%81_1_coxzq3.svg" alt="thegioigiaitri" fill />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
