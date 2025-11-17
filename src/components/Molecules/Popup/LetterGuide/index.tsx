@@ -114,7 +114,7 @@ const LetterGuide: React.FC<LetterGuideProps> = ({ isOpen, onClose, onNext, onBa
               <div className="flex gap-3 sm:gap-4 md:gap-6 items-center">
                 <div className="relative w-[400px] lg:w-[400px] h-[200px] lg:h-[200px]">
                   <Image
-                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1762593929/mapcl_3_sew4en.png"
+                    src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763392056/mapcl_3_mk8cwf.png"
                     alt="Letter Guide"
                     fill
                     style={{ objectFit: "contain" }}

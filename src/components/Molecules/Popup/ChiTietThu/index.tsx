@@ -168,85 +168,85 @@ const ChiTietThu = ({ isOpen, letterId, onClose, onParticipate, onBack, letters 
                                             <span className='text-secondary font-bd-street-sign lg:text-5xl text-3xl'>LÁ THƯ GỬI KỲ NHÂN - TÂM SỰ TỪ HẬU THẾ</span>
                                         </div>
 
-                                        {/* Content */}
-                                        <div className='relative w-full h-full'>
-                                            {/* Previous Button */}
-                                            <button
-                                                type='button'
-                                                onClick={handlePrevious}
-                                                disabled={!hasPrevious}
-                                                className={`absolute left-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center transition-opacity ${hasPrevious ? 'hover:opacity-80' : 'opacity-50 cursor-not-allowed'
-                                                    }`}
-                                            >
-                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721544/Back_cwp7tx.svg' alt='Prev' fill />
-                                            </button>
+                                        {/* Previous Button */}
+                                        <button
+                                            type='button'
+                                            onClick={handlePrevious}
+                                            disabled={!hasPrevious}
+                                            className={`absolute left-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center transition-opacity ${hasPrevious ? 'hover:opacity-80' : 'opacity-50 cursor-not-allowed'
+                                                }`}
+                                        >
+                                            <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391123/Next_1_rws1tq.png' alt='Prev' fill />
+                                        </button>
 
-                                            {/* Next Button */}
-                                            <button
-                                                type='button'
-                                                onClick={handleNext}
-                                                disabled={!hasNext}
-                                                className={`absolute right-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center transition-opacity ${hasNext ? 'hover:opacity-80' : 'opacity-50 cursor-not-allowed'
-                                                    }`}
-                                            >
-                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760725883/next_xshxeb.svg' alt='Next' fill />
-                                            </button>
+                                        {/* Next Button */}
+                                        <button
+                                            type='button'
+                                            onClick={handleNext}
+                                            disabled={!hasNext}
+                                            className={`absolute right-[-56px] top-1/2 -translate-y-1/2 w-[40px] h-[40px] cursor-pointer flex items-center justify-center transition-opacity ${hasNext ? 'hover:opacity-80' : 'opacity-50 cursor-not-allowed'
+                                                }`}
+                                        >
+                                            <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391077/Next_ek6cme.png' alt='Next' fill />
+                                        </button>
 
-                                            {isLoading ? (
-                                                <div className='flex justify-center items-center h-full'>
-                                                    <p className='text-secondary text-lg'>Đang tải...</p>
-                                                </div>
-                                            ) : isError || !letter ? (
-                                                <div className='flex justify-center items-center h-full'>
-                                                    <p className='text-secondary text-lg'>Có lỗi xảy ra khi tải dữ liệu</p>
-                                                </div>
-                                            ) : (
-                                                <>
-                                                    <div className='flex justify-between items-center'>
-                                                        <div className='w-full'>
-                                                            <div className='flex items-center justify-start lg:mb-4 mb-1'>
-                                                                <div className='lg:w-[10%] w-[15%]'>
-                                                                    <span className='text-secondary lg:text-lg text-sm font-bold'>Từ: </span>
-                                                                </div>
-                                                                <span className='text-[#CE7346] lg:text-lg text-sm font-bold italic'>
-                                                                    {letter.fromUser?.name || letter.from || 'Ẩn danh'}
-                                                                </span>
+                                        {isLoading ? (
+                                            <div className='flex justify-center items-center h-full'>
+                                                <p className='text-secondary text-lg'>Đang tải...</p>
+                                            </div>
+                                        ) : isError || !letter ? (
+                                            <div className='flex justify-center items-center h-full'>
+                                                <p className='text-secondary text-lg'>Có lỗi xảy ra khi tải dữ liệu</p>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <div className='flex justify-between items-center'>
+                                                    <div className='w-full'>
+                                                        <div className='flex items-center justify-start lg:mb-4 mb-1'>
+                                                            <div className='lg:w-[10%] w-[15%]'>
+                                                                <span className='text-secondary lg:text-lg text-sm font-bold'>Từ: </span>
                                                             </div>
-                                                            <div className='flex items-center justify-start lg:mb-4 mb-1'>
-                                                                <div className='lg:w-[10%] w-[15%]'>
-                                                                    <span className='text-secondary lg:text-lg text-sm font-bold'>Đến: </span>
-                                                                </div>
-                                                                <span className='text-[#CE7346] lg:text-lg text-sm font-bold italic'>
-                                                                    {letter.to || 'Kỳ Nhân'}
-                                                                </span>
-                                                            </div>
+                                                            <span className='text-[#CE7346] lg:text-lg text-sm font-bold italic'>
+                                                                {letter.fromUser?.name || letter.from || 'Ẩn danh'}
+                                                            </span>
                                                         </div>
-
-                                                        <div className='relative w-[120px] h-[40px] cursor-pointer flex flex-col items-end justify-end'>
-                                                            <p className='text-secondary lg:text-lg text-sm font-bold'>Ngày gửi</p>
-                                                            <p className='text-secondary lg:text-base text-sm italic'>
-                                                                {DateMonthYear(letter.createdAt)}
-                                                            </p>
+                                                        <div className='flex items-center justify-start lg:mb-4 mb-1'>
+                                                            <div className='lg:w-[10%] w-[15%]'>
+                                                                <span className='text-secondary lg:text-lg text-sm font-bold'>Đến: </span>
+                                                            </div>
+                                                            <span className='text-[#CE7346] lg:text-lg text-sm font-bold italic'>
+                                                                {letter.to || 'Kỳ Nhân'}
+                                                            </span>
                                                         </div>
                                                     </div>
 
-                                                    <div className='flex items-start justify-start lg:h-[80%] h-[70%] bg-[#F4ECD0] overflow-y-auto border-4 border-secondary rounded-xl px-4 py-2'>
-                                                        <span className='lg:text-base text-sm leading-relaxed whitespace-pre-line'>
-                                                            {letter.content}
-                                                        </span>
+                                                    <div className='relative w-[120px] h-[40px] cursor-pointer flex flex-col items-end justify-end'>
+                                                        <p className='text-secondary lg:text-lg text-sm font-bold'>Ngày gửi</p>
+                                                        <p className='text-secondary lg:text-base text-sm italic'>
+                                                            {DateMonthYear(letter.createdAt)}
+                                                        </p>
                                                     </div>
-                                                </>
-                                            )}
+                                                </div>
 
-                                            <div className='absolute lg:bottom-[-96px] bottom-[-55px] flex justify-center items-center w-full h-fit'>
+                                                <div className='flex items-start justify-start lg:h-[80%] h-[70%] bg-[#F4ECD0] overflow-y-auto border-4 border-secondary rounded-xl px-4 py-2'>
+                                                    <span className='lg:text-base text-sm leading-relaxed whitespace-pre-line'>
+                                                        {letter.content}
+                                                    </span>
+                                                </div>
+                                            </>
+                                        )}
+
+                                        <div className='absolute lg:bottom-[-96px] bottom-[-55px] flex justify-center items-center w-full h-fit'>
+                                            <div className='absolute flex justify-center items-center w-[20%] h-fit'>
                                                 <button className='lg:w-[200px] w-[120px] lg:h-[50px] h-[35px] cursor-pointer flex items-center justify-center hover:opacity-80 transition-all duration-300' onClick={handleParticipate}>
-                                                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760718877/Button_bb7ywk.svg' alt='join' fill />
+                                                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763389725/Rectangle_znlllq.png' alt='join' fill />
                                                     <div className='absolute inset-0 flex items-center justify-center'>
-                                                        <span className='text-secondary lg:text-sm text-[10px] font-bold'>Để tham gia ngay</span>
+                                                        <span className='text-secondary lg:text-sm text-[10px] font-bold'>Tham gia ngay</span>
                                                     </div>
                                                 </button>
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>

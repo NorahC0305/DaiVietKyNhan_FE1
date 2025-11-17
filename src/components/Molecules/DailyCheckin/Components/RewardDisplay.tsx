@@ -14,13 +14,6 @@ const RewardDisplay: React.FC<ICOMPONENTS.RewardDisplayProps> = memo(
             {reward.toLocaleString()}
           </div>
         </div>
-        <Plus
-          color="#FFDD3D"
-          className="cursor-pointer text-center justify-center items-center drop-shadow-2xl hover:opacity-60 transition-all duration-300 -ml-8"
-          strokeWidth={3}
-          size={25}
-        // onClick={onBuyMoreLifeClick}
-        />
       </div>
     </div>
   )

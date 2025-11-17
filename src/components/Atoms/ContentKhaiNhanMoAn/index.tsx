@@ -35,14 +35,14 @@ const ContentChuong4 = () => {
                     <br />
                     <p className="text-secondary lg:text-xl text-base text-justify leading-relaxed">Để khôi phục ánh sáng, Kỳ Chủ phải đi qua bốn vùng đất linh thiêng: Núi Tản Viên, Đầm Dạ Trạch, Làng Phù Đổng và Phủ Tây Hồ.</p>
                 </div>
-                <div className="relative lg:w-[330px] lg:h-[230px] w-[230px] h-[150px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726368/Trang_map_Ky%CC%80_Gio%CC%9B%CC%81i_qu5mvl.svg' alt="talinh" fill />
+                <div className="relative lg:w-[270px] lg:h-[230px] w-[180px] h-[150px]">
+                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760866961/T%C3%A0_%E1%BA%A2nh_1_o8opax.png' alt="talinh" fill />
                 </div>
             </div>
 
             {/* --- Content 2 --- */}
             <div className="px-10 mt-6 mb-6 flex items-center justify-between">
-                <div className="relative w-[300px] h-[250px] lg:h-[350px] lg:w-[400px]">
+                <div className="relative w-[280px] h-[250px] lg:h-[350px] lg:w-[400px]">
                     <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392095/l%E1%BB%ADa_t%E1%BA%AFt_1_ezzoka.png' alt="NgonLuaTat" fill />
                 </div>
                 <div className="w-[60%] ml-10">
@@ -87,14 +87,14 @@ const ContentChuong3 = () => {
                     <span className="text-secondary lg:text-xl text-base text-justify mb-0.5 leading-relaxed">Và rồi, khi sức mạnh đủ lớn, bóng tối ấy bắt đầu len lỏi vào Kỳ Giới – nơi lẽ ra chỉ có ánh sáng của ký ức và niềm tin tồn tại. Biến cố ập đến khi nó thổi tắt Kỳ Linh Việt Hỏa, dập tắt ánh sáng thiêng liêng vốn nuôi dưỡng linh hồn đất Việt. Hậu quả là toàn bộ các Kỳ Nhân – những danh nhân đã góp phần làm nên linh hồn dân tộc – bị phong ấn trong những  cuộn giấy cổ.</span>
                 </div>
                 <div className="relative lg:w-[350px] lg:h-[250px] w-[250px] h-[150px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1762617362/557595175_1129889679256040_6828254329627511677_n_1_huveib.png' alt="NgonLuaTat" fill />
+                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392050/557595175_1129889679256040_6828254329627511677_n_1_gfdfdn.png' alt="Cackynhanbiphongan" fill />
                 </div>
             </div>
 
             {/* --- Content 4 --- */}
             <div className="px-10 mt-6 mb-6 flex items-center justify-between">
                 <div className="relative lg:w-[350px] lg:h-[550px] w-[250px] h-[400px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1762617364/sa%CC%81ch_ta%CC%81ch_ne%CC%82%CC%80n_1_mcxjjg.png' alt="NgonLuaTat" fill />
+                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392058/s%C3%A1ch_t%C3%A1ch_n%E1%BB%81n_1_i9bhft.png' alt="SachDaiVietKyNhan" fill />
                 </div>
                 <div className="w-[50%] ml-10">
                     <span className="text-secondary lg:text-xl text-base text-justify mb-0.5 leading-relaxed">Trước biến cố ấy, Tứ Bất Tử không thể khoanh tay đứng nhìn. Họ cảm nhận rõ bóng tối đang len sâu vào linh hồn dân tộc, khiến ánh lửa ký ức dần lụi tàn. Nhưng là những đấng thần linh, họ hiểu hơn ai hết rằng vận mệnh của một dân tộc phải do chính con người của dân tộc ấy quyết định.
@@ -122,7 +122,7 @@ const ContentChuong2 = () => {
                     <span className="text-secondary lg:text-xl text-base text-justify leading-relaxed">Ban đầu, Tà Ảnh chỉ là những bào thai hỗn loạn. Bản thể của nó là những làn sương đen mỏng, yếu ớt, mang hình dạng của những ý niệm sai lệch trước lịch sử.  </span>
                 </div>
                 <div className="relative w-[270px] lg:w-[300px] h-[270px] lg:h-[330px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760866961/T%C3%A0_%E1%BA%A2nh_1_o8opax.png' alt="TaAnh" fill />
+                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763402526/Ta%CC%80_A%CC%89nh_1_oekar0.png' alt="TaAnh" fill />
                 </div>
             </div>
 
@@ -160,7 +160,7 @@ const ContentChuong1 = () => {
             {/* --- Content 2 --- */}
             <div className="px-10 mt-6 mb-6 flex items-center justify-between">
                 <div className="relative w-[300px] h-[280px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760865503/POST_TBT_1_js9xab.png' alt="Post TBT 1" fill />
+                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391729/POST_TBT_1_fohths.png' alt="Post TBT 1" fill />
                 </div>
                 <div className="w-[70%] ml-10">
                     <span className="text-secondary lg:text-xl text-base text-justify mb-0.5 leading-relaxed">Tứ Bất Tử được chọn làm những vị thần canh giữ Kỳ Linh Việt Hỏa. Để bảo vệ ngọn lửa khỏi những thế lực xấu xa, họ đã cùng nhau dựng nên Kỳ Giới - một cõi linh thiêng, huyền ảo với bốn vùng đất được bảo hộ bởi mỗi vị thần tương ứng Những vùng đất ấy lần lượt là:</span>

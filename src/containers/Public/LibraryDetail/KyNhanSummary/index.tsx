@@ -9,7 +9,7 @@ const KyNhanSummary = ({ moTaKyNhan }: { moTaKyNhan: any }) => {
         <div className="flex items-center justify-center">
             {/* Main scroll container */}
             <div className="relative w-[1400px] h-[800px] lg:h-[900px]">
-                <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726800/frame1_qudfzd.png" alt="Library Detail" className="relative w-full" fill />
+                <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763392066/khung_chi_ti%E1%BA%BFt_2_smpo9j.png" alt="Library Detail" className="relative w-full" fill />
                 <div className="absolute top-0 left-0 w-full h-full">
                     {/* Content area */}
                     <div className="flex justify-around items-center h-full">
@@ -75,7 +75,7 @@ const KyNhanSummary = ({ moTaKyNhan }: { moTaKyNhan: any }) => {
 
                                 {/* Decorative background circle */}
                                 <div className="absolute -z-10 w-[500px] h-[500px] lg:w-[650px] lg:h-[650px]">
-                                    <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760942553/trongdongdongson_okrufz.png" alt="Detail Circle" fill />
+                                    <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763392846/2ef0d20b52ffbab170a2db40d779a5dc_1_w8p39y.png" alt="Detail Circle" fill />
                                 </div>
                             </div>
 
