@@ -261,17 +261,17 @@ const HomePageClient = ({
       <section className="relative w-full lg:h-[750px] h-[510px] flex items-center justify-center overflow-hidden">
         <div className="absolute z-0 flex justify-center lg:w-[1330px] w-full h-full">
           <Image
-            src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103211/Key_visual_trong_web_3_dldjch.png"
+            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763397507/Key_visual_trong_web_3_rplw3h.png"
             alt="HomePage Banner"
             fill
             priority
           />
           <div className="flex w-[1330px]">
             <div className="absolute bottom-16 lg:bottom-25 left-20 lg:left-20 lg:w-[250px] lg:h-[80px] w-[150px] h-[50px] cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => router.push(ROUTES.PUBLIC.MAP)}>
-              <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103336/Group_117_jdhguy.png" alt="HomePage Banner" fill />
+              <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763397506/Tham_gia_ngay_ladofh.png" alt="Tham gia ngay" fill />
             </div>
             <div className="absolute bottom-16 lg:bottom-25 left-[250px] lg:left-[350px] lg:w-[250px] lg:h-[80px] w-[150px] h-[50px] cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => router.push(ROUTES.PUBLIC.INTRODUCE)}>
-              <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103394/Group_116_nvwx5n.png" alt="HomePage Banner" fill />
+              <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763397504/Tham_gia_ngay_1_cmttkj.png" alt="Thông tin chi tiết" fill />
             </div>
           </div>
         </div>
@@ -316,14 +316,16 @@ const HomePageClient = ({
 
       {/* Banner 2 - Khí Chất Section */}
       <section className="relative mt-12 lg:mt-32 w-full lg:h-[870px] h-[591px] flex items-center justify-center overflow-hidden">
-        <div className="absolute z-0 cursor-pointer flex justify-center w-[1330px] h-full">
+        <div className="absolute z-0 flex justify-center w-[1330px] h-full">
           <Image
             src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763393844/Key_visual_trong_web_3_rgdlyk.svg"
             alt="Khí Chất Của Bạn Là"
             fill
-            onClick={() => router.push(ROUTES.STARTER.TEST_PLAYGROUND)}
             priority
           />
+          <div className="absolute bottom-10 lg:bottom-10 left-[600px] lg:left-[560px] lg:w-[250px] lg:h-[80px] w-[150px] h-[50px] cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => router.push(ROUTES.STARTER.TEST_PLAYGROUND)}>
+            <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763397506/Tham_gia_ngay_ladofh.png" alt="Tham gia ngay" fill />
+          </div>
         </div>
       </section>
 
@@ -331,14 +333,13 @@ const HomePageClient = ({
       <section className="relative mt-12 lg:mt-32 w-full lg:h-[870px] h-[591px] flex items-center justify-center overflow-hidden">
         <div className="absolute z-0 flex justify-center lg:w-[1330px] w-full  h-full">
           <Image
-            src="https://res.cloudinary.com/dznt9yias/image/upload/v1762595082/FIGMA_la%CC%81_thu%CC%9B_1_yp04is.png"
+            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763397503/FIGMA_la%CC%81_thu%CC%9B_1_uryvyj.png"
             alt="Letter Guide"
             fill
-
             priority
           />
           <div className="absolute bottom-14 lg:bottom-16 left-[160px] lg:left-[300px] lg:w-[250px] lg:h-[80px] w-[150px] h-[50px] cursor-pointer hover:scale-105 transition-transform duration-200" onClick={() => router.push(`${ROUTES.PUBLIC.MAP}?openLetterGuide=true`)}>
-            <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762103336/Group_117_jdhguy.png" alt="HomePage Banner" fill />
+            <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763397506/Tham_gia_ngay_ladofh.png" alt="Tham gia ngay" fill />
           </div>
         </div>
       </section>

@@ -130,7 +130,7 @@ const VietThuGuiHauThe: React.FC<VietThuGuiHauTheProps> = ({ isOpen, onClose, on
                                 onClick={handleBack}
                             >
                                 <span className='relative block h-full w-full'>
-                                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391068/Return_1_uzxmz3.png' alt='Back' fill />
                                 </span>
                             </button>
 
@@ -190,7 +190,7 @@ const VietThuGuiHauThe: React.FC<VietThuGuiHauTheProps> = ({ isOpen, onClose, on
                                                         disabled={isSubmitting}
                                                         className='relative w-[120px] h-[40px] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed'
                                                     >
-                                                        <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760718877/Button_bb7ywk.svg' alt='Gui' fill />
+                                                        <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763389725/Rectangle_znlllq.png' alt='Gui' fill />
                                                         <span className='absolute inset-0 flex items-center justify-center text-secondary text-lg font-bold'>
                                                             {isSubmitting ? 'Đang gửi...' : 'Gửi'}
                                                         </span>

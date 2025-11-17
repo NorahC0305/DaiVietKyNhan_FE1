@@ -144,7 +144,7 @@ const ChiTietThu = ({ isOpen, letterId, onClose, onParticipate, onBack, letters 
                         onClick={handleBack}
                     >
                         <span className='relative block h-full w-full'>
-                            <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760726102/Return_1_qwp1kh.svg' alt='Back' fill />
+                            <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391068/Return_1_uzxmz3.png' alt='Back' fill />
                         </span>
                     </button>
 

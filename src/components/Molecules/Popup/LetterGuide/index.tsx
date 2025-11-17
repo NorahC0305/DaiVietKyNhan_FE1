@@ -6,6 +6,7 @@ import ModalBackdrop from "../../../Atoms/ModalBackdrop";
 import ButtonImage from "../../../Atoms/ButtonImage";
 import { getCurrentVietnamTime } from "@/utils/ReleaseDateUtils";
 import { createPortal } from "react-dom";
+import TrangSuConDoiAiDua from "@components/Atoms/TrangSuConDoiAiDua";
 
 export type LetterGuideProps = {
   isOpen: boolean;
@@ -60,16 +61,7 @@ const LetterGuide: React.FC<LetterGuideProps> = ({ isOpen, onClose, onNext, onBa
 
             {/* Banner - Responsive sizing */}
             <div className="flex-shrink-0 w-full max-w-[280px] sm:max-w-[320px] md:max-w-[400px] lg:max-w-xl mx-auto mt-3 sm:mt-4 md:mt-6">
-              <div className="relative aspect-[26/9] w-full">
-                <Image
-                  src="https://res.cloudinary.com/dznt9yias/image/upload/v1761020824/Group_101_cv70mj.svg"
-                  alt="Khung chứa thông điệp"
-                  fill
-                  sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, (max-width: 1024px) 400px, 400px"
-                  style={{ objectFit: "contain" }}
-                  priority
-                />
-              </div>
+              <TrangSuConDoiAiDua />
             </div>
           </div>
 
@@ -103,7 +95,7 @@ const LetterGuide: React.FC<LetterGuideProps> = ({ isOpen, onClose, onNext, onBa
               <div className="col-span-1 md:col-span-2 flex justify-center md:justify-end items-start pt-3 sm:pt-4 md:pt-0 px-2">
                 <div className="relative w-[200px] lg:w-[300px] h-[200px] lg:h-[300px]">
                   <Image
-                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760861352/FA25MC15_SLIDE_1_1_gby9iz.svg"
+                    src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763392057/FA25MC15_SLIDE_1_1_vltddq.png"
                     alt="Letter Guide"
                     width={280}
                     height={280}
