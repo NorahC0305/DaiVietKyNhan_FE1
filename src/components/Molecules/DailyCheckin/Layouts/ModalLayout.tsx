@@ -154,7 +154,7 @@ const ModalLayout: React.FC<ModalLayoutProps> = memo(({ isOpen, onClose, onCheck
           <div className="flex justify-center items-center relative">
             <div className="relative lg:w-[700px] lg:h-[600px] w-[500px] h-[400px]">
               <Image
-                src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726271/scroll-vertical_aftde9.svg"
+                src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763395885/Thie%CC%82%CC%81t_ke%CC%82%CC%81_chu%CC%9Ba_co%CC%81_te%CC%82n_8_4_vqbohd.svg"
                 alt="scroll-vertical"
                 fill
                 className="object-contain"

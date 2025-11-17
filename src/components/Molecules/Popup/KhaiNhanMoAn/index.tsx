@@ -152,7 +152,7 @@ export default function KhaiNhanMoAn({
                 )}
                 {isCharacterClickable("Sơn Tinh") ? (
                   <Image
-                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760861674/Sơn_Tinh_-_Chương_1_tmi2kx.png"
+                    src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763396939/S%C6%A1n_Tinh_-_Ch%C6%B0%C6%A1ng_1_t3wtmz.png"
                     alt="Sơn Tinh - Chương 1"
                     fill
                     className="relative z-10"
@@ -176,7 +176,7 @@ export default function KhaiNhanMoAn({
                   )}
                 {isCharacterClickable("Chử Đồng Tử") ? (
                   <Image
-                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760862149/Ch%E1%BB%AD_%C4%90%E1%BB%93ng_T%E1%BB%AD_-_Ch%C6%B0%C6%A1ng_2_sxhcav.png"
+                    src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763396966/Ch%E1%BB%AD_%C4%90%E1%BB%93ng_T%E1%BB%AD_-_Ch%C6%B0%C6%A1ng_2_yt87mr.png"
                     alt="Chử Đồng Tử - Chương 2"
                     fill
                     className="relative z-10"
@@ -200,7 +200,7 @@ export default function KhaiNhanMoAn({
                   )}
                 {isCharacterClickable("Thánh Gióng") ? (
                   <Image
-                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760862212/Th%C3%A1nh_Gi%C3%B3ng_-_Ch%C6%B0%C6%A1ng_3_wlwpux.png"
+                    src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763396993/Th%C3%A1nh_Gi%C3%B3ng_-_Ch%C6%B0%C6%A1ng_3_wzx3an.png"
                     alt="Thánh Gióng - Chương 3"
                     fill
                     className="relative z-10"
@@ -222,7 +222,7 @@ export default function KhaiNhanMoAn({
                 )}
                 {isCharacterClickable("Liễu Hạnh") ? (
                   <Image
-                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760862249/Li%E1%BB%85u_H%E1%BA%A1nh_-_Ch%C6%B0%C6%A1ng_4_l8xkci.png"
+                    src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763397020/Li%E1%BB%85u_H%E1%BA%A1nh_-_Ch%C6%B0%C6%A1ng_4_xhrv5k.png"
                     alt="Liễu Hạnh - Chương 4"
                     fill
                     className="relative z-10"

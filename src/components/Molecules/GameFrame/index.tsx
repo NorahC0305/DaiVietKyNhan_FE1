@@ -4,7 +4,6 @@ import Image from "next/image";
 import React, { useCallback, useState } from "react";
 import { cn } from "@/utils/CN";
 import Avartar from "@components/Atoms/Avartar";
-import frame from "../../../../public/frame.svg";
 import heart from "../../../../public/Heart.svg";
 import heart2 from "../../../../public/Heart (1).svg";
 import frameCoin from "../../../../public/FrameCoin.svg";
@@ -323,7 +322,7 @@ export const GameFrame: React.FC<GameFrameProps> = ({
         <div className="flex items-center justify-center">
           <div className="relative top-0 left-0 flex items-center justify-center lg:ml-5 ml-3 drop-shadow-2xl ">
             <div className="relative lg:w-[180px] lg:h-[55px] w-[100px] h-[40px]">
-              <Image src={frame} alt="frame" fill />
+              <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390553/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_ij8bzq.png" alt="frame" fill />
             </div>
             <div className="absolute top-0 left-0 flex justify-center items-center h-full w-full gap-2">
               {renderHearts()}
@@ -361,8 +360,8 @@ export const GameFrame: React.FC<GameFrameProps> = ({
         </div>
 
         <div className="relative top-0 left-0 flex items-center justify-center ml-2">
-          <div className="relative w-[100px] h-[45px] lg:w-[180px] lg:h-[70px]">
-            <Image src={frame} alt="frame" className="mt-3" fill />
+          <div className="relative w-[100px] h-[25px] lg:w-[180px] lg:h-[50px]">
+            <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390553/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_ij8bzq.png" alt="frame" className="mt-3" fill />
             <div className="absolute top-3 lg:top-3.5 left-0 flex justify-center items-center h-full w-full gap-2">
               <span className="text-xs lg:text-xl font-bold text-amber-500">
                 {user?.point?.toLocaleString() || "0"} ĐIỂM

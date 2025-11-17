@@ -19,7 +19,7 @@ const AboutUsPage = () => {
         <div className="relative w-full max-w-5xl mx-auto">
           {/* Scroll Paper Background */}
           <Image
-            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg"
+            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763392813/khung_chi_ti%E1%BA%BFt_3_mhxweg.png"
             alt="Scroll Paper"
             width={1000}
             height={1000}
@@ -84,7 +84,7 @@ const AboutUsPage = () => {
         <div className="relative w-full max-w-5xl mx-auto">
           {/* Scroll Paper Background */}
           <Image
-            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg"
+            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763392813/khung_chi_ti%E1%BA%BFt_3_mhxweg.png"
             alt="Scroll Paper"
             width={1000}
             height={1000}

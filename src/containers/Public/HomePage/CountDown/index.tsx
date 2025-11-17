@@ -40,7 +40,7 @@ const CountDown = ({ activeWithAmountUser, accessToken }: CountDownProps) => {
             const date = new Date(launchDate);
             date.setDate(date.getDate() - 1);
             return date.toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' });
-          })()
+        })()
         : '';
 
     useEffect(() => {
@@ -48,7 +48,7 @@ const CountDown = ({ activeWithAmountUser, accessToken }: CountDownProps) => {
             return;
         }
 
-        const imageUrls = ["https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg", frame.src];
+        const imageUrls = ["https://res.cloudinary.com/dauhpllo7/image/upload/v1763392813/khung_chi_ti%E1%BA%BFt_3_mhxweg.png", frame.src];
         const promises = imageUrls.map((src) => {
             return new Promise((resolve, reject) => {
                 const img = new window.Image();
@@ -139,7 +139,7 @@ const CountDown = ({ activeWithAmountUser, accessToken }: CountDownProps) => {
     return (
         <div className='w-full flex items-center justify-center'>
             <div className='relative w-full max-w-5xl mx-auto'>
-                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg' alt="Scroll Paper" className="w-full h-auto max-w-[1000px]" priority width={1000} height={1000} />
+                <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392813/khung_chi_ti%E1%BA%BFt_3_mhxweg.png' alt="Scroll Paper" className="w-full h-auto max-w-[1000px]" priority width={1000} height={1000} />
 
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] md:w-[80%] flex items-center justify-center flex-col">
                     <div className='flex items-center justify-center flex-col mt-2'>
@@ -155,7 +155,7 @@ const CountDown = ({ activeWithAmountUser, accessToken }: CountDownProps) => {
                     </div>
 
                     <div className='relative w-full flex justify-center'>
-                        <Image src={frame} alt="Frame" className="w-full h-auto max-w-[550px] md:max-w-[800px]" priority />
+                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390553/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_ij8bzq.png" alt="Frame" className="w-full h-auto max-w-[550px] md:max-w-[800px]" priority />
                         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] md:w-[90%] flex items-center justify-start flex-col'>
                             {/* --- Title Count Down --- */}
                             <div className='w-full flex items-center justify-center gap-2'>

@@ -147,7 +147,7 @@ const VietThuGuiHauThe: React.FC<VietThuGuiHauTheProps> = ({ isOpen, onClose, on
                                     <h2 className='text-white text-xl lg:text-2xl font-extrabold text-center'>Hãy viết một lá thư để bày tỏ đôi lời gửi tới vị Kỳ Nhân yêu thích</h2>
 
                                     <div className='relative lg:w-[900px] lg:h-[500px] w-[700px] h-[350px]'>
-                                        <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg' alt='Viet Thu Gui Hau The' fill />
+                                        <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392813/khung_chi_ti%E1%BA%BFt_3_mhxweg.png' alt='Viet Thu Gui Hau The' fill />
 
                                         <div className='absolute w-full h-[100%] flex items-center justify-center inset-0'>
                                             <div className='absolute lg:w-[70%] w-[60%] lg:h-[70%] h-[60%] flex flex-col justify-center'>

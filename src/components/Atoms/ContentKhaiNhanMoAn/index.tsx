@@ -42,8 +42,8 @@ const ContentChuong4 = () => {
 
             {/* --- Content 2 --- */}
             <div className="px-10 mt-6 mb-6 flex items-center justify-between">
-                <div className="relative w-[300px] h-[350px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760869022/4_logo_1_1_epeehj.png' alt="NgonLuaTat" fill />
+                <div className="relative w-[300px] h-[250px] lg:h-[350px] lg:w-[400px]">
+                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392095/l%E1%BB%ADa_t%E1%BA%AFt_1_ezzoka.png' alt="NgonLuaTat" fill />
                 </div>
                 <div className="w-[60%] ml-10">
                     <span className="text-secondary lg:text-xl text-base text-justify mb-0.5 leading-relaxed">Tại mỗi vùng đất, Kỳ Chủ sẽ thông qua những dấu tích còn sót lại từ những câu chuyện Kỳ Nhân để giải phong ấn cho họ. Mỗi khi thành công giải ấn cho một Kỳ Nhân, cảm xúc và ký ức của họ lại sống dậy, trao cho Kỳ Chủ một Kỳ Ấn - những thông tin và câu chuyện về Kỳ Nhân đó.</span>
@@ -74,7 +74,7 @@ const ContentChuong3 = () => {
             {/* --- Content 2 --- */}
             <div className="px-10 mt-6 mb-6 flex items-center justify-between">
                 <div className="relative w-[240px] h-[200px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760868510/l%E1%BB%ADa_t%E1%BA%AFt_1_jdahkz.svg' alt="NgonLuaTat" fill />
+                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392095/l%E1%BB%ADa_t%E1%BA%AFt_1_ezzoka.png' alt="NgonLuaTat" fill />
                 </div>
                 <div className="w-[60%] ml-10">
                     <span className="text-secondary lg:text-xl text-base text-justify mb-0.5 leading-relaxed">Và rồi, khi sức mạnh đủ lớn, bóng tối ấy bắt đầu len lỏi vào Kỳ Giới – nơi lẽ ra chỉ có ánh sáng của ký ức và niềm tin tồn tại. Biến cố ập đến khi nó thổi tắt Kỳ Linh Việt Hỏa, dập tắt ánh sáng thiêng liêng vốn nuôi dưỡng linh hồn đất Việt. Hậu quả là toàn bộ các Kỳ Nhân – những danh nhân đã góp phần làm nên linh hồn dân tộc – bị phong ấn trong những  cuộn giấy cổ.</span>
@@ -153,7 +153,7 @@ const ContentChuong1 = () => {
                     <span className="text-secondary lg:text-xl text-base text-justify leading-relaxed">Ngàn năm về trước, mỗi dân tộc đều có riêng cho mình một ngọn lửa thiêng – kết tinh của hồn cốt và ký ức dân tộc, là mạch nguồn lưu giữ câu chuyện của muôn ngàn thế hệ. Ngọn lửa của con dân đất Việt mang tên Kỳ Linh Việt Hỏa. Ánh sáng của ngọn lửa trường tồn ấy không chỉ soi tỏ lịch sử, mà còn gắn kết nó với từng con người bằng xương bằng thịt, cùng nỗi buồn, niềm vui, khát vọng của họ. </span>
                 </div>
                 <div className="relative w-[200px] h-[200px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760722420/Ky%CC%80_Linh_Vie%CC%A3%CC%82t_Ho%CC%89a_1_mvwrlg.svg' alt="KyLinhVietHoa" fill />
+                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391990/K%E1%BB%B3_Linh_Vi%E1%BB%87t_H%E1%BB%8Fa_4_yb7psq.png' alt="KyLinhVietHoa" fill />
                 </div>
             </div>
 

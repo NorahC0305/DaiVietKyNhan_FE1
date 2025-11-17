@@ -27,7 +27,7 @@ const IntroduceLayoutClient: React.FC<IntroduceLayoutProps> = ({
             {/* Background Image */}
             <div className="absolute inset-0 z-0">
                 <Image
-                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721580/background_web_1_mq9ehy.svg"
+                    src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390430/background_web_1_kthcwf.png"
                     alt="Background"
                     fill
                     className="object-cover"

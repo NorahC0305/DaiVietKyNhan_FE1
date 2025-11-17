@@ -113,7 +113,7 @@ const SuKienTuongTac = ({ onClose }: { onClose: () => void }) => {
                     <div className="flex items-center justify-between mt-5">
                         <div className="flex flex-col items-center justify-center">
                             <div className="relative w-[90px] lg:w-[130px] h-[90px] lg:h-[130px] mb-5">
-                                <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760727086/big-logo_zq7jb4.svg" alt="poster" fill />
+                                <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391411/LOGO-%C4%90%E1%BA%A0I-VI%E1%BB%86T-K%E1%BB%B2-NH%C3%82N_1_jyv7su.png" alt="poster" fill />
                             </div>
                             <div className="relative w-[90px] lg:w-[130px] h-[90px] lg:h-[130px] mb-5">
                                 <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762754351/image_7_ro9hrx.png" alt="poster" fill />
@@ -235,10 +235,10 @@ const TraiNghiemWebsite = ({ onClose }: { onClose: () => void }) => {
                                     </h3>
                                 </div>
                                 <div className="relative w-[250px] lg:w-[300px] h-[180px] lg:h-[200px] mb-5">
-                                    <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762098794/mapcl_4_po7nzm.png" alt="frame" fill className="w-full h-full" />
+                                    <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390690/mapcl_4_nrq1qp.png" alt="frame" fill className="w-full h-full" />
                                 </div>
                                 <div className="relative w-[250px] lg:w-[300px] h-[180px] lg:h-[200px] mb-3">
-                                    <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762098837/mapcl_5_payi1x.png" alt="frame" fill className="w-full h-full" />
+                                    <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390768/mapcl_5_vsm13z.png" alt="frame" fill className="w-full h-full" />
                                 </div>
                             </div>
 
@@ -260,8 +260,8 @@ const TraiNghiemWebsite = ({ onClose }: { onClose: () => void }) => {
                                 </h3>
                             </div>
                             <div className="flex justify-between items-center mt-5">
-                                <div className="relative w-[250px] lg:w-[300px] h-[150px] lg:h-[180px]">
-                                    <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762100249/mapcl_6_v28nro.png" alt="frame" fill className="w-full h-full" />
+                                <div className="relative w-[250px] lg:w-[300px] h-[200px] lg:h-[230px]">
+                                    <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390820/mapcl_6_uf6x62.png" alt="frame" fill className="w-full h-full" />
                                 </div>
 
                                 <div className="flex flex-col items-start justify-start text-secondary w-[50%]">
@@ -278,7 +278,7 @@ const TraiNghiemWebsite = ({ onClose }: { onClose: () => void }) => {
                             <div className="flex justify-between items-center mt-5">
                                 <div className="flex items-center justify-center w-[40%]">
                                     <div className="relative w-[250px] lg:w-[250px] h-[200px] lg:h-[250px]">
-                                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762100561/mapcl_10_1_ab5ahp.png" alt="frame" fill className="w-full h-full" />
+                                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390834/mapcl_10_hjaiin.png" alt="frame" fill className="w-full h-full" />
                                     </div>
                                 </div>
 
@@ -304,7 +304,7 @@ const TraiNghiemWebsite = ({ onClose }: { onClose: () => void }) => {
                             <div className="flex justify-between items-center mt-5">
                                 <div className="flex items-center justify-center w-[40%]">
                                     <div className="relative w-[250px] lg:w-[250px] h-[200px] lg:h-[250px]">
-                                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762100223/mapcl_8_g2ckyf.png" alt="frame" fill className="w-full h-full" />
+                                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390838/mapcl_8_ytk27x.png" alt="frame" fill className="w-full h-full" />
                                     </div>
                                 </div>
 
@@ -322,7 +322,7 @@ const TraiNghiemWebsite = ({ onClose }: { onClose: () => void }) => {
                             <div className="flex justify-between items-start mt-5">
                                 <div className="flex items-center justify-center w-[40%]">
                                     <div className="relative w-[250px] lg:w-[250px] h-[200px] lg:h-[250px]">
-                                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762101232/mapcl_9_sqmdcn.png" alt="frame" fill className="w-full h-full" />
+                                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390840/mapcl_9_x8gdgr.png" alt="frame" fill className="w-full h-full" />
                                     </div>
                                 </div>
 
@@ -496,10 +496,10 @@ const ChuoiHoatDongSanThuong = ({ onClose, onOpenKyAnDocBao }: { onClose: () => 
 
                 <div className="flex flex-col items-center justify-center mx-10 mt-10">
                     <div className="relative w-[120px] lg:w-[220px] h-[140px] lg:h-[240px]">
-                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762097672/Gemini_Generated_Image_mnkmapmnkmapmnkm_2_v9zc3l.png" alt="frame" fill className="w-full h-full" />
+                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762097672/Gemini_Generated_Image_mnkmapmnkmapmnkm_2_v9zc3l.png" alt="gift" fill className="w-full h-full" />
                     </div>
                     <div className="relative w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] cursor-pointer mt-5" onClick={onOpenKyAnDocBao}>
-                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760725883/next_xshxeb.svg" alt="frame" fill className="w-full h-full" />
+                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391077/Next_ek6cme.png" alt="next" fill className="w-full h-full" />
                     </div>
                 </div>
             </div>
@@ -554,7 +554,7 @@ const KyAnDocBan = ({ onClose, onBack }: { onClose: () => void; onBack: () => vo
 
                         <div className="flex items-center justify-center my-5">
                             <div className="relative w-[450px] lg:w-[700px] h-[280px] lg:h-[400px] mb-10">
-                                <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762795131/image_9_ftjfb1.png" alt="frame" fill />
+                                <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391114/image_9_i598em.png" alt="top15sodiemcaonhat" fill />
                             </div>
                         </div>
 
@@ -572,7 +572,7 @@ const KyAnDocBan = ({ onClose, onBack }: { onClose: () => void; onBack: () => vo
                 </div>
                 <div className="flex flex-col items-center justify-center mx-10 mt-10">
                     <div className="relative w-[40px] lg:w-[50px] h-[40px] lg:h-[50px] cursor-pointer" onClick={onBack}>
-                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721544/Back_cwp7tx.svg" alt="frame" fill className="w-full h-full" />
+                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391123/Next_1_rws1tq.png" alt="previous" fill className="w-full h-full" />
                     </div>
                 </div>
             </div>
@@ -658,10 +658,10 @@ const IntroducePageClient = () => {
                                 <h3 className="text-left lg:text-xl text-lg font-bold text-secondary">3. Các hoạt động trọng tâm</h3>
                                 <div className="flex items-center justify-center">
                                     <div
-                                        className='relative w-[300px] lg:w-[400px] h-[80px] lg:h-[117px] flex items-center justify-center my-5 cursor-pointer hover:scale-105 transition-transform'
+                                        className='relative w-[300px] lg:w-[400px] h-[60px] lg:h-[80px] flex items-center justify-center my-5 cursor-pointer hover:scale-105 transition-transform'
                                         onClick={() => handleActivityClick('trai-nghiem')}
                                     >
-                                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726766/frame_hfc9ot.svg" alt="frame" fill />
+                                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391421/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_bsnqvq.png" alt="frame" fill />
                                         <div className='absolute inset-0 flex items-center justify-center '>
                                             <div className='flex  flex-col items-center justify-center w-[80%]'>
                                                 <span className='text-center lg:text-[17px] text-sm font-bd-street-sign text-[#AD844A]'>Trải nghiệm website</span>
@@ -670,10 +670,10 @@ const IntroducePageClient = () => {
                                         </div>
                                     </div>
                                     <div
-                                        className='relative w-[300px] lg:w-[400px] h-[80px] lg:h-[117px] flex items-center justify-center my-5 cursor-pointer hover:scale-105 transition-transform'
+                                        className='relative w-[300px] lg:w-[400px] h-[60px] lg:h-[80px] flex items-center justify-center my-5 cursor-pointer hover:scale-105 transition-transform'
                                         onClick={() => handleActivityClick('san-thuong')}
                                     >
-                                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726766/frame_hfc9ot.svg" alt="frame" fill />
+                                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391421/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_bsnqvq.png" alt="frame" fill />
                                         <div className='absolute inset-0 flex items-center justify-center '>
                                             <div className='flex  flex-col items-center justify-center w-[80%]'>
                                                 <span className='text-center lg:text-[17px] text-sm font-bd-street-sign text-[#AD844A]'>Chuỗi hoạt động săn thưởng đổi quà</span>
@@ -682,10 +682,10 @@ const IntroducePageClient = () => {
                                         </div>
                                     </div>
                                     <div
-                                        className='relative w-[300px] lg:w-[400px] h-[80px] lg:h-[117px] flex items-center justify-center my-5 cursor-pointer hover:scale-105 transition-transform'
+                                        className='relative w-[300px] lg:w-[400px] h-[60px] lg:h-[80px] flex items-center justify-center my-5 cursor-pointer hover:scale-105 transition-transform'
                                         onClick={() => handleActivityClick('su-kien')}
                                     >
-                                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726766/frame_hfc9ot.svg" alt="frame" fill />
+                                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391421/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_bsnqvq.png" alt="frame" fill />
                                         <div className='absolute inset-0 flex items-center justify-center '>
                                             <div className='flex  flex-col items-center justify-center w-[80%]'>
                                                 <span className='text-center lg:text-[17px] text-sm font-bd-street-sign text-[#AD844A]'>Sự kiện tương tác</span>

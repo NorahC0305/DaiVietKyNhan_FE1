@@ -159,7 +159,7 @@ const ChiTietThu = ({ isOpen, letterId, onClose, onParticipate, onBack, letters 
                         <div className='flex flex-col items-center justify-center'>
                             {/* Cuộn giấy */}
                             <div className='relative lg:w-[1300px] lg:h-[700px] w-[700px] h-[400px]'>
-                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg' alt='Viet Thu Gui Hau The' fill />
+                                <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392813/khung_chi_ti%E1%BA%BFt_3_mhxweg.png' alt='Viet Thu Gui Hau The' fill />
 
                                 <div className='absolute w-full h-[100%] flex items-center justify-center inset-0'>
                                     <div className='absolute lg:w-[60%] w-[60%] lg:h-[70%] h-[60%] flex flex-col justify-center'>

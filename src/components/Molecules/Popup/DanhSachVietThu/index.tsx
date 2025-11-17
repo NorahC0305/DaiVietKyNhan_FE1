@@ -151,7 +151,7 @@ const DanhSachVietThu = ({
               {/* Cuộn giấy */}
               <div className="relative lg:w-[1300px] lg:h-[700px] w-[700px] h-[400px]">
                 <Image
-                  src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg"
+                  src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763392813/khung_chi_ti%E1%BA%BFt_3_mhxweg.png"
                   alt="Viet Thu Gui Hau The"
                   fill
                 />

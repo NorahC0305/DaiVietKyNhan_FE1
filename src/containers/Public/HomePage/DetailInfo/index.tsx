@@ -56,7 +56,7 @@ const DetailInfo = () => {
     return (
         <div className='w-full flex items-center justify-center'>
             <div className='relative w-full max-w-5xl mx-auto'>
-                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760721989/ScrollPaper_dqmtkl.svg' alt="Scroll Paper" className="w-full h-auto max-w-[1000px]" width={1000} height={1000} />
+                <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392813/khung_chi_ti%E1%BA%BFt_3_mhxweg.png' alt="Scroll Paper" className="w-full h-auto max-w-[1000px]" width={1000} height={1000} />
 
                 <form
                     onSubmit={handleSubmit(onSubmit)}
@@ -67,7 +67,7 @@ const DetailInfo = () => {
                     </h1>
 
                     <div className='relative w-full flex justify-center'>
-                        <Image src={frame} alt="Frame" className="w-full h-auto max-w-[550px] md:max-w-[800px]" />
+                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390553/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_ij8bzq.png" alt="Frame" className="w-full h-auto max-w-[550px] md:max-w-[800px]" />
 
                         <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] md:w-[45%] flex items-center justify-start flex-col space-y-2 sm:space-y-4'>
                             <div className='w-full flex items-center justify-start gap-2'>

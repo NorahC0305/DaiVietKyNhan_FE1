@@ -332,8 +332,8 @@ export default function RedeemModal({
                             <Image
                               src={
                                 tier.canRedeem
-                                  ? "https://res.cloudinary.com/dznt9yias/image/upload/v1760725918/Property_1_%C4%90u%CC%89_%C4%91e%CC%82%CC%89_%C4%91o%CC%82%CC%89i_go2bxs.svg"
-                                  : "https://res.cloudinary.com/dznt9yias/image/upload/v1760725953/Property_1_Chu%CC%9Ba_%C4%91u%CC%89_%C4%91e%CC%82%CC%89_%C4%91o%CC%82%CC%89i_jd7uh5.svg"
+                                  ? "https://res.cloudinary.com/dauhpllo7/image/upload/v1763392831/Property_1_%C4%90u%CC%89_%C4%91e%CC%82%CC%89_%C4%91o%CC%82%CC%89i_p3w8gc.svg"
+                                  : "https://res.cloudinary.com/dauhpllo7/image/upload/v1763392811/Property_1_Chu%CC%9Ba_%C4%91u%CC%89_%C4%91e%CC%82%CC%89_%C4%91o%CC%82%CC%89i_lu6jbu.svg"
                               }
                               alt="Button background"
                               fill
