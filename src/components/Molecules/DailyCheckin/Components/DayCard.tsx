@@ -61,7 +61,7 @@ const DayCard: React.FC<ICOMPONENTS.DayCardProps> = memo(({ day, variant }) => {
     : "";
 
   const backdropStyle = {
-    backgroundImage: "url('https://res.cloudinary.com/dznt9yias/image/upload/v1761078739/Thie%CC%82%CC%81t_ke%CC%82%CC%81_chu%CC%9Ba_co%CC%81_te%CC%82n_21_1_wkhkqr.png')",
+    backgroundImage: "url('https://res.cloudinary.com/dauhpllo7/image/upload/v1763399320/Thie%CC%82%CC%81t_ke%CC%82%CC%81_chu%CC%9Ba_co%CC%81_te%CC%82n_21_1_os6dxe.png')",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
