@@ -288,7 +288,7 @@ const HomePageClient = ({
               className="fixed lg:bottom-7 bottom-20 lg:right-7 right-5 lg:w-[50px] lg:h-[50px] w-[45px] h-[45px] z-10 cursor-pointer"
               onClick={() => setIsVideoModalOpen(true)}
             >
-              <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1761673445/video_pzrrzw.png" alt="Video" fill />
+              <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763404207/Group_126_1_mkuuwh.png" alt="Video" fill />
             </div>
           </TooltipTrigger>
           <TooltipContent side="left" sideOffset={10} className="bg-transparent border-0 shadow-none">

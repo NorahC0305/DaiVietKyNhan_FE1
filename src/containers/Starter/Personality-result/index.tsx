@@ -350,7 +350,7 @@ const PersonalityResultPage = React.memo(() => {
               aria-label="Back"
             >
               <Image
-                src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721544/Back_cwp7tx.svg"
+                src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391123/Next_1_rws1tq.png"
                 alt="Back"
                 width={50}
                 height={50}
@@ -369,7 +369,7 @@ const PersonalityResultPage = React.memo(() => {
               style={{ width: "180px", height: "50px" }}
             >
               <Image
-                src="https://res.cloudinary.com/dznt9yias/image/upload/v1760718877/Button_bb7ywk.svg"
+                src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763389725/Rectangle_znlllq.png"
                 alt="Tiếp tục"
                 objectFit="contain"
                 className="absolute"

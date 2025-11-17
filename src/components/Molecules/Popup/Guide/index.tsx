@@ -74,7 +74,7 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                     <div className='flex items-center justify-around pb-2'>
                                         {/* Story */}
                                         <div className='relative w-[230px] lg:w-[400px] h-[240px] lg:h-[370px]'>
-                                            <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760865503/POST_TBT_1_js9xab.png' alt='POST_TBT_1' fill />
+                                            <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391729/POST_TBT_1_fohths.png' alt='POST_TBT_1' fill />
                                         </div>
 
                                         <div className='w-1/2'>
@@ -102,10 +102,10 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                         </div>
                                         <div className='flex items-center'>
                                             <div className='relative w-[150px] lg:w-[200px] h-[300px] lg:h-[370px]'>
-                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760990827/figures/images/file_bgsgvx_6c3e09.png' alt='figures_male' fill />
+                                                <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391728/char_nam_1_rx9ljw.png' alt='figures_male' fill />
                                             </div>
                                             <div className='relative w-[150px] lg:w-[200px] h-[300px] lg:h-[370px]'>
-                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760990779/figures/images/file_reoxf0_deccf3.png' alt='figures_female' fill />
+                                                <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391729/char_n%E1%BB%AF_1_tusszm.png' alt='figures_female' fill />
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                         <h4 className='lg:text-5xl text-3xl font-bd-street-sign text-[#CE7346] text-center'>Bản đồ Kỳ Giới</h4>
                                         <div className='flex items-center justify-around'>
                                             <div className='relative w-[1000px] lg:w-[1000px] h-[300px] lg:h-[370px] ml-4'>
-                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760992467/Group_106_hbl7no.png' alt='guide_map' fill />
+                                                <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763403708/Group_126_rnhbjx.png' alt='guide_map' fill />
                                             </div>
                                             <ul className='mx-5 list-disc list-inside'>
                                                 <li className='text-secondary lg:text-xl text-sm'>Có bốn vùng đất ứng với bảo hộ của bốn vị thần:
@@ -148,10 +148,10 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                                 <li className='text-secondary lg:text-xl text-sm'>Lần lượt giải mã các câu hỏi để tìm ra danh tính các vị Kỳ Nhân bị phong ấn ở mỗi vùng đất</li>
                                             </ul>
                                             <div className='relative w-[80px] lg:w-[80px] h-[50px] lg:h-[50px] ml-4'>
-                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760993978/cuo%CC%A3%CC%82n_gia%CC%82%CC%81y_cuo%CC%A3%CC%82n_la%CC%A3i_1_1_x3dwbd.png' alt='cuon_giay_cuon_lai' fill />
+                                                <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391735/cu%E1%BB%99n_gi%E1%BA%A5y_cu%E1%BB%99n_l%E1%BA%A1i_6_iqegbi.png' alt='cuon_giay_cuon_lai' fill />
                                             </div>
                                             <div className='relative w-[140px] lg:w-[160px] h-[100px] lg:h-[100px] ml-4'>
-                                                <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760994096/Pop-up_ca%CC%82u_ho%CC%89i_1_1_yhz2o9.png' alt='cau_hoi' fill />
+                                                <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391726/Pop-up_c%C3%A2u_h%E1%BB%8Fi_1_vchsfi.png' alt='cau_hoi' fill />
                                             </div>
                                         </div>
 
@@ -169,7 +169,7 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                             {/* ***Collect Kỳ Ấn & Plus Point*** */}
                                             <div className='flex items-center justify-start'>
                                                 <div className='relative w-[140px] lg:w-[200px] h-[230px] lg:h-[300px] ml-4'>
-                                                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760994814/An_Tu%CC%9B_Co%CC%82ng_Chu%CC%81a62_1_vihyo0.png' alt='thu_thap_ki_an' fill />
+                                                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763391727/An_T%C6%B0_C%C3%B4ng_Ch%C3%BAa62_1_dl2dud.png' alt='thu_thap_ki_an' fill />
                                                 </div>
                                                 <div className='relative w-[120px] lg:w-[200px] h-[30px] lg:h-[70px] ml-4'>
                                                     <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392323/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_xodyzk.png' alt='thu_thap_ki_an' fill />
