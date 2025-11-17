@@ -374,7 +374,7 @@ const ChuoiHoatDongSanThuong = ({ onClose, onOpenKyAnDocBao }: { onClose: () => 
                 {/* Mở Ấn Tích Xu, Thưởng Quà KỲ CHỦ */}
                 <div className="flex flex-col items-center justify-center">
                     <div className="relative w-[400px] lg:w-[600px] h-[200px] lg:h-[350px] mx-auto mb-10">
-                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1762076231/mapcl_10_eneafr.png" alt="frame" fill />
+                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763359163/qua%CC%80_mo%CC%9B%CC%81i_2_tyhrcj.png" alt="frame" fill />
                     </div>
 
                     <ul className="list-disc list-inside mx-10 w-[400px] lg:w-[600px] text-secondary lg:text-lg text-base text-justify leading-relaxed">
