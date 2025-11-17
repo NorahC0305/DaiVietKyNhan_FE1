@@ -13,9 +13,9 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
             hearts.push(
                 <div
                     key={i}
-                    className="relative lg:w-[25px] lg:h-[30px] w-[18px] h-[18px]"
+                    className="relative lg:w-[25px] lg:h-[28px] w-[18px] h-[18px]"
                 >
-                    <Image src={i < heartCount ? 'https://res.cloudinary.com/dznt9yias/image/upload/v1760725806/Heart_ayqjbd.svg' : 'https://res.cloudinary.com/dznt9yias/image/upload/v1760725840/Gray_Heart_uai4vn.svg'} alt="heart" fill />
+                    <Image src={i < heartCount ? 'https://res.cloudinary.com/dauhpllo7/image/upload/v1763390706/Heart_mii1b0.png' : 'https://res.cloudinary.com/dauhpllo7/image/upload/v1763392338/Heart_ahlmhm.png'} alt="heart" fill />
                 </div>
             );
         }
@@ -56,7 +56,7 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                 >
                                     <span className="block relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12">
                                         <Image
-                                            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721841/X_lqpgdp.svg"
+                                            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391063/Tr%E1%BB%9F_l%E1%BA%A1i_trang_tr%C6%B0%E1%BB%9Bc_t1jpaz.png"
                                             alt="Đóng"
                                             fill
                                             sizes="(max-width: 640px) 32px, (max-width: 768px) 40px, 48px"
@@ -171,8 +171,8 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                                 <div className='relative w-[140px] lg:w-[200px] h-[230px] lg:h-[300px] ml-4'>
                                                     <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760994814/An_Tu%CC%9B_Co%CC%82ng_Chu%CC%81a62_1_vihyo0.png' alt='thu_thap_ki_an' fill />
                                                 </div>
-                                                <div className='relative w-[120px] lg:w-[200px] h-[30px] lg:h-[300px] ml-4'>
-                                                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760722393/khung_ma%CC%A3ng_xu_%C4%91ie%CC%82%CC%89m_niyoz8.svg' alt='thu_thap_ki_an' fill />
+                                                <div className='relative w-[120px] lg:w-[200px] h-[30px] lg:h-[70px] ml-4'>
+                                                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763392323/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_xodyzk.png' alt='thu_thap_ki_an' fill />
                                                     <div className='absolute inset-0 flex items-center justify-center'>
                                                         <span className='text-secondary lg:text-xl text-sm'>+100 điểm</span>
                                                     </div>
@@ -184,7 +184,7 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                                 <div className="flex items-center">
                                                     <div className="relative top-0 left-0 flex items-center justify-center lg:ml-5 ml-3 drop-shadow-2xl ">
                                                         <div className="relative lg:w-[180px] lg:h-[55px] w-[120px] h-[55px]">
-                                                            <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760722393/khung_ma%CC%A3ng_xu_%C4%91ie%CC%82%CC%89m_niyoz8.svg' alt='khung_ma_ng_xu_diem' fill />
+                                                            <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763390553/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_ij8bzq.png' alt='khung_ma_ng_xu_diem' fill />
                                                         </div>
                                                         <div className="absolute top-0 left-0 flex justify-center items-center h-full w-full gap-2">
                                                             {renderHearts(2)}
@@ -199,7 +199,7 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                                 </div>
 
                                                 <div className='relative w-[120px] lg:w-[180px] h-[30px] lg:h-[55px]'>
-                                                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760722393/khung_ma%CC%A3ng_xu_%C4%91ie%CC%82%CC%89m_niyoz8.svg' alt='thu_thap_ki_an' fill />
+                                                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763390553/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_ij8bzq.png' alt='thu_thap_ki_an' fill />
                                                     <div className='absolute inset-0 flex items-center justify-center'>
                                                         <span className='text-secondary lg:text-xl text-sm'>-20 ĐIỂM</span>
                                                     </div>
@@ -212,7 +212,7 @@ const Guide = ({ isOpen, onClose, user }: { isOpen: boolean, onClose: () => void
                                                 <li className='text-end'>Mỗi ngày, bạn có 3 mạng chơi</li>
                                                 <div className='relative w-[120px] lg:w-[180px] h-[30px] lg:h-[35px]'>
                                                     <div className="relative lg:w-[180px] lg:h-[35px] w-[120px] h-[35px]">
-                                                        <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760722393/khung_ma%CC%A3ng_xu_%C4%91ie%CC%82%CC%89m_niyoz8.svg' alt='khung_ma_ng_xu_diem' fill />
+                                                        <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763390553/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_ij8bzq.png' alt='khung_ma_ng_xu_diem' fill />
                                                     </div>
                                                     <div className="absolute lg:top-0 top-0.5 lg:left-0 flex justify-center items-center h-full w-full gap-2">
                                                         {renderHearts(3)}

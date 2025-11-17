@@ -112,7 +112,7 @@ export const GameFrame: React.FC<GameFrameProps> = ({
 
   const [isChiTietThuModalOpen, setIsChiTietThuModalOpen] =
     useState<boolean>(false);
-  
+
   const [selectedLetterId, setSelectedLetterId] = useState<number | null>(null);
   const [lettersList, setLettersList] = useState<ILetterEntity[]>([]);
 
@@ -375,7 +375,7 @@ export const GameFrame: React.FC<GameFrameProps> = ({
             className="relative w-[35px] h-[35px] lg:w-[65px] lg:h-[65px] top-0 left-0 flex items-center justify-center ml-2 cursor-pointer hover:opacity-80 transition-all duration-300"
           >
             <Image
-              src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721841/X_lqpgdp.svg"
+              src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391063/Tr%E1%BB%9F_l%E1%BA%A1i_trang_tr%C6%B0%E1%BB%9Bc_t1jpaz.png"
               alt="X"
               className="mt-3"
               fill
@@ -394,7 +394,7 @@ export const GameFrame: React.FC<GameFrameProps> = ({
             onClick={onAchievementClick}
           >
             <Image
-              src="https://res.cloudinary.com/dznt9yias/image/upload/v1760727027/achievement_vi5gxo.svg"
+              src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763393521/He%CC%A3%CC%82_tho%CC%82%CC%81ng_tha%CC%80nh_tu%CC%9B%CC%A3u_ngsqxs.png"
               alt="achievement"
               className="mt-3 cursor-pointer"
               fill
@@ -405,7 +405,7 @@ export const GameFrame: React.FC<GameFrameProps> = ({
             onClick={onRedeemClick}
           >
             <Image
-              src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726864/gift_ubfyga.svg"
+              src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763393615/%C4%90o%CC%82%CC%89i_qua%CC%80_jcxzou.svg"
               alt="gift"
               className="cursor-pointer"
               fill
@@ -422,8 +422,8 @@ export const GameFrame: React.FC<GameFrameProps> = ({
             onClick={onLetterGuideClick}
           >
             <Image
-              src="https://res.cloudinary.com/dznt9yias/image/upload/v1760815558/Vi%E1%BA%BFt_Th%C6%B0_hmaabr.svg"
-              alt="achievement"
+              src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763393689/Vie%CC%82%CC%81t_Thu%CC%9B_gxso09.svg"
+              alt="write letter"
               className="cursor-pointer"
               fill
             />
@@ -433,8 +433,8 @@ export const GameFrame: React.FC<GameFrameProps> = ({
             onClick={onGuideClick}
           >
             <Image
-              src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726885/guide_pvrmm1.svg"
-              alt="gift"
+              src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763393625/Hu%CC%9Bo%CC%9B%CC%81ng_da%CC%82%CC%83n_ca%CC%81ch_cho%CC%9Bi_mvp3ri.svg"
+              alt="guide"
               className="cursor-pointer"
               fill
             />

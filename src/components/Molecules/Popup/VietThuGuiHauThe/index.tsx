@@ -114,7 +114,7 @@ const VietThuGuiHauThe: React.FC<VietThuGuiHauTheProps> = ({ isOpen, onClose, on
                                 >
                                     <span className="relative block h-8 w-8 sm:h-10 sm:w-10">
                                         <Image
-                                            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721841/X_lqpgdp.svg"
+                                            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391063/Tr%E1%BB%9F_l%E1%BA%A1i_trang_tr%C6%B0%E1%BB%9Bc_t1jpaz.png"
                                             alt="Đóng"
                                             fill
                                             sizes="(max-width: 640px) 32px, 40px"

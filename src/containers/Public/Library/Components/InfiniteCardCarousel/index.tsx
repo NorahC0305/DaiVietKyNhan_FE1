@@ -48,7 +48,7 @@ const PrevButton: React.FC<{
     type="button"
   >
     <Image
-      src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721544/Back_cwp7tx.svg"
+      src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391123/Next_1_rws1tq.png"
       alt="Previous"
       width={64}
       height={64}
@@ -68,7 +68,7 @@ const NextButton: React.FC<{
     type="button"
   >
     <Image
-      src="https://res.cloudinary.com/dznt9yias/image/upload/v1760725883/next_xshxeb.svg"
+      src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391077/Next_ek6cme.png"
       alt="Next"
       width={64}
       height={64}

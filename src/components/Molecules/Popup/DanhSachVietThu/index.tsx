@@ -22,7 +22,7 @@ const DanhSachVietThu = ({
 }: DanhSachVietThuProps) => {
   // State for filter - default to false (show all letters)
   const [filterByUserId, setFilterByUserId] = useState<boolean>(false);
-  
+
   // Ref for scroll container
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -115,7 +115,7 @@ const DanhSachVietThu = ({
             >
               <span className="relative block h-8 w-8 sm:h-10 sm:w-10">
                 <Image
-                  src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721841/X_lqpgdp.svg"
+                  src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391063/Tr%E1%BB%9F_l%E1%BA%A1i_trang_tr%C6%B0%E1%BB%9Bc_t1jpaz.png"
                   alt="Đóng"
                   fill
                   sizes="(max-width: 640px) 32px, 40px"
@@ -188,7 +188,7 @@ const DanhSachVietThu = ({
                     </div>
 
                     {/* List */}
-                    <div 
+                    <div
                       ref={scrollContainerRef}
                       className="grid lg:grid-cols-3 grid-cols-2 h-[68%] gap-5 overflow-y-auto px-3"
                     >
@@ -276,14 +276,14 @@ const DanhSachVietThu = ({
                           </div>
                         ))
                       )}
-                      
+
                       {/* Loading indicator for fetching next page */}
                       {isFetchingNextPage && (
                         <div className="col-span-full flex justify-center items-center py-4">
                           <p className="text-secondary text-sm">Đang tải thêm...</p>
                         </div>
                       )}
-                      
+
                       {/* End of list message */}
                       {!hasNextPage && letters.length > 0 && (
                         <div className="col-span-full flex justify-center items-center py-4">

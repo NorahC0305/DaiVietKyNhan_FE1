@@ -73,7 +73,7 @@ const IntroComponent = React.memo(
           style={{ width: "180px", height: "50px" }}
         >
           <Image
-            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760718877/Button_bb7ywk.svg"
+            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763389725/Rectangle_znlllq.png"
             alt="Bắt đầu"
             fill
             style={{ objectFit: "contain" }}

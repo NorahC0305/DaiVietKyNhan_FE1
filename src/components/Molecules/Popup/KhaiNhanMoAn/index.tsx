@@ -97,7 +97,7 @@ export default function KhaiNhanMoAn({
             <div className="flex items-center justify-center gap-2">
               <div className="relative w-[230px] lg:w-[300px] h-[106px] lg:h-[117px]">
                 <Image
-                  src="https://res.cloudinary.com/dznt9yias/image/upload/v1760859516/MayNuiTrai_ffxbum.svg"
+                  src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763392213/M%C3%A2y_n%C3%BAi_1_bynla1.png"
                   alt="May Nui Trai"
                   fill
                 />
@@ -121,7 +121,7 @@ export default function KhaiNhanMoAn({
               </div>
               <div className="relative w-[230px] lg:w-[300px] h-[106px] lg:h-[117px]">
                 <Image
-                  src="https://res.cloudinary.com/dznt9yias/image/upload/v1760859543/MayNuiPhai_imfhgx.svg"
+                  src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763392223/M%C3%A2y_n%C3%BAi_2_gf7fbv.png"
                   alt="May Nui Phai"
                   fill
                 />
@@ -141,11 +141,10 @@ export default function KhaiNhanMoAn({
             {/* --- Khai Nhan Mo An Card --- */}
             <div className="relative w-full mt-5 flex items-center justify-center gap-4">
               <div
-                className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[250px] w-[150px] h-[200px] transition-all duration-300 ${
-                  isCharacterClickable("Sơn Tinh")
+                className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[250px] w-[150px] h-[200px] transition-all duration-300 ${isCharacterClickable("Sơn Tinh")
                     ? `cursor-pointer ${an === "Sơn Tinh" ? "scale-105" : ""}`
                     : "cursor-not-allowed opacity-50"
-                }`}
+                  }`}
                 onClick={() => handleSetAn("Sơn Tinh")}
               >
                 {an === "Sơn Tinh" && isCharacterClickable("Sơn Tinh") && (
@@ -164,13 +163,11 @@ export default function KhaiNhanMoAn({
               </div>
 
               <div
-                className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] transition-all duration-300 ${
-                  isCharacterClickable("Chử Đồng Tử")
-                    ? `cursor-pointer ${
-                        an === "Chử Đồng Tử" ? "scale-105" : ""
-                      }`
+                className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] transition-all duration-300 ${isCharacterClickable("Chử Đồng Tử")
+                    ? `cursor-pointer ${an === "Chử Đồng Tử" ? "scale-105" : ""
+                    }`
                     : "cursor-not-allowed opacity-50"
-                }`}
+                  }`}
                 onClick={() => handleSetAn("Chử Đồng Tử")}
               >
                 {an === "Chử Đồng Tử" &&
@@ -190,13 +187,11 @@ export default function KhaiNhanMoAn({
               </div>
 
               <div
-                className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] transition-all duration-300 ${
-                  isCharacterClickable("Thánh Gióng")
-                    ? `cursor-pointer ${
-                        an === "Thánh Gióng" ? "scale-105" : ""
-                      }`
+                className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] transition-all duration-300 ${isCharacterClickable("Thánh Gióng")
+                    ? `cursor-pointer ${an === "Thánh Gióng" ? "scale-105" : ""
+                    }`
                     : "cursor-not-allowed opacity-50"
-                }`}
+                  }`}
                 onClick={() => handleSetAn("Thánh Gióng")}
               >
                 {an === "Thánh Gióng" &&
@@ -216,11 +211,10 @@ export default function KhaiNhanMoAn({
               </div>
 
               <div
-                className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] transition-all duration-300 ${
-                  isCharacterClickable("Liễu Hạnh")
+                className={`relative inset-0 flex items-center justify-center lg:w-[200px] lg:h-[248px] w-[150px] h-[200px] transition-all duration-300 ${isCharacterClickable("Liễu Hạnh")
                     ? `cursor-pointer ${an === "Liễu Hạnh" ? "scale-105" : ""}`
                     : "cursor-not-allowed opacity-50"
-                }`}
+                  }`}
                 onClick={() => handleSetAn("Liễu Hạnh")}
               >
                 {an === "Liễu Hạnh" && isCharacterClickable("Liễu Hạnh") && (
@@ -247,7 +241,7 @@ export default function KhaiNhanMoAn({
                 >
                   <div className="relative w-11 h-11 lg:w-16 lg:h-16">
                     <Image
-                      src="https://res.cloudinary.com/dznt9yias/image/upload/v1760725883/next_xshxeb.svg"
+                      src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391077/Next_ek6cme.png"
                       alt="Tiếp tục"
                       fill
                     />

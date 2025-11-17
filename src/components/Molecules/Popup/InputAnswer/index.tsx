@@ -51,7 +51,7 @@ export default function InputAnswer({
     >
       <div className="relative aspect-[26/9] w-full">
         <Image
-          src="https://res.cloudinary.com/dznt9yias/image/upload/v1760722651/InputAnswer_vqetjd.png"
+          src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391722/Artboard_4_2_ggkvjh.png"
           alt="Khung nhập đáp án"
           fill
           sizes="(max-width: 640px) 90vw, (max-width: 1024px) 70vw, 640px"

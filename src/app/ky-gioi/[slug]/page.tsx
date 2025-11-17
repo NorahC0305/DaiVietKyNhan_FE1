@@ -22,24 +22,24 @@ const regionSlugs: Record<string, RegionData> = {
     slug: "nui-tan-vien",
     id: 1,
     backgroundImage:
-      "https://res.cloudinary.com/dznt9yias/image/upload/v1760722789/Map_So%CC%9Bn_Tinh_2_pq7v2w.svg",
+      "https://res.cloudinary.com/dauhpllo7/image/upload/v1763391738/S%C6%A1n_Tinh_2_wphtwb.png",
   },
   "phu-tay-ho": {
     slug: "phu-tay-ho",
     id: 4,
     backgroundImage:
-      "https://res.cloudinary.com/dznt9yias/image/upload/v1761121411/Trang_vu%CC%80ng_%C4%91a%CC%82%CC%81t_Lie%CC%82%CC%83u_Ha%CC%A3nh_odoktx.svg",
+      "https://res.cloudinary.com/dauhpllo7/image/upload/v1763391738/Li%E1%BB%85u_H%E1%BA%A1nh_4_dujop5.png",
   },
   "dam-da-trach": {
     slug: "dam-da-trach",
     id: 2,
     backgroundImage:
-      "https://res.cloudinary.com/dznt9yias/image/upload/v1760722758/Map_Chu%CC%9B%CC%89_%C4%90o%CC%82%CC%80ng_Tu%CC%9B%CC%89_1_nypmqj.svg", // Sử dụng ảnh Thánh Gióng cho Đầm Dạ Trạch
+      "https://res.cloudinary.com/dauhpllo7/image/upload/v1763391742/Ch%E1%BB%AD_%C4%90o%CC%82%CC%80ng_Tu%CC%9B%CC%89_1_chggvo.png", // Sử dụng ảnh Thánh Gióng cho Đầm Dạ Trạch
   },
   "lang-phu-dong": {
     slug: "lang-phu-dong",
     id: 3,
-    backgroundImage: "https://res.cloudinary.com/dznt9yias/image/upload/v1760722781/Map_Tha%CC%81nh_Gio%CC%81ng_1_x9yqi3.svg", // Sử dụng ảnh Sơn Tinh cho Làng Phù Đổng
+    backgroundImage: "https://res.cloudinary.com/dauhpllo7/image/upload/v1763391745/Tha%CC%81nh_Gio%CC%81ng_1_p63jve.png", // Sử dụng ảnh Sơn Tinh cho Làng Phù Đổng
   },
 
   "ky-linh-viet-hoa": {

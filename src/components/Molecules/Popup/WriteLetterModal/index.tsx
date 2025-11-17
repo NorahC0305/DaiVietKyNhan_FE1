@@ -129,7 +129,7 @@ export default function WriteLetterModal({
                     }}
                   >
                     <Image
-                      src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721841/X_lqpgdp.svg"
+                      src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391063/Tr%E1%BB%9F_l%E1%BA%A1i_trang_tr%C6%B0%E1%BB%9Bc_t1jpaz.png"
                       alt="Đóng"
                       fill
                       sizes="(max-width: 640px) 10vw, (max-width: 768px) 48px, 56px"
@@ -144,7 +144,7 @@ export default function WriteLetterModal({
                 >
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6 w-full">
                     <div className="flex flex-col gap-3 w-full sm:w-auto">
-                    <label className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full">
+                      <label className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full">
                         <span className="text-[#835D26] text-sm sm:text-base font-bold uppercase tracking-wide">
                           Từ:
                         </span>
@@ -160,7 +160,7 @@ export default function WriteLetterModal({
                         />
                       </label>
 
-                    <label className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full">
+                      <label className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full">
                         <span className="text-[#835D26] text-sm sm:text-base font-bold uppercase tracking-wide">
                           Đến:
                         </span>

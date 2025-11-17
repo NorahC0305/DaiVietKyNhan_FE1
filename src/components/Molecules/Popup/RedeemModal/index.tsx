@@ -94,17 +94,17 @@ export default function RedeemModal({
     // Check if reward.gift contains coin information
     const giftText = reward.gift?.toLowerCase() || "";
     const coinMatch = giftText.match(/(\d+)\s*(xu|coin)/);
-    
-    
-    const right: RightDisplay = coinMatch 
+
+
+    const right: RightDisplay = coinMatch
       ? {
-          type: "coins",
-          amount: parseInt(coinMatch[1])
-        }
+        type: "coins",
+        amount: parseInt(coinMatch[1])
+      }
       : {
-          type: "text",
-          label: reward.gift,
-        };
+        type: "text",
+        label: reward.gift,
+      };
 
     // Check if user can afford this reward
     const canAfford = user
@@ -243,7 +243,7 @@ export default function RedeemModal({
                   >
                     <span className="block relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12">
                       <Image
-                        src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721841/X_lqpgdp.svg"
+                        src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391063/Tr%E1%BB%9F_l%E1%BA%A1i_trang_tr%C6%B0%E1%BB%9Bc_t1jpaz.png"
                         alt="Đóng"
                         fill
                         sizes="(max-width: 640px) 32px, (max-width: 768px) 40px, 48px"

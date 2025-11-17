@@ -57,17 +57,17 @@ export default function MapRegion({
   // Tính toán style cho container dựa trên mode
   const containerStyle = isFullscreen
     ? {
-        ...position,
-        zIndex,
-        width: `${(size.width / 1920) * 100}vw`,
-        height: `${(size.height / 1080) * 100}vh`,
-      }
+      ...position,
+      zIndex,
+      width: `${(size.width / 1920) * 100}vw`,
+      height: `${(size.height / 1080) * 100}vh`,
+    }
     : {
-        ...position,
-        zIndex,
-        width: size.width,
-        height: size.height,
-      };
+      ...position,
+      zIndex,
+      width: size.width,
+      height: size.height,
+    };
 
   return (
     <div className="absolute group" style={containerStyle}>
@@ -87,7 +87,7 @@ export default function MapRegion({
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <Image
-                src="https://res.cloudinary.com/dznt9yias/image/upload/v1761067244/cloud_ybkv9q.svg"
+                src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763394347/Group_125_jtzhn7.png"
                 alt="Cloud overlay"
                 width={610}
                 height={200}
@@ -119,26 +119,24 @@ export default function MapRegion({
 
       {/* Vùng tương tác hover (hitbox) - Vẫn giữ lại để có thể tương tác */}
       <div
-        className={`absolute ${
-          isLocked ? "cursor-not-allowed" : "cursor-pointer"
-        }`}
+        className={`absolute ${isLocked ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
         style={
           isFullscreen
             ? {
-                top: "50%",
-                left: "50%",
-                width: `${hitboxScale * 100}%`,
-                height: `${hitboxScale * 100}%`,
-                transform: `translate(-50%, -50%) translate(${
-                  (hitboxOffset.x || 0) * 100
+              top: "50%",
+              left: "50%",
+              width: `${hitboxScale * 100}%`,
+              height: `${hitboxScale * 100}%`,
+              transform: `translate(-50%, -50%) translate(${(hitboxOffset.x || 0) * 100
                 }%, ${(hitboxOffset.y || 0) * 100}%)`,
-              }
+            }
             : {
-                top: hitboxOffsetY,
-                left: hitboxOffsetX,
-                width: hitboxWidth,
-                height: hitboxHeight,
-              }
+              top: hitboxOffsetY,
+              left: hitboxOffsetX,
+              width: hitboxWidth,
+              height: hitboxHeight,
+            }
         }
         onMouseEnter={() =>
           (!isLocked || id === "ky-linh-viet-hoa") && setIsHovered(true)

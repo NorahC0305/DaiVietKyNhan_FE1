@@ -17,7 +17,7 @@ export default function ImageFrame({
     <div className="relative inline-block">
       {/* Backdrop frame */}
       <Image
-        src="https://res.cloudinary.com/dznt9yias/image/upload/v1760726112/revealedBG_gzuiid.svg"
+        src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763393921/Chu%CC%9Ba_co%CC%81_te%CC%82n_1080_x_1740_px_4_1_mvqq0p.svg"
         alt="Frame backdrop"
         width={width}
         height={height}

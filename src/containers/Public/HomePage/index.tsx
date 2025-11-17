@@ -41,7 +41,7 @@ const testimonialsData = [
     quote:
       "Đây là cuốn sách rất xứng đáng để có một trên gia sách của các gia đình Việt Nam?",
     avatar:
-      "https://res.cloudinary.com/dznt9yias/image/upload/v1760811389/PhanThanhHai_dtbb2b.svg",
+      "https://res.cloudinary.com/dauhpllo7/image/upload/v1763390044/Ch%C6%B0a_c%C3%B3_t%C3%AAn_768_x_768_px_2_1_tz91z7.png",
     isMain: false,
   },
   {
@@ -51,7 +51,7 @@ const testimonialsData = [
     quote:
       "Tôi tin đây là một cuốn sách ai cũng nên có cho chính mình, người thân và gia đình!",
     avatar:
-      "https://res.cloudinary.com/dznt9yias/image/upload/v1760811335/NSUTThanhLoc_o9xoa6.svg",
+      "https://res.cloudinary.com/dauhpllo7/image/upload/v1763390097/Ch%C6%B0a_c%C3%B3_t%C3%AAn_768_x_768_px_1_s0vsn2.png",
     isMain: true,
   },
   {
@@ -61,7 +61,7 @@ const testimonialsData = [
     quote:
       "Đây là 1 dự án hiếm hoi xứng đáng được lan truyền rộng rãi trong cộng đồng.",
     avatar:
-      "https://res.cloudinary.com/dznt9yias/image/upload/v1760811440/CharlieNguyen_oxuqka.svg",
+      "https://res.cloudinary.com/dauhpllo7/image/upload/v1763390117/Ch%C6%B0a_c%C3%B3_t%C3%AAn_768_x_768_px_1_1_jzk3ob.png",
     isMain: false,
   },
 ];
@@ -318,7 +318,7 @@ const HomePageClient = ({
       <section className="relative mt-12 lg:mt-32 w-full lg:h-[870px] h-[591px] flex items-center justify-center overflow-hidden">
         <div className="absolute z-0 cursor-pointer flex justify-center w-[1330px] h-full">
           <Image
-            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760803844/KhiChatCuaBanLa_wmxfip.svg"
+            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763393844/Key_visual_trong_web_3_rgdlyk.svg"
             alt="Khí Chất Của Bạn Là"
             fill
             onClick={() => router.push(ROUTES.STARTER.TEST_PLAYGROUND)}
@@ -348,7 +348,7 @@ const HomePageClient = ({
         <div className="relative">
           {/* Scroll Paper Background - Điều chỉnh kích thước */}
           <Image
-            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760804373/CuonGiayHaiBenMauTrang_w8cxky.svg"
+            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391577/%C4%90%E1%BA%A1i_vi%E1%BB%87t_k%E1%BB%B3_nh%C3%A2n_1_1_pxpq2d.png"
             alt="Bảng Xếp Hạng"
             width={1000}
             height={600}
@@ -357,7 +357,7 @@ const HomePageClient = ({
           />
 
           {/* Content Overlay - Điều chỉnh positioning */}
-          <div className="absolute top-3 left-0 right-0 bottom-0 z-10  mx-auto h-[100%] flex flex-col justify-center">
+          <div className="absolute -top-5 left-0 right-0 bottom-0 z-10  mx-auto h-[100%] flex flex-col justify-center">
             {/* Content Container - Giới hạn kích thước */}
             <div className="w-full overflow-hidden">
               <div className="flex items-center justify-center">
@@ -491,7 +491,7 @@ const HomePageClient = ({
         <div className="relative">
           {/* Scroll Paper Background - Điều chỉnh kích thước */}
           <Image
-            src="https://res.cloudinary.com/dznt9yias/image/upload/v1760804373/CuonGiayHaiBenMauTrang_w8cxky.svg"
+            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391577/%C4%90%E1%BA%A1i_vi%E1%BB%87t_k%E1%BB%B3_nh%C3%A2n_1_1_pxpq2d.png"
             alt="Bảng Xếp Hạng"
             width={1000}
             height={600}
@@ -500,7 +500,7 @@ const HomePageClient = ({
           />
 
           {/* Content Overlay - Điều chỉnh positioning */}
-          <div className="absolute top-3 left-0 right-0 bottom-0 z-10  mx-auto h-[100%] flex flex-col justify-center">
+          <div className="absolute -top-5 left-0 right-0 bottom-0 z-10  mx-auto h-[100%] flex flex-col justify-center">
             {/* Content Container - Giới hạn kích thước */}
             <div className="w-full overflow-hidden">
               <div className="flex flex-col items-center justify-center">
@@ -710,11 +710,11 @@ const HomePageClient = ({
                     ĐƠN VỊ TỔ CHỨC
                   </p>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="relative w-20 h-20 lg:w-32 md:h-28 rounded-[10px] overflow-hidden shadow-lg">
-                      <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1760727086/big-logo_zq7jb4.svg" alt="logo_dvkn" fill />
+                    <div className="relative w-20 h-20 lg:w-28 md:h-28 rounded-[10px] overflow-hidden shadow-lg">
+                      <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390239/c860d8a0-4be0-419f-9490-a98490a94d31_3_md2dyt.png" alt="logo_dvkn" fill />
                     </div>
                     <div className="relative w-28 h-20 lg:w-32 md:h-28 rounded-[10px] overflow-hidden shadow-lg">
-                      <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763135045/Thie%CC%82%CC%81t_ke%CC%82%CC%81_chu%CC%9Ba_co%CC%81_te%CC%82n_23_1_vbp3yr.svg" alt="khainhanmoan" fill />
+                      <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390246/Thi%E1%BA%BFt_k%E1%BA%BF_ch%C6%B0a_c%C3%B3_t%C3%AAn_23_1_q0jduj.png" alt="khainhanmoan" fill />
                     </div>
                   </div>
                 </div>
@@ -727,7 +727,7 @@ const HomePageClient = ({
                         NHÀ TÀI TRỢ KIM CƯƠNG
                       </p>
                       <div className="relative w-36 h-20 lg:w-36 md:h-24 rounded-[10px] overflow-hidden shadow-lg">
-                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763135720/bo%CC%A3%CC%82_logo_PARC_MALL.pdf_2_1_pc5hvj.svg" alt="parc_mall" fill />
+                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390270/b%E1%BB%99_logo_PARC_MALL.pdf_2_1_zso3iu.png" alt="parc_mall" fill />
                       </div>
                     </div>
 
@@ -738,10 +738,10 @@ const HomePageClient = ({
                       </p>
                       <div className="flex items-center justify-center">
                         <div className="relative w-20 h-20 lg:w-32 md:h-24 rounded-[10px] overflow-hidden shadow-lg">
-                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763137645/bo%CC%A3%CC%82_logo_PARC_MALL.pdf_3_1_1_zjqabz.svg" alt="thuan_tien" fill />
+                          <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390289/b%E1%BB%99_logo_PARC_MALL.pdf_3_1_dpdlr4.png" alt="thuan_tien" fill />
                         </div>
                         <div className="relative w-20 h-20 lg:w-26 md:h-26 rounded-[10px] overflow-hidden shadow-lg">
-                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763135789/MR.BROWN_2_vvfy5i.svg" alt="mr_brown" fill />
+                          <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390311/MR.BROWN_2_lyc30v.png" alt="mr_brown" fill />
                         </div>
                       </div>
                     </div>
@@ -749,10 +749,10 @@ const HomePageClient = ({
                     {/* Đối tác công nghệ */}
                     <div className="flex flex-col items-center justify-center">
                       <p className="text-base lg:text-xl text-white font-bold text-center mb-4">
-                        NHÀ TÀI TRỢ ĐỒNG
+                        NHÀ TÀI CÔNG NGHỆ
                       </p>
-                      <div className="relative w-50 h-20 lg:w-52 md:h-20 rounded-[10px] overflow-hidden shadow-lg">
-                        <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763135823/bo%CC%A3%CC%82_logo_PARC_MALL.pdf_4_1_ljv7my.svg" alt="dimo" fill />
+                      <div className="relative w-50 h-20 lg:w-60 md:h-20 rounded-[10px] overflow-hidden shadow-lg">
+                        <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390330/b%E1%BB%99_logo_PARC_MALL.pdf_4_1_mcpbh7.png" alt="dimo" fill />
                       </div>
                     </div>
                   </div>
@@ -767,10 +767,10 @@ const HomePageClient = ({
                       </p>
                       <div className="flex items-center justify-center gap-4">
                         <div className="relative w-20 h-20 lg:w-24 md:h-24 rounded-[10px] overflow-hidden shadow-lg">
-                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138061/Thie%CC%82%CC%81t_ke%CC%82%CC%81_chu%CC%9Ba_co%CC%81_te%CC%82n_75_qvoijk.svg" alt="vicu_vietnhan" fill />
+                          <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390368/Thi%E1%BA%BFt_k%E1%BA%BF_ch%C6%B0a_c%C3%B3_t%C3%AAn_75_dbhsa2.png" alt="vicu_vietnhan" fill />
                         </div>
                         <div className="relative w-20 h-20 lg:w-24 md:h-24 rounded-[10px] overflow-hidden shadow-lg">
-                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138057/Thie%CC%82%CC%81t_ke%CC%82%CC%81_chu%CC%9Ba_co%CC%81_te%CC%82n_76_rveyqx.svg" alt="citycodes" fill />
+                          <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390374/Thi%E1%BA%BFt_k%E1%BA%BF_ch%C6%B0a_c%C3%B3_t%C3%AAn_76_cysud3.png" alt="citycodes" fill />
                         </div>
                       </div>
                     </div>
@@ -780,24 +780,24 @@ const HomePageClient = ({
                       <p className="text-base lg:text-xl text-white font-bold text-center mb-2">
                         BẢO TRỢ TRUYỀN THÔNG
                       </p>
-                      <div className="flex items-center justify-center">
+                      <div className="flex items-center justify-center gap-4">
                         <div className="relative w-20 h-11 lg:w-32 lg:h-11 rounded-[10px] overflow-hidden shadow-lg">
-                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138394/ybox_1_1_b2qiry.svg" alt="ybox" fill />
+                          <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390391/ybox_1_tt5a4h.png" alt="ybox" fill />
                         </div>
-                        <div className="relative w-20 h-11 lg:w-26 lg:h-11 rounded-[10px] overflow-hidden shadow-lg">
-                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138365/LOGO_HVDV_1_uz9cxu.svg" alt="hoavandaiviet" fill />
+                        <div className="relative w-20 h-11 lg:w-14 lg:h-14 overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390417/LOGO_HVDV_1_k0bpak.png" alt="hoavandaiviet" fill />
                         </div>
-                        <div className="relative w-20 h-11 lg:w-26 lg:h-11 rounded-[10px] overflow-hidden shadow-lg">
-                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138360/GTVH1_1_rhatpn.svg" alt="giaitrivanhoa" fill />
+                        <div className="relative w-20 h-11 lg:w-26 lg:h-11 overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390429/GTVH1_1_fllkoy.png" alt="giaitrivanhoa" fill />
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-center gap-4">
-                        <div className="relative w-30 h-11 lg:w-36 lg:h-24 rounded-[10px] overflow-hidden shadow-lg">
-                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138355/golive_1_f6y60e.svg" alt="golive" fill />
+                      <div className="flex items-center justify-center gap-4 mt-2">
+                        <div className="relative w-30 h-11 lg:w-36 lg:h-11 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390433/golive_1_nqvvnu.png" alt="golive" fill />
                         </div>
-                        <div className="relative w-30 h-11 lg:w-44 lg:h-24 rounded-[10px] overflow-hidden shadow-lg">
-                          <Image src="https://res.cloudinary.com/dznt9yias/image/upload/v1763138352/The%CC%82%CC%81_Gio%CC%9B%CC%81i_Gia%CC%89i_Tri%CC%81_1_coxzq3.svg" alt="thegioigiaitri" fill />
+                        <div className="relative w-30 h-11 lg:w-44 lg:h-7 rounded-[10px] overflow-hidden shadow-lg">
+                          <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390546/Th%E1%BA%BF_Gi%E1%BB%9Bi_Gi%E1%BA%A3i_Tr%C3%AD_1_kbejez.png" alt="thegioigiaitri" fill />
                         </div>
                       </div>
                     </div>

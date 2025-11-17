@@ -107,7 +107,7 @@ const mobileRegionsConfig = {
 };
 
 const mainMapImage =
-  "https://res.cloudinary.com/dznt9yias/image/upload/v1761121694/Trang_map_Ky%CC%80_Gio%CC%9B%CC%81i_e6kyap.svg";
+  "https://res.cloudinary.com/dauhpllo7/image/upload/v1763391742/mapcl_1_wm0hbq.png";
 
 // TODO: Tạm thời mở khóa tất cả map để review. Sau khi hoàn thành, đổi thành false
 const TEMP_UNLOCK_ALL = false;

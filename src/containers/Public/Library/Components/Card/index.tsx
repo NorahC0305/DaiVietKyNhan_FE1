@@ -120,7 +120,7 @@ export default function Card({
               {!unlocked ? (
                 <>
                   <Image
-                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760722617/Group_104_otxy0s.svg"
+                    src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763394184/Group_99_hagucx.png"
                     alt="Hidden framed card"
                     fill
                     sizes="(max-width: 768px) 40vw, (max-width: 1200px) 20vw, 18vw"
@@ -146,9 +146,7 @@ export default function Card({
               <div className="absolute inset-0 [transform:rotateY(180deg)] [backface-visibility:hidden]">
                 <Image
                   src={
-                    backContent?.backgroundSrc ||
-                    "https://res.cloudinary.com/dznt9yias/image/upload/v1760726112/revealedBG_gzuiid.svg" ||
-                    "/placeholder.svg"
+                    "https://res.cloudinary.com/dauhpllo7/image/upload/v1763393921/Chu%CC%9Ba_co%CC%81_te%CC%82n_1080_x_1740_px_4_1_mvqq0p.svg"
                   }
                   alt="Revealed background"
                   fill

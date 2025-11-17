@@ -41,7 +41,7 @@ const IntroduceLayoutClient: React.FC<IntroduceLayoutProps> = ({
                 className="absolute top-4 right-4 z-30 hover:scale-110 transition-transform duration-200"
             >
                 <Image
-                    src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721841/X_lqpgdp.svg"
+                    src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390775/%C4%91%C3%B3ng_t9d0ko.png"
                     alt="X"
                     width={40}
                     height={40}

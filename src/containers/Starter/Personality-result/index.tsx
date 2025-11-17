@@ -615,7 +615,7 @@ const PersonalityResultPage = React.memo(() => {
             aria-label="Next"
           >
             <Image
-              src="https://res.cloudinary.com/dznt9yias/image/upload/v1760725883/next_xshxeb.svg"
+              src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391077/Next_ek6cme.png"
               alt="Next"
               width={50}
               height={50}

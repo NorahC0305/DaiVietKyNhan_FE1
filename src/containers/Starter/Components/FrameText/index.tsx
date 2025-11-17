@@ -40,7 +40,7 @@ const FrameText: React.FC<FrameTextProps> = React.memo(
         {/* Background frame image */}
         <div className="relative">
           <Image
-            src='https://res.cloudinary.com/dznt9yias/image/upload/v1760722393/khung_ma%CC%A3ng_xu_%C4%91ie%CC%82%CC%89m_niyoz8.svg'
+            src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763390604/khung_m%E1%BA%A1ng_xu_%C4%91i%E1%BB%83m_.._3_1_e7g65t.png'
             alt="Decorative frame"
             width={width}
             height={height}

@@ -43,13 +43,13 @@ function normalizeRewardDisplay(ach: Achievement): RewardDisplay {
 function getButtonImage(status: "PENDING" | "COMPLETED" | "CLAIMED"): string {
   switch (status) {
     case "PENDING":
-      return "https://res.cloudinary.com/dznt9yias/image/upload/v1760725953/Property_1_Chu%CC%9Ba_%C4%91u%CC%89_%C4%91e%CC%82%CC%89_nha%CC%A3%CC%82n_cgzj1r.svg"; // PENDING means chưa đủ để nhận
+      return "https://res.cloudinary.com/dauhpllo7/image/upload/v1763392811/Property_1_Chu%CC%9Ba_%C4%91u%CC%89_%C4%91e%CC%82%CC%89_%C4%91o%CC%82%CC%89i_lu6jbu.svg"; // PENDING means chưa đủ để nhận
     case "COMPLETED":
-      return "https://res.cloudinary.com/dznt9yias/image/upload/v1760725920/Property_1_%C4%90u%CC%89_%C4%91e%CC%82%CC%89_nha%CC%A3%CC%82n_g8qs7s.svg"; // COMPLETED means đủ để nhận
+      return "https://res.cloudinary.com/dauhpllo7/image/upload/v1763392831/Property_1_%C4%90u%CC%89_%C4%91e%CC%82%CC%89_%C4%91o%CC%82%CC%89i_p3w8gc.svg"; // COMPLETED means đủ để nhận
     case "CLAIMED":
-      return "https://res.cloudinary.com/dznt9yias/image/upload/v1761207091/%C4%90a%CC%83_nha%CC%A3%CC%82n_uzr9rm.png";
+      return "https://res.cloudinary.com/dauhpllo7/image/upload/v1763392811/Property_1_Chu%CC%9Ba_%C4%91u%CC%89_%C4%91e%CC%82%CC%89_%C4%91o%CC%82%CC%89i_lu6jbu.svg";
     default:
-      return "https://res.cloudinary.com/dznt9yias/image/upload/v1760725953/Property_1_Chu%CC%9Ba_%C4%91u%CC%89_%C4%91e%CC%82%CC%89_nha%CC%A3%CC%82n_cgzj1r.svg"; // CLAIMED shows chưa đủ để nhận
+      return "https://res.cloudinary.com/dauhpllo7/image/upload/v1763392811/Property_1_Chu%CC%9Ba_%C4%91u%CC%89_%C4%91e%CC%82%CC%89_%C4%91o%CC%82%CC%89i_lu6jbu.svg"; // CLAIMED shows chưa đủ để nhận
   }
 }
 
@@ -119,7 +119,7 @@ export default function AchievementsModal({
                   >
                     <span className="block relative w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12">
                       <Image
-                        src="https://res.cloudinary.com/dznt9yias/image/upload/v1760721841/X_lqpgdp.svg"
+                        src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391063/Tr%E1%BB%9F_l%E1%BA%A1i_trang_tr%C6%B0%E1%BB%9Bc_t1jpaz.png"
                         alt="Đóng"
                         fill
                         sizes="(max-width: 640px) 32px, (max-width: 768px) 40px, 48px"
