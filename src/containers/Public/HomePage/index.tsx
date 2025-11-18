@@ -351,9 +351,8 @@ const HomePageClient = ({
           <Image
             src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391577/%C4%90%E1%BA%A1i_vi%E1%BB%87t_k%E1%BB%B3_nh%C3%A2n_1_1_pxpq2d.png"
             alt="Bảng Xếp Hạng"
-            width={1000}
-            height={600}
-            className="w-full h-auto max-h-[600px] object-contain"
+            width={1100}
+            height={700}
             priority
           />
 
@@ -494,9 +493,8 @@ const HomePageClient = ({
           <Image
             src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391577/%C4%90%E1%BA%A1i_vi%E1%BB%87t_k%E1%BB%B3_nh%C3%A2n_1_1_pxpq2d.png"
             alt="Bảng Xếp Hạng"
-            width={1000}
-            height={600}
-            className="w-full h-auto max-h-[600px] object-contain"
+            width={1100}
+            height={700}
             priority
           />
 
