@@ -306,7 +306,7 @@ export const GameFrame: React.FC<GameFrameProps> = ({
                 src={(user as any).figure.imageUrl}
                 alt="User Figure"
                 fill
-                className="object-cover object-top scale-400 mt-7"
+                className="object-cover object-top scale-200 mt-5"
               />
             </div>
           ) : (
