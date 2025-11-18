@@ -100,7 +100,7 @@ export default function MobileRegion({
             // Cloud overlay for Kỳ Linh Việt Hỏa - larger on mobile
             <div className="absolute -inset-8 w-[calc(100%+4rem)] h-[calc(100%+4rem)]">
               <Image
-                src="https://res.cloudinary.com/dznt9yias/image/upload/v1761067244/cloud_ybkv9q.svg"
+                src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763394347/Group_125_jtzhn7.png"
                 alt="Cloud overlay"
                 fill
                 className="object-cover"

@@ -268,7 +268,7 @@ export default function KhaiNhanMoAn({
       >
         <div className="relative w-full h-[80vh] min-h-[420px]">
           <Image
-            src="https://res.cloudinary.com/dznt9yias/image/upload/v1762751940/unnamed_3_1_ypcajn.png"
+            src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763391275/unnamed_3_1_qjk5nf.png"
             alt="Kỳ Linh Việt Hỏa"
             fill
             className="object-contain"

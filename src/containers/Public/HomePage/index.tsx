@@ -741,7 +741,7 @@ const HomePageClient = ({
                         <div className="relative w-20 h-20 lg:w-32 md:h-24 rounded-[10px] overflow-hidden shadow-lg">
                           <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390289/b%E1%BB%99_logo_PARC_MALL.pdf_3_1_dpdlr4.png" alt="thuan_tien" fill />
                         </div>
-                        <div className="relative w-20 h-20 lg:w-26 md:h-26 rounded-[10px] overflow-hidden shadow-lg">
+                        <div className="relative w-20 h-20 lg:w-32 md:h-26 rounded-[10px] overflow-hidden shadow-lg">
                           <Image src="https://res.cloudinary.com/dauhpllo7/image/upload/v1763390311/MR.BROWN_2_lyc30v.png" alt="mr_brown" fill />
                         </div>
                       </div>
