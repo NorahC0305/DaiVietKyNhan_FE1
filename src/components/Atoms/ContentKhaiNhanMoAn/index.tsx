@@ -36,7 +36,7 @@ const ContentChuong4 = () => {
                     <p className="text-secondary lg:text-xl text-base text-justify leading-relaxed">Để khôi phục ánh sáng, Kỳ Chủ phải đi qua bốn vùng đất linh thiêng: Núi Tản Viên, Đầm Dạ Trạch, Làng Phù Đổng và Phủ Tây Hồ.</p>
                 </div>
                 <div className="relative lg:w-[270px] lg:h-[230px] w-[180px] h-[150px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760866961/T%C3%A0_%E1%BA%A2nh_1_o8opax.png' alt="talinh" fill />
+                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763402526/Ta%CC%80_A%CC%89nh_1_oekar0.png' alt="talinh" fill />
                 </div>
             </div>
 
@@ -67,7 +67,7 @@ const ContentChuong3 = () => {
                     <p className="text-secondary lg:text-xl text-base text-justify leading-relaxed">Cứ thế, Tà Ảnh từng chút một lớn lên. Từ những làn sương đen yếu ớt, nó tích tụ năng lượng trong im lặng, lan khắp những kẽ hở của tâm trí con người.</p>
                 </div>
                 <div className="relative w-[230px] h-[230px]">
-                    <Image src='https://res.cloudinary.com/dznt9yias/image/upload/v1760866961/T%C3%A0_%E1%BA%A2nh_1_o8opax.png' alt="talinh" fill />
+                    <Image src='https://res.cloudinary.com/dauhpllo7/image/upload/v1763402526/Ta%CC%80_A%CC%89nh_1_oekar0.png' alt="talinh" fill />
                 </div>
             </div>
 
